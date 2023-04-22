@@ -1,9 +1,9 @@
 import React from "react";
 import Router from "./Routes";
-import Child from "./components/adminLogin/adminLogin/adminLoginPortal.jsx";
+import AdminLogin from "./pages/adminLogin/adminLogin.jsx";
 
 const App = () => {
-  return <Child />;
+  return <AdminLogin />;
 };
 
 export default App;
