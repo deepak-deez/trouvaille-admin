@@ -1,9 +1,25 @@
-import React from 'react'
+import React from "react";
+import Router from "../../Routes";
+import "./adminResetPassword.scss";
+import LoginBanner from "../../components/adminLogin/loginBanner/loginBanner.jsx";
+import NavBar from "../../components/adminLogin/navBar/navBar.jsx";
+import ResetPassword from "../../components/adminLogin/resetPassword/resetPassword.jsx";
+import Footer from "../../components/adminLogin/footer/footer.jsx";
 
-export default function adminResetPassword() {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+
+const adminLogin = () => {
+  return(
+    <>
+        <div className="login-page flex">
+            <LoginBanner />
+            <div className="signin-container bg-white">
+                <NavBar />
+                <ResetPassword />
+                <Footer />
+            </div>
+        </div>
+    </>
+ )
+};
+
+export default adminLogin;

@@ -1,7 +1,10 @@
 import React from 'react'
+import { Outlet, Link } from "react-router-dom";
 import "./loginForm.scss";
 import mail from "../../../assets/img/singinForm/mail.svg"
 import view from "../../../assets/img/singinForm/view.svg"
+
+
 
 export default function loginForm() {
   return (
@@ -22,7 +25,7 @@ export default function loginForm() {
                 </div>
                 <div className="flex flex-row mt-[26px] justify-between text-[14px] items-center">
                   <p>Password</p>
-                  <span>Forgot Password?</span>
+                  <Link  to="/forgotPassword">Forgot Password?</Link> 
                 </div>
                 <div className="bg-white input-fields px-[23px] py-[15px] mt-[9px] flex flex-row items-center justify-between">
                   <input
