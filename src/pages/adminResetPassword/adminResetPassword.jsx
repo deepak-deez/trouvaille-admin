@@ -6,20 +6,17 @@ import NavBar from "../../components/adminLogin/navBar/navBar.jsx";
 import ResetPassword from "../../components/adminLogin/resetPassword/resetPassword.jsx";
 import Footer from "../../components/adminLogin/footer/footer.jsx";
 
-
 const adminLogin = () => {
-  return(
-    <>
-        <div className="login-page flex">
-            <LoginBanner />
-            <div className="signin-container bg-white">
-                <NavBar />
-                <ResetPassword />
-                <Footer />
-            </div>
-        </div>
-    </>
- )
+  return (
+    <header className="login-page flex">
+      <LoginBanner />
+      <div className="signin-container bg-white">
+        <NavBar />
+        <ResetPassword />
+        <Footer />
+      </div>
+    </header>
+  );
 };
 
 export default adminLogin;
