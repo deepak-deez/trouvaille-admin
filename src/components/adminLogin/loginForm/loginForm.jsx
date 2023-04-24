@@ -4,7 +4,7 @@ import "./loginForm.scss";
 import mail from "../../../assets/img/singinForm/mail.svg";
 import view from "../../../assets/img/singinForm/view.svg";
 
-export default function loginForm() {
+export default function LoginForm() {
   return (
     <div className=" xl:mt-[50px] 2xl:mt-[147px] signin-form flex flex-col items-center justify-center">
       <div className="flex flex-col w-[300px] xl:w-[360px]">
@@ -49,14 +49,6 @@ export default function loginForm() {
           <button className="mt-[27px] py-[15px] text-center signin-button">
             Sign in
           </button>
-          <div className="lg:hidden flex flex-row mt-[10px] gap-[28px]">
-            <p className="new-user-text text-[12px] lg:text-[14px] m-auto">
-              New to here?
-            </p>
-            <button className="create-account-button py-[10px] px-[20px]">
-              Create an account
-            </button>
-          </div>
         </form>
       </div>
     </div>

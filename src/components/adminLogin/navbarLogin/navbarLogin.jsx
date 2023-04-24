@@ -1,8 +1,8 @@
 import React from 'react'
-import "./navbar.scss";
+import "./navbarLogin.scss";
 import navLogo from "../../../assets/img/navBar/navBar.svg";
 
-export default function Navbar() {
+export default function NavBar() {
   return (
     <nav className="flex flex-row px-[15px] py-[10px] lg:px-[30px] lg:py-[20px] 2xl:px-[64px] 2xl:py-[27px] justify-between">
             <div className="flex flex-row gap-[10px] lg:gap-[10px] 2xl:gap-[15px]">
@@ -21,9 +21,9 @@ export default function Navbar() {
               </div>
             </div>
             <div className="hidden lg:flex flex-row gap-[28px]">
-              <p className="new-user-text pt-[18px]">New to here?</p>
+              <p className="new-user-text pt-[18px]">Already have an account?</p>
               <button className="create-account-button px-[20px]">
-                Create an account
+                Sign In
               </button>
             </div>
           </nav>

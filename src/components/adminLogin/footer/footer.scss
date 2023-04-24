@@ -4,6 +4,7 @@ $font-color-grey: #727a86;
 $font-name1: "Lexend", sans-serif;
 
 .footer {
+
   color: $font-color-grey;
   font-family: $font-name1;
   font-weight: 400;
@@ -13,5 +14,11 @@ footer {
     color: $font-color-blue;
     font-family: $font-name1;
     font-weight: 400;
+  }
+}
+@media screen and (min-width: 1024px){
+  footer{
+    position: absolute;
+    width: 80%;
   }
 }
