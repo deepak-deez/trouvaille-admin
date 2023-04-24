@@ -1,4 +1,5 @@
 import React from 'react'
+import { Outlet, Link } from "react-router-dom";
 import "./navbarLoginForm.scss"
 
 export default function NavBarLoginForm() {
@@ -7,9 +8,9 @@ export default function NavBarLoginForm() {
         <p className="new-user-text text-[12px] lg:text-[14px] m-auto">
             New to here?
         </p>
-        <button className="create-account-button py-[10px] px-[20px]">
-            Create an account
-        </button>
+        <Link className="create-account-button py-[9px] m-auto px-[20px]" to="/signup">
+                Create an account
+        </Link>
     </div>
   )
 }
