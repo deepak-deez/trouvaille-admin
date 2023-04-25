@@ -4,7 +4,7 @@ import userIcon from "../../assets/image/navbar/user-icon.png";
 
 const Navbar = () => {
   return (
-    <div className="flex justify-between items-center bg-[#E5ECF6] p-5">
+    <div className="flex justify-between items-center bg-[#dbe6f5] p-5">
       <h2 className="font-bold ">All Users</h2>
       <div className="flex md:flex-row flex-col-reverse justify-center items-center md:space-x-3">
         <MdNotificationsNone />
