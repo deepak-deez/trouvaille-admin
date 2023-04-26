@@ -6,7 +6,7 @@ import view from "../../../assets/img/singinForm/view.svg";
 
 export default function LoginForm() {
   return (
-    <div className=" xl:mt-[50px] 2xl:mt-[147px] signin-form flex flex-col items-center justify-center">
+    <div className=" signin-form flex flex-col items-center justify-center">
       <div className="flex flex-col w-[300px] xl:w-[360px]">
         <h2 className="text-[34px] ">
           Sign in to <br /> your Account

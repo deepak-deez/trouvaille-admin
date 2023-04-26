@@ -10,15 +10,10 @@ $font-name1: "Lexend", sans-serif;
   font-weight: 400;
 }
 footer {
+  width: 100%;
   ul {
     color: $font-color-blue;
     font-family: $font-name1;
     font-weight: 400;
-  }
-}
-@media screen and (min-width: 1024px){
-  footer{
-    position: absolute;
-    width: 80%;
   }
 }

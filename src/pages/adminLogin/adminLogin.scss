@@ -12,7 +12,7 @@ $banner-width: 20%;
 
 @media screen and (min-width: 1024px) {
     .signin-container {
-            width: calc(100% - $banner-width);
+            margin-left: 20%;
         }
     
     }

@@ -5,7 +5,7 @@ import mail from "../../../assets/img/singinForm/mail.svg"
 
 export default function ForgotPassword() {
   return (
-    <div className=" xl:mt-[50px] 2xl:mt-[147px] forgot-password-form flex flex-col items-center justify-center">
+    <div className=" my-auto forgot-password-form flex flex-col items-center justify-center">
             <div className="flex flex-col w-[300px] xl:w-[360px]">
               <h2 className="text-[34px] ">
               Set Profile Password

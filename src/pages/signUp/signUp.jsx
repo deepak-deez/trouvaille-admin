@@ -11,9 +11,9 @@ const adminLogin = () => {
   return (
     <header className="signup-page flex">
       <LoginBanner />
-      <div className="signin-container bg-white">
+      <div className="signin-container flex flex-col bg-white">
         <NavBarLogin />
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col my-auto mt-[5rem] lg:mt-[8rem] justify-center items-center">
           <SignUp />
           <NavBarLoginForm />
         </div>

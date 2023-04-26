@@ -11,6 +11,8 @@ $font-size: 1rem;
     background-image: url("../../../assets/img/signinBanner/experience.png");
     background-repeat: no-repeat;
     background-size: cover;
+    overflow: scroll;
+    position: fixed;
 }
 .sign-in-banner-text {
     font-family: $font-name1;

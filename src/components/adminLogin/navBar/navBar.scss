@@ -5,6 +5,11 @@ $font-name2: 'Montserrat', sans-serif;
 $font-color-grey : #727A86;
 $button-color-blue: #092C4C;
 
+nav{
+    position: fixed;
+    backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, 0.098);
+}
 .trouvaille-heading{
     font-family: $font-name2;
     font-weight: 500;
@@ -25,4 +30,9 @@ $button-color-blue: #092C4C;
     border:1.5px solid $button-color-blue;
     font-family: $font-name1;
     border-radius: 5px;
+}
+@media screen and (min-width:1024px){
+    nav {
+            width: 80%;
+        }
 }

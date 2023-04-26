@@ -4,7 +4,7 @@ import view from "../../../assets/img/singinForm/view.svg";
 
 export default function Signin() {
   return (
-    <div className=" xl:mt-[40px] 2xl:mt-[105px] signup-form flex flex-col items-center justify-center">
+    <div className=" my-auto signup-form flex flex-col items-center justify-center">
       <div className="flex flex-col w-[300px] xl:w-[360px]">
         <h2 className="text-[34px] ">
           Sign Up
