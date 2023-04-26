@@ -2,10 +2,16 @@ import React, { useState } from "react";
 import delIcon from "../../assets/image/user/delete.svg";
 import editIcon from "../../assets/image/user/edit-icon.svg";
 
-const Menu = ({ editPop, setEditPop, setEditable, data }) => {
+const Menu = ({
+  editPop,
+  setEditPop,
+  setEditable,
+  data,
+  delPop,
+  setDelPop,
+}) => {
   const [menu, setMenu] = useState(false);
 
-  // const [editPop, setEditPop] = useState(false);
   return (
     <div className="relative">
       <button
@@ -23,15 +29,21 @@ const Menu = ({ editPop, setEditPop, setEditable, data }) => {
         }`}
       >
         <button
-          className="flex justify-center items-center"
+          className="flex justify-between items-center"
           onClick={() => {
             setEditPop(!editPop);
             setEditable(data);
           }}
         >
-          Edit <img className="ms-6" src={editIcon} alt="edit" />
+          <span> Edit </span>{" "}
+          <img className="ms-10" src={editIcon} alt="edit" />
         </button>
-        <button className="flex justify-center items-center  ">
+        <button
+          className="flex justify-center items-center"
+          onClick={() => {
+            setDelPop(!delPop);
+          }}
+        >
           Delete <img className="ms-6" src={delIcon} alt="delete" />
         </button>
       </div>

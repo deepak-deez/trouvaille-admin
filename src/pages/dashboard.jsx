@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Navbar from "../component/Navbar/Navbar";
 import Sidebar from "../component/Sidebar/Sidebar";
 import User from "../component/Users/user";
@@ -8,12 +8,11 @@ import { GlobalContext } from "../context/GlobalContext";
 import Booking from "../component/Booking/Booking";
 
 const Dashboard = () => {
-  const { mount } = useContext(GlobalContext);
-
+  const { mount, navHead } = useContext(GlobalContext);
 
   function loadMount() {
     if (mount === "Dashboard") {
-      return <User/>;
+      return <User />;
     } else if (mount === "Bookings") {
       return <Booking />;
     }
@@ -29,8 +28,9 @@ const Dashboard = () => {
       <Sidebar />
       {/* </div> */}
       <div className="w-full bg-[#f5f7f7] ">
-        <Navbar heading="User" />
-        {loadMount()}
+        <Navbar heading={navHead} />
+        <div className="h-auto overflow-scroll"> {loadMount()}</div>
+
         <Footer />
       </div>
     </div>

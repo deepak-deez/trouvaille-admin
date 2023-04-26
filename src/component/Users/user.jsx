@@ -4,17 +4,19 @@ import Menu from "../UserMenu/Menu";
 import "./style.scss";
 import AddNewUser from "../AddNewUser/AddNewUser";
 import EditUser from "../EditUser/EditUser";
+import DeleteUser from "../DeleteUser/DeleteUser";
 
 const User = () => {
   const [addPop, setAddPop] = useState(false);
   const [editPop, setEditPop] = useState(false);
+  const [delPop, setDelPop] = useState(false);
   const [editable, setEditable] = useState("");
   console.log(editable, "editable");
   return (
     <>
       <div className="p-3">
-        <div className="p-4 bg-white item-center w-full overflow-x-scroll">
-          <table className=" w-[75rem]">
+        <div className="p-4 bg-white item-center w-full overflow-x-scroll border-b-2">
+          <table className="w-[65rem]">
             <thead>
               <tr className="tr-class">
                 <th className="p-3">User Name</th>
@@ -23,7 +25,6 @@ const User = () => {
                 <th>
                   <button
                     className="text-[#E75C54]"
-                    // href="adduser"
                     onClick={() => {
                       setAddPop(!addPop);
                     }}
@@ -47,6 +48,8 @@ const User = () => {
                         setEditPop={setEditPop}
                         setEditable={setEditable}
                         data={val}
+                        delPop={delPop}
+                        setDelPop={setDelPop}
                       />
                     </td>
                   </tr>
@@ -60,6 +63,7 @@ const User = () => {
       {editPop && (
         <EditUser editPop={editPop} setEditPop={setEditPop} data={editable} />
       )}
+      {delPop && <DeleteUser delPop={delPop} setDelPop={setDelPop} />}
     </>
   );
 };

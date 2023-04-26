@@ -7,22 +7,22 @@ import { GlobalContext } from "../../context/GlobalContext";
 
 const Sidebar = (props) => {
   const [show, setShow] = useState(false);
-  const { setMount } = useContext(GlobalContext);
+  const { setMount, setNavHead } = useContext(GlobalContext);
 
   return (
     <>
       {/* <div className="p-4 xl:p-0 relative"> */}
-        <button
-          className="navbar_toggle absolute top-[2%] left-2 block xl:hidden bg-[#E85C53] text-white hover:text-white px-2 py-1"
-          style={{
-            zIndex:"20000"
-          }}
-          onClick={() => {
-            setShow(!show);
-          }}
-        >
-          <i className="fa-solid fa-bars"></i>
-        </button>
+      <button
+        className="navbar_toggle absolute top-[2%] left-2 block xl:hidden bg-[#E85C53] text-white hover:text-white px-2 py-1"
+        style={{
+          zIndex: "20000",
+        }}
+        onClick={() => {
+          setShow(!show);
+        }}
+      >
+        <i className="fa-solid fa-bars"></i>
+      </button>
       {/* </div> */}
       <div
         className={`mainSideBar xl:flex flex-col justify-between relative min-h-[90vh] ${
@@ -52,6 +52,7 @@ const Sidebar = (props) => {
                     className="ms-5"
                     onClick={() => {
                       setMount(item.heading);
+                      setNavHead(item.heading);
                     }}
                   >
                     {item.heading}

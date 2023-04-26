@@ -10,7 +10,7 @@ const EditUser = ({ editPop, setEditPop, data }) => {
         !editPop && "hidden"
       }`}
     >
-      <div className="flex flex-col justify-center m-auto bg-white p-4 ">
+      <div className="flex flex-col justify-center m-auto md:w-[28%] bg-white p-4 ">
         <div className="flex justify-between py-2">
           <h2 className="text-start font-bold">Update User Details</h2>
           <button
@@ -27,7 +27,7 @@ const EditUser = ({ editPop, setEditPop, data }) => {
             Name
           </label>
           <input
-            className="border-2"
+            className="border-2 p-2"
             type="text"
             value={name}
             onChange={(e) => {
@@ -38,7 +38,7 @@ const EditUser = ({ editPop, setEditPop, data }) => {
             Email Address
           </label>
           <input
-            className="border-2"
+            className="border-2 p-2"
             type="email"
             value={email}
             onChange={(e) => {
@@ -49,7 +49,7 @@ const EditUser = ({ editPop, setEditPop, data }) => {
             Phone Number
           </label>
           <input
-            className="border-2"
+            className="border-2 p-2"
             type="text"
             value={phone}
             onChange={(e) => {
@@ -58,7 +58,9 @@ const EditUser = ({ editPop, setEditPop, data }) => {
           />
         </form>
         <div className="flex item-center justify-center">
-          <button className="bg-[#E85C53] p-2 mt-5 rounded-sm">Update</button>
+          <button className="bg-[#E85C53] text-white p-2 mt-5 rounded-sm">
+            Update
+          </button>
         </div>
       </div>
     </div>
