@@ -4,7 +4,7 @@ export const GlobalContext = createContext();
 
 export const GlobalProvider = ({ children }) => {
   const [mount, setMount] = useState("Dashboard");
-
+ 
   const valueObj = {
     mount,
     setMount,

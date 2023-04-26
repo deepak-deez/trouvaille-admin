@@ -3,9 +3,13 @@ import userData from "./UserData";
 import Menu from "../UserMenu/Menu";
 import "./style.scss";
 import AddNewUser from "../AddNewUser/AddNewUser";
+import EditUser from "../EditUser/EditUser";
 
 const User = () => {
   const [addPop, setAddPop] = useState(false);
+  const [editPop, setEditPop] = useState(false);
+  const [editable, setEditable] = useState("");
+  console.log(editable, "editable");
   return (
     <>
       <div className="p-3">
@@ -22,7 +26,6 @@ const User = () => {
                     // href="adduser"
                     onClick={() => {
                       setAddPop(!addPop);
-                     
                     }}
                   >
                     Add A New User
@@ -38,7 +41,14 @@ const User = () => {
                     <td className="td-class font-bold p-3">{val.userName}</td>
                     <td className="td-class">{val.email}</td>
                     <td className="td-class">{val.phone}</td>
-                    <td className="">{<Menu />}</td>
+                    <td className="">
+                      <Menu
+                        editPop={editPop}
+                        setEditPop={setEditPop}
+                        setEditable={setEditable}
+                        data={val}
+                      />
+                    </td>
                   </tr>
                 );
               })}
@@ -47,6 +57,9 @@ const User = () => {
         </div>
       </div>
       {addPop && <AddNewUser setAddPop={setAddPop} addPop={addPop} />}
+      {editPop && (
+        <EditUser editPop={editPop} setEditPop={setEditPop} data={editable} />
+      )}
     </>
   );
 };
