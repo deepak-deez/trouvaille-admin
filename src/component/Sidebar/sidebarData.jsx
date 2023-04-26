@@ -6,6 +6,7 @@ import b2bIcon from "../../assets/image/Sidebar/b2b-icon.svg";
 import faqIcon from "../../assets/image/Sidebar/faq-icon.svg";
 import genericIcon from "../../assets/image/Sidebar/generic-icon.svg";
 
+
 const SideBarLinks = [
   {
     icon: dashboardIcon,
