@@ -5,32 +5,30 @@ import User from "../component/Users/user";
 import Footer from "../component/Footer/Footer";
 import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalContext";
-import Booking from "../component/Booking/Booking";
 
 const Dashboard = () => {
-  const { mount, navHead } = useContext(GlobalContext);
+  // const { mount, navHead } = useContext(GlobalContext);
 
-  function loadMount() {
-    if (mount === "Dashboard") {
-      return <User />;
-    } else if (mount === "Bookings") {
-      return <Booking />;
-    }
-  }
+  // function loadMount() {
+  //   if (mount === "Dashboard") {
+  //     return <User />;
+  //   } else if (mount === "Bookings") {
+  //     return <Booking />;
+  //   }
+  // }
 
-  useEffect(() => {
-    loadMount();
-  }, []);
+  // useEffect(() => {
+  //   loadMount();
+  // }, []);
 
   return (
     <div className="flex h-full">
-      {/* <div className="w-[30%]"> */}
       <Sidebar />
-      {/* </div> */}
       <div className="w-full bg-[#f5f7f7] ">
-        <Navbar heading={navHead} />
-        <div className="h-auto overflow-scroll"> {loadMount()}</div>
-
+        <Navbar heading="All Users" />
+        <div className="h-[90vh]">
+          <User />
+        </div>
         <Footer />
       </div>
     </div>

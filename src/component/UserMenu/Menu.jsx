@@ -31,7 +31,7 @@ const Menu = ({
         <button
           className="flex justify-between items-center"
           onClick={() => {
-            setEditPop(!editPop);
+            setEditPop((editPop) => !editPop);
             setEditable(data);
           }}
         >
