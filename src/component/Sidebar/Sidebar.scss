@@ -35,6 +35,11 @@ $text-color-blue:#24233D;
     display: none ;
 }
 
+.active {
+    background: #F5F9FF;
+    border-right: 2px solid red ;
+}
+
 @media (min-width:1280px) {
     .hidden-bar{
         display: flex;

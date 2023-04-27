@@ -6,42 +6,41 @@ import b2bIcon from "../../assets/image/Sidebar/b2b-icon.svg";
 import faqIcon from "../../assets/image/Sidebar/faq-icon.svg";
 import genericIcon from "../../assets/image/Sidebar/generic-icon.svg";
 
-
 const SideBarLinks = [
   {
     icon: dashboardIcon,
     heading: "Dashboard",
-    path: "dashboard",
-  },
-  {
-    icon: bookingIcon,
-    heading: "Bookings",
-    path: "bookings",
-  },
-  {
-    icon: visaIcon,
-    heading: "visa",
-    path: "visa",
-  },
-  {
-    icon: offerIcon,
-    heading: "Offers",
-    path: "offers",
+    path: "/dashboard",
   },
   {
     icon: b2bIcon,
-    heading: "B2B",
-    path: "b2b",
+    heading: "Trip Categories",
+    path: "/trip-categories",
   },
   {
-    icon: faqIcon,
-    heading: "FAQ",
-    path: "faq",
+    icon: visaIcon,
+    heading: "All Amenities",
+    path: "/all-amenities",
+  },
+  {
+    icon: bookingIcon,
+    heading: "Occasions List",
+    path: "/occasions-list",
+  },
+  {
+    icon: b2bIcon,
+    heading: "Travel Type List",
+    path: "/travel-type",
   },
   {
     icon: genericIcon,
-    heading: "Generic Page",
-    path: "genericpage",
+    heading: "List of Trips",
+    path: "/list-of-trips",
+  },
+  {
+    icon: genericIcon,
+    heading: "Booking List",
+    path: "/booking-list",
   },
 ];
 

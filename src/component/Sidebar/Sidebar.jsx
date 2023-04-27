@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import "./Sidebar.scss";
 import mainLogo from "../../assets/image/navbar/Site-logo.svg";
 import SideBarLinks from "./sidebarData";
@@ -25,7 +26,7 @@ const Sidebar = (props) => {
       </button>
       {/* </div> */}
       <div
-        className={`mainSideBar xl:flex flex-col justify-between relative min-h-[90vh] ${
+        className={`mainSideBar z-50 absolute md:static xl:flex md:w-[40%] p-5 flex-col bg-white h-full ${
           !show && "hidden-bar"
         }`}
       >
@@ -43,8 +44,9 @@ const Sidebar = (props) => {
           <div className={`sidebar-Links`}>
             {SideBarLinks.map((item, index) => {
               return (
-                <div
-                  className="flex w-full border-b-2 m-auto items-center p-4 md:p-9 px-10"
+                <NavLink
+                  to={item.path}
+                  className="flex w-full border-b-2 m-auto items-center p-2 md:py-5 px-11"
                   key={index}
                 >
                   <img src={item.icon} alt="" />
@@ -57,14 +59,14 @@ const Sidebar = (props) => {
                   >
                     {item.heading}
                   </h3>
-                </div>
+                </NavLink>
               );
             })}
           </div>
         </div>
 
         <div
-          className={`sidebar-footer relative left-0 bottom-0 w-full h-[10%]`}
+          className={`sidebar-footer relative left-0 bottom-0 w-full h-[10%] md:mt-30`}
         >
           <div className="bg-[#E85C53] p-3 text-center">
             <a className="text-white" href="superAdmins">

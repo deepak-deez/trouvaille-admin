@@ -22,7 +22,7 @@ const DeleteUser = ({ delPop, setDelPop }) => {
             Cancel
           </button>
           <button className="bg-[#E85C53] text-white p-2 mt-5 rounded-sm">
-            Update
+            Delete
           </button>
         </div>
       </div>
