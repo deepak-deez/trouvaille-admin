@@ -1,9 +1,13 @@
 import { React, useState } from "react";
 import TripDetails from "./tripData";
 import AddNewTrip from "../AddNewTrip/AddNewTrip";
+import TripAction from "../TripAction/TripAction";
 
 const Trip = () => {
   const [tripPop, setTripPop] = useState(false);
+  const [editPop, setEditPop] = useState(false);
+  const [delPop, setDelPop] = useState(false);
+  const [editable, setEditable] = useState("");
   return (
     <>
       <div className="w-full p-5">
@@ -25,7 +29,9 @@ const Trip = () => {
               <div className="w-full p-5 gap-4" key={index}>
                 <div className="p-8 bg-white rounded shadow-md">
                   <div className="flex justify-end">
-                    <button>...</button>
+                    <button>
+                      <TripAction />
+                    </button>
                   </div>
                   <div className="flex justify-center">
                     <img src={data.icon} alt="" />
