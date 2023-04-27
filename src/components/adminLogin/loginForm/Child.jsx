@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet, Link } from "react-router-dom";
-import "./loginForm.scss";
+import "./child.scss";
 import mail from "../../../assets/img/singinForm/mail.svg";
 import view from "../../../assets/img/singinForm/view.svg";
 

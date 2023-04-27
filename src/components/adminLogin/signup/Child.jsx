@@ -1,5 +1,5 @@
 import React from "react";
-import "./Signup.scss";
+import "./child.scss";
 import view from "../../../assets/img/singinForm/view.svg";
 
 export default function Signin() {

@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import AdminLogin from "./pages/adminLogin/adminLogin.jsx";
-import ForgotPassword from "./pages/adminForgotPassword/adminForgotPassword.jsx";
-import ResetPassword from "./pages/adminResetPassword/adminResetPassword.jsx";
-import Signup from "./pages/signUp/signUp.jsx"
+import AdminLogin from "./pages/adminLogin/Child.jsx";
+import ForgotPassword from "./pages/adminForgotPassword/Child.jsx";
+import ResetPassword from "./pages/adminResetPassword/Child.jsx";
+import Signup from "./pages/signUp/Child.jsx"
 
 const Router = () => {
     return (

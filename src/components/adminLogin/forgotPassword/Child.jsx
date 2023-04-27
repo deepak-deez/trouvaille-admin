@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet, Link } from "react-router-dom";
-import "./forgotPassword.scss";
+import "./child.scss";
 import mail from "../../../assets/img/singinForm/mail.svg"
 
 export default function ForgotPassword() {
