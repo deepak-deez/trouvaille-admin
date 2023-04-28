@@ -1,8 +1,8 @@
 import React from "react";
 import { Outlet, Link } from "react-router-dom";
 import "./child.scss";
-import mail from "../../../assets/img/singinForm/mail.svg";
-import view from "../../../assets/img/singinForm/view.svg";
+import mail from "../../../assets/images/adminLogin/singinForm/mail.svg";
+import view from "../../../assets/images/adminLogin/singinForm/view.svg";
 
 export default function LoginForm() {
   return (
