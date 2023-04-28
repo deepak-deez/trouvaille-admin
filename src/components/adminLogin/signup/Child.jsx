@@ -9,17 +9,6 @@ export default function Signin() {
         <h2 className="text-[34px] ">Sign Up</h2>
         <form action="">
           <p className="mt-[25px] text-[14px]">Email Address</p>
-<<<<<<< HEAD
-              <input className="bg-white w-100 input-fields px-[23px] py-[10px] mt-[9px] outline-none w-[100%]" 
-                type="text"
-                placeholder="Enter you email"
-              />
-          <p className="mt-[10px] text-[14px]">Phone Number</p>
-              <input className="bg-white w-[100%] outline-none input-fields px-[23px] py-[10px] mt-[9px]"
-                type="text"
-                placeholder="Enter you email"
-              />
-=======
           <div className="bg-white w-100 input-fields px-[23px] py-[10px] mt-[9px]">
             <input type="text" placeholder="Enter you email" />
           </div>
@@ -27,7 +16,6 @@ export default function Signin() {
           <div className="bg-white w-100 input-fields px-[23px] py-[10px] mt-[9px]">
             <input type="text" placeholder="Enter you email" />
           </div>
->>>>>>> b5682af (TROUV-8 CORE : Added separate folders for each component, page and image)
           <p className="mt-[10px] text-[14px]">Password</p>
           <div className="bg-white input-fields px-[23px] mt-[9px] flex flex-row items-center justify-between">
             <input
@@ -50,7 +38,7 @@ export default function Signin() {
               <img className="input-icon" src={view} alt="view-icon" />
             </button>
           </div>
-          <button className="mt-[27px] py-[10px] text-center signup-button">
+          <button className="mt-[27px] hover:bg-[#a92323] transition-colors duration-500 py-[10px] text-center signup-button">
             Sign Up
           </button>
         </form>

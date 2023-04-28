@@ -46,7 +46,7 @@ export default function LoginForm() {
             <input type="checkbox" name="remember-me" value="yes" />
             Remember Me
           </div>
-          <button className="mt-[27px] py-[15px] text-center signin-button">
+          <button className="mt-[27px] py-[15px] hover:bg-[#a92323] transition-colors duration-500 text-center signin-button">
             Sign in
           </button>
         </form>
