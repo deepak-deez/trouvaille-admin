@@ -11,23 +11,19 @@ export default function Signin() {
         </h2>
         <form action="">
           <p className="mt-[25px] text-[14px]">Email Address</p>
-            <div className="bg-white w-100 input-fields px-[23px] py-[10px] mt-[9px]" >
-              <input
+              <input className="bg-white w-100 input-fields px-[23px] py-[10px] mt-[9px] outline-none w-[100%]" 
                 type="text"
                 placeholder="Enter you email"
               />
-            </div>
           <p className="mt-[10px] text-[14px]">Phone Number</p>
-            <div className="bg-white w-100 input-fields px-[23px] py-[10px] mt-[9px]">
-              <input
+              <input className="bg-white w-[100%] outline-none input-fields px-[23px] py-[10px] mt-[9px]"
                 type="text"
                 placeholder="Enter you email"
               />
-            </div>
           <p className="mt-[10px] text-[14px]">Password</p>
-          <div className="bg-white input-fields px-[23px] py-[10px] mt-[9px] flex flex-row items-center justify-between">
+          <div className="bg-white input-fields px-[23px] mt-[9px] flex flex-row items-center justify-between">
             <input
-              className="bg-transparent"
+              className="bg-transparent w-[100%] py-[10px] outline-none"
               type="text"
               placeholder="Enter you password"
             />
@@ -36,9 +32,9 @@ export default function Signin() {
             </button>
           </div>
           <p className="mt-[10px] text-[14px]">Confirm Password</p>
-          <div className="bg-white input-fields px-[23px] py-[10px] mt-[9px] flex flex-row items-center justify-between">
+          <div className="bg-white input-fields px-[23px] mt-[9px] flex flex-row items-center justify-between">
             <input
-              className="bg-transparent"
+              className="bg-transparent w-[100%] py-[10px] outline-none"
               type="text"
               placeholder="Enter you password"
             />

@@ -13,9 +13,9 @@ export default function ForgotPassword() {
               <p>Enter the email associated with your account and we will send an email with instructions to reset your password.</p>
               <form action="">
                 <p className="mt-[47px] text-[14px]">Email Address</p>
-                <div className="bg-white input-fields px-[23px] py-[15px] mt-[9px] flex flex-row items-center justify-between">
+                <div className="bg-white input-fields px-[23px] mt-[9px] flex flex-row items-center justify-between">
                   <input
-                    className="bg-transparent"
+                    className="bg-transparent w-[100%] outline-none py-[15px]"
                     type="text"
                     placeholder="Enter you email"
                   />

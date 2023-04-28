@@ -13,9 +13,9 @@ export default function LoginForm() {
         </h2>
         <form action="">
           <p className="mt-[47px] text-[14px]">Email Address</p>
-          <div className="bg-white input-fields px-[23px] py-[15px] mt-[9px] flex flex-row items-center justify-between">
+          <div className="bg-white input-fields px-[23px]  mt-[9px] flex flex-row items-center justify-between">
             <input
-              className="bg-transparent"
+              className="bg-transparent w-[100%] py-[15px] outline-none"
               type="text"
               placeholder="Enter you email"
             />
@@ -29,9 +29,9 @@ export default function LoginForm() {
               Forgot Password?
             </Link>
           </div>
-          <div className="bg-white input-fields px-[23px] py-[15px] mt-[9px] flex flex-row items-center justify-between">
+          <div className="bg-white input-fields px-[23px] mt-[9px] flex flex-row items-center justify-between">
             <input
-              className="bg-transparent"
+              className="bg-transparent w-[100%] py-[15px] outline-none"
               type="text"
               placeholder="Enter you password"
             />
