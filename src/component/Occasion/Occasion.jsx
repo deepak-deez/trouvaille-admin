@@ -1,9 +1,15 @@
 import { React, useState } from "react";
 import OccasionDb from "./occasionData";
 import AddOccasion from "../AddNewOccasion/AddNewOccasion";
+import DeleteOccasion from "../DeleteOccasion/DeleteOccasion";
+import UpdateOccasion from "../UpdateOccasion/UpdateOccasion";
+import OccasionMenu from "../OccasionMenu/OccasionMenu";
 
 const Occasion = () => {
   const [showOccasionsPop, setShowOccasionsPop] = useState(false);
+  const [showUpdateOccasionPop, setshowUpdateOccasionPop] = useState(false);
+  const [updateOccasion, setUpdateOccasion] = useState(false);
+  const [deleteOccasionPop, setDeleteOccasionPop] = useState(false);
   return (
     <>
       <div className="p-3">
@@ -37,14 +43,14 @@ const Occasion = () => {
                       </td>
                       <td className="td-class">{data.desc}</td>
                       <td className="">
-                        {/* <AmenitiesMenu
-                          amenitiesDB={data}
-                          setUpdateAmenities={setUpdateAmenities}
-                          showUpdateAmenitiesPop={showUpdateAmenitiesPop}
-                          setshowUpdateAmenitiesPop={setshowUpdateAmenitiesPop}
-                          deleteAmenitiesPop={deleteAmenitiesPop}
-                          setDeleteAmenitiesPop={setDeleteAmenitiesPop}
-                        /> */}
+                        <OccasionMenu
+                          OccasionDB={data}
+                          setUpdateOccasion={setUpdateOccasion}
+                          showUpdateOccasionPop={showUpdateOccasionPop}
+                          setshowUpdateOccasionPop={setshowUpdateOccasionPop}
+                          deleteOccasionPop={deleteOccasionPop}
+                          setDeleteOccasionPop={setDeleteOccasionPop}
+                        />
                       </td>
                     </tr>
                   );
@@ -59,19 +65,19 @@ const Occasion = () => {
           setShowOccasionsPop={setShowOccasionsPop}
         />
       )}
-      {/* {showUpdateAmenitiesPop && (
-        <UpdateAmenities
-          showUpdateAmenitiesPop={showUpdateAmenitiesPop}
-          setshowUpdateAmenitiesPop={setshowUpdateAmenitiesPop}
-          amenitiesDB={updateAmenities}
+      {showUpdateOccasionPop && (
+        <UpdateOccasion
+          showUpdateOccasionPop={showUpdateOccasionPop}
+          setshowUpdateOccasionPop={setshowUpdateOccasionPop}
+          OccasionDB={updateOccasion}
         />
-      )} */}
-      {/* {deleteAmenitiesPop && (
-        <DeleteAmenities
-          deleteAmenitiesPop={deleteAmenitiesPop}
-          setDeleteAmenitiesPop={setDeleteAmenitiesPop}
+      )}
+      {deleteOccasionPop && (
+        <DeleteOccasion
+          deleteOccasionPop={deleteOccasionPop}
+          setDeleteOccasionPop={setDeleteOccasionPop}
         />
-      )} */}
+      )}
     </>
   );
 };
