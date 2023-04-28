@@ -2,12 +2,14 @@ import { React, useState } from "react";
 import TripDetails from "./tripData";
 import AddNewTrip from "../AddNewTrip/AddNewTrip";
 import TripAction from "../TripAction/TripAction";
+import EditTrip from "../EditTrip/EditTrip";
+import DeleteTrip from "../DeleteTrip/DeleteTrip";
 
 const Trip = () => {
   const [tripPop, setTripPop] = useState(false);
   const [editPop, setEditPop] = useState(false);
-  const [delPop, setDelPop] = useState(false);
-  const [editable, setEditable] = useState("");
+  const [delTripPop, setDelTripPop] = useState(false);
+  const [editTrip, setEditTrip] = useState("");
   return (
     <>
       <div className="w-full p-5">
@@ -29,9 +31,16 @@ const Trip = () => {
               <div className="w-full p-5 gap-4" key={index}>
                 <div className="p-8 bg-white rounded shadow-md">
                   <div className="flex justify-end">
-                    <button>
-                      <TripAction />
-                    </button>
+                    <div>
+                      <TripAction
+                        editPop={editPop}
+                        setEditPop={setEditPop}
+                        setEditTrip={setEditTrip}
+                        TripData={data}
+                        delTripPop={delTripPop}
+                        setDelTripPop={setDelTripPop}
+                      />
+                    </div>
                   </div>
                   <div className="flex justify-center">
                     <img src={data.icon} alt="" />
@@ -47,6 +56,16 @@ const Trip = () => {
         </div>
       </div>
       {tripPop && <AddNewTrip tripPop={tripPop} setTripPop={setTripPop} />}
+      {editPop && (
+        <EditTrip
+          editPop={editPop}
+          setEditPop={setEditPop}
+          TripData={editTrip}
+        />
+      )}
+      {delTripPop && (
+        <DeleteTrip delTripPop={delTripPop} setDelTripPop={setDelTripPop} />
+      )}
     </>
   );
 };

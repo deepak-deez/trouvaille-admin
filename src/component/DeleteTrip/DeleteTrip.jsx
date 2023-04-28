@@ -4,7 +4,7 @@ const DeleteTrip = ({ delTripPop, setDelTripPop }) => {
   return (
     <div
       className={`fixed top-0 left-0 w-full flex justify-center items-center addUser  h-[100vh] ${
-        !delPop && "hidden"
+        !delTripPop && "hidden"
       }`}
     >
       <div className="flex flex-col justify-center text-center m-auto md:w-[28%] bg-white p-4 ">

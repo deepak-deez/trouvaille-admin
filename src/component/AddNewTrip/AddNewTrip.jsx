@@ -5,6 +5,7 @@ const AddNewTrip = ({ tripPop, setTripPop }) => {
   const [file, setFile] = useState();
   function handleChange(e) {
     setFile(URL.createObjectURL(e.target.files[0]));
+    console.log(setFile);
   }
   return (
     <div
@@ -32,7 +33,7 @@ const AddNewTrip = ({ tripPop, setTripPop }) => {
               <img src={browserIcon} alt="browserIcon" className="w-[7rem]" />
             )}
             <p className="md:w-1/3 my-2">
-              Allowed file types: <b> png, bjpg, jpeg </b>
+              Allowed file types: <b> png, jpg, jpeg </b>
             </p>
             <div className="relative">
               <button className="border-2 border-red-500 px-2 rounded-md text-red-500">
@@ -40,6 +41,7 @@ const AddNewTrip = ({ tripPop, setTripPop }) => {
               </button>
               <input
                 type="file"
+                accept=".jpg,.png,.jpeg"
                 className="absolute left-[-90%] top-[30%] opacity-0 cursor-pointer "
                 onChange={handleChange}
               />

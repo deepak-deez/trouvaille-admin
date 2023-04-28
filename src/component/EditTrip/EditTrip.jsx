@@ -1,12 +1,12 @@
-import React from "react";
+import { React, useState } from "react";
 
-const EditTrip = ({ editTripPop, setEditTripPop, data }) => {
-  const [tripTitle, setTripTitle] = useState(data.heading);
-  const [tripDesc, settripDesc] = useState(data.description);
+const EditTrip = ({ editPop, setEditPop, TripData }) => {
+  const [tripTitle, setTripTitle] = useState(TripData.heading);
+  const [tripDesc, settripDesc] = useState(TripData.description);
   return (
     <div
       className={`fixed top-0 left-0 w-full flex justify-center items-center addUser  h-[100vh] ${
-        !editTripPop && "hidden"
+        !editPop && "hidden"
       }`}
     >
       <div className="flex flex-col justify-center m-auto md:w-[28%] bg-white p-4 ">
@@ -15,7 +15,7 @@ const EditTrip = ({ editTripPop, setEditTripPop, data }) => {
           <button
             className=""
             onClick={() => {
-              setEditTripPop(!editTripPop);
+              setEditPop(!editPop);
             }}
           >
             <i className="fa-solid fa-xmark"></i>

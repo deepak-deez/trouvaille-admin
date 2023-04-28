@@ -3,10 +3,10 @@ import delIcon from "../../assets/image/user/delete.svg";
 import editIcon from "../../assets/image/user/edit-icon.svg";
 
 const TripAction = ({
-  setEditTripPop,
-  editTripPop,
-  setEditableTrip,
-  data,
+  setEditPop,
+  editPop,
+  setEditTrip,
+  TripData,
   delTripPop,
   setDelTripPop,
 }) => {
@@ -24,15 +24,16 @@ const TripAction = ({
       </button>
 
       <div
-        className={` absolute top-0 bg-white rounded-lg w-[45%] p-3 flex shadow-[5px_10px_25px_rgba(102,101,130,0.15)] flex-col justify-center items-start ${
+        className={` absolute  top-6 right-0 bg-white rounded-lg  p-4 flex shadow-[5px_10px_25px_rgba(102,101,130,0.15)] flex-col justify-center items-start ${
           !tripAction && "hidden"
         }`}
       >
         <button
           className="flex justify-between items-center"
           onClick={() => {
-            setEditTripPop((editTripPop) => !editTripPop);
-            setEditableTrip(data);
+            setEditPop(!editPop);
+            console.log(TripData);
+            setEditTrip(TripData);
           }}
         >
           <span> Edit </span>{" "}
