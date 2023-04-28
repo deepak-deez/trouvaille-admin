@@ -7,6 +7,8 @@ const AmenitiesMenu = ({
   setshowUpdateAmenitiesPop,
   setUpdateAmenities,
   amenitiesDB,
+  setDeleteAmenitiesPop,
+  deleteAmenitiesPop,
 }) => {
   const [showAmenitiesMenu, setshowAmenitiesMenu] = useState(false);
   return (
@@ -35,7 +37,12 @@ const AmenitiesMenu = ({
           Edit
           <img className="ms-10" src={editIcon} alt="edit" />
         </button>
-        <button className="flex justify-center items-center" onClick={() => {}}>
+        <button
+          className="flex justify-center items-center"
+          onClick={() => {
+            setDeleteAmenitiesPop(!deleteAmenitiesPop);
+          }}
+        >
           Delete <img className="ms-6" src={delIcon} alt="delete" />
         </button>
       </div>

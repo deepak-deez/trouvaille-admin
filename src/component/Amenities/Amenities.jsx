@@ -3,11 +3,13 @@ import amenitiesData from "./amenitiesData";
 import AddAmenities from "../AddAmenities/AddAmenities";
 import AmenitiesMenu from "../AmenitiesMenu/AmenitiesMenu";
 import UpdateAmenities from "../UpdateAmenities/UpdateAmenities";
+import DeleteAmenities from "../DeleteAmenities/DeleteAmenities";
 
 const AmenitiesTable = () => {
   const [showAddPop, setShowAddPop] = useState(false);
   const [showUpdateAmenitiesPop, setshowUpdateAmenitiesPop] = useState(false);
   const [updateAmenities, setUpdateAmenities] = useState(false);
+  const [deleteAmenitiesPop, setDeleteAmenitiesPop] = useState(false);
   return (
     <>
       <div className="p-3">
@@ -24,7 +26,7 @@ const AmenitiesTable = () => {
                       setShowAddPop(!showAddPop);
                     }}
                   >
-                    Add New Occasion
+                    Add New Amenities
                     <i className=" ms-5 red-dot fa-solid fa-circle-plus"></i>
                   </button>
                 </th>
@@ -46,6 +48,8 @@ const AmenitiesTable = () => {
                           setUpdateAmenities={setUpdateAmenities}
                           showUpdateAmenitiesPop={showUpdateAmenitiesPop}
                           setshowUpdateAmenitiesPop={setshowUpdateAmenitiesPop}
+                          deleteAmenitiesPop={deleteAmenitiesPop}
+                          setDeleteAmenitiesPop={setDeleteAmenitiesPop}
                         />
                       </td>
                     </tr>
@@ -63,6 +67,12 @@ const AmenitiesTable = () => {
           showUpdateAmenitiesPop={showUpdateAmenitiesPop}
           setshowUpdateAmenitiesPop={setshowUpdateAmenitiesPop}
           amenitiesDB={updateAmenities}
+        />
+      )}
+      {deleteAmenitiesPop && (
+        <DeleteAmenities
+          deleteAmenitiesPop={deleteAmenitiesPop}
+          setDeleteAmenitiesPop={setDeleteAmenitiesPop}
         />
       )}
     </>
