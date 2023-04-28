@@ -1,8 +1,13 @@
 import { React, useState } from "react";
 import amenitiesData from "./amenitiesData";
+import AddAmenities from "../AddAmenities/AddAmenities";
+import AmenitiesMenu from "../AmenitiesMenu/AmenitiesMenu";
+import UpdateAmenities from "../UpdateAmenities/UpdateAmenities";
 
 const AmenitiesTable = () => {
   const [showAddPop, setShowAddPop] = useState(false);
+  const [showUpdateAmenitiesPop, setshowUpdateAmenitiesPop] = useState(false);
+  const [updateAmenities, setUpdateAmenities] = useState(false);
   return (
     <>
       <div className="p-3">
@@ -26,22 +31,40 @@ const AmenitiesTable = () => {
               </tr>
             </thead>
             <tbody>
-              {amenitiesData.map((data, index) => {
-                return (
-                  <tr className=" tr-class text-center" key={index}>
-                    <td className="td-class font-bold flex items-center p-3">
-                      <img className="mr-2" src={data.icon} alt="" />
-                      {data.heading}
-                    </td>
-                    <td className="td-class">{data.desc}</td>
-                    <td className=""></td>
-                  </tr>
-                );
-              })}
+              {amenitiesData &&
+                amenitiesData.map((data, index) => {
+                  return (
+                    <tr className=" tr-class text-center" key={index}>
+                      <td className="td-class font-bold flex items-center p-3">
+                        <img className="mr-2" src={data.icon} alt="" />
+                        {data.heading}
+                      </td>
+                      <td className="td-class">{data.desc}</td>
+                      <td className="">
+                        <AmenitiesMenu
+                          amenitiesDB={data}
+                          setUpdateAmenities={setUpdateAmenities}
+                          showUpdateAmenitiesPop={showUpdateAmenitiesPop}
+                          setshowUpdateAmenitiesPop={setshowUpdateAmenitiesPop}
+                        />
+                      </td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </div>
       </div>
+      {showAddPop && (
+        <AddAmenities showAddPop={showAddPop} setShowAddPop={setShowAddPop} />
+      )}
+      {showUpdateAmenitiesPop && (
+        <UpdateAmenities
+          showUpdateAmenitiesPop={showUpdateAmenitiesPop}
+          setshowUpdateAmenitiesPop={setshowUpdateAmenitiesPop}
+          amenitiesDB={updateAmenities}
+        />
+      )}
     </>
   );
 };
