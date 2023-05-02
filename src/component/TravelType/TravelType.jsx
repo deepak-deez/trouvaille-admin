@@ -1,8 +1,9 @@
 import { React, useState } from "react";
 import travelData from "./travelDB";
+import AddNewTravel from "../AddNewTravelType/AddNewTravel";
 
 const TravelType = () => {
-  const [tripPop, setTripPop] = useState(false);
+  const [showAddTravel, setShowAddTravel] = useState(false);
   return (
     <>
       <div className="w-full p-5">
@@ -10,7 +11,7 @@ const TravelType = () => {
           <button
             className="text-[#E75C54] font-bold"
             onClick={() => {
-              setTripPop(!tripPop);
+              setShowAddTravel(!showAddTravel);
               console.log("hii");
             }}
           >
@@ -39,6 +40,12 @@ const TravelType = () => {
           })}
         </div>
       </div>
+      {showAddTravel && (
+        <AddNewTravel
+          showAddTravel={showAddTravel}
+          setShowAddTravel={setShowAddTravel}
+        />
+      )}
     </>
   );
 };
