@@ -1,5 +1,4 @@
 import { React, useState } from "react";
-import travelData from "../TravelType/travelDB";
 
 const UpdateTravelType = ({
   showTravelUpdatePop,

@@ -29,7 +29,7 @@ const TravelType = () => {
           {travelData.map((data, index) => {
             return (
               <div className="w-full p-5 gap-4 " key={index}>
-                <div className="p-8 bg-white md:h-[30vh] rounded shadow-md">
+                <div className="p-4 bg-white rounded shadow-md">
                   <div className="flex justify-end">
                     <div>
                       <TravelDropMenu
