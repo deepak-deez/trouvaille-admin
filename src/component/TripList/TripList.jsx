@@ -31,9 +31,11 @@ const TripList = () => {
               {TripListDB.map((val, index) => {
                 return (
                   <tr className=" tr-class text-center" key={index}>
-                    <td className="td-class font-bold flex justify-around items-center p-3">
-                      <img src={val.icon} alt="logo" />
-                      {val.title}
+                    <td className="td-class font-bold  p-3">
+                      <div className="flex  items-center">
+                        <img className="px-6" src={val.icon} alt="logo" />
+                        {val.title}
+                      </div>
                     </td>
                     <td className="td-class">{val.duration}</td>
                     <td className="td-class">{val.price}</td>
@@ -45,7 +47,7 @@ const TripList = () => {
             </tbody>
           </table>
         </div>
-      </div>
+      </div> 
     </>
   );
 };
