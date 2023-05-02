@@ -27,10 +27,16 @@ const TravelType = () => {
                   <div className="flex justify-end">
                     <div>{/* travel menu */}</div>
                   </div>
-                  <div className="flex justify-center">
-                    <img src={data.icon} alt="" />
+                  <div className="flex justify-center py-2">
+                    <img
+                      className="lg:w-[30%] h-[3rem]"
+                      src={data.icon}
+                      alt=""
+                    />
                   </div>
-                  <h3 className="text-center">{data.title}</h3>
+                  <h3 className="text-center font-semibold py-2">
+                    {data.title}
+                  </h3>
                   <p className="text-gray-600 w-full md:h-[10vh] overflow-scroll">
                     {data.desc}
                   </p>
