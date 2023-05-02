@@ -1,9 +1,15 @@
 import { React, useState } from "react";
 import travelData from "./travelDB";
 import AddNewTravel from "../AddNewTravelType/AddNewTravel";
+import TravelDropMenu from "../TravelDropMenu/TravelDropMenu";
+import UpdateTravelType from "../UpdateTraveType/UpdateTravelType";
+import DeleteTravelType from "../DeleteTravelType/DeleteTravelType";
 
 const TravelType = () => {
   const [showAddTravel, setShowAddTravel] = useState(false);
+  const [showTravelUpdatePop, setshowTravelUpdatePop] = useState(false);
+  const [showDelTravelPop, setShowDelTravelPop] = useState(false);
+  const [editTravel, seteditTravel] = useState("");
   return (
     <>
       <div className="w-full p-5">
@@ -25,7 +31,16 @@ const TravelType = () => {
               <div className="w-full p-5 gap-4 " key={index}>
                 <div className="p-8 bg-white md:h-[30vh] rounded shadow-md">
                   <div className="flex justify-end">
-                    <div>{/* travel menu */}</div>
+                    <div>
+                      <TravelDropMenu
+                        travelData={data}
+                        showDelTravelPop={showDelTravelPop}
+                        setShowDelTravelPop={setShowDelTravelPop}
+                        showTravelUpdatePop={showTravelUpdatePop}
+                        setshowTravelUpdatePop={setshowTravelUpdatePop}
+                        seteditTravel={seteditTravel}
+                      />
+                    </div>
                   </div>
                   <div className="flex justify-center py-2">
                     <img
@@ -50,6 +65,20 @@ const TravelType = () => {
         <AddNewTravel
           showAddTravel={showAddTravel}
           setShowAddTravel={setShowAddTravel}
+        />
+      )}
+      {showTravelUpdatePop && (
+        <UpdateTravelType
+          showTravelUpdatePop={showTravelUpdatePop}
+          setshowTravelUpdatePop={setshowTravelUpdatePop}
+          travelData={editTravel}
+        />
+      )}
+
+      {showDelTravelPop && (
+        <DeleteTravelType
+          showDelTravelPop={showDelTravelPop}
+          setShowDelTravelPop={setShowDelTravelPop}
         />
       )}
     </>
