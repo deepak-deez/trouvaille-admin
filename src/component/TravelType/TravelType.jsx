@@ -21,17 +21,17 @@ const TravelType = () => {
         <div className="grid lg:grid-cols-4">
           {travelData.map((data, index) => {
             return (
-              <div className="w-full p-5 gap-4" key={index}>
-                <div className="p-8 bg-white rounded shadow-md">
+              <div className="w-full p-5 gap-4 " key={index}>
+                <div className="p-8 bg-white md:h-[30vh] rounded shadow-md">
                   <div className="flex justify-end">
                     <div>{/* travel menu */}</div>
                   </div>
                   <div className="flex justify-center">
                     <img src={data.icon} alt="" />
                   </div>
-                  <h3 className="text-center">{data.heading}</h3>
+                  <h3 className="text-center">{data.title}</h3>
                   <p className="text-gray-600 w-full md:h-[10vh] overflow-scroll">
-                    {data.description}
+                    {data.desc}
                   </p>
                 </div>
               </div>
