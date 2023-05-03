@@ -64,7 +64,7 @@ const Occasion = () => {
         <AddNewPop
           showAdd={showAdd}
           setShowAdd={setShowAdd}
-          heading="Add Occasions"
+          heading=" Occasions"
           icon={occasionBrowserIcon}
           titleHeading="Occasion"
         />
@@ -74,8 +74,8 @@ const Occasion = () => {
           showUpdatePop={showUpdatePop}
           setShowUpdatePop={setShowUpdatePop}
           updateData={editData}
-          heading="Travel Type"
-          titleHeading="Travel Type"
+          heading="Occasion"
+          titleHeading="Occasion"
         />
       )}
 
@@ -83,7 +83,7 @@ const Occasion = () => {
         <DeletePop
           showDelPop={setShowDelPop}
           setShowDelPop={setShowDelPop}
-          heading="Trip Categories"
+          heading="Occasion"
         />
       )}
     </>
