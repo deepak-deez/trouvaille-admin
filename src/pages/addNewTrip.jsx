@@ -8,7 +8,7 @@ const AddNewTrip = () => {
   return (
     <div className="flex h-full">
       <Sidebar />
-      <div className="w-full bg-[#f5f7f7] ">
+      <div className="w-full">
         <Navbar heading="Add New Trip" />
         <div className="md:h-[90vh]">
           <NewTripForm />

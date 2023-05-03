@@ -8,7 +8,7 @@ const NewTripForm = () => {
   }
   return (
     <div className="flex-col flex md:flex-row">
-      <div className="md:w-1/3">
+      <div className="md:w-1/3 bg-[#f5f7f7] rounded-lg m-4 p-4 h-[50%]">
         <div className="flex justify-center">
           {file ? (
             <img src={file} alt="browserIcon" />
@@ -31,7 +31,41 @@ const NewTripForm = () => {
         </div>
       </div>
       <div className=" w-full ">
-        <h1>form</h1>
+        <div className="p-5 flex flex-col space-y-2">
+          <h2 className="text-start text-2xl font-semibold">Add New Trip</h2>
+          <label className=" text-gray-400">Trip Package Title</label>
+          <input className="border-2 rounded-md" type="text" />
+        </div>
+        <div className="p-5 flex flex-col space-y-2">
+          <h2 className="text-start text-2xl font-semibold">
+            Trip Duration & Day Activities
+          </h2>
+          <label className=" text-gray-400">Duration</label>
+          <input className="border-2 rounded-md" type="date" />
+        </div>
+        <div className="p-5 flex flex-col space-y-2">
+          <h2 className="text-start text-2xl font-semibold">
+            {/* Trip Duration & Day Activities */}
+          </h2>
+
+          <div className="flex-col flex md:flex-row ">
+            <div className="flex flex-col ">
+              <label className=" text-gray-400">Trip category</label>
+              <input className="border-2 rounded-md" type="text" />
+            </div>
+            <div className="flex flex-col md:px-3">
+              <label className=" text-gray-400">No. of places</label>
+              <input className="border-2 rounded-md" type="number" />
+            </div>
+            <div className="flex flex-col md:px-3">
+              <label className=" text-gray-400">Maximum guests</label>
+              <input className="border-2 rounded-md" type="number" />
+            </div>
+          </div>
+        </div>
+        <div>
+          <h2>hey</h2>
+        </div>
       </div>
     </div>
   );
