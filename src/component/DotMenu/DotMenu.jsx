@@ -2,45 +2,47 @@ import { React, useState } from "react";
 import delIcon from "../../assets/image/user/delete.svg";
 import editIcon from "../../assets/image/user/edit-icon.svg";
 
-const AmenitiesMenu = ({
-  showUpdateAmenitiesPop,
-  setshowUpdateAmenitiesPop,
-  setUpdateAmenities,
-  amenitiesDB,
-  setDeleteAmenitiesPop,
-  deleteAmenitiesPop,
+const DotMenu = ({
+  showUpdatePop,
+  setShowUpdatePop,
+  setEditData,
+  updateData,
+  showDelPop,
+  setShowDelPop,
 }) => {
-  const [showAmenitiesMenu, setshowAmenitiesMenu] = useState(false);
+  const [showTraveldrop, setShowTraveldrop] = useState(false);
+
   return (
     <div className="relative">
       <button
         className=""
         onClick={() => {
-          setshowAmenitiesMenu(!showAmenitiesMenu);
+          setShowTraveldrop(!showTraveldrop);
         }}
       >
         ...
       </button>
 
       <div
-        className={` absolute top-0 bg-white rounded-lg w-[45%] p-3 flex shadow-[5px_10px_25px_rgba(102,101,130,0.15)] flex-col justify-center items-start ${
-          !showAmenitiesMenu && "hidden"
+        className={` absolute  top-6 right-0 bg-white rounded-lg  p-4 flex shadow-[5px_10px_25px_rgba(102,101,130,0.15)] flex-col justify-center items-start ${
+          !showTraveldrop && "hidden"
         }`}
       >
         <button
           className="flex justify-between items-center"
           onClick={() => {
-            setshowUpdateAmenitiesPop(!showUpdateAmenitiesPop);
-            setUpdateAmenities(amenitiesDB);
+            setShowUpdatePop(!showUpdatePop);
+            console.log(updateData);
+            setEditData(updateData);
           }}
         >
-          Edit
+          <span> Edit </span>
           <img className="ms-10" src={editIcon} alt="edit" />
         </button>
         <button
           className="flex justify-center items-center"
           onClick={() => {
-            setDeleteAmenitiesPop(!deleteAmenitiesPop);
+            setShowDelPop(!showDelPop);
           }}
         >
           Delete <img className="ms-6" src={delIcon} alt="delete" />
@@ -50,4 +52,4 @@ const AmenitiesMenu = ({
   );
 };
 
-export default AmenitiesMenu;
+export default DotMenu;

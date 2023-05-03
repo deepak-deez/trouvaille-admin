@@ -6,22 +6,22 @@ import tvIcon from "../../assets/image/amenities/tv-icon.svg";
 const amenitiesData = [
   {
     icon: acIcon,
-    heading: "Air Condition",
+    title: "Air Condition",
     desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.",
   },
   {
     icon: tvIcon,
-    heading: "Television",
+    title: "Television",
     desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.",
   },
   {
     icon: fireIcon,
-    heading: "Safety",
+    title: "Safety",
     desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.",
   },
   {
     icon: sunIcon,
-    heading: "Sun facing",
+    title: "Sun facing",
     desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.",
   },
 ];

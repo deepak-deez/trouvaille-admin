@@ -1,15 +1,16 @@
 import { React, useState } from "react";
 import amenitiesData from "./amenitiesData";
-import AddAmenities from "../AddAmenities/AddAmenities";
-import AmenitiesMenu from "../AmenitiesMenu/AmenitiesMenu";
-import UpdateAmenities from "../UpdateAmenities/UpdateAmenities";
-import DeleteAmenities from "../DeleteAmenities/DeleteAmenities";
+import amenitiesBrowserIcon from "../../assets/image/amenities/browse-anenities-icon.svg"
+import DotMenu from "../DotMenu/DotMenu";
+import UpdatePop from "../UpdatePop/UpdatePop";
+import AddNewPop from "../AddNewPop/AddNewPop";
+import DeletePop from "../DeletePop/DeletePop";
 
 const AmenitiesTable = () => {
-  const [showAddPop, setShowAddPop] = useState(false);
-  const [showUpdateAmenitiesPop, setshowUpdateAmenitiesPop] = useState(false);
-  const [updateAmenities, setUpdateAmenities] = useState(false);
-  const [deleteAmenitiesPop, setDeleteAmenitiesPop] = useState(false);
+  const [showAdd, setShowAdd] = useState(false);
+  const [showDelPop, setShowDelPop] = useState(false);
+  const [showUpdatePop, setShowUpdatePop] = useState(false);
+  const [editData, setEditData] = useState("");
   return (
     <>
       <div className="p-3">
@@ -23,7 +24,7 @@ const AmenitiesTable = () => {
                   <button
                     className="text-[#E75C54]"
                     onClick={() => {
-                      setShowAddPop(!showAddPop);
+                      setShowAdd(!showAdd);
                     }}
                   >
                     Add New Amenities
@@ -43,13 +44,13 @@ const AmenitiesTable = () => {
                       </td>
                       <td className="td-class">{data.desc}</td>
                       <td className="">
-                        <AmenitiesMenu
-                          amenitiesDB={data}
-                          setUpdateAmenities={setUpdateAmenities}
-                          showUpdateAmenitiesPop={showUpdateAmenitiesPop}
-                          setshowUpdateAmenitiesPop={setshowUpdateAmenitiesPop}
-                          deleteAmenitiesPop={deleteAmenitiesPop}
-                          setDeleteAmenitiesPop={setDeleteAmenitiesPop}
+                        <DotMenu
+                          updateData={data}
+                          showDelPop={showDelPop}
+                          setShowDelPop={setShowDelPop}
+                          showUpdatePop={showUpdatePop}
+                          setShowUpdatePop={setShowUpdatePop}
+                          setEditData={setEditData}
                         />
                       </td>
                     </tr>
@@ -59,20 +60,30 @@ const AmenitiesTable = () => {
           </table>
         </div>
       </div>
-      {showAddPop && (
-        <AddAmenities showAddPop={showAddPop} setShowAddPop={setShowAddPop} />
-      )}
-      {showUpdateAmenitiesPop && (
-        <UpdateAmenities
-          showUpdateAmenitiesPop={showUpdateAmenitiesPop}
-          setshowUpdateAmenitiesPop={setshowUpdateAmenitiesPop}
-          amenitiesDB={updateAmenities}
+      {showAdd && (
+        <AddNewPop
+          showAdd={showAdd}
+          setShowAdd={setShowAdd}
+          heading="Add New Amenities"
+          icon={amenitiesBrowserIcon}
+          titleHeading="Amenity "
         />
       )}
-      {deleteAmenitiesPop && (
-        <DeleteAmenities
-          deleteAmenitiesPop={deleteAmenitiesPop}
-          setDeleteAmenitiesPop={setDeleteAmenitiesPop}
+      {showUpdatePop && (
+        <UpdatePop
+          showUpdatePop={showUpdatePop}
+          setShowUpdatePop={setShowUpdatePop}
+          updateData={editData}
+          heading="Amenities"
+          titleHeading="Amenity"
+        />
+      )}
+
+      {showDelPop && (
+        <DeletePop
+          showDelPop={setShowDelPop}
+          setShowDelPop={setShowDelPop}
+          heading="amenity"
         />
       )}
     </>

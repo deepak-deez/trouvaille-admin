@@ -1,38 +1,43 @@
 import { React, useState } from "react";
 
-const UpdateAmenities = ({
-  showUpdateAmenitiesPop,
-  setshowUpdateAmenitiesPop,
-  amenitiesDB,
+const UpdatePop = ({
+  showUpdatePop,
+  setShowUpdatePop,
+  updateData,
+  heading,
+  titleHeading,
 }) => {
-  const [amenitiesTitle, setAmenitiesTitle] = useState(amenitiesDB.heading);
-  const [amenitiesDesc, setAmenitiesDesc] = useState(amenitiesDB.desc);
+  const [title, setTitle] = useState(updateData.title);
+  console.log(updateData);
+  const [desc, setDesc] = useState(updateData.desc);
   return (
     <div
       className={`fixed top-0 left-0 w-full flex justify-center items-center addUser  h-[100vh] ${
-        !showUpdateAmenitiesPop && "hidden"
+        !showUpdatePop && "hidden"
       }`}
     >
       <div className="flex flex-col justify-center m-auto md:w-[28%] bg-white p-4 ">
         <div className="flex justify-between py-2">
-          <h2 className="text-start font-bold">Update Amenities</h2>
+          <h2 className="text-start font-bold">Update {heading}</h2>
           <button
             className=""
             onClick={() => {
-              setshowUpdateAmenitiesPop(!showUpdateAmenitiesPop);
+              setShowUpdatePop(!showUpdatePop);
             }}
           >
             <i className="fa-solid fa-xmark"></i>
           </button>
         </div>
         <form className="flex flex-col ">
-          <label className="text-sm font-light py-2">Amenity Title</label>
+          <label className="text-sm font-light py-2" htmlFor="Name">
+            {titleHeading} Title
+          </label>
           <input
             className="border-2 p-2"
             type="text"
-            value={amenitiesTitle}
+            value={title}
             onChange={(e) => {
-              setAmenitiesTitle(e.target.value);
+              setTitle(e.target.value);
             }}
           />
           <label className="text-sm  py-2 font-semibold">Description</label>
@@ -40,9 +45,9 @@ const UpdateAmenities = ({
             className="resize-none border-2"
             cols="30"
             rows="10"
-            value={amenitiesDesc}
+            value={desc}
             onChange={(e) => {
-              setAmenitiesDesc(e.target.value);
+              setDesc(e.target.value);
             }}
           ></textarea>
         </form>
@@ -56,4 +61,4 @@ const UpdateAmenities = ({
   );
 };
 
-export default UpdateAmenities;
+export default UpdatePop;
