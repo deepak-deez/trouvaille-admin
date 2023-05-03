@@ -1,15 +1,16 @@
 import { React, useState } from "react";
 import travelData from "./travelDB";
-import AddNewTravel from "../AddNewTravelType/AddNewTravel";
-import TravelDropMenu from "../TravelDropMenu/TravelDropMenu";
-import UpdateTravelType from "../UpdateTraveType/UpdateTravelType";
-import DeleteTravelType from "../DeleteTravelType/DeleteTravelType";
+import browserIcon from "../../assets/image/travel-type/independent-icon.svg";
+import AddNewPop from "../AddNewPop/AddNewPop";
+import UpdatePop from "../UpdatePop/UpdatePop";
+import DeletePop from "../DeletePop/DeletePop";
+import DotMenu from "../DotMenu/DotMenu";
 
 const TravelType = () => {
-  const [showAddTravel, setShowAddTravel] = useState(false);
-  const [showTravelUpdatePop, setshowTravelUpdatePop] = useState(false);
-  const [showDelTravelPop, setShowDelTravelPop] = useState(false);
-  const [editTravel, seteditTravel] = useState("");
+  const [showAdd, setShowAdd] = useState(false);
+  const [showUpdatePop, setShowUpdatePop] = useState(false);
+  const [showDelPop, setShowDelPop] = useState(false);
+  const [editData, setEditData] = useState("");
   return (
     <>
       <div className="w-full p-5">
@@ -17,7 +18,7 @@ const TravelType = () => {
           <button
             className="text-[#E75C54] font-bold"
             onClick={() => {
-              setShowAddTravel(!showAddTravel);
+              setShowAdd(!showAdd);
               console.log("hii");
             }}
           >
@@ -32,13 +33,13 @@ const TravelType = () => {
                 <div className="p-4 bg-white rounded shadow-md">
                   <div className="flex justify-end">
                     <div>
-                      <TravelDropMenu
-                        travelData={data}
-                        showDelTravelPop={showDelTravelPop}
-                        setShowDelTravelPop={setShowDelTravelPop}
-                        showTravelUpdatePop={showTravelUpdatePop}
-                        setshowTravelUpdatePop={setshowTravelUpdatePop}
-                        seteditTravel={seteditTravel}
+                      <DotMenu
+                        updateData={data}
+                        showDelPop={showDelPop}
+                        setShowDelPop={setShowDelPop}
+                        showUpdatePop={showUpdatePop}
+                        setShowUpdatePop={setShowUpdatePop}
+                        setEditData={setEditData}
                       />
                     </div>
                   </div>
@@ -61,24 +62,31 @@ const TravelType = () => {
           })}
         </div>
       </div>
-      {showAddTravel && (
-        <AddNewTravel
-          showAddTravel={showAddTravel}
-          setShowAddTravel={setShowAddTravel}
+      {showAdd && (
+        <AddNewPop
+          showAdd={showAdd}
+          setShowAdd={setShowAdd}
+          heading="Travel Type"
+          icon={browserIcon}
+          titleHeading="Travel Type"
         />
       )}
-      {showTravelUpdatePop && (
-        <UpdateTravelType
-          showTravelUpdatePop={showTravelUpdatePop}
-          setshowTravelUpdatePop={setshowTravelUpdatePop}
-          travelData={editTravel}
+      {showUpdatePop && (
+        <UpdatePop
+          showUpdatePop={showUpdatePop}
+          setShowUpdatePop={setShowUpdatePop}
+          updateData={editData}
+          heading="Travel Type"
+          icon={browserIcon}
+          titleHeading="Travel Type"
         />
       )}
 
-      {showDelTravelPop && (
-        <DeleteTravelType
-          showDelTravelPop={showDelTravelPop}
-          setShowDelTravelPop={setShowDelTravelPop}
+      {showDelPop && (
+        <DeletePop
+          showDelPop={setShowDelPop}
+          setShowDelPop={setShowDelPop}
+          heading="Trip Categories"
         />
       )}
     </>

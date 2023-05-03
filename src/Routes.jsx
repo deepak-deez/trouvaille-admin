@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/dashboard";
 import PageError from "./component/Error/PageError";
-import TravelType from "./component/TravelType/TravelType";
 import Travel from "./pages/travel";
 
 const Router = () => {

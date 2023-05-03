@@ -2,13 +2,13 @@ import { React, useState } from "react";
 import delIcon from "../../assets/image/user/delete.svg";
 import editIcon from "../../assets/image/user/edit-icon.svg";
 
-const TravelDropMenu = ({
-  showTravelUpdatePop,
-  setshowTravelUpdatePop,
-  seteditTravel,
-  travelData,
-  showDelTravelPop,
-  setShowDelTravelPop,
+const DotMenu = ({
+  showUpdatePop,
+  setShowUpdatePop,
+  setEditData,
+  updateData,
+  showDelPop,
+  setShowDelPop,
 }) => {
   const [showTraveldrop, setShowTraveldrop] = useState(false);
 
@@ -31,9 +31,9 @@ const TravelDropMenu = ({
         <button
           className="flex justify-between items-center"
           onClick={() => {
-            setshowTravelUpdatePop(!showTravelUpdatePop);
-            console.log(travelData);
-            seteditTravel(travelData);
+            setShowUpdatePop(!showUpdatePop);
+            console.log(updateData);
+            setEditData(updateData);
           }}
         >
           <span> Edit </span>
@@ -42,7 +42,7 @@ const TravelDropMenu = ({
         <button
           className="flex justify-center items-center"
           onClick={() => {
-            setShowDelTravelPop(!showDelTravelPop);
+            setShowDelPop(!showDelPop);
           }}
         >
           Delete <img className="ms-6" src={delIcon} alt="delete" />
@@ -52,4 +52,4 @@ const TravelDropMenu = ({
   );
 };
 
-export default TravelDropMenu;
+export default DotMenu;
