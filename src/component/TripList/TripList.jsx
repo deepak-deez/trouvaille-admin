@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import TripListDB from "./TripListDB";
+import TripDropMenu from "../TripDropMenu/TripDropMenu";
+import { useNavigate } from "react-router-dom";
 
 const TripList = () => {
-  const [addPop, setAddPop] = useState(false);
+  const navigate = useNavigate();
   return (
     <>
       <div className="p-3">
@@ -18,10 +20,10 @@ const TripList = () => {
                   <button
                     className="text-[#E75C54]"
                     onClick={() => {
-                      setAddPop(!addPop);
+                      navigate("/trip-list/add-trip");
                     }}
                   >
-                    Add A New User
+                    Add New Trip
                     <i className=" red-dot fa-solid fa-circle-plus"></i>
                   </button>
                 </th>
@@ -40,14 +42,16 @@ const TripList = () => {
                     <td className="td-class">{val.duration}</td>
                     <td className="td-class">{val.price}</td>
                     <td className="td-class">{val.discounted}</td>
-                    <td className="">{/*  */}</td>
+                    <td className="">
+                      <TripDropMenu data={val} />
+                    </td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
         </div>
-      </div> 
+      </div>
     </>
   );
 };
