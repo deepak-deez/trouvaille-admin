@@ -64,7 +64,7 @@ const AmenitiesTable = () => {
         <AddNewPop
           showAdd={showAdd}
           setShowAdd={setShowAdd}
-          heading="Add New Amenities"
+          heading=" New Amenities"
           icon={amenitiesBrowserIcon}
           titleHeading="Amenity "
         />
