@@ -14,7 +14,7 @@ const AddOccasion = ({ showOccasionsPop, setShowOccasionsPop }) => {
     >
       <div className="flex flex-col justify-center m-auto xl:w-[30%] md:w-[40%] w-[80%] bg-white p-4 ">
         <div className="flex justify-between py-2">
-          <h2 className="text-start font-bold py-4">Add New Amenities</h2>
+          <h2 className="text-start font-bold py-4">Add New Occasion</h2>
           <button
             className=""
             onClick={() => {
@@ -49,7 +49,7 @@ const AddOccasion = ({ showOccasionsPop, setShowOccasionsPop }) => {
         </div>
         <form className="flex text-[#737A83] flex-col ">
           <label className="text-sm font-semibold py-2" htmlFor="title">
-            Amenity Title
+            Occasion Title
           </label>
           <input className="border-2" type="text" />
           <label className="text-sm  py-2 font-semibold" htmlFor="description">
