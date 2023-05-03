@@ -1,15 +1,16 @@
 import { React, useState } from "react";
 import TripDetails from "./tripData";
-import AddNewTrip from "../AddNewTrip/AddNewTrip";
-import TripAction from "../TripAction/TripAction";
-import EditTrip from "../EditTrip/EditTrip";
-import DeleteTrip from "../DeleteTrip/DeleteTrip";
+import browseTripIcon from "../../assets/image/trip/browse-trip-icon.svg";
+import DotMenu from "../DotMenu/DotMenu";
+import AddNewPop from "../AddNewPop/AddNewPop";
+import UpdatePop from "../UpdatePop/UpdatePop";
+import DeletePop from "../DeletePop/DeletePop";
 
 const Trip = () => {
-  const [tripPop, setTripPop] = useState(false);
-  const [editPop, setEditPop] = useState(false);
-  const [delTripPop, setDelTripPop] = useState(false);
-  const [editTrip, setEditTrip] = useState("");
+  const [showAdd, setShowAdd] = useState(false);
+  const [showDelPop, setShowDelPop] = useState(false);
+  const [showUpdatePop, setShowUpdatePop] = useState(false);
+  const [editData, setEditData] = useState("");
   return (
     <>
       <div className="w-full p-5">
@@ -17,7 +18,7 @@ const Trip = () => {
           <button
             className="text-[#E75C54] font-bold"
             onClick={() => {
-              setTripPop(!tripPop);
+              setShowAdd(!showAdd);
               console.log("hii");
             }}
           >
@@ -32,22 +33,22 @@ const Trip = () => {
                 <div className="p-8 bg-white rounded shadow-md">
                   <div className="flex justify-end">
                     <div>
-                      <TripAction
-                        editPop={editPop}
-                        setEditPop={setEditPop}
-                        setEditTrip={setEditTrip}
-                        TripData={data}
-                        delTripPop={delTripPop}
-                        setDelTripPop={setDelTripPop}
+                      <DotMenu
+                        updateData={data}
+                        showDelPop={showDelPop}
+                        setShowDelPop={setShowDelPop}
+                        showUpdatePop={showUpdatePop}
+                        setShowUpdatePop={setShowUpdatePop}
+                        setEditData={setEditData}
                       />
                     </div>
                   </div>
                   <div className="flex justify-center">
                     <img src={data.icon} alt="" />
                   </div>
-                  <h3 className="text-center">{data.heading}</h3>
+                  <h3 className="text-center">{data.title}</h3>
                   <p className="text-gray-600 w-full md:h-[10vh] overflow-scroll">
-                    {data.description}
+                    {data.desc}
                   </p>
                 </div>
               </div>
@@ -55,16 +56,31 @@ const Trip = () => {
           })}
         </div>
       </div>
-      {tripPop && <AddNewTrip tripPop={tripPop} setTripPop={setTripPop} />}
-      {editPop && (
-        <EditTrip
-          editPop={editPop}
-          setEditPop={setEditPop}
-          TripData={editTrip}
+      {showAdd && (
+        <AddNewPop
+          showAdd={showAdd}
+          setShowAdd={setShowAdd}
+          heading=" New Trip Categories"
+          icon={browseTripIcon}
+          titleHeading="Trip "
         />
       )}
-      {delTripPop && (
-        <DeleteTrip delTripPop={delTripPop} setDelTripPop={setDelTripPop} />
+      {showUpdatePop && (
+        <UpdatePop
+          showUpdatePop={showUpdatePop}
+          setShowUpdatePop={setShowUpdatePop}
+          updateData={editData}
+          heading="Trip Categories"
+          titleHeading="Trip"
+        />
+      )}
+
+      {showDelPop && (
+        <DeletePop
+          showDelPop={setShowDelPop}
+          setShowDelPop={setShowDelPop}
+          heading="Trip Categories"
+        />
       )}
     </>
   );

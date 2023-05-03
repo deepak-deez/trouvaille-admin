@@ -2,22 +2,22 @@ import { React, useState } from "react";
 import delIcon from "../../assets/image/user/delete.svg";
 import editIcon from "../../assets/image/user/edit-icon.svg";
 
-const TripAction = ({
-  setEditPop,
-  editPop,
-  setEditTrip,
-  TripData,
-  delTripPop,
-  setDelTripPop,
+const DotMenu = ({
+  showUpdatePop,
+  setShowUpdatePop,
+  setEditData,
+  updateData,
+  showDelPop,
+  setShowDelPop,
 }) => {
-  const [tripAction, setTripAction] = useState(false);
+  const [showTraveldrop, setShowTraveldrop] = useState(false);
 
   return (
     <div className="relative">
       <button
         className=""
         onClick={() => {
-          setTripAction(!tripAction);
+          setShowTraveldrop(!showTraveldrop);
         }}
       >
         ...
@@ -25,24 +25,24 @@ const TripAction = ({
 
       <div
         className={` absolute  top-6 right-0 bg-white rounded-lg  p-4 flex shadow-[5px_10px_25px_rgba(102,101,130,0.15)] flex-col justify-center items-start ${
-          !tripAction && "hidden"
+          !showTraveldrop && "hidden"
         }`}
       >
         <button
           className="flex justify-between items-center"
           onClick={() => {
-            setEditPop(!editPop);
-            console.log(TripData);
-            setEditTrip(TripData);
+            setShowUpdatePop(!showUpdatePop);
+            console.log(updateData);
+            setEditData(updateData);
           }}
         >
-          <span> Edit </span>{" "}
+          <span> Edit </span>
           <img className="ms-10" src={editIcon} alt="edit" />
         </button>
         <button
           className="flex justify-center items-center"
           onClick={() => {
-            setDelTripPop(!delTripPop);
+            setShowDelPop(!showDelPop);
           }}
         >
           Delete <img className="ms-6" src={delIcon} alt="delete" />
@@ -52,4 +52,4 @@ const TripAction = ({
   );
 };
 
-export default TripAction;
+export default DotMenu;

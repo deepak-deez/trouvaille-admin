@@ -1,21 +1,28 @@
 import { React, useState } from "react";
 
-const EditTrip = ({ editPop, setEditPop, TripData }) => {
-  const [tripTitle, setTripTitle] = useState(TripData.heading);
-  const [tripDesc, settripDesc] = useState(TripData.description);
+const UpdatePop = ({
+  showUpdatePop,
+  setShowUpdatePop,
+  updateData,
+  heading,
+  titleHeading,
+}) => {
+  const [title, setTitle] = useState(updateData.title);
+  console.log(updateData);
+  const [desc, setDesc] = useState(updateData.desc);
   return (
     <div
       className={`fixed top-0 left-0 w-full flex justify-center items-center addUser  h-[100vh] ${
-        !editPop && "hidden"
+        !showUpdatePop && "hidden"
       }`}
     >
       <div className="flex flex-col justify-center m-auto md:w-[28%] bg-white p-4 ">
         <div className="flex justify-between py-2">
-          <h2 className="text-start font-bold">Update Trip Categories</h2>
+          <h2 className="text-start font-bold">Update {heading}</h2>
           <button
             className=""
             onClick={() => {
-              setEditPop(!editPop);
+              setShowUpdatePop(!showUpdatePop);
             }}
           >
             <i className="fa-solid fa-xmark"></i>
@@ -23,14 +30,14 @@ const EditTrip = ({ editPop, setEditPop, TripData }) => {
         </div>
         <form className="flex flex-col ">
           <label className="text-sm font-light py-2" htmlFor="Name">
-            Name
+            {titleHeading} Title
           </label>
           <input
             className="border-2 p-2"
             type="text"
-            value={tripTitle}
+            value={title}
             onChange={(e) => {
-              setTripTitle(e.target.value);
+              setTitle(e.target.value);
             }}
           />
           <label className="text-sm  py-2 font-semibold">Description</label>
@@ -38,9 +45,9 @@ const EditTrip = ({ editPop, setEditPop, TripData }) => {
             className="resize-none border-2"
             cols="30"
             rows="10"
-            value={tripDesc}
+            value={desc}
             onChange={(e) => {
-              settripDesc(e.target.value);
+              setDesc(e.target.value);
             }}
           ></textarea>
         </form>
@@ -54,4 +61,4 @@ const EditTrip = ({ editPop, setEditPop, TripData }) => {
   );
 };
 
-export default EditTrip;
+export default UpdatePop;
