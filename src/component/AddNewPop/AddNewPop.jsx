@@ -1,24 +1,26 @@
 import { React, useState } from "react";
-import browserIcon from "../../assets/image/occasion/cup-icon.svg";
 
-const AddOccasion = ({ showOccasionsPop, setShowOccasionsPop }) => {
+const AddNewPop = (props) => {
+  const { setShowAdd, showAdd, heading, icon, titleHeading } =
+    props;
   const [file, setFile] = useState();
   function handleChange(e) {
     setFile(URL.createObjectURL(e.target.files[0]));
   }
+  console.log(setFile);
   return (
     <div
       className={`fixed top-0 left-0 w-full flex justify-center items-center addUser   h-[100vh] ${
-        !showOccasionsPop && "hidden"
+        !showAdd && "hidden"
       }`}
     >
       <div className="flex flex-col justify-center m-auto xl:w-[30%] md:w-[40%] w-[80%] bg-white p-4 ">
         <div className="flex justify-between py-2">
-          <h2 className="text-start font-bold py-4">Add New Occasion</h2>
+          <h2 className="text-start font-bold py-4">{"Add " + heading}</h2>
           <button
             className=""
             onClick={() => {
-              setShowOccasionsPop(!showOccasionsPop);
+              setShowAdd(!showAdd);
             }}
           >
             <i className="fa-solid fa-xmark"></i>
@@ -29,7 +31,7 @@ const AddOccasion = ({ showOccasionsPop, setShowOccasionsPop }) => {
             {file ? (
               <img src={file} alt="browserIcon" className="w-[7rem]" />
             ) : (
-              <img src={browserIcon} alt="browserIcon" className="w-[7rem]" />
+              <img src={icon} alt="browserIcon" className="w-[7rem]" />
             )}
             <p className="md:w-1/3 my-2">
               Allowed file types: <b> png, jpg, jpeg </b>
@@ -48,11 +50,11 @@ const AddOccasion = ({ showOccasionsPop, setShowOccasionsPop }) => {
           </div>
         </div>
         <form className="flex text-[#737A83] flex-col ">
-          <label className="text-sm font-semibold py-2" htmlFor="title">
-            Occasion Title
+          <label className="text-sm font-semibold py-2" htmlFor="Name">
+            {titleHeading} Title
           </label>
           <input className="border-2" type="text" />
-          <label className="text-sm  py-2 font-semibold" htmlFor="description">
+          <label className="text-sm  py-2 font-semibold" htmlFor="email">
             Description
           </label>
           <textarea
@@ -70,5 +72,4 @@ const AddOccasion = ({ showOccasionsPop, setShowOccasionsPop }) => {
     </div>
   );
 };
-
-export default AddOccasion;
+export default AddNewPop;

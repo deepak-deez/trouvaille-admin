@@ -1,15 +1,16 @@
 import { React, useState } from "react";
 import OccasionDb from "./occasionData";
-import AddOccasion from "../AddNewOccasion/AddNewOccasion";
-import DeleteOccasion from "../DeleteOccasion/DeleteOccasion";
-import UpdateOccasion from "../UpdateOccasion/UpdateOccasion";
-import OccasionMenu from "../OccasionMenu/OccasionMenu";
+import DotMenu from "../DotMenu/DotMenu";
+import AddNewPop from "../AddNewPop/AddNewPop";
+import UpdatePop from "../UpdatePop/UpdatePop";
+import DeletePop from "../DeletePop/DeletePop";
+import occasionBrowserIcon from "../../assets/image/occasion/occasion-browse-icon.svg";
 
 const Occasion = () => {
-  const [showOccasionsPop, setShowOccasionsPop] = useState(false);
-  const [showUpdateOccasionPop, setshowUpdateOccasionPop] = useState(false);
-  const [updateOccasion, setUpdateOccasion] = useState(false);
-  const [deleteOccasionPop, setDeleteOccasionPop] = useState(false);
+  const [showAdd, setShowAdd] = useState(false);
+  const [showUpdatePop, setShowUpdatePop] = useState(false);
+  const [showDelPop, setShowDelPop] = useState(false);
+  const [editData, setEditData] = useState("");
   return (
     <>
       <div className="p-3">
@@ -23,7 +24,7 @@ const Occasion = () => {
                   <button
                     className="text-[#E75C54]"
                     onClick={() => {
-                      setShowOccasionsPop(!showOccasionsPop);
+                      setShowAdd(!showAdd);
                     }}
                   >
                     Add New Occasion
@@ -43,13 +44,13 @@ const Occasion = () => {
                       </td>
                       <td className="td-class">{data.desc}</td>
                       <td className="">
-                        <OccasionMenu
-                          OccasionDB={data}
-                          setUpdateOccasion={setUpdateOccasion}
-                          showUpdateOccasionPop={showUpdateOccasionPop}
-                          setshowUpdateOccasionPop={setshowUpdateOccasionPop}
-                          deleteOccasionPop={deleteOccasionPop}
-                          setDeleteOccasionPop={setDeleteOccasionPop}
+                        <DotMenu
+                          updateData={data}
+                          showDelPop={showDelPop}
+                          setShowDelPop={setShowDelPop}
+                          showUpdatePop={showUpdatePop}
+                          setShowUpdatePop={setShowUpdatePop}
+                          setEditData={setEditData}
                         />
                       </td>
                     </tr>
@@ -59,23 +60,30 @@ const Occasion = () => {
           </table>
         </div>
       </div>
-      {showOccasionsPop && (
-        <AddOccasion
-          showOccasionsPop={showOccasionsPop}
-          setShowOccasionsPop={setShowOccasionsPop}
+      {showAdd && (
+        <AddNewPop
+          showAdd={showAdd}
+          setShowAdd={setShowAdd}
+          heading="Add Occasions"
+          icon={occasionBrowserIcon}
+          titleHeading="Occasion"
         />
       )}
-      {showUpdateOccasionPop && (
-        <UpdateOccasion
-          showUpdateOccasionPop={showUpdateOccasionPop}
-          setshowUpdateOccasionPop={setshowUpdateOccasionPop}
-          OccasionDB={updateOccasion}
+      {showUpdatePop && (
+        <UpdatePop
+          showUpdatePop={showUpdatePop}
+          setShowUpdatePop={setShowUpdatePop}
+          updateData={editData}
+          heading="Travel Type"
+          titleHeading="Travel Type"
         />
       )}
-      {deleteOccasionPop && (
-        <DeleteOccasion
-          deleteOccasionPop={deleteOccasionPop}
-          setDeleteOccasionPop={setDeleteOccasionPop}
+
+      {showDelPop && (
+        <DeletePop
+          showDelPop={setShowDelPop}
+          setShowDelPop={setShowDelPop}
+          heading="Trip Categories"
         />
       )}
     </>

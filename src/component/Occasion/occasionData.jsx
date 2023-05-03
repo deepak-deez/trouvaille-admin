@@ -6,22 +6,22 @@ import cupIcon from "../../assets/image/occasion/cup-icon.svg";
 const OccasionDb = [
   {
     icon: familyIcon,
-    heading: "Family Vacation ",
+    title: "Family Vacation ",
     desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.",
   },
   {
     icon: cupIcon,
-    heading: "Romantic getaway ",
+    title: "Romantic getaway ",
     desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.",
   },
   {
     icon: adventureIcon,
-    heading: "Adventure ",
+    title: "Adventure ",
     desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.",
   },
   {
     icon: bedIcon,
-    heading: "Honeymoon ",
+    title: "Honeymoon ",
     desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.",
   },
 ];
