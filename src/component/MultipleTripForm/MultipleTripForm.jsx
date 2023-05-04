@@ -53,7 +53,7 @@ function MultipleTripForm() {
                   <label className=" text-gray-400">Title</label>
                   <input
                     type="text"
-                    className="border-2 rounded-md w-[80%]"
+                    className="border-2 p-2 rounded-md w-[80%]"
                     onChange={(e) => handleChange(index, e)}
                     value={data.Title}
                     name="Title"
@@ -63,7 +63,7 @@ function MultipleTripForm() {
                   <label className=" text-gray-400">Name</label>
                   <input
                     type="text"
-                    className="border-2 rounded-md"
+                    className="border-2 p-2 rounded-md"
                     onChange={(e) => handleChange(index, e)}
                     value={data.Name}
                     name="Name"
