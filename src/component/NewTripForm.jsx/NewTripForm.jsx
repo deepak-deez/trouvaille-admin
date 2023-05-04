@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import tempIcon from "../../assets/image/trip-list/AddNewTrip-icon.svg";
+import MultipleTripForm from "../MultipleTripForm/MultipleTripForm";
 
 const NewTripForm = () => {
   const [file, setFile] = useState();
@@ -37,7 +38,7 @@ const NewTripForm = () => {
           <input className="border-2 rounded-md" type="text" />
         </div>
         <div className="p-5 flex flex-col space-y-2">
-          <h2 className="text-start text-2xl font-semibold">
+          <h2 className="text-start font-bold">
             Trip Duration & Day Activities
           </h2>
           <label className=" text-gray-400">Duration</label>
@@ -63,8 +64,8 @@ const NewTripForm = () => {
             </div>
           </div>
         </div>
-        <div>
-          <h2>hey</h2>
+        <div className="p-5 flex flex-col space-y-2">
+          <MultipleTripForm />
         </div>
       </div>
     </div>
