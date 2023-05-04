@@ -9,7 +9,7 @@ const TripListPage = () => {
     <div className="flex h-full">
       <Sidebar />
       <div className="w-full bg-[#f5f7f7] ">
-        <Navbar heading="All Users" />
+        <Navbar heading="List Of Trips" />
         <div className="md:h-[90vh]">
           <TripList />
         </div>

@@ -13,7 +13,7 @@ const AddNewTrip = () => {
         <div className="md:h-[90vh]">
           <NewTripForm />
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </div>
   );

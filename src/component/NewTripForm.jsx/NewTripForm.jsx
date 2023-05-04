@@ -1,12 +1,15 @@
 import { React, useState } from "react";
 import tempIcon from "../../assets/image/trip-list/AddNewTrip-icon.svg";
 import MultipleTripForm from "../MultipleTripForm/MultipleTripForm";
+import TagsInput from "../TagsInput/TagsInput";
 
 const NewTripForm = () => {
   const [file, setFile] = useState();
   function handleChange(e) {
     setFile(URL.createObjectURL(e.target.files[0]));
   }
+ 
+
   return (
     <div className="flex-col flex md:flex-row">
       <div className="md:w-1/3 bg-[#f5f7f7] rounded-lg m-4 p-4 h-[50%]">
@@ -32,19 +35,19 @@ const NewTripForm = () => {
         </div>
       </div>
       <div className=" w-full ">
-        <div className="p-5 flex flex-col space-y-2">
+        <div className="p-2 flex flex-col space-y-2">
           <h2 className="text-start text-2xl font-semibold">Add New Trip</h2>
           <label className=" text-gray-400">Trip Package Title</label>
           <input className="border-2 rounded-md" type="text" />
         </div>
-        <div className="p-5 flex flex-col space-y-2">
+        <div className="p-2 flex flex-col space-y-2">
           <h2 className="text-start font-bold">
             Trip Duration & Day Activities
           </h2>
           <label className=" text-gray-400">Duration</label>
           <input className="border-2 rounded-md" type="date" />
         </div>
-        <div className="p-5 flex flex-col space-y-2">
+        <div className="p-2 flex flex-col space-y-2">
           <h2 className="text-start text-2xl font-semibold">
             {/* Trip Duration & Day Activities */}
           </h2>
@@ -64,8 +67,11 @@ const NewTripForm = () => {
             </div>
           </div>
         </div>
-        <div className="p-5 flex flex-col space-y-2">
+        <div className="p-2 flex flex-col space-y-2">
           <MultipleTripForm />
+        </div>
+        <div className="p-2 flex flex-col space-y-2 ">
+          <TagsInput heading="Amenities"  />
         </div>
       </div>
     </div>
