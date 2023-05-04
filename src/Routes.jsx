@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/dashboard";
 import PageError from "./component/Error/PageError";
 import BookingList from "./pages/bookingList";
+import BookingDetails from "./pages/bookingDetails";
 
 const Router = () => {
   return (
@@ -11,7 +12,7 @@ const Router = () => {
         <Route exact path="/dashboard" element={<Dashboard />} />
         <Route exact path="*" element={<PageError />} />
         <Route exact path="/booking-list" element={<BookingList />} />
-        
+        <Route exact path="/booking-details/:id" element={<BookingDetails />} />
       </Routes>
     </BrowserRouter>
   );
