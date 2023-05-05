@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "../component/Sidebar/Sidebar";
 import Navbar from "../component/Navbar/Navbar";
 import Footer from "../component/Footer/Footer";
-import { Link } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
 
-import { useParams } from "react-router-dom";
+
+
+const BookingDetails = () => {
 
 const bookingData = [
   {
@@ -17,28 +19,24 @@ const bookingData = [
   },
   {
     id: 2,
-    title: "Warsáw, Poland",
-    name: "Connie Parks",
-    email: "conniepark@info.com",
+    title: "Giza, Egypt",
+    name: "Carmen Collins",
+    email: "carmencollins@info.com",
     phone: "+41-22-767-6111",
-    address: "156 South Lexington Rd.Paterson, NJ 07501",
+    status: "Confirm"
   },
   {
     id: 3,
-    title: "Warsáw, Poland",
-    name: "Connie Parks",
-    email: "conniepark@info.com",
+    title: "Venice, Italy",
+    name: "Arturo Reese",
+    email: "arturoreese@info.com",
     phone: "+41-22-767-6111",
-    address: "156 South Lexington Rd.Paterson, NJ 07501",
+    status: "Pending"
   },
 ];
 
-const Id = () => {
-  const routeParams = useParams();
-  console.log(routeParams);
-};
+let { id } = useParams();
 
-const BookingDetails = () => {
   return (
     <div className="flex h-full">
       <Sidebar />
@@ -55,7 +53,7 @@ const BookingDetails = () => {
             </div>
             <div className="w-[50%]">
               <div className="flex justify-between">
-                <p className="text-3xl font-semibold">{bookingData[0].title}</p>
+                <p className="text-3xl font-semibold">{bookingData[id-1].title}</p>
                 <Link
                   to={'/booking-list/booking-details/'+2+'/cancel-booking'}
                   className="justify-self-end border px-3 py-2 rounded-md border-black me-5"
@@ -74,12 +72,12 @@ const BookingDetails = () => {
                 </div>
 
                 <div className="flex flex-col gap-5 font-semibold">  
-                  <p> {bookingData[0].name}</p>
-                  <p> {bookingData[0].passengers}3</p>
+                  <p> {bookingData[id-1].name}</p>
+                  <p> {bookingData[id-1].passengers}3</p>
                   <li>list data</li>
-                  <p>{bookingData[0].email}</p>
-                  <p>{bookingData[0].phone}</p>
-                  <p> {bookingData[0].address}</p>
+                  <p>{bookingData[id-1].email}</p>
+                  <p>{bookingData[id-1].phone}</p>
+                  <p> {bookingData[id-1].address}</p>
                 </div>
               </div>
             </div>

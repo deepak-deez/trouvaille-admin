@@ -11,13 +11,15 @@ const bookingData = [
     status: "Pending"
   },
   {
+    id:2,
     title: "Giza, Egypt",
     name: "Carmen Collins",
     email: "carmencollins@info.com",
     phone: "+41-22-767-6111",
     status: "Confirm"
   },
-  {
+  { 
+    id:3,
     title: "Venice, Italy",
     name: "Arturo Reese",
     email: "arturoreese@info.com",
