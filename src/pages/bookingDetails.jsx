@@ -57,7 +57,7 @@ const BookingDetails = () => {
               <div className="flex justify-between">
                 <p className="text-3xl font-semibold">{bookingData[0].title}</p>
                 <Link
-                  to="/cancelBooking"
+                  to={'/booking-list/booking-details/'+2+'/cancel-booking'}
                   className="justify-self-end border px-3 py-2 rounded-md border-black me-5"
                 >
                   Cancel

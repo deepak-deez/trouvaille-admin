@@ -44,7 +44,7 @@ const BookingItems = () => {
               <span className='w-[1rem] h-[1rem]  rounded-full bg-green-400'> </span> <span>Confirm</span></td>
           }
           <td className='p-3'>
-         <Link className='border border-black px-3 py-1 rounded-md font-semibold' to={"/booking-details/"+data.id}>
+         <Link className='border border-black px-3 py-1 rounded-md font-semibold' to={"/booking-list/booking-details/"+data.id}>
          View
          </Link></td>
           {/* <td className='p-3'><button className=' border border-black px-3 py-1 rounded-md font-semibold'>View</button></td> */}
