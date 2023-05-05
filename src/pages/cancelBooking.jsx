@@ -7,21 +7,21 @@ import CurrentBookingDetails from '../component/CurrentBookingDetails/CurrentBoo
 
 const CancelBooking = () => {
     return (
-       <div className="relative">
-       
-        <div className="flex">
-        <Sidebar />
-        <div className="w-full bg-[#f5f7f7] ">
-          <Navbar heading="All Users" />
-          <div className="md:h-[90vh]">
-          <CurrentBookingDetails/>
-          <CancelDialog className="absolute"/>
-          </div>
-          <Footer />
+        <div className="relative">
+
+            <div className="flex">
+                <Sidebar />
+                <div className="w-full bg-[#f5f7f7] ">
+                    <Navbar heading="All Users" />
+                    <div className="md:h-[90vh]">
+                        <CurrentBookingDetails />
+                        <CancelDialog className="absolute" />
+                    </div>
+                    <Footer />
+                </div>
+            </div>
+
         </div>
-      </div>
-    
-       </div>
     );
 }
 

@@ -5,20 +5,14 @@ import Footer from "../component/Footer/Footer";
 
 import CurrentBookingDetails from "../component/CurrentBookingDetails/CurrentBookingDetails";
 
-
-
 const BookingDetails = () => {
-
-
-
-
   return (
     <div className="flex h-full">
       <Sidebar />
       <div className="w-full bg-[#f5f7f7] ">
         <Navbar heading="Booking Details" />
         <div className="md:h-[90vh] flex flex-col">
-          <CurrentBookingDetails/>
+          <CurrentBookingDetails />
         </div>
         <Footer />
       </div>
