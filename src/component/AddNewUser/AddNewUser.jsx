@@ -11,9 +11,6 @@ import {
 const AddNewUser = ({ setAddPop, addPop }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-
-  const { data } = useSelector((state) => state.getUser);
-  const { data: addedUser } = useSelector((state) => state.addNewUser);
   const dispatch = useDispatch();
 
   const addUserHandler = () => {
@@ -21,14 +18,9 @@ const AddNewUser = ({ setAddPop, addPop }) => {
       dispatch(addNewUser(name, email, "Backend-user"));
       setName("");
       setEmail("");
+      setAddPop(!addPop);
     }
   };
-
-  useEffect(() => {
-    if (data?.success) {
-      console.log(data);
-    }
-  }, [data]);
 
   return (
     <div

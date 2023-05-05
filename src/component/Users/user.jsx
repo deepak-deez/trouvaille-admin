@@ -1,17 +1,32 @@
-import React, { useState } from "react";
-import userData from "./UserData";
+import { React, useEffect, useState } from "react";
 import Menu from "../UserMenu/Menu";
 import "./style.scss";
 import AddNewUser from "../AddNewUser/AddNewUser";
 import EditUser from "../EditUser/EditUser";
 import DeleteUser from "../DeleteUser/DeleteUser";
+import { getUser } from "../../redux/actions/addUserAction";
+import { useDispatch, useSelector } from "react-redux";
 
 const User = () => {
   const [addPop, setAddPop] = useState(false);
   const [editPop, setEditPop] = useState(false);
   const [delPop, setDelPop] = useState(false);
   const [editable, setEditable] = useState("");
-  console.log(editable, "editable");
+  const dispatch = useDispatch();
+
+  const { data } = useSelector((state) => state.getUser);
+  const { data: addedUser } = useSelector((state) => state.addNewUser);
+  useEffect(() => {
+    if (addedUser) {
+      dispatch(getUser("Backend-user"));
+    }
+  }, [addedUser]);
+
+  useEffect(() => {
+    dispatch(getUser("Backend-user"));
+  }, []);
+
+  console.log(data);
   return (
     <>
       <div className="p-3">
@@ -36,25 +51,27 @@ const User = () => {
               </tr>
             </thead>
             <tbody>
-              {userData.map((val, index) => {
-                return (
-                  <tr className=" tr-class text-center" key={index}>
-                    <td className="td-class font-bold p-3">{val.userName}</td>
-                    <td className="td-class">{val.email}</td>
-                    <td className="td-class">{val.phone}</td>
-                    <td className="">
-                      <Menu
-                        editPop={editPop}
-                        setEditPop={setEditPop}
-                        setEditable={setEditable}
-                        data={val}
-                        delPop={delPop}
-                        setDelPop={setDelPop}
-                      />
-                    </td>
-                  </tr>
-                );
-              })}
+              {data &&
+                data.data.map((val, index) => {
+                  console.log(data);
+                  return (
+                    <tr className=" tr-class text-center" key={index}>
+                      <td className="td-class font-bold p-3">{val.userName}</td>
+                      <td className="td-class">{val.email}</td>
+                      <td className="td-class">{val.phone}</td>
+                      <td className="">
+                        <Menu
+                          editPop={editPop}
+                          setEditPop={setEditPop}
+                          setEditable={setEditable}
+                          data={val}
+                          delPop={delPop}
+                          setDelPop={setDelPop}
+                        />
+                      </td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </div>
@@ -63,7 +80,7 @@ const User = () => {
       {editPop && (
         <EditUser editPop={editPop} setEditPop={setEditPop} data={editable} />
       )}
-      {delPop && <DeleteUser delPop={delPop} setDelPop={setDelPop} />}
+      {delPop && <DeleteUser delPop={delPop}  setDelPop={setDelPop} />}
     </>
   );
 };

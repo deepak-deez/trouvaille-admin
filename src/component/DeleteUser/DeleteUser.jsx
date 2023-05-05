@@ -1,4 +1,11 @@
-import React from "react";
+import { React, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addNewUser,
+  updateUser,
+  delUser,
+  getUser,
+} from "../../redux/actions/addUserAction";
 
 const DeleteUser = ({ delPop, setDelPop }) => {
   return (

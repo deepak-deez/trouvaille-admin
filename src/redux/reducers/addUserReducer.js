@@ -15,7 +15,7 @@ import {
 
 const addNewUserStateInitial = {
   loading: false,
-  userDetails: null,
+  data: null,
   error: null,
 };
 
@@ -24,33 +24,33 @@ export const addNewUserReducer = (state = addNewUserStateInitial, action) => {
     case ADD_USER_REQUEST:
       return {
         ...state,
-        userDetails: null,
+        data: null,
         loading: true,
         error: null,
       };
     case ADD_USER_SUCCESS:
       return {
         ...state,
-        loading: true,
+        loading: false,
         error: null,
-        userDetails: action.payload,
+        data: action.payload,
       };
     case ADD_USER_FAILED:
       return {
         ...state,
-        userDetails: null,
-        loading: true,
+        data: null,
+        loading: false,
         error: action.payload,
       };
     default: {
-      return false;
+      return state;
     }
   }
 };
 
 const getUserStateInitial = {
   loading: false,
-  userDetails: null,
+  data: null,
   error: null,
 };
 
@@ -59,7 +59,7 @@ export const getUserReducer = (state = getUserStateInitial, action) => {
     case GET_USER_REQUEST:
       return {
         ...state,
-        userDetails: null,
+        data: null,
         loading: true,
         error: null,
       };
@@ -68,24 +68,24 @@ export const getUserReducer = (state = getUserStateInitial, action) => {
         ...state,
         loading: true,
         error: null,
-        userDetails: action.payload,
+        data: action.payload,
       };
     case GET_USER_FAILED:
       return {
         ...state,
-        userDetails: null,
+        data: null,
         loading: true,
         error: action.payload,
       };
     default: {
-      return false;
+      return state;
     }
   }
 };
 
 const updateUserStateInitial = {
   loading: false,
-  userDetails: null,
+  data: null,
   error: null,
 };
 
@@ -94,7 +94,7 @@ export const updateUserReducer = (state = updateUserStateInitial, action) => {
     case UPDATE_USER_REQUEST:
       return {
         ...state,
-        userDetails: null,
+        data: null,
         loading: true,
         error: null,
       };
@@ -103,24 +103,24 @@ export const updateUserReducer = (state = updateUserStateInitial, action) => {
         ...state,
         loading: true,
         error: null,
-        userDetails: action.payload,
+        data: action.payload,
       };
     case UPDATE_USER_FAILED:
       return {
         ...state,
-        userDetails: null,
+        data: null,
         loading: true,
         error: action.payload,
       };
     default: {
-      return false;
+      return state;
     }
   }
 };
 
 const delUserStateInitial = {
   loading: false,
-  userDetails: null,
+  data: null,
   error: null,
 };
 
@@ -129,7 +129,7 @@ export const delUserReducer = (state = delUserStateInitial, action) => {
     case DELETE_USER_REQUEST:
       return {
         ...state,
-        userDetails: null,
+        data: null,
         loading: true,
         error: null,
       };
@@ -138,17 +138,17 @@ export const delUserReducer = (state = delUserStateInitial, action) => {
         ...state,
         loading: true,
         error: null,
-        userDetails: action.payload,
+        data: action.payload,
       };
     case DELETE_USER_FAILED:
       return {
         ...state,
-        userDetails: null,
+        data: null,
         loading: true,
         error: action.payload,
       };
     default: {
-      return false;
+      return state;
     }
   }
 };

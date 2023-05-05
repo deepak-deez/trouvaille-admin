@@ -15,10 +15,10 @@ import {
 } from "../constants/addUserConstant.js";
 
 const API = process.env.REACT_APP_NODE_API;
-console.log(API);
 
 export const addNewUser = (name, email, type) => async (dispatch) => {
   try {
+    console.log(name, email, type);
     dispatch({
       type: ADD_USER_REQUEST,
     });
@@ -51,6 +51,7 @@ export const getUser = (type) => async (dispatch) => {
       "Content-Type": "application/json",
     };
     const { data } = await axios.get(`${API}/database/${type}`, header);
+
     dispatch({
       type: GET_USER_SUCCESS,
       payload: data,
