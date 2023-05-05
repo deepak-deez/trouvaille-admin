@@ -5,9 +5,7 @@ import { GlobalProvider } from "./context/GlobalContext";
 const App = () => {
   return (
     <>
-      <GlobalProvider>
         <Router />
-      </GlobalProvider>
     </>
   );
 };
