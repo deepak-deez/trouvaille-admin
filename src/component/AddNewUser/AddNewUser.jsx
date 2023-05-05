@@ -1,14 +1,10 @@
 import { React, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./style.scss";
-import {
-  addNewUser,
-  updateUser,
-  delUser,
-  getUser,
-} from "../../redux/actions/addUserAction";
+import { addNewUser, getUser } from "../../redux/actions/addUserAction";
 
 const AddNewUser = ({ setAddPop, addPop }) => {
+  const { data: addedUser } = useSelector((state) => state.addNewUser);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const dispatch = useDispatch();
@@ -18,9 +14,15 @@ const AddNewUser = ({ setAddPop, addPop }) => {
       dispatch(addNewUser(name, email, "Backend-user"));
       setName("");
       setEmail("");
-      setAddPop(!addPop);
     }
   };
+  useEffect(() => {
+    if (addedUser) {
+      setAddPop(!addPop);
+      dispatch(getUser("Backend-user"));
+    }
+  }, [addedUser]);
+  console.log(addedUser);
 
   return (
     <div

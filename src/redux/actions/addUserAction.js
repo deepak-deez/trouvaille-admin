@@ -30,8 +30,9 @@ export const addNewUser = (name, email, type) => async (dispatch) => {
       email,
     };
     const { data } = await axios.post(`${API}/add/${type}`, body, header);
+    console.log(data);
     dispatch({
-      tyep: ADD_USER_SUCCESS,
+      type: ADD_USER_SUCCESS,
       payload: data,
     });
   } catch (error) {
@@ -79,7 +80,7 @@ export const updateUser = (name, email, type, phone) => async (dispatch) => {
     };
     const { data } = await axios.post(`${API}/update/${type}`, body, header);
     dispatch({
-      tyep: UPDATE_USER_SUCCESS,
+      type: UPDATE_USER_SUCCESS,
       payload: data,
     });
   } catch (error) {
@@ -100,7 +101,7 @@ export const delUser = (id, type) => async (dispatch) => {
     };
     const { data } = await axios.delete(`${API}/delete/${type}/${id}`, header);
     dispatch({
-      tyep: DELETE_USER_SUCCESS,
+      type: DELETE_USER_SUCCESS,
       payload: data,
     });
   } catch (error) {

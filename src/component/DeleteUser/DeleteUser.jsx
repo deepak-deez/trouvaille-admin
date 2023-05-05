@@ -1,13 +1,25 @@
-import { React, useState } from "react";
+import { React, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addNewUser,
-  updateUser,
-  delUser,
-  getUser,
-} from "../../redux/actions/addUserAction";
+import { delUser, getUser } from "../../redux/actions/addUserAction";
 
-const DeleteUser = ({ delPop, setDelPop }) => {
+const DeleteUser = ({ delPop, setDelPop, data }) => {
+  const dispatch = useDispatch();
+  const { data: deletedUser } = useSelector((state) => state.delUser);
+
+  const DelHandler = () => {
+    if (id) {
+      dispatch(delUser(id, "Backend-user"));
+    }
+  };
+
+  useEffect(() => {
+    if (deletedUser) {
+      setDelPop(!delPop);
+      dispatch(getUser("Backend-user"));
+    }
+  }, [deletedUser]);
+
+  const id = data._id;
   return (
     <div
       className={`fixed top-0 left-0 w-full flex justify-center items-center addUser  h-[100vh] ${
@@ -28,7 +40,10 @@ const DeleteUser = ({ delPop, setDelPop }) => {
           >
             Cancel
           </button>
-          <button className="bg-[#E85C53] text-white p-2 mt-5 rounded-sm">
+          <button
+            className="bg-[#E85C53] text-white p-2 mt-5 rounded-sm"
+            onClick={DelHandler}
+          >
             Delete
           </button>
         </div>

@@ -15,18 +15,11 @@ const User = () => {
   const dispatch = useDispatch();
 
   const { data } = useSelector((state) => state.getUser);
-  const { data: addedUser } = useSelector((state) => state.addNewUser);
-  useEffect(() => {
-    if (addedUser) {
-      dispatch(getUser("Backend-user"));
-    }
-  }, [addedUser]);
 
   useEffect(() => {
     dispatch(getUser("Backend-user"));
   }, []);
 
-  console.log(data);
   return (
     <>
       <div className="p-3">
@@ -53,7 +46,6 @@ const User = () => {
             <tbody>
               {data &&
                 data.data.map((val, index) => {
-                  console.log(data);
                   return (
                     <tr className=" tr-class text-center" key={index}>
                       <td className="td-class font-bold p-3">{val.userName}</td>
@@ -80,7 +72,9 @@ const User = () => {
       {editPop && (
         <EditUser editPop={editPop} setEditPop={setEditPop} data={editable} />
       )}
-      {delPop && <DeleteUser delPop={delPop}  setDelPop={setDelPop} />}
+      {delPop && (
+        <DeleteUser delPop={delPop} setDelPop={setDelPop} data={editable} />
+      )}
     </>
   );
 };
