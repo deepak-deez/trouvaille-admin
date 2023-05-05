@@ -8,7 +8,6 @@ import { GlobalContext } from "../../context/GlobalContext";
 
 const Sidebar = (props) => {
   const [show, setShow] = useState(false);
-  const { setMount, setNavHead } = useContext(GlobalContext);
 
   return (
     <>
@@ -53,8 +52,7 @@ const Sidebar = (props) => {
                   <h3
                     className="ms-5"
                     onClick={() => {
-                      setMount(item.heading);
-                      setNavHead(item.heading);
+                     
                     }}
                   >
                     {item.heading}

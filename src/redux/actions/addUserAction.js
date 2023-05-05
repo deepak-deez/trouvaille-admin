@@ -12,9 +12,10 @@ import {
   DELETE_USER_REQUEST,
   DELETE_USER_SUCCESS,
   DELETE_USER_FAILED,
-} from "../actions/addUserAction.js";
+} from "../constants/addUserConstant.js";
 
-const BASE_URL = process.env.REACT_APP_NODE_API;
+const API = process.env.REACT_APP_NODE_API;
+console.log(API);
 
 export const addNewUser = (name, email, type) => async (dispatch) => {
   try {
@@ -28,12 +29,12 @@ export const addNewUser = (name, email, type) => async (dispatch) => {
       name,
       email,
     };
-    const { data } = await axios.post(`${BASE_URL}/add/${type}`, body, header);
+    const { data } = await axios.post(`${API}/add/${type}`, body, header);
     dispatch({
       tyep: ADD_USER_SUCCESS,
       payload: data,
     });
-  } catch {
+  } catch (error) {
     dispatch({
       type: ADD_USER_FAILED,
       payload: error.message,
@@ -49,16 +50,12 @@ export const getUser = (type) => async (dispatch) => {
     const header = {
       "Content-Type": "application/json",
     };
-    const { data } = await axios.get(
-      `${BASE_URL}/database/${type}`,
-      body,
-      header
-    );
+    const { data } = await axios.get(`${API}/database/${type}`, header);
     dispatch({
       type: GET_USER_SUCCESS,
       payload: data,
     });
-  } catch {
+  } catch (error) {
     dispatch({
       type: GET_USER_FAILED,
       payload: error.message,
@@ -79,16 +76,12 @@ export const updateUser = (name, email, type, phone) => async (dispatch) => {
       email,
       phone,
     };
-    const { data } = await axios.post(
-      `${BASE_URL}/update/${type}`,
-      body,
-      header
-    );
+    const { data } = await axios.post(`${API}/update/${type}`, body, header);
     dispatch({
       tyep: UPDATE_USER_SUCCESS,
       payload: data,
     });
-  } catch {
+  } catch (error) {
     dispatch({
       type: UPDATE_USER_FAILED,
       payload: error.message,
@@ -104,15 +97,12 @@ export const delUser = (id, type) => async (dispatch) => {
     const header = {
       "Content-Type": "application/json",
     };
-    const { data } = await axios.delete(
-      `${BASE_URL}/delete/${type}/${id}`,
-      header
-    );
+    const { data } = await axios.delete(`${API}/delete/${type}/${id}`, header);
     dispatch({
       tyep: DELETE_USER_SUCCESS,
       payload: data,
     });
-  } catch {
+  } catch (error) {
     dispatch({
       type: DELETE_USER_FAILED,
       payload: error.message,

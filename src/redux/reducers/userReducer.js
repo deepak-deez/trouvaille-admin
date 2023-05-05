@@ -10,7 +10,7 @@ const signInStateInitial = {
   error: null,
 };
 
-export const signInReducer = (state = signInStateInitial, action) => {
+export const logInUserReducer = (state = signInStateInitial, action) => {
   switch (action.type) {
     case USER_LOGIN_REQUEST:
       return {
@@ -33,5 +33,8 @@ export const signInReducer = (state = signInStateInitial, action) => {
         loading: true,
         error: action.payload,
       };
+    default: {
+      return false;
+    }
   }
 };
