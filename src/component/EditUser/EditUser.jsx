@@ -1,9 +1,37 @@
-import React, { useState } from "react";
+import { React, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUser, getUser } from "../../redux/actions/addUserAction";
 
 const EditUser = ({ editPop, setEditPop, data }) => {
+  const { data: updatedUser } = useSelector((state) => state.updateUser);
   const [name, setName] = useState(data.userName);
   const [email, setEmail] = useState(data.email);
-  const [phone, setPhone] = useState(data.phone);
+  const [phone, setPhone] = useState("");
+  const [editedData, setEditedData] = useState({ name, email, phone });  
+  const id = data._id;
+  const dispatch = useDispatch;
+
+  const updateHandler = () => {
+    console.log("hiii");
+    console.log(id);
+    if (email || phone || name) {
+      dispatch(updateUser(id, name, email, phone, "Backend-user"));
+      console.log(email);
+    }
+  };
+  console.log(updatedUser);
+
+  useEffect(() => {
+    if (updatedUser?.success) {
+      console.log(updatedUser);
+      dispatch(getUser("Backend-user"));
+      setEditPop(!editPop);
+
+      // set addedUser to null
+      dispatch({ type: "UPDATE_USER_SUCCESS", payload: null });
+    }
+  }, [updatedUser]);
+
   return (
     <div
       className={`fixed top-0 left-0 w-full flex justify-center items-center addUser  h-[100vh] ${
@@ -23,42 +51,42 @@ const EditUser = ({ editPop, setEditPop, data }) => {
           </button>
         </div>
         <form className="flex flex-col ">
-          <label className="text-sm font-light py-2" htmlFor="Name">
-            Name
-          </label>
+          <label className="text-sm font-light py-2">Name</label>
           <input
             className="border-2 p-2"
             type="text"
             value={name}
             onChange={(e) => {
               setName(e.target.value);
+              console.log(name);
             }}
           />
-          <label className="text-sm py-2 font-light" htmlFor="email">
-            Email Address
-          </label>
+          <label className="text-sm py-2 font-light">Email Address</label>
           <input
             className="border-2 p-2"
             type="email"
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
+              console.log(email);
             }}
           />
-          <label className="text-sm py-2 font-light" htmlFor="email">
-            Phone Number
-          </label>
+          <label className="text-sm py-2 font-light">Phone Number</label>
           <input
             className="border-2 p-2"
             type="text"
             value={phone}
             onChange={(e) => {
               setPhone(e.target.value);
+              console.log(phone);
             }}
           />
         </form>
         <div className="flex item-center justify-center">
-          <button className="bg-[#E85C53] text-white p-2 mt-5 rounded-sm">
+          <button
+            className="bg-[#E85C53] text-white p-2 mt-5 rounded-sm"
+            onClick={updateHandler}
+          >
             Update
           </button>
         </div>

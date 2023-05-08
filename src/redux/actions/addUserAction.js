@@ -65,31 +65,33 @@ export const getUser = (type) => async (dispatch) => {
   }
 };
 
-export const updateUser = (name, email, type, phone) => async (dispatch) => {
-  try {
-    dispatch({
-      type: UPDATE_USER_REQUEST,
-    });
-    const header = {
-      "Content-Type": "application/json",
-    };
-    const body = {
-      name,
-      email,
-      phone,
-    };
-    const { data } = await axios.post(`${API}/update/${type}`, body, header);
-    dispatch({
-      type: UPDATE_USER_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: UPDATE_USER_FAILED,
-      payload: error.message,
-    });
-  }
-};
+export const updateUser =
+  (id, name, email, phone, type) => async (dispatch) => {
+    try {
+      dispatch({
+        type: UPDATE_USER_REQUEST,
+      });
+      const header = {
+        "Content-Type": "application/json",
+      };
+      const body = {
+        id,
+        name,
+        email,
+        phone,
+      };
+      const { data } = await axios.post(`${API}/update/${type}`, body, header);
+      dispatch({
+        type: UPDATE_USER_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_USER_FAILED,
+        payload: error.message,
+      });
+    }
+  };
 
 export const delUser = (id, type) => async (dispatch) => {
   try {
