@@ -3,6 +3,8 @@ import tempIcon from "../../assets/image/trip-list/AddNewTrip-icon.svg";
 import MultipleTripForm from "../MultipleTripForm/MultipleTripForm";
 import TagsInput from "../TagsInput/TagsInput";
 import SelectMenu from "../SelectMenu/SelectMenu";
+import Faq from "../Faq/Faq";
+import StatusMenu from "../StatusMenu/StatusMenu";
 
 const NewTripForm = () => {
   const [file, setFile] = useState();
@@ -10,17 +12,26 @@ const NewTripForm = () => {
     setFile(URL.createObjectURL(e.target.files[0]));
   }
   const Occassion = [
-    { label: "Family Vacation", value: 1 },
-    { label: "Romantic getaway", value: 2 },
-    { label: "Adventure", value: 3 },
-    { label: "Honeymoon", value: 4 },
+    { label: "Family Vacation", value: "Family Vacation" },
+    { label: "Romantic getaway", value: "Romantic getaway" },
+    { label: "Adventure", value: "Adventure" },
+    { label: "Honeymoon", value: "Honeymoon" },
   ];
 
   const TripCategory = [
-    { label: "Forest", value: 1 },
-    { label: "Desert", value: 2 },
-    { label: "Tropical Falls", value: 3 },
-    { label: "Sea", value: 4 },
+    { label: "Forest", value: "Forest" },
+    { label: "Desert", value: "Desert" },
+    { label: "Tropical Falls", value: "Tropical Falls" },
+    { label: "Sea", value: "Sea" },
+  ];
+  const TravelType = [
+    { label: "Independent Tour", value: "Independent Tour" },
+    { label: "Escorted Tour", value: "Escorted Tour" },
+  ];
+
+  const Status = [
+    { label: "Active", value: "Active " },
+    { label: "In-Active", value: "In-Active" },
   ];
 
   return (
@@ -68,7 +79,7 @@ const NewTripForm = () => {
           <div className="flex-col flex md:flex-row justify-between ">
             <div className="flex flex-col w-full">
               <label className=" text-gray-400 ">Trip category</label>
-              <SelectMenu options={TripCategory} width="100%"  />
+              <SelectMenu options={TripCategory} width="100%" />
             </div>
             <div className="flex flex-col md:px-3">
               <label className=" text-gray-400">No. of places</label>
@@ -107,15 +118,34 @@ const NewTripForm = () => {
             </div>
             <div className="flex flex-col w-full">
               <label className=" text-gray-400">Travel type</label>
-              <input
-                className="border-2 py-2 rounded-md w-[90%]"
-                type="number"
-              />
+              <SelectMenu options={TravelType} width="91%" />
             </div>
           </div>
         </div>
         <div className="p-2 flex flex-col space-y-2 ">
           <TagsInput heading="Amenities" />
+        </div>
+        <div className="p-2 flex flex-col space-y-2 ">
+          <label className=" text-gray-400">Brief Description</label>
+          <textarea
+            rows="5"
+            cols="33"
+            type="text"
+            value=""
+            className="border-2 rounded-md resize-none"
+            name="Description"
+          />
+        </div>
+        <div className="p-2 flex flex-col space-y-2 ">
+          <Faq />
+        </div>
+        <div className="p-2 flex flex-col space-y-2 ">
+          <div className=" flex justify-between items-center w-full space-x-3">
+            <StatusMenu width="50%" />
+            <button className="bg-[#CD4B43] rounded-md w-1/2 p-3">
+              Submit
+            </button>
+          </div>
         </div>
       </div>
     </div>
