@@ -13,9 +13,13 @@ const DeleteUser = ({ delPop, setDelPop, data }) => {
   };
 
   useEffect(() => {
-    if (deletedUser) {
-      setDelPop(!delPop);
+    if (deletedUser?.success) {
+      console.log(deletedUser);
       dispatch(getUser("Backend-user"));
+      setDelPop(!delPop);
+
+      // set deletedUser to null
+      dispatch({ type: "DELETE_USER_SUCCESS", payload: null });
     }
   }, [deletedUser]);
 

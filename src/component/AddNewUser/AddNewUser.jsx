@@ -17,12 +17,14 @@ const AddNewUser = ({ setAddPop, addPop }) => {
     }
   };
   useEffect(() => {
-    if (addedUser) {
-      setAddPop(!addPop);
+    if (addedUser?.success) {
+      console.log(addedUser);
       dispatch(getUser("Backend-user"));
+      setAddPop(!addPop);
+      // set addedUser to null
+      dispatch({ type: "ADD_USER_SUCCESS", payload: null });
     }
   }, [addedUser]);
-  console.log(addedUser);
 
   return (
     <div
