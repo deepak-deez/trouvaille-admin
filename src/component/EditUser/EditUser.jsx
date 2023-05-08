@@ -7,9 +7,9 @@ const EditUser = ({ editPop, setEditPop, data }) => {
   const [name, setName] = useState(data.userName);
   const [email, setEmail] = useState(data.email);
   const [phone, setPhone] = useState("");
-  const [editedData, setEditedData] = useState({ name, email, phone });  
+  const [editedData, setEditedData] = useState({ name, email, phone });
   const id = data._id;
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
 
   const updateHandler = () => {
     console.log("hiii");
