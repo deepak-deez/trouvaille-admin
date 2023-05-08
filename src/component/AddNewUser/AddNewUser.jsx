@@ -7,6 +7,7 @@ const AddNewUser = ({ setAddPop, addPop }) => {
   const { data: addedUser } = useSelector((state) => state.addNewUser);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [error, setError] = useState(null);
   const dispatch = useDispatch();
 
   const addUserHandler = () => {
@@ -16,11 +17,26 @@ const AddNewUser = ({ setAddPop, addPop }) => {
       setEmail("");
     }
   };
+
+  function isValidEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
+  }
+
+  const handleChange = (e) => {
+    if (!isValidEmail(e.target.value)) {
+      setError("Email is invalid");
+    } else {
+      setError(null);
+    }
+    setEmail(e.target.value);
+  };
+
   useEffect(() => {
     if (addedUser?.success) {
       console.log(addedUser);
       dispatch(getUser("Backend-user"));
       setAddPop(!addPop);
+
       // set addedUser to null
       dispatch({ type: "ADD_USER_SUCCESS", payload: null });
     }
@@ -63,11 +79,12 @@ const AddNewUser = ({ setAddPop, addPop }) => {
             className="border-2"
             value={email}
             type="email"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
+            onChange={handleChange}
           />
         </form>
+
+        {error && <h2 style={{ color: "red" }}>{error}</h2>}
+
         <div className="flex item-center justify-center">
           <button
             className="bg-[#E85C53] text-white p-2 mt-5 rounded-sm"
