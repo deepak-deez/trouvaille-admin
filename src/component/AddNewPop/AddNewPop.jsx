@@ -1,7 +1,8 @@
 import { React, useState } from "react";
 
 const AddNewPop = (props) => {
-  const { setShowAdd, showAdd, heading, icon, titleHeading } = props;
+  const { setShowAdd, showAdd, heading, icon, titleHeading } =
+    props;
   const [file, setFile] = useState();
   function handleChange(e) {
     setFile(URL.createObjectURL(e.target.files[0]));
