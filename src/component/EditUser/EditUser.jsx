@@ -6,7 +6,7 @@ const EditUser = ({ editPop, setEditPop, data }) => {
   const { data: updatedUser } = useSelector((state) => state.updateUser);
   const [name, setName] = useState(data.userName);
   const [email, setEmail] = useState(data.email);
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState(data.phone);
   const [editedData, setEditedData] = useState({ name, email, phone });
   const id = data._id;
   const dispatch = useDispatch();
