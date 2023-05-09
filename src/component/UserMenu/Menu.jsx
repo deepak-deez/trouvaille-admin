@@ -2,14 +2,7 @@ import React, { useState } from "react";
 import delIcon from "../../assets/image/user/delete.svg";
 import editIcon from "../../assets/image/user/edit-icon.svg";
 
-const Menu = ({
-  editPop,
-  setEditPop,
-  setEditable,
-  data,
-  delPop,
-  setDelPop,
-}) => {
+const Menu = ({ setEditPop, setEditable, data, delPop, setDelPop }) => {
   const [menu, setMenu] = useState(false);
 
   return (
