@@ -1,13 +1,16 @@
 import { React, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser, getUser } from "../../redux/actions/addUserAction";
+import Swal from "sweetalert2";
 
 const EditUser = ({ editPop, setEditPop, data }) => {
   const { data: updatedUser } = useSelector((state) => state.updateUser);
   const [name, setName] = useState(data.userName);
   const [email, setEmail] = useState(data.email);
   const [phone, setPhone] = useState(data.phone);
-  const [editedData, setEditedData] = useState({ name, email, phone });
+  const [error, setError] = useState(null);
+  
+
   const id = data._id;
   const dispatch = useDispatch();
 
@@ -29,6 +32,17 @@ const EditUser = ({ editPop, setEditPop, data }) => {
 
       // set addedUser to null
       dispatch({ type: "UPDATE_USER_SUCCESS", payload: null });
+      Swal.fire({
+        position: "center",
+        width: "40vh",
+        icon: "success",
+        title: "Success",
+        text: updatedUser.message,
+        showConfirmButton: false,
+        toast: false,
+        timer: 2000,
+        timerProgressBar: true,
+      });
     }
   }, [updatedUser]);
 
@@ -77,12 +91,27 @@ const EditUser = ({ editPop, setEditPop, data }) => {
             type="text"
             value={phone}
             onChange={(e) => {
-              setPhone(e.target.value);
-              console.log(phone);
+              let phoneVal = e.target.value;
+              setPhone(phoneVal);
+              if (phoneVal.length > 10) {
+                console.log(phoneVal.length);
+                setError("Enter Valid Number");
+              } else if (phoneVal.length === 10) {
+                setError("Valid Number");
+              }
             }}
           />
+          {error && <h2 style={{ color: "red" }}>{error}</h2>}
         </form>
-        <div className="flex item-center justify-center">
+        <div className="flex item-center justify-center gap-6 ">
+          <button
+            className="bg-[#E85C53] text-white p-2 mt-5 rounded-sm"
+            onClick={() => {
+              setEditPop(!editPop);
+            }}
+          >
+            Cancel
+          </button>
           <button
             className="bg-[#E85C53] text-white p-2 mt-5 rounded-sm"
             onClick={updateHandler}
