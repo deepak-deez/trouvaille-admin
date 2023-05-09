@@ -2,33 +2,59 @@ import { React, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./style.scss";
 import { addNewUser, getUser } from "../../redux/actions/addUserAction";
+import Swal from "sweetalert2";
+import validator from "validator";
 
 const AddNewUser = ({ setAddPop, addPop }) => {
+  const { data } = useSelector((state) => state.getUser);
   const { data: addedUser } = useSelector((state) => state.addNewUser);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
 
+  const validateEmail = (e) => {
+    setEmail(e.target.value);
+
+    if (validator.isEmail(email)) {
+      setError(null);
+    } else {
+      setError("Enter valid Email!");
+    }
+  };
+
+  // function isValidEmail(email) {
+  //   return /\S+@\S+\.\S+/.test(email);
+  // }
+
+  // const emailTest = (e) => {
+  //   if (!isValidEmail(e.target.value)) {
+  //     setError("Email is invalid");
+  //   } else {
+  //     setError(null);
+  //   }
+  //   setEmail(e.target.value);
+  // };
+
   const addUserHandler = () => {
     if (name && email) {
       dispatch(addNewUser(name, email, "Backend-user"));
       setName("");
       setEmail("");
-    }
-  };
-
-  function isValidEmail(email) {
-    return /\S+@\S+\.\S+/.test(email);
-  }
-
-  const handleChange = (e) => {
-    if (!isValidEmail(e.target.value)) {
-      setError("Email is invalid");
     } else {
-      setError(null);
+      Swal.fire({
+        className: "pop-top",
+        position: "top",
+        icon: "error",
+        title: "Oops...",
+        text: "All fields are required",
+        showConfirmButton: false,
+        width: "40vh",
+        // toast: true,
+        timer: 1500,
+        timerProgressBar: true,
+      });
     }
-    setEmail(e.target.value);
   };
 
   useEffect(() => {
@@ -39,6 +65,17 @@ const AddNewUser = ({ setAddPop, addPop }) => {
 
       // set addedUser to null
       dispatch({ type: "ADD_USER_SUCCESS", payload: null });
+      Swal.fire({
+        position: "center",
+        width: "40vh",
+        icon: "success",
+        title: "Success",
+        text: addedUser.message,
+        showConfirmButton: false,
+        toast: false,
+        timer: 2000,
+        timerProgressBar: true,
+      });
     }
   }, [addedUser]);
 
@@ -79,7 +116,9 @@ const AddNewUser = ({ setAddPop, addPop }) => {
             className="border-2"
             value={email}
             type="email"
-            onChange={handleChange}
+            onChange={(e) => {
+              validateEmail(e);
+            }}
           />
         </form>
 

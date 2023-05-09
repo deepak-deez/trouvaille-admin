@@ -1,6 +1,7 @@
 import { React, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { delUser, getUser } from "../../redux/actions/addUserAction";
+import Swal from "sweetalert2";
 
 const DeleteUser = ({ delPop, setDelPop, data }) => {
   const dispatch = useDispatch();
@@ -20,6 +21,16 @@ const DeleteUser = ({ delPop, setDelPop, data }) => {
 
       // set deletedUser to null
       dispatch({ type: "DELETE_USER_SUCCESS", payload: null });
+      Swal.fire({
+        position: "top",
+        icon: "success",
+        title: "Success",
+        text: deletedUser.message,
+        showConfirmButton: false,
+        // toast: true,
+        timer: 1500,
+        timerProgressBar: true,
+      });
     }
   }, [deletedUser]);
 
