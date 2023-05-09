@@ -6,6 +6,12 @@ import {
   delUserReducer,
   getUserReducer,
 } from "./addUserReducer";
+import {
+  addNewTipReducer,
+  updateTripReducer,
+  deleteTripReducer,
+  getTripReducer,
+} from "./addTripReducer";
 
 const rootReducer = combineReducers({
   logInUser: logInUserReducer,
@@ -13,6 +19,10 @@ const rootReducer = combineReducers({
   updateUser: updateUserReducer,
   delUser: delUserReducer,
   getUser: getUserReducer,
+  addNewTip: addNewTipReducer,
+  updateTrip: updateTripReducer,
+  deleteTrip: deleteTripReducer,
+  getTrip: getTripReducer,
 });
 
 export default rootReducer;
