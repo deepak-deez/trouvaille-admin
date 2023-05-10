@@ -32,7 +32,6 @@ const DotMenu = ({
           className="flex justify-between  w-full items-center"
           onClick={() => {
             setShowUpdatePop(!showUpdatePop);
-            console.log(updateData);
             setEditData(updateData);
           }}
         >
@@ -43,6 +42,7 @@ const DotMenu = ({
           className="flex justify-between items-center  w-full"
           onClick={() => {
             setShowDelPop(!showDelPop);
+            setEditData(updateData);
           }}
         >
           Delete <img className="" src={delIcon} alt="delete" />

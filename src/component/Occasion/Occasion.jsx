@@ -1,16 +1,24 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import OccasionDb from "./occasionData";
 import DotMenu from "../DotMenu/DotMenu";
 import AddNewPop from "../AddNewPop/AddNewPop";
 import UpdatePop from "../UpdatePop/UpdatePop";
 import DeletePop from "../DeletePop/DeletePop";
 import occasionBrowserIcon from "../../assets/image/occasion/occasion-browse-icon.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { getTrip } from "../../redux/actions/tripAction";
 
 const Occasion = () => {
   const [showAdd, setShowAdd] = useState(false);
   const [showUpdatePop, setShowUpdatePop] = useState(false);
   const [showDelPop, setShowDelPop] = useState(false);
   const [editData, setEditData] = useState("");
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getTrip("occasion"));
+  }, []);
+  const { data } = useSelector((state) => state.getTrip);
+  console.log(data);
   return (
     <>
       <div className="p-3">
@@ -34,15 +42,21 @@ const Occasion = () => {
               </tr>
             </thead>
             <tbody>
-              {OccasionDb &&
-                OccasionDb.map((data, index) => {
+              {data &&
+                data.data.map((data, index) => {
+                  const base64String = btoa(
+                    String.fromCharCode(...new Uint8Array(data.icon.data.data))
+                  );
                   return (
                     <tr className=" tr-class text-center" key={index}>
                       <td className="td-class font-bold flex items-center p-3">
-                        <img className="mr-2" src={data.icon} alt="" />
-                        {data.heading}
+                        <img
+                          src={`data:image; base64,${base64String}`}
+                          alt=""
+                        />
+                        {data.title}
                       </td>
-                      <td className="td-class">{data.desc}</td>
+                      <td className="td-class">{data.description}</td>
                       <td className="">
                         <DotMenu
                           updateData={data}
@@ -67,6 +81,7 @@ const Occasion = () => {
           heading=" Occasions"
           icon={occasionBrowserIcon}
           titleHeading="Occasion"
+          feature="occasion"
         />
       )}
       {showUpdatePop && (
@@ -74,6 +89,7 @@ const Occasion = () => {
           showUpdatePop={showUpdatePop}
           setShowUpdatePop={setShowUpdatePop}
           updateData={editData}
+          feature="occasion"
           heading="Occasion"
           titleHeading="Occasion"
         />
@@ -84,6 +100,8 @@ const Occasion = () => {
           showDelPop={setShowDelPop}
           setShowDelPop={setShowDelPop}
           heading="Occasion"
+          feature="occasion"
+          updateData={editData}
         />
       )}
     </>

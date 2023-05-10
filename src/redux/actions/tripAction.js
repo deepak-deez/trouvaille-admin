@@ -18,7 +18,7 @@ import {
 const API = process.env.REACT_APP_NODE_API;
 
 export const addNewTip =
-  (featureImages, title, description, feature) => async (dispatch) => {
+  (icon, title, description, feature) => async (dispatch) => {
     try {
       dispatch({
         type: ADD_TRIP_REQUEST,
@@ -27,7 +27,7 @@ export const addNewTip =
         "Content-Type": "application/json",
       };
       const body = {
-        featureImages,
+        icon,
         title,
         description,
       };
@@ -95,7 +95,7 @@ export const deleteTrip = (id, feature) => async (dispatch) => {
 };
 
 export const updateTrip =
-  (id, name, description, feature) => async (dispatch) => {
+  (id, title, description, feature) => async (dispatch) => {
     try {
       dispatch({
         type: UPDATE_TRIP_REQUEST,
@@ -105,7 +105,7 @@ export const updateTrip =
       };
       const body = {
         id,
-        name,
+        title,
         description,
       };
       const { data } = await axios.post(

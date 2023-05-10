@@ -1,15 +1,72 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
+import { getTrip, updateTrip } from "../../redux/actions/tripAction";
+import { useSelector, useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 
 const UpdatePop = ({
   showUpdatePop,
   setShowUpdatePop,
   updateData,
+  feature,
   heading,
   titleHeading,
 }) => {
   const [title, setTitle] = useState(updateData.title);
-  console.log(updateData);
-  const [desc, setDesc] = useState(updateData.desc);
+  const [desc, setDesc] = useState(updateData.description);
+  const { data: updatedTrip } = useSelector((state) => state.updateTrip);
+  const dispatch = useDispatch();
+  const id = updateData._id;
+
+  const updateHandler = () => {
+    if (title || desc) {
+      dispatch(updateTrip(id, title, desc, feature));
+    } else {
+      Swal.fire({
+        className: "pop-top",
+        position: "top",
+        icon: "error",
+        title: "Oops...",
+        text: "All fields are required",
+        showConfirmButton: false,
+        width: "40vh",
+        timer: 1500,
+        timerProgressBar: true,
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (updatedTrip?.success) {
+      dispatch(getTrip(feature));
+      setShowUpdatePop(!showUpdatePop);
+      dispatch({ type: "UPDATE_TRIP_SUCCESS", payload: null });
+      Swal.fire({
+        position: "center",
+        width: "40vh",
+        icon: "success",
+        title: "Success",
+        text: updatedTrip.message,
+        showConfirmButton: false,
+        toast: false,
+        timer: 2000,
+        timerProgressBar: true,
+      });
+    } else if (updatedTrip?.success === false) {
+      Swal.fire({
+        position: "center",
+        width: "40vh",
+        icon: "error",
+        title: "failed",
+        text: updatedTrip.message,
+        showConfirmButton: false,
+        toast: false,
+        timer: 2000,
+        timerProgressBar: true,
+      });
+      dispatch({ type: "UPDATE_TRIP_SUCCESS", payload: null });
+    }
+  }, [updatedTrip]);
+
   return (
     <div
       className={`fixed top-0 left-0 w-full flex justify-center items-center addUser  h-[100vh] ${
@@ -52,7 +109,10 @@ const UpdatePop = ({
           ></textarea>
         </form>
         <div className="flex item-center justify-center">
-          <button className="bg-[#E85C53] text-white p-2 mt-5 rounded-sm">
+          <button
+            className="bg-[#E85C53] text-white p-2 mt-5 rounded-sm"
+            onClick={updateHandler}
+          >
             Update
           </button>
         </div>

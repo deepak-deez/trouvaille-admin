@@ -13,6 +13,7 @@ const Trip = () => {
   const [showUpdatePop, setShowUpdatePop] = useState(false);
   const [editData, setEditData] = useState("");
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getTrip("category"));
   }, []);
@@ -40,8 +41,7 @@ const Trip = () => {
               const base64String = btoa(
                 String.fromCharCode(...new Uint8Array(val.icon.data.data))
               );
-              console.log(val.icon.data);
-              console.log(base64String);
+
               return (
                 <div className="w-full p-5 gap-4" key={index}>
                   <div className="p-8 bg-white rounded shadow-md">
@@ -85,6 +85,7 @@ const Trip = () => {
           showUpdatePop={showUpdatePop}
           setShowUpdatePop={setShowUpdatePop}
           updateData={editData}
+          feature="category"
           heading="Trip Categories"
           titleHeading="Trip"
         />
@@ -95,6 +96,8 @@ const Trip = () => {
           showDelPop={setShowDelPop}
           setShowDelPop={setShowDelPop}
           heading="Trip Categories"
+          updateData={editData}
+          feature="category"
         />
       )}
     </>

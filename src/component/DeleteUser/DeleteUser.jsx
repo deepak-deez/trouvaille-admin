@@ -31,6 +31,19 @@ const DeleteUser = ({ delPop, setDelPop, data }) => {
         timer: 1500,
         timerProgressBar: true,
       });
+    } else if (deletedUser?.success === false) {
+      Swal.fire({
+        position: "center",
+        width: "40vh",
+        icon: "error",
+        title: "failed",
+        text: deletedUser.message,
+        showConfirmButton: false,
+        toast: false,
+        timer: 2000,
+        timerProgressBar: true,
+      });
+      dispatch({ type: "DELETE_USER_SUCCESS", payload: null });
     }
   }, [deletedUser]);
 

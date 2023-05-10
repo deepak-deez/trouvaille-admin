@@ -9,20 +9,16 @@ const EditUser = ({ editPop, setEditPop, data }) => {
   const [email, setEmail] = useState(data.email);
   const [phone, setPhone] = useState(data.phone);
   const [error, setError] = useState(null);
-  
 
   const id = data._id;
   const dispatch = useDispatch();
 
   const updateHandler = () => {
-    console.log("hiii");
     console.log(id);
     if (email || phone || name) {
       dispatch(updateUser(id, name, email, phone, "Backend-user"));
-      console.log(email);
     }
   };
-  console.log(updatedUser);
 
   useEffect(() => {
     if (updatedUser?.success) {
@@ -43,6 +39,19 @@ const EditUser = ({ editPop, setEditPop, data }) => {
         timer: 2000,
         timerProgressBar: true,
       });
+    } else if (updatedUser?.success === false) {
+      Swal.fire({
+        position: "center",
+        width: "40vh",
+        icon: "error",
+        title: "failed",
+        text: updatedUser.message,
+        showConfirmButton: false,
+        toast: false,
+        timer: 2000,
+        timerProgressBar: true,
+      });
+      dispatch({ type: "UPDATE_USER_SUCCESS", payload: null });
     }
   }, [updatedUser]);
 

@@ -1,6 +1,56 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteTrip, getTrip } from "../../redux/actions/tripAction";
+import Swal from "sweetalert2";
 
-const DeletePop = ({ showDelPop, setShowDelPop, heading }) => {
+const DeletePop = ({
+  showDelPop,
+  setShowDelPop,
+  updateData,
+  heading,
+  feature,
+}) => {
+  const { data: deletedTrip } = useSelector((state) => state.deleteTrip);
+  const dispatch = useDispatch();
+  const id = updateData._id;
+  console.log(id);
+
+  const deleteTripHandler = () => {
+    if (id) {
+      dispatch(deleteTrip(id, feature));
+    }
+  };
+
+  useEffect(() => {
+    if (deletedTrip?.success) {
+      dispatch(getTrip(feature));
+      setShowDelPop(!showDelPop);
+      dispatch({ type: "DELETE_TRIP_SUCCESS", payload: null });
+      Swal.fire({
+        position: "top",
+        icon: "success",
+        title: "Success",
+        text: deletedTrip.message,
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+      });
+    } else if (deletedTrip?.success === false) {
+      Swal.fire({
+        position: "center",
+        width: "40vh",
+        icon: "error",
+        title: "failed",
+        text: deletedTrip.message,
+        showConfirmButton: false,
+        toast: false,
+        timer: 2000,
+        timerProgressBar: true,
+      });
+      dispatch({ type: "DELETE_TRIP_SUCCESS", payload: null });
+    }
+  }, [deletedTrip]);
+
   return (
     <div
       className={`fixed top-0 left-0 w-full flex justify-center items-center addUser  h-[100vh] ${
@@ -21,7 +71,10 @@ const DeletePop = ({ showDelPop, setShowDelPop, heading }) => {
           >
             Cancel
           </button>
-          <button className="bg-[#E85C53] text-white p-2 mt-5 rounded-sm">
+          <button
+            className="bg-[#E85C53] text-white p-2 mt-5 rounded-sm"
+            onClick={deleteTripHandler}
+          >
             Delete
           </button>
         </div>
