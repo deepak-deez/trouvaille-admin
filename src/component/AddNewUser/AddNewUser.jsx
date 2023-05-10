@@ -12,7 +12,8 @@ const AddNewUser = ({ setAddPop, addPop }) => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
-
+  console.log(data);
+  console.log(addedUser);
   const validateEmail = (e) => {
     setEmail(e.target.value);
 
@@ -22,19 +23,6 @@ const AddNewUser = ({ setAddPop, addPop }) => {
       setError("Enter valid Email!");
     }
   };
-
-  // function isValidEmail(email) {
-  //   return /\S+@\S+\.\S+/.test(email);
-  // }
-
-  // const emailTest = (e) => {
-  //   if (!isValidEmail(e.target.value)) {
-  //     setError("Email is invalid");
-  //   } else {
-  //     setError(null);
-  //   }
-  //   setEmail(e.target.value);
-  // };
 
   const addUserHandler = () => {
     if (name && email) {
@@ -76,6 +64,19 @@ const AddNewUser = ({ setAddPop, addPop }) => {
         timer: 2000,
         timerProgressBar: true,
       });
+    } else if (addedUser?.success === false) {
+      Swal.fire({
+        position: "center",
+        width: "40vh",
+        icon: "error",
+        title: "failed",
+        text: addedUser.message,
+        showConfirmButton: false,
+        toast: false,
+        timer: 2000,
+        timerProgressBar: true,
+      });
+      dispatch({ type: "ADD_USER_SUCCESS", payload: null });
     }
   }, [addedUser]);
 

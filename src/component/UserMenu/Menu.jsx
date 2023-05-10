@@ -28,7 +28,7 @@ const Menu = ({ setEditPop, setEditable, data, delPop, setDelPop }) => {
             setEditable(data);
           }}
         >
-          <span> Edit </span>{" "}
+          <span> Edit </span>
           <img className="ms-10" src={editIcon} alt="edit" />
         </button>
         <button

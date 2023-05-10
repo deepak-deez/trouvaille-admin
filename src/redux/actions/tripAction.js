@@ -18,7 +18,7 @@ import {
 const API = process.env.REACT_APP_NODE_API;
 
 export const addNewTip =
-  (icon, title, heading, feature) => async (dispatch) => {
+  (featureImages, title, description, feature) => async (dispatch) => {
     try {
       dispatch({
         type: ADD_TRIP_REQUEST,
@@ -27,9 +27,9 @@ export const addNewTip =
         "Content-Type": "application/json",
       };
       const body = {
-        icon,
+        featureImages,
         title,
-        heading,
+        description,
       };
       const { data } = await axios.post(
         `${API}/create/${feature}`,

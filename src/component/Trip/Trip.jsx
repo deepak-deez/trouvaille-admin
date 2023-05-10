@@ -1,16 +1,24 @@
-import { React, useState } from "react";
-import TripDetails from "./tripData";
+import { React, useState, useEffect } from "react";
 import browseTripIcon from "../../assets/image/trip/browse-trip-icon.svg";
 import DotMenu from "../DotMenu/DotMenu";
 import AddNewPop from "../AddNewPop/AddNewPop";
 import UpdatePop from "../UpdatePop/UpdatePop";
 import DeletePop from "../DeletePop/DeletePop";
+import { useDispatch, useSelector } from "react-redux";
+import { getTrip } from "../../redux/actions/tripAction";
 
 const Trip = () => {
   const [showAdd, setShowAdd] = useState(false);
   const [showDelPop, setShowDelPop] = useState(false);
   const [showUpdatePop, setShowUpdatePop] = useState(false);
   const [editData, setEditData] = useState("");
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getTrip("category"));
+  }, []);
+  const { data } = useSelector((state) => state.getTrip);
+  console.log(data);
+
   return (
     <>
       <div className="w-full p-5">
@@ -27,33 +35,39 @@ const Trip = () => {
           </button>
         </div>
         <div className="grid lg:grid-cols-4">
-          {TripDetails.map((data, index) => {
-            return (
-              <div className="w-full p-5 gap-4" key={index}>
-                <div className="p-8 bg-white rounded shadow-md">
-                  <div className="flex justify-end">
-                    <div>
-                      <DotMenu
-                        updateData={data}
-                        showDelPop={showDelPop}
-                        setShowDelPop={setShowDelPop}
-                        showUpdatePop={showUpdatePop}
-                        setShowUpdatePop={setShowUpdatePop}
-                        setEditData={setEditData}
-                      />
+          {data &&
+            data.data.map((val, index) => {
+              const base64String = btoa(
+                String.fromCharCode(...new Uint8Array(val.icon.data.data))
+              );
+              console.log(val.icon.data);
+              console.log(base64String);
+              return (
+                <div className="w-full p-5 gap-4" key={index}>
+                  <div className="p-8 bg-white rounded shadow-md">
+                    <div className="flex justify-end">
+                      <div>
+                        <DotMenu
+                          updateData={val}
+                          showDelPop={showDelPop}
+                          setShowDelPop={setShowDelPop}
+                          showUpdatePop={showUpdatePop}
+                          setShowUpdatePop={setShowUpdatePop}
+                          setEditData={setEditData}
+                        />
+                      </div>
                     </div>
+                    <div className="flex justify-center">
+                      <img src={`data:image; base64,${base64String}`} alt="" />
+                    </div>
+                    <h3 className="text-center">{val.title}</h3>
+                    <p className="text-gray-600 w-full md:h-[10vh] overflow-scroll">
+                      {val.description}
+                    </p>
                   </div>
-                  <div className="flex justify-center">
-                    <img src={data.icon} alt="" />
-                  </div>
-                  <h3 className="text-center">{data.title}</h3>
-                  <p className="text-gray-600 w-full md:h-[10vh] overflow-scroll">
-                    {data.desc}
-                  </p>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
       </div>
       {showAdd && (
@@ -61,6 +75,7 @@ const Trip = () => {
           showAdd={showAdd}
           setShowAdd={setShowAdd}
           heading=" New Trip Categories"
+          feature="category"
           icon={browseTripIcon}
           titleHeading="Trip "
         />
