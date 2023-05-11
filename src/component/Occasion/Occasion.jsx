@@ -44,8 +44,7 @@ const Occasion = () => {
               </tr>
             </thead>
             <tbody>
-              {data &&
-                data.data.map((data, index) => {
+              {data && data?.data && data.data.map((data, index) => {
                   const base64String = btoa(
                     String.fromCharCode(...new Uint8Array(data.icon.data.data))
                   );

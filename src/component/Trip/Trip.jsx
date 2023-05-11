@@ -14,11 +14,12 @@ const Trip = () => {
   const [editData, setEditData] = useState("");
   const dispatch = useDispatch();
 
+  const { data } = useSelector((state) => state.getTrip);
+  console.log(data);
+
   useEffect(() => {
     dispatch(getTrip("category"));
   }, []);
-  const { data } = useSelector((state) => state.getTrip);
-  console.log(data);
 
   return (
     <>
@@ -37,6 +38,7 @@ const Trip = () => {
         </div>
         <div className="grid lg:grid-cols-4">
           {data &&
+            data?.data &&
             data.data.map((val, index) => {
               const base64String = btoa(
                 String.fromCharCode(...new Uint8Array(val.icon.data.data))

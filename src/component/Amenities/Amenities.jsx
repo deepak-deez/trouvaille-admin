@@ -1,16 +1,24 @@
-import { React, useState } from "react";
-import amenitiesData from "./amenitiesData";
-import amenitiesBrowserIcon from "../../assets/image/amenities/browse-anenities-icon.svg"
+import { React, useEffect, useState } from "react";
+
+import amenitiesBrowserIcon from "../../assets/image/amenities/browse-anenities-icon.svg";
 import DotMenu from "../DotMenu/DotMenu";
 import UpdatePop from "../UpdatePop/UpdatePop";
 import AddNewPop from "../AddNewPop/AddNewPop";
 import DeletePop from "../DeletePop/DeletePop";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getTrip } from "../../redux/actions/tripAction";
 const AmenitiesTable = () => {
   const [showAdd, setShowAdd] = useState(false);
   const [showDelPop, setShowDelPop] = useState(false);
   const [showUpdatePop, setShowUpdatePop] = useState(false);
   const [editData, setEditData] = useState("");
+  const dispatch = useDispatch();
+  const { data } = useSelector((state) => state.getTrip);
+
+  useEffect(() => {
+    dispatch(getTrip("amenity"));
+  }, []);
+
   return (
     <>
       <div className="p-3">
@@ -34,15 +42,23 @@ const AmenitiesTable = () => {
               </tr>
             </thead>
             <tbody>
-              {amenitiesData &&
-                amenitiesData.map((data, index) => {
+              {data &&
+                data?.data &&
+                data.data.map((data, index) => {
+                  const base64String = btoa(
+                    String.fromCharCode(...new Uint8Array(data.icon.data.data))
+                  );
                   return (
                     <tr className=" tr-class text-center" key={index}>
                       <td className="td-class font-bold flex items-center p-3">
-                        <img className="mr-2" src={data.icon} alt="" />
-                        {data.heading}
+                        <img
+                          src={`data:image; base64,${base64String}`}
+                          alt=""
+                        />
+
+                        {data.title}
                       </td>
-                      <td className="td-class">{data.desc}</td>
+                      <td className="td-class">{data.description}</td>
                       <td className="">
                         <DotMenu
                           updateData={data}
@@ -67,6 +83,7 @@ const AmenitiesTable = () => {
           heading=" New Amenities"
           icon={amenitiesBrowserIcon}
           titleHeading="Amenity "
+          feature="amenity"
         />
       )}
       {showUpdatePop && (
@@ -76,6 +93,7 @@ const AmenitiesTable = () => {
           updateData={editData}
           heading="Amenities"
           titleHeading="Amenity"
+          feature="amenity"
         />
       )}
 
@@ -84,6 +102,8 @@ const AmenitiesTable = () => {
           showDelPop={setShowDelPop}
           setShowDelPop={setShowDelPop}
           heading="amenity"
+          updateData={editData}
+          feature="amenity"
         />
       )}
     </>
