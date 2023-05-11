@@ -5,9 +5,10 @@ import {
 } from "../constants/loginAdminConstants";
 import axios from "axios";
 
-const URL = process.env.api_server;
+const URL = process.env.REACT_APP_API;
 
 export const getUsers = (email, password) => async (dispatch) => {
+  console.log(password);
   try {
     dispatch({
       type: ADMIN_REQUEST,
@@ -17,10 +18,11 @@ export const getUsers = (email, password) => async (dispatch) => {
     const body = {
       email,
       password,
-      type: "ADMIN",
+      type: "Admin",
     };
-
-    const { data } = await axios.post(`${URL}login/ADMIN`, body, config);
+    console.log(`${URL}login/Admin`);
+    const { data } = await axios.post(`${URL}login/Admin`, body, config);
+    console.log(data);
     if (data.status == 200) {
       dispatch({
         type: ADMIN_SUCCESS,
