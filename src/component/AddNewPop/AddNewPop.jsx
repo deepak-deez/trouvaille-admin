@@ -13,12 +13,12 @@ const AddNewPop = (props) => {
 
   const addNewHandler = () => {
     if (file && name && description) {
+      console.log(file);
       dispatch(addNewTip(file, name, description, feature));
       setName("");
       setDescription("");
     }
   };
-  console.log(addedTrip);
 
   useEffect(() => {
     if (addedTrip?.success) {
@@ -57,11 +57,21 @@ const AddNewPop = (props) => {
   });
 
   const [file, setFile] = useState();
-  console.log(file);
-  function handleChange(e) {
-    setFile(URL.createObjectURL(e.target.files[0]));
-  }
-  console.log(setFile);
+
+  const handleChange = (e) => {
+    let reader = new FileReader();
+    if (e.target.files.length !== 0) {
+      reader.readAsDataURL(e.target.files[0]);
+      console.log(e.target.files[0]);
+      reader.onload = () => {
+        console.log(reader.result);
+        setFile(reader.result);
+      };
+    }
+  };
+
+  
+
   return (
     <div
       className={`fixed top-0 left-0 w-full flex justify-center items-center addUser   h-[100vh] ${

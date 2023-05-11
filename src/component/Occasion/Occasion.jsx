@@ -13,11 +13,13 @@ const Occasion = () => {
   const [showUpdatePop, setShowUpdatePop] = useState(false);
   const [showDelPop, setShowDelPop] = useState(false);
   const [editData, setEditData] = useState("");
+  const { data } = useSelector((state) => state.getTrip);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getTrip("occasion"));
   }, []);
-  const { data } = useSelector((state) => state.getTrip);
+
   console.log(data);
   return (
     <>
