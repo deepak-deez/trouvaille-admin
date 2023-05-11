@@ -1,32 +1,32 @@
-import { ADMIN_REQUEST, ADMIN_SUCCESS, ADMIN_FAILED } from "../constants/types";
+import { ADMIN_REQUEST, ADMIN_SUCCESS, ADMIN_FAILED } from "../constants/loginAdminConstants";
 
 const initialState = {
-  users: [],
+  userDetails: [],
   loading: false,
   error: null,
 };
 
-export default function (state = initialState, action) {
+export default userReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADMIN_REQUEST: 
       return {
         ...state,
         loading: true,
-        users: null,
+        userDetails: null,
         error: null,
       };
     case ADMIN_SUCCESS:
       return {
         ...state,
-        users: action.payload,
         loading: true,
+        userDetails: action.payload,
         error: null,
       };
     case ADMIN_FAILED: 
       return {
         ...state,
         loading: true,
-        users: null,
+        userDetails: null,
         error: action.payload,
       };
     default:
