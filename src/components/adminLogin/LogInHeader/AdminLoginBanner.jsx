@@ -1,4 +1,4 @@
-import "./child.scss";
+import "./style.scss";
 
 export default function AdminLoginBanner() {
   return (
