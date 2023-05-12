@@ -9,7 +9,7 @@ const OccasionPage = () => {
     <div className="flex h-full">
       <Sidebar />
       <div className="w-full bg-[#f5f7f7] ">
-        <Navbar heading="Trip Categories" />
+        <Navbar heading="Occasions List" />
         <div className="md:h-[90vh]">
           <Occasion />
         </div>

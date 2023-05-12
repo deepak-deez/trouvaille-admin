@@ -20,13 +20,12 @@ const Occasion = () => {
     dispatch(getTrip("occasion"));
   }, []);
 
-  console.log(data);
   return (
     <>
       <div className="p-3">
-        <div className="p-4 bg-white item-center w-full overflow-x-scroll border-b-2">
+        <div className="p-4 bg-white item-center w-full border-b-2">
           <table className="w-[100%]">
-            <thead>
+            <thead className="">
               <tr className="tr-class">
                 <th className="p-3">Occasion Title</th>
                 <th>Description</th>
@@ -44,18 +43,23 @@ const Occasion = () => {
               </tr>
             </thead>
             <tbody>
-              {data && data?.data && data.data.map((data, index) => {
+              {data &&
+                data?.data &&
+                data.data.map((data, index) => {
                   const base64String = btoa(
                     String.fromCharCode(...new Uint8Array(data.icon.data.data))
                   );
                   return (
                     <tr className=" tr-class text-center" key={index}>
                       <td className="td-class font-bold flex items-center p-3">
-                        <img
-                          src={`data:image; base64,${base64String}`}
-                          alt=""
-                        />
-                        {data.title}
+                        <div className="flex justify-between items-center ">
+                          <img
+                            src={`data:image; base64,${base64String}`}
+                            alt=""
+                            className="h-10"
+                          />
+                          <span className="px-2">{data.title}</span>
+                        </div>
                       </td>
                       <td className="td-class">{data.description}</td>
                       <td className="">

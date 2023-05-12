@@ -43,7 +43,7 @@ const TravelType = () => {
               );
 
               return (
-                <div className="w-full p-5 gap-4 " key={index}>
+                <div className="w-full p-5 gap-4 h-[25vh]" key={index}>
                   <div className="p-4 bg-white rounded shadow-md">
                     <div className="flex justify-end">
                       <div>
@@ -58,12 +58,12 @@ const TravelType = () => {
                       </div>
                     </div>
                     <div className="flex justify-center py-2">
-                      <img src={`data:image; base64,${base64String}`} alt="" />
+                      <img src={`data:image; base64,${base64String}`} alt="" className="h-10" />
                     </div>
                     <h3 className="text-center font-semibold py-2">
                       {data.title}
                     </h3>
-                    <p className="text-gray-600 w-full md:h-[10vh] overflow-scroll">
+                    <p className="text-gray-600 w-full md:h-[10vh] overflow-y-scroll ">
                       {data.description}
                     </p>
                   </div>

@@ -60,9 +60,13 @@ const Trip = () => {
                       </div>
                     </div>
                     <div className="flex justify-center">
-                      <img src={`data:image; base64,${base64String}`} alt="" />
+                      <img
+                        src={`data:image; base64,${base64String}`}
+                        alt=""
+                        className="h-10"
+                      />
                     </div>
-                    <h3 className="text-center">{val.title}</h3>
+                    <h3 className="text-center font-semibold">{val.title}</h3>
                     <p className="text-gray-600 w-full md:h-[10vh] overflow-scroll">
                       {val.description}
                     </p>

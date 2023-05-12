@@ -6,10 +6,10 @@ import TravelType from "../component/TravelType/TravelType";
 
 const Travel = () => {
   return (
-    <div className="flex h-full">
+    <div className="flex h-screen">
       <Sidebar />
       <div className="w-full bg-[#f5f7f7] ">
-        <Navbar heading="All Users" />
+        <Navbar heading="Travel Type List" />
         <div className="md:h-[90vh]">
           <TravelType />
         </div>
