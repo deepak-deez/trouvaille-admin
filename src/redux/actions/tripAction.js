@@ -32,7 +32,7 @@ export const addNewTip =
         description,
       };
       const { data } = await axios.post(
-        `${API}/create/${feature}`,
+        `${API}/create-feature/${feature}`,
         body,
         header
       );
@@ -57,7 +57,7 @@ export const getTrip = (feature) => async (dispatch) => {
     const header = {
       "Content-Type": "application/json",
     };
-    const { data } = await axios.get(`${API}/get/${feature}`, header);
+    const { data } = await axios.get(`${API}/get-feature/${feature}`, header);
     dispatch({
       type: GET_TRIP_SUCCESS,
       payload: data,
@@ -79,7 +79,7 @@ export const deleteTrip = (id, feature) => async (dispatch) => {
       "Content-Type": "application/json",
     };
     const { data } = await axios.delete(
-      `${API}/delete/${feature}/${id}`,
+      `${API}/delete-feature/${feature}/${id}`,
       header
     );
     dispatch({
@@ -109,7 +109,7 @@ export const updateTrip =
         description,
       };
       const { data } = await axios.post(
-        `${API}/update/${feature}/${id}`,
+        `${API}/update-feature/${feature}/${id}`,
         body,
         header
       );
