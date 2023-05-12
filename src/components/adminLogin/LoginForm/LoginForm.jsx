@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import Handle from "rc-slider/lib/Handles/Handle";
 import { getUsers } from "../../../redux/actions/userActions";
 import { useSelector, useDispatch } from "react-redux";
+import  store  from "../../../redux/store.js";
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ export default function LoginForm() {
     localStorage.getItem("rememberMe") === "true" ? true : false
   );
 
+  console.log(store.getState());
   useEffect(() => {
     if (userDetails?.success) {
       handleRemember(userDetails);
@@ -41,11 +43,14 @@ export default function LoginForm() {
       localStorage.setItem("email", emailRef.current.value);
       localStorage.setItem("password", passwordRef.current.value);
       localStorage.setItem("token", userDetails.data.token);
+      localStorage.setItem("userType", userDetails.data.userDetails.userType);
       localStorage.setItem("rememberMe", checked);
     } else {
       localStorage.removeItem("email", emailRef.current.value);
       localStorage.removeItem("password", passwordRef.current.value);
       localStorage.removeItem("token", userDetails.data.token);
+      localStorage.removeItem("userType", userDetails.data.userDetails.userType);
+
       localStorage.setItem("rememberMe", checked);
     }
     Cookies.set("TOKEN", userDetails.data.token, { expires: 7 });
