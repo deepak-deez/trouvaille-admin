@@ -22,38 +22,36 @@ export default function LoginForm() {
     localStorage.getItem("rememberMe") === "true" ? true : false
   );
 
-  // useEffect(() => {
-  //   if (userDetails) {
-  //     handleRemember(userDetails);
-  //     // navigate("");
-  //   }
-  // }, [userDetails]);
+  useEffect(() => {
+    if (userDetails?.success) {
+      handleRemember(userDetails);
+      navigate("/dashboard");
+    }
+  }, [userDetails]);
 
-  // useEffect(() => {
-  //   if (error) {
-  //     setapiMessage(error.message);
-  //   }
-  // }, [error]);
+  useEffect(() => {
+    if (error) {
+      console.log(error);
+      setapiMessage(error.message);
+    }
+  }, [error]);
 
   const handleRemember = (userDetails) => {
     if (checked) {
       localStorage.setItem("email", emailRef.current.value);
       localStorage.setItem("password", passwordRef.current.value);
-      localStorage.setItem("token", userDetails.current.value);
+      localStorage.setItem("token", userDetails.data.token);
       localStorage.setItem("rememberMe", checked);
     } else {
       localStorage.removeItem("email", emailRef.current.value);
       localStorage.removeItem("password", passwordRef.current.value);
-      localStorage.removeItem("token", userDetails.current.value);
+      localStorage.removeItem("token", userDetails.data.token);
       localStorage.setItem("rememberMe", checked);
     }
     Cookies.set("TOKEN", userDetails.data.token, { expires: 7 });
   };
-  // console.log(emailRef.current.value);
     
   const signInHandler = async () => {
-    console.log(emailRef.current.value);
-    console.log(passwordRef.current.value);
     details["email"] = emailRef.current.value;
     details["password"] = passwordRef.current.value;
     if (!!emailRef.current.value.length && !!passwordRef.current.value) {
