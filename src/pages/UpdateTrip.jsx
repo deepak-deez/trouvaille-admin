@@ -1,17 +1,16 @@
 import React from "react";
-import NewTripForm from "../component/NewTripForm/NewTripForm";
 import Sidebar from "../component/Sidebar/Sidebar";
 import Navbar from "../component/Navbar/Navbar";
-import Footer from "../component/Footer/Footer";
+import UpdateTripForm from "../component/UpdatetripForm/UpdateTripForm";
 
-const AddNewTrip = () => {
+const UpdateTrip = () => {
   return (
     <div className="flex h-full">
       <Sidebar />
       <div className="w-full">
-        <Navbar heading="Add New Trip" />
+        <Navbar heading="Edit Trip" />
         <div className="md:h-[90vh]">
-          <NewTripForm />
+          <UpdateTripForm />
         </div>
         {/* <Footer /> */}
       </div>
@@ -19,4 +18,4 @@ const AddNewTrip = () => {
   );
 };
 
-export default AddNewTrip;
+export default UpdateTrip;

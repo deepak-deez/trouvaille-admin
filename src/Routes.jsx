@@ -4,6 +4,7 @@ import Dashboard from "./pages/dashboard";
 import PageError from "./component/Error/PageError";
 import TripListPage from "./pages/tripListPage";
 import AddNewTrip from "./pages/addNewTrip";
+import UpdateTrip from "./pages/UpdateTrip";
 
 const Router = () => {
   return (
@@ -12,6 +13,7 @@ const Router = () => {
         <Route exact path="/dashboard" element={<Dashboard />} />
         <Route exact path="/list-of-trips" element={<TripListPage />} />
         <Route exact path="/trip-list/add-trip" element={<AddNewTrip />} />
+        <Route exact path="/trip-list/edit-trip/:id" element={<UpdateTrip />} />
         <Route exact path="*" element={<PageError />} />
       </Routes>
     </BrowserRouter>

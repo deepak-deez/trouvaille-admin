@@ -5,34 +5,18 @@ import TagsInput from "../TagsInput/TagsInput";
 import SelectMenu from "../SelectMenu/SelectMenu";
 import Faq from "../Faq/Faq";
 import StatusMenu from "../StatusMenu/StatusMenu";
+import {
+  Occassion,
+  TripCategory,
+  TravelType,
+  Status,
+} from "./tripFormSelect.jsx";
 
 const NewTripForm = () => {
   const [file, setFile] = useState();
   function handleChange(e) {
     setFile(URL.createObjectURL(e.target.files[0]));
   }
-  const Occassion = [
-    { label: "Family Vacation", value: "Family Vacation" },
-    { label: "Romantic getaway", value: "Romantic getaway" },
-    { label: "Adventure", value: "Adventure" },
-    { label: "Honeymoon", value: "Honeymoon" },
-  ];
-
-  const TripCategory = [
-    { label: "Forest", value: "Forest" },
-    { label: "Desert", value: "Desert" },
-    { label: "Tropical Falls", value: "Tropical Falls" },
-    { label: "Sea", value: "Sea" },
-  ];
-  const TravelType = [
-    { label: "Independent Tour", value: "Independent Tour" },
-    { label: "Escorted Tour", value: "Escorted Tour" },
-  ];
-
-  const Status = [
-    { label: "Active", value: "Active " },
-    { label: "In-Active", value: "In-Active" },
-  ];
 
   return (
     <div className="flex-col flex md:flex-row">

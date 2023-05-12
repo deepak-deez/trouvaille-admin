@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import delIcon from "../../assets/image/user/delete.svg";
 import editIcon from "../../assets/image/user/edit-icon.svg";
 import { useNavigate } from "react-router-dom";
+import UpdateTripForm from "../UpdatetripForm/UpdateTripForm";
 
-const TripDropMenu = ({ data }) => {
+const TripDropMenu = ({ editData, setEditData, delPop, setDelPop }) => {
   const [showPop, setShowPop] = useState(false);
+
   const navigate = useNavigate();
-  console.log(data);
   return (
     <div className="relative">
       <button
@@ -26,8 +27,8 @@ const TripDropMenu = ({ data }) => {
         <button
           className="flex justify-between items-center w-full"
           onClick={() => {
-            navigate(`/edit/${data.id}`);
-            // edit pop
+            navigate(`/trip-list/edit-trip/${editData.id}`);
+            console.log(editData);
           }}
         >
           Edit
@@ -36,7 +37,7 @@ const TripDropMenu = ({ data }) => {
         <button
           className="flex justify-between items-center w-full"
           onClick={() => {
-            //   del function
+            setDelPop(!delPop);
           }}
         >
           Delete <img src={delIcon} alt="delete" />

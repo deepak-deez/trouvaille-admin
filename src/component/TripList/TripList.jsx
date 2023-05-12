@@ -1,9 +1,12 @@
-import React from "react";
+import { React, useState } from "react";
 import TripListDB from "./TripListDB";
 import TripDropMenu from "../TripDropMenu/TripDropMenu";
 import { useNavigate } from "react-router-dom";
+import DeleteTripPop from "../DeleteTripPop/DeleteTripPop";
 
 const TripList = () => {
+  const [editData, setEditData] = useState("");
+  const [delPop, setDelPop] = useState(false);
   const navigate = useNavigate();
   return (
     <>
@@ -43,7 +46,12 @@ const TripList = () => {
                     <td className="td-class">{val.price}</td>
                     <td className="td-class">{val.discounted}</td>
                     <td className="">
-                      <TripDropMenu data={val} />
+                      <TripDropMenu
+                        editData={val}
+                        setEditData={setEditData}
+                        delPop={delPop}
+                        setDelPop={setDelPop}
+                      />
                     </td>
                   </tr>
                 );
@@ -51,6 +59,7 @@ const TripList = () => {
             </tbody>
           </table>
         </div>
+        {delPop && <DeleteTripPop delPop={delPop} setDelPop={setDelPop} />}
       </div>
     </>
   );
