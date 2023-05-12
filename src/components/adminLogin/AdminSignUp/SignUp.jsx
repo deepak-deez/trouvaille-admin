@@ -1,8 +1,8 @@
 import React from "react";
-import "./child.scss";
+import "./style.scss";
 import view from "../../../assets/images/adminLogin/singinForm/view.svg";
 
-export default function Signin() {
+export default function SignUp() {
   return (
     <div className=" my-auto signup-form flex flex-col items-center justify-center">
       <div className="flex flex-col w-[300px] xl:w-[360px]">

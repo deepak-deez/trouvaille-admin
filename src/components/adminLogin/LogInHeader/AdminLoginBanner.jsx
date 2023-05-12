@@ -1,6 +1,6 @@
 import "./child.scss";
 
-export default function AdminLogin() {
+export default function AdminLoginBanner() {
   return (
     <>
       <div className="sign-in-banner hidden lg:flex lg:flex-col lg:justify-end">

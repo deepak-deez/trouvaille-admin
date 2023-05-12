@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Outlet, Link, Navigate, useNavigate } from "react-router-dom";
-import "./child.scss";
+import "./style.scss";
 import mail from "../../../assets/images/adminLogin/singinForm/mail.svg";
 import view from "../../../assets/images/adminLogin/singinForm/view.svg";
 import Cookies from "js-cookie";

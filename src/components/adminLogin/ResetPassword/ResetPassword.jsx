@@ -1,5 +1,5 @@
 import React from "react";
-import "./child.scss";
+import "./style.scss";
 import eyeIcon from "../../../assets/images/adminLogin/singinForm/view.svg";
 
 export default function ResetPassword() {
