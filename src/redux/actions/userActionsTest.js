@@ -3,7 +3,7 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAILED,
-} from "../constants/userConstant.js";
+} from "../constants/userConstantTest.js";
 const BASE_URL = process.env.REACT_APP_NODE_API;
 
 export const logInUser = (email, password, type) => async (dispatch) => {
