@@ -1,7 +1,6 @@
 import { React, useState } from "react";
 import "./style.scss";
-const TagsInput = ({ heading }) => {
-  const [tags, setTags] = useState([]);
+const TagsInput = ({ heading, tags, setTags }) => {
   const addTags = (event) => {
     if (event.key === "Enter" && event.target.value !== "") {
       setTags([...tags, event.target.value]);

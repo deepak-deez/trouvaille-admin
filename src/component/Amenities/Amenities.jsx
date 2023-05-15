@@ -1,5 +1,4 @@
 import { React, useEffect, useState } from "react";
-
 import amenitiesBrowserIcon from "../../assets/image/amenities/browse-anenities-icon.svg";
 import DotMenu from "../DotMenu/DotMenu";
 import UpdatePop from "../UpdatePop/UpdatePop";
@@ -44,24 +43,18 @@ const AmenitiesTable = () => {
             <tbody>
               {data &&
                 data?.data &&
-                data.data.map((data, index) => {
-                  const base64String = btoa(
-                    String.fromCharCode(...new Uint8Array(data.icon.data.data))
-                  );
+                data?.data?.map((item, index) => {
                   return (
                     <tr className=" tr-class text-center" key={index}>
                       <td className="td-class font-bold flex items-center p-3">
-                        <img
-                          src={`data:image; base64,${base64String}`}
-                          alt=""
-                        />
+                        <img src={item.icon.url} alt="" />
 
-                        {data.title}
+                        {item.title}
                       </td>
-                      <td className="td-class">{data.description}</td>
+                      <td className="td-class">{item.description}</td>
                       <td className="">
                         <DotMenu
-                          updateData={data}
+                          updateData={item}
                           showDelPop={showDelPop}
                           setShowDelPop={setShowDelPop}
                           showUpdatePop={showUpdatePop}

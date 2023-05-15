@@ -18,7 +18,7 @@ import {
 const API = process.env.REACT_APP_NODE_API;
 
 export const addNewTip =
-  (icon, title, description, feature) => async (dispatch) => {
+  (image, title, description, feature) => async (dispatch) => {
     try {
       dispatch({
         type: ADD_TRIP_REQUEST,
@@ -27,7 +27,7 @@ export const addNewTip =
         "Content-Type": "application/json",
       };
       const body = {
-        icon,
+        image,
         title,
         description,
       };

@@ -12,6 +12,13 @@ import {
   deleteTripReducer,
   getTripReducer,
 } from "./addTripReducer";
+import {
+  getSinglePackageReducer,
+  getPackageReducer,
+  addPackageReducer,
+  updatePackageReducer,
+  deletePackageReducer,
+} from "./addPackageReducers";
 
 const rootReducer = combineReducers({
   logInUser: logInUserReducer,
@@ -23,6 +30,11 @@ const rootReducer = combineReducers({
   updateTrip: updateTripReducer,
   deleteTrip: deleteTripReducer,
   getTrip: getTripReducer,
+  getSinglePackage: getSinglePackageReducer,
+  getPackage: getPackageReducer,
+  addPackage: addPackageReducer,
+  updatePackage: updatePackageReducer,
+  deletePackage: deletePackageReducer,
 });
 
 export default rootReducer;
