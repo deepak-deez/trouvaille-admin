@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import { logInUserReducer } from "./userReducerTest";
+import {userReducer} from "./userReducer";
 import {
   addNewUserReducer,
   updateUserReducer,
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   addPackage: addPackageReducer,
   updatePackage: updatePackageReducer,
   deletePackage: deletePackageReducer,
+  userLogin: userReducer
 });
 
 export default rootReducer;
