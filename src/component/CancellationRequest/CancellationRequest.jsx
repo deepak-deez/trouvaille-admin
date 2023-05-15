@@ -23,7 +23,7 @@ const CancellationRequest = () => {
             {
                 requests.map((item, index) => {
                     return (
-                        <p className='mx-5 p-3 rounded-lg bg-[#F5F9FF]'>Booking for {item.title} on {item.date} has been cancelled of {item.url}</p>
+                        <p className='mx-5 p-3 rounded-lg bg-[#F5F9FF]'key={index} >Booking for {item.title} on {item.date} has been cancelled of {item.url}</p>
                     )
                 })
             }

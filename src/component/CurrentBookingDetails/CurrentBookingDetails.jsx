@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useParams } from "react-router-dom";
+import CancelDialog from '../CancelDialog/cancelDialog';
 
 
 
 const CurrentBookingDetails = () => {
 
     // const [cancelBooking , setCancelBooking] = useState(false);
+    const [cancelPopUp , setCancelPopUp] = useState(false);
 
     const bookingData = [
         {
@@ -36,22 +38,20 @@ const CurrentBookingDetails = () => {
 
 
     let { id } = useParams();
-
+const [currentId] = useState(id);
     return (
+        <>
         <div className="flex-col flex md:flex-row w-full py-5">
             <div className="flex sm:w-[50%] w-full p-2">
-                <div className='w-[50%]'><img src="" alt="img1" /></div>
-                <div className="flex flex-col w-[50%]">
-                    <div className='h-[50%]'><img src="" alt="img2" /></div>
-                    <div className='h-[50%]'><img src="" alt="img3" /></div>
-                </div>
+                <div className='w-[100%]'><img src="" alt="img1" /></div>
+              
             </div>
             <div className="sm:w-[50%] w-full p-2">
                 <div className="flex justify-between items-center">
                     <p className="text-3xl font-semibold">{bookingData[id - 1].title}</p>
                     <Link
-                        to={'/booking-list/booking-details/' + 2 + '/cancel-booking'}
                         className="flex justify-self-end border px-3 py-2 rounded-md border-black me-5"
+                        onClick={()=>{setCancelPopUp(!cancelPopUp)}}
                     >
                         Cancel
                     </Link>
@@ -78,6 +78,10 @@ const CurrentBookingDetails = () => {
                 </div>
             </div>
         </div>
+       {
+        cancelPopUp? (<CancelDialog setCancelPopUp={setCancelPopUp} id={id} />):("")
+       }
+        </>
     );
 }
 

@@ -15,7 +15,6 @@ const CancelBooking = () => {
                     <Navbar heading="All Users" />
                     <div className="md:h-[90vh]">
                         <CurrentBookingDetails />
-                        <CancelDialog className="absolute" />
                     </div>
                     <Footer />
                 </div>

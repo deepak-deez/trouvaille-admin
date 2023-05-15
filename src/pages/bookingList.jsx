@@ -14,13 +14,15 @@ const BookingList = () => {
           <div className="bg-white overflow-x-scroll ">
             <table className="w-full ">
               <thead className="w-full text-[#8383A9] ">
-                <th className="py-5">Trip Title</th>
+              <tr>
+              <th className="py-5">Trip Title</th>
                 <th className="py-5 ">Passenger Name</th>
                 <th className="py-5">Email</th>
                 <th className="py-5">Phone number</th>
                 <th className="py-5">
                   <span className="rounded-full"></span> Status
                 </th>
+              </tr>
               </thead>
               <tbody>
                 <BookingItems />

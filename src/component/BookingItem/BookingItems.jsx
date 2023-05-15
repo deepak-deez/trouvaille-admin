@@ -32,7 +32,7 @@ const BookingItems = () => {
   return (
     bookingData.map((data, index) => {
       return (
-        <tr>
+        <tr key={index}>
           <td className='p-3 '>{data.title}</td>
           <td className='p-3'>{data.name}</td>
           <td className='p-3'>{data.email}</td>
