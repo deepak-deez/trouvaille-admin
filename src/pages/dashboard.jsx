@@ -3,8 +3,6 @@ import Navbar from "../component/Navbar/Navbar";
 import Sidebar from "../component/Sidebar/Sidebar";
 import User from "../component/Users/user";
 import Footer from "../component/Footer/Footer";
-import { useContext } from "react";
-import { GlobalContext } from "../context/GlobalContext";
 
 const Dashboard = () => {
   // const { mount, navHead } = useContext(GlobalContext);

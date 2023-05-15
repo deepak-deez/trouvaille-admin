@@ -1,13 +1,10 @@
 import React from "react";
-import Router from "./Routes";
-import { GlobalProvider } from "./context/GlobalContext";
+import Router from "./Routes.jsx";
 
 const App = () => {
   return (
     <>
-      <GlobalProvider>
         <Router />
-      </GlobalProvider>
     </>
   );
 };
