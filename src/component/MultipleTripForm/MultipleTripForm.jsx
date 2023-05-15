@@ -36,7 +36,6 @@ function MultipleTripForm({ inputFields, setInputFields }) {
     list[index][name] = value;
     setInputFields(list);
   };
-  console.log(inputFields, "input");
   return (
     <div className="col-sm-8">
       <div className="flex justify-between">

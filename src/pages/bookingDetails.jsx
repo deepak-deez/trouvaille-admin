@@ -6,11 +6,12 @@ import Footer from "../component/Footer/Footer";
 import CurrentBookingDetails from "../component/CurrentBookingDetails/CurrentBookingDetails";
 
 const BookingDetails = () => {
+  let email = localStorage.getItem("email");
   return (
     <div className="flex h-full">
       <Sidebar />
       <div className="w-full bg-[#f5f7f7] ">
-        <Navbar heading="Booking Details" />
+        <Navbar heading="Booking Details" userName={email}/>
         <div className="md:h-[90vh] flex flex-col">
           <CurrentBookingDetails />
         </div>

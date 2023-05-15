@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import travelData from "./travelDB";
-import browserIcon from "../../assets/image/travel-type/independent-icon.svg";
+import browserIcon from "../../assets/images/travel-type/independent-icon.svg";
 import AddNewPop from "../AddNewPop/AddNewPop";
 import UpdatePop from "../UpdatePop/UpdatePop";
 import DeletePop from "../DeletePop/DeletePop";

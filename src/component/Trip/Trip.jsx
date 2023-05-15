@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import browseTripIcon from "../../assets/image/trip/browse-trip-icon.svg";
+import browseTripIcon from "../../assets/images/trip/browse-trip-icon.svg";
 import DotMenu from "../DotMenu/DotMenu";
 import AddNewPop from "../AddNewPop/AddNewPop";
 import UpdatePop from "../UpdatePop/UpdatePop";

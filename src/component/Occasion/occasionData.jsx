@@ -1,7 +1,7 @@
-import familyIcon from "../../assets/image/occasion/family-icon.svg";
-import adventureIcon from "../../assets/image/occasion/adventure-icon.svg";
-import bedIcon from "../../assets/image/occasion/bed-icon.svg";
-import cupIcon from "../../assets/image/occasion/cup-icon.svg";
+import familyIcon from "../../assets/images/occasion/family-icon.svg";
+import adventureIcon from "../../assets/images/occasion/adventure-icon.svg";
+import bedIcon from "../../assets/images/occasion/bed-icon.svg";
+import cupIcon from "../../assets/images/occasion/cup-icon.svg";
 
 const OccasionDb = [
   {

@@ -1,7 +1,7 @@
-import forestIcon from "../../assets/image/trip/forest-icon.svg";
-import desertIcon from "../../assets/image/trip/desert-icon.svg";
-import tropicalIcon from "../../assets/image/trip/tropical-icon.svg";
-import seaIcon from "../../assets/image/trip/sea-icon.svg";
+import forestIcon from "../../assets/images/trip/forest-icon.svg";
+import desertIcon from "../../assets/images/trip/desert-icon.svg";
+import tropicalIcon from "../../assets/images/trip/tropical-icon.svg";
+import seaIcon from "../../assets/images/trip/sea-icon.svg";
 
 const TripDetails = [
   {

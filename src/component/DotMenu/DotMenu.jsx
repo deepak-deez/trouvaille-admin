@@ -1,6 +1,6 @@
 import { React, useState } from "react";
-import delIcon from "../../assets/image/user/delete.svg";
-import editIcon from "../../assets/image/user/edit-icon.svg";
+import delIcon from "../../assets/images/user/delete.svg";
+import editIcon from "../../assets/images/user/edit-icon.svg";
 
 const DotMenu = ({
   showUpdatePop,

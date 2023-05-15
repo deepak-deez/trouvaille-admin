@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import tempIcon from "../../assets/image/trip-list/AddNewTrip-icon.svg";
+import tempIcon from "../../assets/images/trip-list/AddNewTrip-icon.svg";
 import MultipleTripForm from "../MultipleTripForm/MultipleTripForm";
 import TagsInput from "../TagsInput/TagsInput";
 import SelectMenu from "../SelectMenu/SelectMenu";

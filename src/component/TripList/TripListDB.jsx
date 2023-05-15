@@ -1,11 +1,11 @@
-import berlin from "../../assets/image/trip-list/berlin.svg";
-import egypt from "../../assets/image/trip-list/egypt.svg";
-import germany from "../../assets/image/trip-list/germany.svg";
-import giza from "../../assets/image/trip-list/giza.svg";
-import italy from "../../assets/image/trip-list/italy.svg";
-import poland from "../../assets/image/trip-list/poland.svg";
-import venice from "../../assets/image/trip-list/venice.svg";
-import warsow from "../../assets/image/trip-list/warsow.svg";
+import berlin from "../../assets/images/trip-list/berlin.svg";
+import egypt from "../../assets/images/trip-list/egypt.svg";
+import germany from "../../assets/images/trip-list/germany.svg";
+import giza from "../../assets/images/trip-list/giza.svg";
+import italy from "../../assets/images/trip-list/italy.svg";
+import poland from "../../assets/images/trip-list/poland.svg";
+import venice from "../../assets/images/trip-list/venice.svg";
+import warsow from "../../assets/images/trip-list/warsow.svg";
 
 const TripListDB = [
   {

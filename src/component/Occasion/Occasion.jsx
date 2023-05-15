@@ -4,7 +4,7 @@ import DotMenu from "../DotMenu/DotMenu";
 import AddNewPop from "../AddNewPop/AddNewPop";
 import UpdatePop from "../UpdatePop/UpdatePop";
 import DeletePop from "../DeletePop/DeletePop";
-import occasionBrowserIcon from "../../assets/image/occasion/occasion-browse-icon.svg";
+import occasionBrowserIcon from "../../assets/images/occasion/occasion-browse-icon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { getTrip } from "../../redux/actions/tripAction";
 

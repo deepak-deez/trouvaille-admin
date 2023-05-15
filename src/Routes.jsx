@@ -20,11 +20,11 @@ import ForgotPassword from "./pages/AdminForgotPassword/AdminForgotPassword.jsx"
 import ResetPassword from "./pages/AdminResetPassword/AdminResetPassword.jsx";
 import Signup from "./pages/AdminSignUp/AdminSignUp.jsx";
 
-
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route exact path="/" element={<AdminLogin />} />
         <Route exact path="/dashboard" element={<Dashboard />} />
         <Route exact path="/travel-type" element={<Travel />} />
         <Route exact path="/occasions-list" element={<OccasionPage />} />
@@ -35,15 +35,24 @@ const Router = () => {
         <Route exact path="/trip-list/edit-trip/:id" element={<UpdateTrip />} />
         <Route exact path="*" element={<PageError />} />
         <Route exact path="/booking-list" element={<BookingList />} />
-        <Route exact path="/booking-list/booking-details/:id" element={<BookingDetails />} />
-        <Route exact path="/booking-list/booking-details/:id/cancel-booking" element={<CancelBooking />} />
-        <Route exact path="/booking-list/cancel-requests" element={<CancelNotification />} />
-
+        <Route
+          exact
+          path="/booking-list/booking-details/:id"
+          element={<BookingDetails />}
+        />
+        <Route
+          exact
+          path="/booking-list/booking-details/:id/cancel-booking"
+          element={<CancelBooking />}
+        />
+        <Route
+          exact
+          path="/booking-list/cancel-requests"
+          element={<CancelNotification />}
+        />
         <Route exact path="/signup" element={<Signup />} />
-        <Route exact path="/" element={<AdminLogin />} />
         <Route exact path="/forgotPassword" element={<ForgotPassword />} />
         <Route exact path="/resetPassword" element={<ResetPassword />} />
-
       </Routes>
     </BrowserRouter>
   );

@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addPackage, getPackage } from "../../redux/actions/addPackageActions";
-import tempIcon from "../../assets/image/trip-list/AddNewTrip-icon.svg";
+import tempIcon from "../../assets/images/trip-list/AddNewTrip-icon.svg";
 import MultipleTripForm from "../MultipleTripForm/MultipleTripForm";
 import TagsInput from "../TagsInput/TagsInput";
 import SelectMenu from "../SelectMenu/SelectMenu";
@@ -56,13 +56,30 @@ const NewTripForm = () => {
   function handleChange(e) {
     setFile(URL.createObjectURL(e.target.files[0]));
     let uplImg = e.target.files[0];
-    console.log(uplImg);
     imgToUrl(uplImg).then((res) => {
-      setImgUrl(res);
+      console.log(res);
+      let data_Url = res;
+      setImgUrl(data_Url);
     });
   }
 
   const submitHandler = () => {
+    console.log(title, "title");
+    console.log(imgUrl, "urlimg");
+    console.log(date, "date");
+    console.log(tripCatValue, "tripcat");
+    console.log(noOfPlace, "noOfPlace");
+    console.log(maxGuest, "maxGuest");
+    console.log(inputFields, "inputFields");
+    console.log(price, "price");
+    console.log(discountedPrice, "discountedPrice");
+    console.log(occassionValue, "occassionValue");
+    console.log(tags, "tags");
+    console.log(travelTypeValue, "travelTypeValue");
+    console.log(description, "description");
+    console.log(faqFields, "faqFields");
+    console.log(status, "status");
+
     if (
       title &&
       imgUrl &&
@@ -99,33 +116,34 @@ const NewTripForm = () => {
           status
         )
       );
-      setTitle("");
-      setImgUrl("");
-      setDescription("");
-      setStatus("");
-      setNoOfPlace("");
-      setMaxGuest("");
-      setTripCatValue([]);
-      setOccassionValue([]);
-      setTravelTypeValue([]);
-      setDate("");
-      setPrice("");
-      setDiscountedPrice("");
-      setTags([
-        {
-          Question: "",
-          Name: "",
-          Answer: "",
-        },
-      ]);
-      setFaqFields([
-        {
-          Title: "",
-          Name: "",
-          Description: "",
-          icon: "",
-        },
-      ]);
+
+      // setTitle("");
+      // setImgUrl("");
+      // setDescription("");
+      // setStatus("");
+      // setNoOfPlace("");
+      // setMaxGuest("");
+      // setTripCatValue([]);
+      // setOccassionValue([]);
+      // setTravelTypeValue([]);
+      // setDate("");
+      // setPrice("");
+      // setDiscountedPrice("");
+      // setTags([
+      //   {
+      //     Question: "",
+      //     Name: "",
+      //     Answer: "",
+      //   },
+      // ]);
+      // setFaqFields([
+      //   {
+      //     Title: "",
+      //     Name: "",
+      //     Description: "",
+      //     icon: "",
+      //   },
+      // ]);
     } else {
       Swal.fire({
         className: "pop-top",
@@ -141,6 +159,8 @@ const NewTripForm = () => {
       });
     }
   };
+  console.log(discountedPrice);
+  console.log(price);
 
   useEffect(() => {
     if (addedPackage?.success) {
@@ -286,7 +306,7 @@ const NewTripForm = () => {
                 type="number"
                 value={discountedPrice}
                 onChange={(e) => {
-                  setDiscountedPrice(e.target.price);
+                  setDiscountedPrice(e.target.value);
                 }}
               />
             </div>

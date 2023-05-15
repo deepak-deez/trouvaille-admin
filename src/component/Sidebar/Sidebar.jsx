@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./Sidebar.scss";
-import mainLogo from "../../assets/image/navbar/Site-logo.svg";
+import mainLogo from "../../assets/images/navbar/Site-logo.svg";
 import SideBarLinks from "./sidebarData";
 import { useContext } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
@@ -49,12 +49,7 @@ const Sidebar = (props) => {
                   key={index}
                 >
                   <img src={item.icon} alt="" />
-                  <h3
-                    className="ms-5"
-                    onClick={() => {
-                     
-                    }}
-                  >
+                  <h3 className="ms-5" onClick={() => {}}>
                     {item.heading}
                   </h3>
                 </NavLink>

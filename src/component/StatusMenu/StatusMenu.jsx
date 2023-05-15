@@ -2,7 +2,6 @@ import { React, useState } from "react";
 import Select from "react-select";
 
 const StatusMenu = ({ width, options, value, setvalue }) => {
-  console.log(options);
   return (
     <div className="">
       <Select

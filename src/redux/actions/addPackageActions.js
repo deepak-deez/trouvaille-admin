@@ -72,37 +72,72 @@ export const getPackage = () => async (dispatch) => {
   }
 };
 
-export const addPackage = (name) => async (dispatch) => {
-  try {
-    dispatch({
-      type: ADD_PACKAGE_REQUEST,
-    });
+export const addPackage =
+  (
+    title,
+    imgUrl,
+    date,
+    tripCatValue,
+    noOfPlace,
+    maxGuest,
+    inputFields,
+    price,
+    discountedPrice,
+    occassionValue,
+    travelTypeValue,
+    tags,
+    description,
+    faqFields,
+    status
+  ) =>
+  async (dispatch) => {
+    try {
+      dispatch({
+        type: ADD_PACKAGE_REQUEST,
+      });
 
-    const body = {
-      name,
-    };
+      const body = {
+        title,
+        imgUrl,
+        date,
+        tripCatValue,
+        noOfPlace,
+        maxGuest,
+        inputFields,
+        price,
+        discountedPrice,
+        occassionValue,
+        travelTypeValue,
+        tags,
+        description,
+        faqFields,
+        status,
+      };
 
-    const header = {
-      "Content-Type": "application/json",
-    };
+      const header = {
+        "Content-Type": "application/json",
+      };
 
-    const { data } = await axios.post(
-      `${API}/create-module/trip-package`,
-      body,
-      header
-    );
+      const { data } = await axios.post(
+        `${API}/create-module/trip-package`,
+        body,
+        header
+      );
 
-    dispatch({
-      type: ADD_PACKAGE_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: ADD_PACKAGE_FAILED,
-      payload: error.message,
-    });
-  }
-};
+      console.log(data);
+
+      dispatch({
+        type: ADD_PACKAGE_SUCCESS,
+        payload: data,
+      });
+      console.log(data);
+    } catch (error) {
+      dispatch({
+        type: ADD_PACKAGE_FAILED,
+        payload: error.message,
+      });
+    }
+  };
 
 export const updatePackage = (name, id) => async (dispatch) => {
   try {

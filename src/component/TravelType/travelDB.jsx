@@ -1,5 +1,5 @@
-import flagIcon from "../../assets/image/travel-type/flag-icon.svg";
-import escortIcon from "../../assets/image/travel-type/independent-icon.svg";
+import flagIcon from "../../assets/images/travel-type/flag-icon.svg";
+import escortIcon from "../../assets/images/travel-type/independent-icon.svg";
 
 const travelData = [
   {

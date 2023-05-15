@@ -1,7 +1,7 @@
-import acIcon from "../../assets/image/amenities/ac-icon.svg";
-import fireIcon from "../../assets/image/amenities/fire-icon.svg";
-import sunIcon from "../../assets/image/amenities/sun-icon.svg";
-import tvIcon from "../../assets/image/amenities/tv-icon.svg";
+import acIcon from "../../assets/images/amenities/ac-icon.svg";
+import fireIcon from "../../assets/images/amenities/fire-icon.svg";
+import sunIcon from "../../assets/images/amenities/sun-icon.svg";
+import tvIcon from "../../assets/images/amenities/tv-icon.svg";
 
 const amenitiesData = [
   {

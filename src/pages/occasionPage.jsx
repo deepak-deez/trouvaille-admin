@@ -5,11 +5,12 @@ import Occasion from "../component/Occasion/Occasion";
 import Footer from "../component/Footer/Footer";
 
 const OccasionPage = () => {
+  let email = localStorage.getItem("email");
   return (
     <div className="flex h-full">
       <Sidebar />
       <div className="w-full bg-[#f5f7f7] ">
-        <Navbar heading="Occasions List" />
+        <Navbar heading="Occasions List" userName={email} />
         <div className="md:h-[90vh]">
           <Occasion />
         </div>

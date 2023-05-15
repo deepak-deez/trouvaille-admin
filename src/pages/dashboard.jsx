@@ -5,25 +5,13 @@ import User from "../component/Users/user";
 import Footer from "../component/Footer/Footer";
 
 const Dashboard = () => {
-  // const { mount, navHead } = useContext(GlobalContext);
-
-  // function loadMount() {
-  //   if (mount === "Dashboard") {
-  //     return <User />;
-  //   } else if (mount === "Bookings") {
-  //     return <Booking />;
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   loadMount();
-  // }, []);
+  let email = localStorage.getItem("email");
 
   return (
     <div className="flex h-full">
       <Sidebar />
       <div className="w-full bg-[#f5f7f7] ">
-        <Navbar heading="All Users" />
+        <Navbar heading="All Users" userName={email} />
         <div className="md:h-[90vh]">
           <User />
         </div>

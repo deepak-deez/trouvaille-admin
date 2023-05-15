@@ -1,10 +1,10 @@
-import dashboardIcon from "../../assets/image/Sidebar/dashboard-icon.svg";
-import bookingIcon from "../../assets/image/Sidebar/booking-icon.svg";
-import visaIcon from "../../assets/image/Sidebar/visa-icon.svg";
-import offerIcon from "../../assets/image/Sidebar/offer-icon.svg";
-import b2bIcon from "../../assets/image/Sidebar/b2b-icon.svg";
-import faqIcon from "../../assets/image/Sidebar/faq-icon.svg";
-import genericIcon from "../../assets/image/Sidebar/generic-icon.svg";
+import dashboardIcon from "../../assets/images/Sidebar/dashboard-icon.svg";
+import bookingIcon from "../../assets/images/Sidebar/booking-icon.svg";
+import visaIcon from "../../assets/images/Sidebar/visa-icon.svg";
+import offerIcon from "../../assets/images/Sidebar/offer-icon.svg";
+import b2bIcon from "../../assets/images/Sidebar/b2b-icon.svg";
+import faqIcon from "../../assets/images/Sidebar/faq-icon.svg";
+import genericIcon from "../../assets/images/Sidebar/generic-icon.svg";
 
 const SideBarLinks = [
   {

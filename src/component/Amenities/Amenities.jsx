@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-import amenitiesBrowserIcon from "../../assets/image/amenities/browse-anenities-icon.svg";
+import amenitiesBrowserIcon from "../../assets/images/amenities/browse-anenities-icon.svg";
 import DotMenu from "../DotMenu/DotMenu";
 import UpdatePop from "../UpdatePop/UpdatePop";
 import AddNewPop from "../AddNewPop/AddNewPop";
