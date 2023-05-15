@@ -1,16 +1,9 @@
 import { React, useState } from "react";
-function Faq() {
-  const [inputFields, setInputFields] = useState([
-    {
-      Question: "",
-      Name: "",
-      Answer: "",
-    },
-  ]);
-
+function Faq({ faqFields, setFaqFields }) {
+ 
   const addInputField = () => {
-    setInputFields([
-      ...inputFields,
+    setFaqFields([
+      ...faqFields,
       {
         Question: "",
         Name: "",
@@ -18,19 +11,19 @@ function Faq() {
       },
     ]);
   };
-  const removeInputFields = (index) => {
-    const rows = [...inputFields];
+  const removefaqFields = (index) => {
+    const rows = [...faqFields];
     rows.splice(index, 1);
-    setInputFields(rows);
+    setFaqFields(rows);
     console.log(rows);
   };
   const handleChange = (index, e) => {
     const { name, value } = e.target;
     console.log(name);
-    const list = [...inputFields];
+    const list = [...faqFields];
     console.log(list);
     list[index][name] = value;
-    setInputFields(list);
+    setFaqFields(list);
   };
   return (
     <div className="col-sm-8">
@@ -43,7 +36,7 @@ function Faq() {
           Add More
         </button>
       </div>
-      {inputFields.map((data, index) => {
+      {faqFields.map((data, index) => {
         return (
           <div className="row my-3" key={index}>
             <div className="flex items-center">
@@ -73,10 +66,10 @@ function Faq() {
               />
             </div>
             <div className="mt-2">
-              {inputFields.length !== 1 ? (
+              {faqFields.length !== 1 ? (
                 <button
                   className="border-2 border-red-500 px-2 rounded-md text-red-500 "
-                  onClick={removeInputFields}
+                  onClick={removefaqFields}
                 >
                   Remove
                 </button>

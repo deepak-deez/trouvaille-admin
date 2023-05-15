@@ -1,13 +1,7 @@
 import { React, useState } from "react";
 import Browse from "../Browse/Browse";
-function MultipleTripForm() {
-  const [inputFields, setInputFields] = useState([
-    {
-      Title: "",
-      Name: "",
-      Description: "",
-    },
-  ]);
+function MultipleTripForm({ inputFields, setInputFields }) {
+
 
   const addInputField = () => {
     setInputFields([

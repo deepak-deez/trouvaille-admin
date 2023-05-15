@@ -3,7 +3,7 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import "./style.scss";
 
-const SelectMenu = ({ options,width }) => {
+const SelectMenu = ({ options, width, setvalue }) => {
   const animatedComponents = makeAnimated();
 
   return (
@@ -25,6 +25,9 @@ const SelectMenu = ({ options,width }) => {
           options={options}
           components={animatedComponents}
           isMulti
+          onChange={(e) => {
+            setvalue(e);
+          }}
         />
       </div>
     </div>

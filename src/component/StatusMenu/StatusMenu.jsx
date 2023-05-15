@@ -1,18 +1,10 @@
 import { React, useState } from "react";
 import Select from "react-select";
 
-const StatusMenu = (width) => {
-  const Status = [
-    { value: "Active", label: "Active" },
-    { value: "In-Active", label: "In-Active" },
-  ];
-
-  function handleSelect(data) {
-    setSelectedOptions(data);
-  }
-  const [selectedOptions, setSelectedOptions] = useState();
+const StatusMenu = ({ width, options, value, setvalue }) => {
+  console.log(options);
   return (
-    <div className="w-[50%] ">
+    <div className="">
       <Select
         styles={{
           control: (baseStyles) => ({
@@ -21,10 +13,12 @@ const StatusMenu = (width) => {
             padding: "0.4rem",
           }),
         }}
-        options={Status}
+        options={options}
         placeholder="Select Status"
-        value={selectedOptions}
-        onChange={handleSelect}
+        value={value}
+        onChange={(e) => {
+          setvalue(e);
+        }}
       />
     </div>
   );
