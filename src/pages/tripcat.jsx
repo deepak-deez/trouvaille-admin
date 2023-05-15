@@ -1,8 +1,8 @@
 import React from "react";
-import Sidebar from "../component/Sidebar/Sidebar";
-import Navbar from "../component/Navbar/Navbar";
-import Trip from "../component/Trip/Trip";
-import Footer from "../component/Footer/Footer";
+import Sidebar from "../components/Sidebar/Sidebar";
+import Navbar from "../components/Navbar/Navbar";
+import Trip from "../components/Trip/Trip";
+import Footer from "../components/Footer/Footer";
 import { emphasize } from "@mui/material";
 
 const Tripcat = () => {

@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/dashboard";
-import PageError from "./component/Error/PageError";
+import PageError from "./components/Error/PageError";
 
 import BookingList from "./pages/bookingList";
 import BookingDetails from "./pages/bookingDetails";

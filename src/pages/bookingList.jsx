@@ -1,8 +1,8 @@
 import React from "react";
-import Sidebar from "../component/Sidebar/Sidebar";
-import Navbar from "../component/Navbar/Navbar";
-import Footer from "../component/Footer/Footer";
-import BookingItems from "../component/BookingItem/BookingItems";
+import Sidebar from "../components/Sidebar/Sidebar";
+import Navbar from "../components/Navbar/Navbar";
+import Footer from "../components/Footer/Footer";
+import BookingItems from "../components/BookingItem/BookingItems";
 
 const BookingList = () => {
   let email = localStorage.getItem("email");

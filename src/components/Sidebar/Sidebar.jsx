@@ -4,7 +4,6 @@ import "./Sidebar.scss";
 import mainLogo from "../../assets/images/navbar/Site-logo.svg";
 import SideBarLinks from "./sidebarData";
 import { useContext } from "react";
-import { GlobalContext } from "../../context/GlobalContext";
 
 const Sidebar = (props) => {
   const [show, setShow] = useState(false);

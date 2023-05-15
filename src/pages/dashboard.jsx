@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import Navbar from "../component/Navbar/Navbar";
-import Sidebar from "../component/Sidebar/Sidebar";
-import User from "../component/Users/user";
-import Footer from "../component/Footer/Footer";
+import Navbar from "../components/Navbar/Navbar";
+import Sidebar from "../components/Sidebar/Sidebar";
+import User from "../components/Users/user";
+import Footer from "../components/Footer/Footer";
 
 const Dashboard = () => {
   let email = localStorage.getItem("email");

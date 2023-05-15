@@ -1,8 +1,8 @@
 import React from "react";
-import Navbar from "../component/Navbar/Navbar";
-import Sidebar from "../component/Sidebar/Sidebar";
-import Occasion from "../component/Occasion/Occasion";
-import Footer from "../component/Footer/Footer";
+import Navbar from "../components/Navbar/Navbar";
+import Sidebar from "../components/Sidebar/Sidebar";
+import Occasion from "../components/Occasion/Occasion";
+import Footer from "../components/Footer/Footer";
 
 const OccasionPage = () => {
   let email = localStorage.getItem("email");

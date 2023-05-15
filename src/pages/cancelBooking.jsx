@@ -1,28 +1,26 @@
-import React from 'react';
-import Footer from '../component/Footer/Footer';
-import Navbar from '../component/Navbar/Navbar';
-import Sidebar from '../component/Sidebar/Sidebar';
-import CancelDialog from '../component/CancelDialog/cancelDialog';
-import CurrentBookingDetails from '../component/CurrentBookingDetails/CurrentBookingDetails';
+import React from "react";
+import Footer from "../components/Footer/Footer";
+import Navbar from "../components/Navbar/Navbar";
+import Sidebar from "../components/Sidebar/Sidebar";
+import CancelDialog from "../components/CancelDialog/cancelDialog";
+import CurrentBookingDetails from "../components/CurrentBookingDetails/CurrentBookingDetails";
 
 const CancelBooking = () => {
-    let email = localStorage.getItem("email");
-    return (
-        <div className="relative">
-
-            <div className="flex">
-                <Sidebar />
-                <div className="w-full bg-[#f5f7f7] ">
-                    <Navbar heading="All Users" userName={email} />
-                    <div className="md:h-[90vh]">
-                        <CurrentBookingDetails />
-                    </div>
-                    <Footer />
-                </div>
-            </div>
-
+  let email = localStorage.getItem("email");
+  return (
+    <div className="relative">
+      <div className="flex">
+        <Sidebar />
+        <div className="w-full bg-[#f5f7f7] ">
+          <Navbar heading="All Users" userName={email} />
+          <div className="md:h-[90vh]">
+            <CurrentBookingDetails />
+          </div>
+          <Footer />
         </div>
-    );
-}
+      </div>
+    </div>
+  );
+};
 
 export default CancelBooking;

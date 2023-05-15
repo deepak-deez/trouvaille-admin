@@ -1,8 +1,8 @@
 import React from "react";
-import NewTripForm from "../component/NewTripForm/NewTripForm";
-import Sidebar from "../component/Sidebar/Sidebar";
-import Navbar from "../component/Navbar/Navbar";
-import Footer from "../component/Footer/Footer";
+import NewTripForm from "../components/NewTripForm/NewTripForm";
+import Sidebar from "../components/Sidebar/Sidebar";
+import Navbar from "../components/Navbar/Navbar";
+import Footer from "../components/Footer/Footer";
 
 const AddNewTrip = () => {
   let email = localStorage.getItem("email");

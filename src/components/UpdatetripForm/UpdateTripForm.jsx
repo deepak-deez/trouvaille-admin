@@ -1,4 +1,5 @@
 import { React, useState } from "react";
+import { useParams } from "react-router-dom";
 import tempIcon from "../../assets/images/trip-list/AddNewTrip-icon.svg";
 import MultipleTripForm from "../MultipleTripForm/MultipleTripForm";
 import TagsInput from "../TagsInput/TagsInput";
@@ -12,8 +13,24 @@ import {
 } from "../NewTripForm/tripFormSelect.jsx";
 
 const UpdateTripForm = ({ editData, setEditData }) => {
+  const { id } = useParams();
   console.log(editData);
   const [file, setFile] = useState();
+  const [faqFields, setFaqFields] = useState([
+    {
+      Question: "",
+      Name: "",
+      Answer: "",
+    },
+  ]);
+  const [inputFields, setInputFields] = useState([
+    {
+      Title: "",
+      Name: "",
+      Description: "",
+      icon: "",
+    },
+  ]);
   function handleChange(e) {
     setFile(URL.createObjectURL(e.target.files[0]));
   }
