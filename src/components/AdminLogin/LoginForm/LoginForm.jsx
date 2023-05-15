@@ -7,7 +7,7 @@ import Cookies from "js-cookie";
 import Handle from "rc-slider/lib/Handles/Handle";
 import { getUsers } from "../../../redux/actions/userActions";
 import { useSelector, useDispatch } from "react-redux";
-import  store  from "../../../redux/store.js";
+import store from "../../../redux/store.js";
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -49,13 +49,16 @@ export default function LoginForm() {
       localStorage.removeItem("email", emailRef.current.value);
       localStorage.removeItem("password", passwordRef.current.value);
       localStorage.removeItem("token", userDetails.data.token);
-      localStorage.removeItem("userType", userDetails.data.userDetails.userType);
+      localStorage.removeItem(
+        "userType",
+        userDetails.data.userDetails.userType
+      );
 
       localStorage.setItem("rememberMe", checked);
     }
     Cookies.set("TOKEN", userDetails.data.token, { expires: 7 });
   };
-    
+
   const signInHandler = async () => {
     details["email"] = emailRef.current.value;
     details["password"] = passwordRef.current.value;
@@ -135,12 +138,11 @@ export default function LoginForm() {
           </div>
           <button
             className="mt-[27px] py-[15px] hover:bg-[#a92323] transition-colors duration-500 text-center signin-button"
-            onClick= {(e)=>{
+            onClick={(e) => {
               e.preventDefault();
 
               signInHandler();
             }}
-            
           >
             Sign in
           </button>

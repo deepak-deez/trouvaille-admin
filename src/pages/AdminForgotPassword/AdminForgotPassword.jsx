@@ -1,11 +1,11 @@
 import React from "react";
 import Router from "../../Routes";
 import "./style.scss";
-import LoginBanner from "../../components/adminLogin/LogInHeader/AdminLoginBanner.jsx";
-import NavBarLogin from "../../components/adminLogin/LoginNavbar/NavBarLogin.jsx";
-import NavBarSigninForm from "../../components/adminLogin/NavBarLoginForm/NavBarLoginForm";
-import ForgotPassword from "../../components/adminLogin/ForgotPassword/ForgotPassword.jsx";
-import Footer from "../../components/adminLogin/FooterComponent/Footer.jsx";
+import LoginBanner from "../../components/AdminLogin/LogInHeader/AdminLoginBanner.jsx";
+import NavBarLogin from "../../components/AdminLogin/LoginNavbar/NavBarLogin.jsx";
+import NavBarSigninForm from "../../components/AdminLogin/NavBarLoginForm/NavBarLoginForm";
+import ForgotPassword from "../../components/AdminLogin/ForgotPassword/ForgotPassword.jsx";
+import Footer from "../../components/AdminLogin/FooterComponent/Footer.jsx";
 
 const AdminForgotPassword = () => {
   return (

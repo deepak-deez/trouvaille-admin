@@ -1,11 +1,11 @@
 import React from "react";
 import Router from "../../Routes";
 import "./style.scss";
-import LoginBanner from "../../components/adminLogin/LogInHeader/AdminLoginBanner.jsx";
-import NavBarLogin from "../../components/adminLogin/LoginNavbar/NavBarLogin.jsx";
-import NavBarSigninForm from "../../components/adminLogin/NavBarLoginForm/NavBarLoginForm";
-import SignUp from "../../components/adminLogin/AdminSignUp/SignUp.jsx";
-import Footer from "../../components/adminLogin/FooterComponent/Footer.jsx";
+import LoginBanner from "../../components/AdminLogin/LogInHeader/AdminLoginBanner.jsx";
+import NavBarLogin from "../../components/AdminLogin/LoginNavbar/NavBarLogin.jsx";
+import NavBarSigninForm from "../../components/AdminLogin/NavBarLoginForm/NavBarLoginForm";
+import SignUp from "../../components/AdminLogin/AdminSignUp/SignUp.jsx";
+import Footer from "../../components/AdminLogin/FooterComponent/Footer.jsx";
 
 const AdminSignUp = () => {
   return (
