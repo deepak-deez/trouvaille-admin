@@ -2,19 +2,22 @@ import { React, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewTip, getTrip } from "../../redux/actions/tripAction.js";
 import Swal from "sweetalert2";
+import imgToUrl from "../../functions/imgToUrl.js";
 
 const AddNewPop = (props) => {
   const { setShowAdd, showAdd, heading, icon, titleHeading, feature } = props;
   const { data } = useSelector((state) => state.getTrip);
   const { data: addedTrip } = useSelector((state) => state.addNewTip);
   const [name, setName] = useState("");
+  const [file, setFile] = useState();
+  const [imgUrl, setImgUrl] = useState("");
   const [description, setDescription] = useState("");
+
   const dispatch = useDispatch();
 
   const addNewHandler = () => {
-    if (file && name && description) {
-      console.log(file);
-      dispatch(addNewTip(file, name, description, feature));
+    if (imgUrl && name && description) {
+      dispatch(addNewTip(imgUrl, name, description, feature));
       setName("");
       setDescription("");
     }
@@ -56,21 +59,19 @@ const AddNewPop = (props) => {
     }
   });
 
-  const [file, setFile] = useState();
 
-  const handleChange = (e) => {
-    let reader = new FileReader();
+  function handleChange(e) {
     if (e.target.files.length !== 0) {
-      reader.readAsDataURL(e.target.files[0]);
-      console.log(e.target.files[0]);
-      reader.onload = () => {
-        console.log(reader.result);
-        setFile(reader.result);
-      };
+      setFile(URL.createObjectURL(e.target.files[0]));
+      let uplImg = e.target.files[0];
+      console.log(uplImg);
+      imgToUrl(uplImg).then((res) => {
+        console.log(res);
+        setImgUrl(res);
+      });
+      console.log(imgUrl);
     }
-  };
-
-  
+  }
 
   return (
     <div
