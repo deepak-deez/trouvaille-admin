@@ -45,26 +45,23 @@ const Occasion = () => {
             <tbody>
               {data &&
                 data?.data &&
-                data.data.map((data, index) => {
-                  const base64String = btoa(
-                    String.fromCharCode(...new Uint8Array(data.icon.data.data))
-                  );
+                data.data.map((item, index) => {
                   return (
                     <tr className=" tr-class text-center" key={index}>
                       <td className="td-class font-bold flex items-center p-3">
                         <div className="flex justify-between items-center ">
                           <img
-                            src={`data:image; base64,${base64String}`}
+                            // src={`data:image; base64,${base64String}`}
                             alt=""
                             className="h-10"
                           />
-                          <span className="px-2">{data.title}</span>
+                          <span className="px-2">{item.title}</span>
                         </div>
                       </td>
-                      <td className="td-class">{data.description}</td>
+                      <td className="td-class">{item.description}</td>
                       <td className="">
                         <DotMenu
-                          updateData={data}
+                          updateData={item}
                           showDelPop={showDelPop}
                           setShowDelPop={setShowDelPop}
                           showUpdatePop={showUpdatePop}

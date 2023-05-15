@@ -37,9 +37,11 @@ const TravelType = () => {
           </button>
         </div>
         <div className="grid lg:grid-cols-4">
-          {data && data?.data && data.data.map((data, index) => {
+          {data &&
+            data?.data &&
+            data.data.map((item, index) => {
               const base64String = btoa(
-                String.fromCharCode(...new Uint8Array(data.icon.data.data))
+                String.fromCharCode(...new Uint8Array(item.icon.data.data))
               );
 
               return (
@@ -48,7 +50,7 @@ const TravelType = () => {
                     <div className="flex justify-end">
                       <div>
                         <DotMenu
-                          updateData={data}
+                          updateData={item}
                           showDelPop={showDelPop}
                           setShowDelPop={setShowDelPop}
                           showUpdatePop={showUpdatePop}
@@ -58,13 +60,17 @@ const TravelType = () => {
                       </div>
                     </div>
                     <div className="flex justify-center py-2">
-                      <img src={`data:image; base64,${base64String}`} alt="" className="h-10" />
+                      <img
+                        src={`data:image; base64,${base64String}`}
+                        alt=""
+                        className="h-10"
+                      />
                     </div>
                     <h3 className="text-center font-semibold py-2">
-                      {data.title}
+                      {item.title}
                     </h3>
                     <p className="text-gray-600 w-full md:h-[10vh] overflow-y-scroll ">
-                      {data.description}
+                      {item.description}
                     </p>
                   </div>
                 </div>
