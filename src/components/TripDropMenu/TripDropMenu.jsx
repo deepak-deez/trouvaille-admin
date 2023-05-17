@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import delIcon from "../../assets/images/user/delete.svg";
 import editIcon from "../../assets/images/user/edit-icon.svg";
 import { useNavigate } from "react-router-dom";
 import UpdateTripForm from "../UpdatetripForm/UpdateTripForm";
+import { useDispatch } from "react-redux";
+import { deleteTrip } from "../../redux/actions/tripAction";
 
-const TripDropMenu = ({ editData, setEditData, delPop, setDelPop }) => {
+const TripDropMenu = ({ editData, setEditData, delPop, setDelPop, deleteTripState, setdeleteTripState }) => {
+ 
+ 
+  // console.log(editData);
   const [showPop, setShowPop] = useState(false);
-
+  const dispatch = useDispatch()
   const navigate = useNavigate();
+
   return (
     <div className="relative">
       <button
@@ -27,7 +33,7 @@ const TripDropMenu = ({ editData, setEditData, delPop, setDelPop }) => {
         <button
           className="flex justify-between items-center w-full"
           onClick={() => {
-            navigate(`/trip-list/edit-trip/${editData.id}`);
+            navigate(`/update-module/trip-package/${editData._id}`);
             console.log(editData);
           }}
         >
@@ -38,6 +44,7 @@ const TripDropMenu = ({ editData, setEditData, delPop, setDelPop }) => {
           className="flex justify-between items-center w-full"
           onClick={() => {
             setDelPop(!delPop);
+            setEditData(editData)
           }}
         >
           Delete <img src={delIcon} alt="delete" />
