@@ -75,19 +75,20 @@ export const getPackage = () => async (dispatch) => {
 export const addPackage =
   (
     title,
-    imgUrl,
-    date,
-    tripCatValue,
-    noOfPlace,
-    maxGuest,
-    inputFields,
+    image,
+    duration,
+    activities=[],
+    tripCategory,
+    placeNumber,
+    maximumGuests,
+    tripHighlights,
     price,
     discountedPrice,
-    occassionValue,
-    travelTypeValue,
-    tags,
-    description,
-    faqFields,
+    occasions,
+    travelType,
+    amenities,
+    briefDescription,
+    faq,
     status
   ) =>
   async (dispatch) => {
@@ -98,20 +99,21 @@ export const addPackage =
 
       const body = {
         title,
-        imgUrl,
-        date,
-        tripCatValue,
-        noOfPlace,
-        maxGuest,
-        inputFields,
+        image,
+        duration,
+        activities,
+        tripCategory,
+        placeNumber,
+        maximumGuests,
+        tripHighlights,
         price,
         discountedPrice,
-        occassionValue,
-        travelTypeValue,
-        tags,
-        description,
-        faqFields,
-        status,
+        occasions,
+        travelType,
+        amenities,
+        briefDescription,
+        faq,
+        status
       };
 
       const header = {
