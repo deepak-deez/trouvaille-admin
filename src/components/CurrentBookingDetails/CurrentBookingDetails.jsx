@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useParams } from "react-router-dom";
 import CancelDialog from '../CancelDialog/cancelDialog';
+import axios from 'axios';
 
 
 
@@ -37,18 +38,37 @@ const CurrentBookingDetails = () => {
     ];
 
 
+
+    const API = process.env.REACT_APP_NODE_API
+
     let { id } = useParams();
-const [currentId] = useState(id);
+// const [currentId] = useState(id);
+
+  const [response,setResponse] = useState();
+  const responseHandler = async() =>{
+    const data = await axios.get(`${API}/booking-details/${id}`)
+   setResponse(data);
+}
+
+  useEffect(()=>{
+    responseHandler();
+   
+  },[])
+
+  console.log(response);
+  if(response?.data)
     return (
+       
         <>
+         {console.log(response.data.data)}
         <div className="flex-col flex md:flex-row w-full py-5">
             <div className="flex sm:w-[50%] w-full p-2">
-                <div className='w-[100%]'><img src="" alt="img1" /></div>
+                <div className='w-[100%]'><img src={response.data.data.image.url} alt="img1" /></div>
               
             </div>
             <div className="sm:w-[50%] w-full p-2">
                 <div className="flex justify-between items-center">
-                    <p className="text-3xl font-semibold">{bookingData[id - 1].title}</p>
+                    <p className="text-3xl font-semibold">{response.data.data.title}</p>
                     <Link
                         className="flex justify-self-end border px-3 py-2 rounded-md border-black me-5"
                         onClick={()=>{setCancelPopUp(!cancelPopUp)}}
@@ -68,12 +88,12 @@ const [currentId] = useState(id);
                     </div>
 
                     <div className="flex w-[50%] flex-col sm:text-lg text-sm gap-5 font-semibold">
-                        <p> {bookingData[id - 1].name}</p>
-                        <p> {bookingData[id - 1].passengers}3</p>
+                        <p> {response.data.data.name}</p>
+                        <p> {response.data.data.passengers}3</p>
                         <li>list data</li>
-                        <p className=' overflow-x-scroll'>{bookingData[id - 1].email}</p>
-                        <p>{bookingData[id - 1].phone}</p>
-                        <p> {bookingData[id - 1].address}</p>
+                        <p className=' overflow-x-scroll'>{response.data.data.email}</p>
+                        <p>{response.data.data.phone}</p>
+                        <p> {response.data.data.address}</p>
                     </div>
                 </div>
             </div>
