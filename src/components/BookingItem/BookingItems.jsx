@@ -1,4 +1,5 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const bookingData = [
@@ -28,9 +29,24 @@ const bookingData = [
   }
 ]
 
-const BookingItems = () => {
+const API = process.env.REACT_APP_NODE_API
+
+const BookingItems =() => {
+
+  const [response,setResponse] = useState();
+  const responseHandler = async() =>{
+    const data = await axios.get(`${API}/all-booking`)
+   setResponse(data);
+}
+
+  useEffect(()=>{
+    responseHandler();
+   
+  },[])
+  console.log(response);
+  if(response?.data)
   return (
-    bookingData.map((data, index) => {
+    response.data.data.map((data, index) => {
       return (
         <tr key={index}>
           <td className='p-3 '>{data.title}</td>
