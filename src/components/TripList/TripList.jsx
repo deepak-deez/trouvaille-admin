@@ -89,6 +89,7 @@ const TripList = () => {
                         />
                       </td>
                     </tr>
+                    
                   );
                 })}
             </tbody>
