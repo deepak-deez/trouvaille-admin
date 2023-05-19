@@ -107,7 +107,7 @@ const AddNewPop = (props) => {
               </button>
               <input
                 type="file"
-                accept=".jpg,.png,.jpeg"
+                accept=".jpg,.png,.jpeg,.svg"
                 className="absolute left-[-90%] top-[30%] opacity-0 cursor-pointer "
                 onChange={handleChange}
               />

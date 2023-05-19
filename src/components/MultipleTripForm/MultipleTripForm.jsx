@@ -103,7 +103,7 @@ function MultipleTripForm({ inputFields, setInputFields }) {
                   </button>
                   <input
                     type="file"
-                    accept=".jpg,.png,.jpeg"
+                    accept=".jpg,.png,.jpeg,.svg"
                     className="absolute right-[10%] opacity-0 cursor-pointer "
                     onChange={(e) => imageChange(index, e)}
                   />
