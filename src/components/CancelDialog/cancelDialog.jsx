@@ -1,17 +1,45 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import store from "../../redux/store";
+import { useNavigate } from "react-router-dom";
+
 
 const CancelDialog = (props) => {
     const {setCancelPopUp ,id} = props;
-    
-    const submitCancelRequest = () =>{
-        console.log(id);
-        setCancelPopUp(false);
+    const [submitDelete, setSubmitDelete] = useState();
+    const [response, setResponse] = useState();
+    const userType = "Admin";
+    const API = process.env.REACT_APP_NODE_API;
+    const navigate = useNavigate();
+    const handleResponse = async() =>{
+        const data = await axios.delete(`${API}/delete-booking/${userType}/${id}`)
+        // const data = await axios.get(`${API}/booking-details/${id}`)
+        console.log(data);
+        // return data;
+        setResponse(data)
     }
 
+    const submitCancelRequest = () =>{
+        console.log(id);
+        
+        // console.log(store.getState().userLogin.userDetails.data.userDetails.userType);
+      
+        handleResponse();
+    //    console.log(response);
+    //   if(response?.data.success ){
+    //     console.log("done");
+ 
+        // navigate("/booking-list")
+    //   }
+    }
+    
     const handleClick = () =>{
         submitCancelRequest();
+        setCancelPopUp(false);
     }
+    console.log(response);
+
 
     return (
         <div className="fixed top-0 left-0 w-full flex justify-center items-center addUser   h-[100vh]">
@@ -41,7 +69,7 @@ const CancelDialog = (props) => {
                 {/* <div className="flex item-center justify-center"> */}
                 <Link className="bg-[#E85C53] text-white p-2 mt-5 rounded-sm"
                 onClick={handleClick}
-                to={"/booking-list/cancel-requests"}
+                // to={"/booking-list/cancel-requests"}
                 >
                     Submit
                 </Link>
