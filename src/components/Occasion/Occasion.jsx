@@ -43,6 +43,7 @@ const Occasion = () => {
               </tr>
             </thead>
             <tbody>
+              {/* {console.log("Data : ",data)} */}
               {data &&
                 data?.data &&
                 data.data.map((item, index) => {
@@ -50,8 +51,9 @@ const Occasion = () => {
                     <tr className=" tr-class text-center" key={index}>
                       <td className="td-class font-bold flex items-center p-3">
                         <div className="flex justify-between items-center ">
+                          {console.log("item",item.icon)}
                           <img
-                            // src={`data:image; base64,${base64String}`}
+                            src={item.icon.url}
                             alt=""
                             className="h-10"
                           />
