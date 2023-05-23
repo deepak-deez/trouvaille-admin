@@ -1,41 +1,57 @@
-import { React, useEffect, useState } from "react";
+import { React, useEffect, useState, useMemo } from "react";
 import TripListDB from "./TripListDB";
 import TripDropMenu from "../TripDropMenu/TripDropMenu";
 import { useNavigate } from "react-router-dom";
 import DeleteTripPop from "../DeleteTripPop/DeleteTripPop";
+import Pagination from "../Pagination/Pagination";
+import list from "./TripListDB.jsx";
 import axios from "axios";
-import { getPackage,deletePackage } from "../../redux/actions/addPackageActions";
+import {
+  getPackage,
+  deletePackage,
+} from "../../redux/actions/addPackageActions";
 import { useDispatch, useSelector } from "react-redux";
+
+let PageSize = 3;
 
 const TripList = () => {
   const [editData, setEditData] = useState("");
   const [delPop, setDelPop] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
   const { data, error } = useSelector((state) => state.getPackage);
   const { data: deletedPackage } = useSelector((state) => state.deletePackage);
   const API = process.env.REACT_APP_NODE_API;
   const dispatch = useDispatch();
 
-  const handleDelete = (id) =>{
-    console.log(id);
-    dispatch(deletePackage(id))
-  }
+  // console.log(data);
+  // console.log(list.slice(0,3));
+
+  // console.log(currentTableData);
+
+  const handleDelete = (id) => {
+    // console.log(id);
+    dispatch(deletePackage(id));
+  };
 
   useEffect(() => {
-    dispatch(getPackage()); 
+    dispatch(getPackage());
   }, []);
 
- 
-
   useEffect(() => {
-    if(deletedPackage?.success){
+    if (deletedPackage?.success) {
       dispatch(getPackage());
-    } 
+    }
   }, [deletedPackage]);
 
-
-
- 
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage-1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    if (data && data?.data)
+      return data.data.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage]);
+  
+  // console.log(currentTableData); //showing three data in every new {currentPage}
 
   return (
     <>
@@ -64,14 +80,14 @@ const TripList = () => {
             <tbody>
               {data &&
                 data?.data &&
-                data.data.map((val, index) => {
+                currentTableData?.map((val, index) => {
                   return (
                     <tr className=" tr-class text-center" key={index}>
                       <td className="td-class font-bold  p-3">
                         <div className="flex  items-center">
                           <img
                             className="px-6"
-                            src={val.image.url}
+                            // src={val.image.url}
                             alt="logo"
                           />
                           {val.title}
@@ -89,14 +105,27 @@ const TripList = () => {
                         />
                       </td>
                     </tr>
-                    
                   );
                 })}
             </tbody>
           </table>
         </div>
-        {delPop && <DeleteTripPop delPop={delPop} setDelPop={setDelPop} handleDelete={handleDelete} editData={editData} />}
+        {delPop && (
+          <DeleteTripPop
+            delPop={delPop}
+            setDelPop={setDelPop}
+            handleDelete={handleDelete}
+            editData={editData}
+          />
+        )}
       </div>
+      <Pagination
+        className="pagination-bar"
+        currentPage={currentPage}
+        totalCount={list.length}
+        pageSize={PageSize}
+        onPageChange={(page) => setCurrentPage(page)}
+      />
     </>
   );
 
