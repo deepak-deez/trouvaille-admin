@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const CancelDialog = (props) => {
     const {setCancelPopUp ,id} = props;
-    const [submitDelete, setSubmitDelete] = useState();
+  
     const [response, setResponse] = useState();
     const userType = "Admin";
     const API = process.env.REACT_APP_NODE_API;
@@ -22,21 +22,19 @@ const CancelDialog = (props) => {
 
     const submitCancelRequest = () =>{
         console.log(id);
-        
         // console.log(store.getState().userLogin.userDetails.data.userDetails.userType);
-      
         handleResponse();
     //    console.log(response);
     //   if(response?.data.success ){
     //     console.log("done");
- 
-        // navigate("/booking-list")
     //   }
     }
-    
+
     const handleClick = () =>{
         submitCancelRequest();
         setCancelPopUp(false);
+        props.setSubmitDelete(true)
+        
     }
     console.log(response);
 
