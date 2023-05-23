@@ -47,11 +47,14 @@ const Pagination = props => {
           })}
           onClick={onPrevious}
         >
-          <div className="arrow left" />
+          <div className="left">PREV</div> 
         </li>
         {paginationRange.map(pageNumber => {
           if (pageNumber === DOTS) {
-            return <li className="pagination-item dots">&#8230;</li>;
+            return <li className="pagination-item dots">
+                {/* &#8230; */}
+                ...
+                </li>;
           }
   
           return (
@@ -71,7 +74,7 @@ const Pagination = props => {
           })}
           onClick={onNext}
         >
-          <div className="arrow right" />
+          <div className="right">NEXT</div> 
         </li>
       </ul>
     );

@@ -23,7 +23,7 @@ const TripList = () => {
   const { data: deletedPackage } = useSelector((state) => state.deletePackage);
   const API = process.env.REACT_APP_NODE_API;
   const dispatch = useDispatch();
-
+  // const list=useState([]);
   // console.log(data);
   // console.log(list.slice(0,3));
 
@@ -38,23 +38,26 @@ const TripList = () => {
     dispatch(getPackage());
   }, []);
 
+
+  // const currentTableData = ()=> {
+    const firstPageIndex = (currentPage-1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    // if (data && data?.data)
+    // currentTableData = data.data.slice(firstPageIndex, lastPageIndex);
+  // };
+
+
+
   useEffect(() => {
     if (deletedPackage?.success) {
       dispatch(getPackage());
     }
   }, [deletedPackage]);
 
-  const currentTableData = useMemo(() => {
-    const firstPageIndex = (currentPage-1) * PageSize;
-    const lastPageIndex = firstPageIndex + PageSize;
-    if (data && data?.data)
-      return data.data.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage]);
-  
-  // console.log(currentTableData); //showing three data in every new {currentPage}
 
   return (
     <>
+  
       <div className="p-3">
         <div className="p-4 bg-white item-center w-full overflow-x-scroll border-b-2">
           <table className="w-[65rem]">
@@ -78,9 +81,13 @@ const TripList = () => {
               </tr>
             </thead>
             <tbody>
-              {data &&
-                data?.data &&
-                currentTableData?.map((val, index) => {
+              {
+              
+              
+              data &&
+                data?.data
+                .slice(firstPageIndex, lastPageIndex)
+                .map((val, index) => {
                   return (
                     <tr className=" tr-class text-center" key={index}>
                       <td className="td-class font-bold  p-3">
@@ -122,12 +129,14 @@ const TripList = () => {
       <Pagination
         className="pagination-bar"
         currentPage={currentPage}
-        totalCount={list.length}
+        totalCount={data &&
+          data?.data.length}
         pageSize={PageSize}
         onPageChange={(page) => setCurrentPage(page)}
       />
     </>
   );
+        // }
 
   // },[])
 };
