@@ -40,9 +40,8 @@ const TravelType = () => {
           {data &&
             data?.data &&
             data.data.map((item, index) => {
-              const base64String = btoa(
-                String.fromCharCode(...new Uint8Array(item.icon.data.data))
-              );
+              console.log("item : ",item.icon.url);
+              const icon=item.icon.url;
 
               return (
                 <div className="w-full p-5 gap-4 h-[25vh]" key={index}>
@@ -61,7 +60,7 @@ const TravelType = () => {
                     </div>
                     <div className="flex justify-center py-2">
                       <img
-                        src={`data:image; base64,${base64String}`}
+                        src={icon}
                         alt=""
                         className="h-10"
                       />
