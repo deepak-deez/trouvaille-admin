@@ -15,20 +15,25 @@ const CancelDialog = (props) => {
   };
 
   const submitCancelRequest = async (reason) => {
-  
-      const data = await axios.delete(
-        `${API}/delete-booking/${userType}/${id}`
-      );
-      setResponse(data)
-      const body = {
-        cancellationStatus: "true",
-        deleteReason: reason,
-        link: data.data.data.link,
-      };
-      const updateData = await axios.post(`${API}/update-booking/${id}`, body);
-      setResponse(updateData);
-      console.log(updateData);
+  if(reason.trim()!==""){
 
+    const data = await axios.delete(
+      `${API}/delete-booking/${userType}/${id}`
+    );
+    setResponse(data)
+    const body = {
+      cancellationStatus: "true",
+      deleteReason: reason,
+      link: data.data.data.link,
+    };
+    const updateData = await axios.post(`${API}/update-booking/${id}`, body);
+    setResponse(updateData);
+    console.log(updateData);
+    setCancelPopUp(false);
+    props.setSubmitDelete(true);
+  }
+  else
+  alert("Reason field empty");
    
   };
  
@@ -36,9 +41,12 @@ const CancelDialog = (props) => {
     if (userType === "Backend-user") {
     submitCancelRequest(reasonRef.current.value);
   } else if (userType === "Admin") 
-  handleResponse();
-    setCancelPopUp(false);
+     { 
+      handleResponse();
+      setCancelPopUp(false);
     props.setSubmitDelete(true);
+     }
+    
   };
   console.log(response);
 
@@ -66,9 +74,9 @@ const CancelDialog = (props) => {
             className="  border-2 p-2 "
             ref={reasonRef}
             required={
-              localStorage.getItem("userType") == "Backend-user"
-                ? "required"
-                : ""
+              localStorage.getItem("userType") === "Backend-user"
+                ? true
+                : false
             }
           />
         </form>

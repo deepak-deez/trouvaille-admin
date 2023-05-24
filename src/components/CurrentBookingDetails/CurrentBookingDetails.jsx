@@ -52,18 +52,22 @@ const CurrentBookingDetails = () => {
                   setCancelPopUp(!cancelPopUp);
                 }}
               >
-                {localStorage.getItem("userType")==='Admin'?"Cancel":"Request Cancellation"}
+                {localStorage.getItem("userType") === "Admin"
+                  ? "Cancel"
+                  : "Request Cancellation"}
               </Link>
             </div>
             <div className="flex gap-2 ">
               <div className="flex flex-col w-[50%] sm:text-lg text-sm text-[#8E8D98] gap-5">
                 <span className="">Passenger name:</span>
                 <span className="">Other passengers:</span>
-                <ol>
-                  {response.data.data.otherPassenger.map((item,index)=>{
-                    return(
-                      <li>{item.firstName} {item.lastName}</li>
-                    )
+                <ol >
+                  {response.data.data.otherPassenger.map((item, index) => {
+                    return (
+                      <li key={index} >
+                       {index+1}. {item.firstName} {item.lastName}
+                      </li>
+                    );
                   })}
                 </ol>
                 <span className="">Email address:</span>
@@ -75,13 +79,13 @@ const CurrentBookingDetails = () => {
                 <p> {response.data.data.name}</p>
                 <p> {response.data.data.passengers}3</p>
                 <ul>
-                  {response.data.data.otherPassenger.map((item,index)=>{
-                    return(
-                      <li className="flex gap-4">
+                  {response.data.data.otherPassenger.map((item, index) => {
+                    return (
+                      <li className="flex gap-4" key={index}>
                         <span>Age: {item.age} </span>
                         <span>Sex: {item.gender}</span>
                       </li>
-                    )
+                    );
                   })}
                 </ul>
                 <p className=" overflow-x-scroll">{response.data.data.email}</p>
