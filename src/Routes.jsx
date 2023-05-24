@@ -31,6 +31,7 @@ const Router = () => {
         <Route exact path="/trip-categories" element={<Tripcat />} />
         <Route exact path="/list-of-trips" element={<TripListPage />} />
         <Route exact path="/trip-list/add-trip" element={<AddNewTrip />} />
+        <Route exact path="/update-module/trip-package/:id" element={<UpdateTrip />} />
         <Route exact path="/trip-list/edit-trip/:id" element={<UpdateTrip />} />
         <Route exact path="*" element={<PageError />} />
         <Route exact path="/booking-list" element={<BookingList />} />

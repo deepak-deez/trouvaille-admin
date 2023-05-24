@@ -18,16 +18,16 @@ const UpdateTripForm = ({ editData, setEditData }) => {
   const [file, setFile] = useState();
   const [faqFields, setFaqFields] = useState([
     {
-      Question: "",
-      Name: "",
-      Answer: "",
+      question: "",
+      name: "",
+      answer: "",
     },
   ]);
   const [inputFields, setInputFields] = useState([
     {
-      Title: "",
-      Name: "",
-      Description: "",
+      title: "",
+      name: "",
+      description: "",
       icon: "",
     },
   ]);

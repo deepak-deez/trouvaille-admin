@@ -5,9 +5,9 @@ function Faq({ faqFields, setFaqFields }) {
     setFaqFields([
       ...faqFields,
       {
-        Question: "",
-        Name: "",
-        Answer: "",
+        question: "",
+        name: "",
+        answer: "",
       },
     ]);
   };
@@ -47,8 +47,8 @@ function Faq({ faqFields, setFaqFields }) {
                     type="text"
                     className="border-2 p-2 rounded-md w-full"
                     onChange={(e) => handleChange(index, e)}
-                    value={data.Question}
-                    name="Question"
+                    value={data.question}
+                    name="question"
                   />
                 </div>
               </div>
@@ -59,10 +59,10 @@ function Faq({ faqFields, setFaqFields }) {
                 rows="5"
                 cols="33"
                 type="text"
-                value={data.Answer}
+                value={data.answer}
                 className="border-2 rounded-md resize-none"
                 onChange={(e) => handleChange(index, e)}
-                name="Answer"
+                name="answer"
               />
             </div>
             <div className="mt-2">

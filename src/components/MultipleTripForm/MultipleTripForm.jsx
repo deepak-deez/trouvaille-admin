@@ -15,9 +15,9 @@ function MultipleTripForm({ inputFields, setInputFields }) {
     setInputFields([
       ...inputFields,
       {
-        Title: "",
-        Name: "",
-        Description: "",
+        title: "",
+        name: "",
+        description: "",
         icon: "",
       },
     ]);
@@ -58,8 +58,8 @@ function MultipleTripForm({ inputFields, setInputFields }) {
                     type="text"
                     className="border-2 p-2 rounded-md w-[80%]"
                     onChange={(e) => handleChange(index, e)}
-                    value={data.Title}
-                    name="Title"
+                    value={data.title}
+                    name="title"
                   />
                 </div>
                 <div className=" flex flex-col w-[80%]">
@@ -68,8 +68,8 @@ function MultipleTripForm({ inputFields, setInputFields }) {
                     type="text"
                     className="border-2 p-2 rounded-md"
                     onChange={(e) => handleChange(index, e)}
-                    value={data.Name}
-                    name="Name"
+                    value={data.name}
+                    name="name"
                   />
                 </div>
               </div>
@@ -80,10 +80,10 @@ function MultipleTripForm({ inputFields, setInputFields }) {
                 rows="5"
                 cols="33"
                 type="text"
-                value={data.Description}
+                value={data.description}
                 className="border-2 rounded-md resize-none"
                 onChange={(e) => handleChange(index, e)}
-                name="Description"
+                name="description"
               />
             </div>
             <div className="py-4">

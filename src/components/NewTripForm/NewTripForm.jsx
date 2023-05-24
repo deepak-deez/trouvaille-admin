@@ -23,30 +23,30 @@ const NewTripForm = () => {
   const { data: addedPackage } = useSelector((state) => state.addPackage);
   const [title, setTitle] = useState("");
   const [file, setFile] = useState();
-  const [imgUrl, setImgUrl] = useState("");
-  const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
+  const [briefd, setBriefd] = useState("");
   const [status, setStatus] = useState("");
-  const [noOfPlace, setNoOfPlace] = useState("");
-  const [maxGuest, setMaxGuest] = useState("");
-  const [tripCatValue, setTripCatValue] = useState([]);
-  const [occassionValue, setOccassionValue] = useState([]);
-  const [travelTypeValue, setTravelTypeValue] = useState([]);
-  const [date, setDate] = useState("");
+  const [placeNumber, setPlaceNumber] = useState("");
+  const [maximumGuests, setMaximumGuests] = useState("");
+  const [tripCategory, setTripCategory] = useState([]);
+  const [occasions, setOccasions] = useState([]);
+  const [travelType, setTravelType] = useState([]);
+  const [duration, setDuration] = useState("");
   const [price, setPrice] = useState("");
   const [discountedPrice, setDiscountedPrice] = useState("");
-  const [tags, setTags] = useState([]);
-  const [faqFields, setFaqFields] = useState([
+  const [amenities, setAmenities] = useState([]);
+  const [faq, setFaq] = useState([
     {
-      Question: "",
-      Name: "",
-      Answer: "",
+      question: "",
+      name: "",
+      answer: "",
     },
   ]);
-  const [inputFields, setInputFields] = useState([
+  const [tripHighlights, setTripHighlights] = useState([
     {
-      Title: "",
-      Name: "",
-      Description: "",
+      title: "",
+      name: "",
+      description: "",
       icon: "",
     },
   ]);
@@ -59,88 +59,89 @@ const NewTripForm = () => {
     imgToUrl(uplImg).then((res) => {
       console.log(res);
       let data_Url = res;
-      setImgUrl(data_Url);
+      setImage(data_Url);
     });
   }
 
   const submitHandler = () => {
     console.log(title, "title");
-    console.log(imgUrl, "urlimg");
-    console.log(date, "date");
-    console.log(tripCatValue, "tripcat");
-    console.log(noOfPlace, "noOfPlace");
-    console.log(maxGuest, "maxGuest");
-    console.log(inputFields, "inputFields");
+    console.log(image, "urlimg");
+    console.log(duration, "duration");
+    console.log(tripCategory.map((trip)=>(trip.value)), "tripcat");
+    console.log(placeNumber, "placeNumber");
+    console.log(maximumGuests, "maximumGuest");
+    console.log(tripHighlights, "tripHighlights");
     console.log(price, "price");
     console.log(discountedPrice, "discountedPrice");
-    console.log(occassionValue, "occassionValue");
-    console.log(tags, "tags");
-    console.log(travelTypeValue, "travelTypeValue");
-    console.log(description, "description");
-    console.log(faqFields, "faqFields");
-    console.log(status, "status");
+    console.log(occasions.map((occasion)=>(occasion.value)), "occasions");
+    console.log(amenities, "amenities");
+    console.log(travelType.value, "travelType");
+    console.log(briefd, "briefd");
+    console.log(faq, "faq");
+    console.log(status.value, "status");
 
     if (
       title &&
-      imgUrl &&
-      date &&
-      tripCatValue &&
-      noOfPlace &&
-      maxGuest &&
-      inputFields &&
+      image &&
+      duration &&
+      tripCategory.map((trip)=>(trip.value)) &&
+      placeNumber &&
+      maximumGuests &&
+      tripHighlights &&
       price &&
       discountedPrice &&
-      occassionValue &&
-      travelTypeValue &&
-      tags &&
-      description &&
-      faqFields &&
-      status
+      occasions.map((occasion)=>(occasion.value)) &&
+      travelType.value &&
+      amenities &&
+      briefd &&
+      faq &&
+      status.value
     ) {
       dispatch(
         addPackage(
           title,
-          imgUrl,
-          date,
-          tripCatValue,
-          noOfPlace,
-          maxGuest,
-          inputFields,
-          price,
-          discountedPrice,
-          occassionValue,
-          travelTypeValue,
-          tags,
-          description,
-          faqFields,
-          status
+      image ,
+      duration ,
+      [],
+      tripCategory.map((trip)=>(trip.value)) ,
+      placeNumber ,
+      maximumGuests ,
+      tripHighlights ,
+      price ,
+      discountedPrice ,
+      occasions.map((occasion)=>(occasion.value)) ,
+      travelType.value ,
+      amenities ,
+      briefd ,
+      faq ,
+      status.value
         )
       );
 
       // setTitle("");
-      // setImgUrl("");
-      // setDescription("");
+      // setImage("");
+      // setd("");
       // setStatus("");
-      // setNoOfPlace("");
-      // setMaxGuest("");
-      // setTripCatValue([]);
-      // setOccassionValue([]);
-      // setTravelTypeValue([]);
-      // setDate("");
+      // setPlaceNumber("");
+      // setMaximumGuest("");
+      // setTripCategory([]);
+      // setOccasions([]);
+      // setTravelType([]);
+      // setDuration("");
       // setPrice("");
       // setDiscountedPrice("");
-      // setTags([
+      // setAmenities([
       //   {
       //     Question: "",
       //     Name: "",
       //     Answer: "",
       //   },
       // ]);
-      // setFaqFields([
+      // setFaq([
       //   {
       //     Title: "",
       //     Name: "",
-      //     Description: "",
+      //     d: "",
       //     icon: "",
       //   },
       // ]);
@@ -239,9 +240,9 @@ const NewTripForm = () => {
           <input
             className="border-2 py-2 rounded-md"
             type="date"
-            value={date}
+            value={duration}
             onChange={(e) => {
-              setDate(e.target.value);
+              setDuration(e.target.value);
             }}
           />
         </div>
@@ -251,9 +252,9 @@ const NewTripForm = () => {
               <label className=" text-gray-400 ">Trip category</label>
               <SelectMenu
                 options={TripCategory}
-                value={tripCatValue}
+                value={tripCategory}
                 width="100%"
-                setvalue={setTripCatValue}
+                setvalue={setTripCategory}
               />
             </div>
             <div className="flex flex-col md:px-3">
@@ -261,9 +262,9 @@ const NewTripForm = () => {
               <input
                 className="border-2 py-2 rounded-md"
                 type="number"
-                value={noOfPlace}
+                value={placeNumber}
                 onChange={(e) => {
-                  setNoOfPlace(e.target.value);
+                  setPlaceNumber(e.target.value);
                 }}
               />
             </div>
@@ -272,9 +273,9 @@ const NewTripForm = () => {
               <input
                 className="border-2 py-2 rounded-md"
                 type="number"
-                value={maxGuest}
+                value={maximumGuests}
                 onChange={(e) => {
-                  setMaxGuest(e.target.value);
+                  setMaximumGuests(e.target.value);
                 }}
               />
             </div>
@@ -282,8 +283,8 @@ const NewTripForm = () => {
         </div>
         <div className="p-2 flex flex-col space-y-2">
           <MultipleTripForm
-            inputFields={inputFields}
-            setInputFields={setInputFields}
+            inputFields={tripHighlights}
+            setInputFields={setTripHighlights}
           />
         </div>
         <div className="p-2 grid grid-col-4 flex-col space-y-2">
@@ -317,8 +318,8 @@ const NewTripForm = () => {
               <SelectMenu
                 options={Occassion}
                 width="91%"
-                value={occassionValue}
-                setvalue={setOccassionValue}
+                value={occasions}
+                setvalue={setOccasions}
               />
             </div>
             <div className="flex flex-col w-full">
@@ -326,31 +327,31 @@ const NewTripForm = () => {
               <StatusMenu
                 width="91%"
                 options={TravelType}
-                value={travelTypeValue}
-                setvalue={setTravelTypeValue}
+                value={travelType}
+                setvalue={setTravelType}
               />
             </div>
           </div>
         </div>
         <div className="p-2 flex flex-col space-y-2 ">
-          <TagsInput heading="Amenities" tags={tags} setTags={setTags} />
+          <TagsInput heading="Amenities" tags={amenities} setTags={setAmenities} />
         </div>
         <div className="p-2 flex flex-col space-y-2 ">
-          <label className=" text-gray-400">Brief Description</label>
+          <label className=" text-gray-400">Brief description</label>
           <textarea
             rows="5"
             cols="33"
             type="text"
             className="border-2 rounded-md resize-none"
-            name="Description"
-            value={description}
+            name="d"
+            value={briefd}
             onChange={(e) => {
-              setDescription(e.target.value);
+              setBriefd(e.target.value);
             }}
           />
         </div>
         <div className="p-2 flex flex-col space-y-2 ">
-          <Faq faqFields={faqFields} setFaqFields={setFaqFields} />
+          <Faq faqFields={faq} setFaqFields={setFaq} />
         </div>
         <div className="p-2 flex flex-col space-y-2 ">
           <div className=" flex justify-between items-center w-full space-x-3">

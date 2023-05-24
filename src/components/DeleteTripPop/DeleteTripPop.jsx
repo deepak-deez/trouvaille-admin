@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const DeleteTripPop = ({ delPop, setDelPop }) => {
-    console.log("hii");
+const DeleteTripPop = ({ delPop, setDelPop, handleDelete, editData }) => {
+
   return (
     <div
       className={`fixed top-0 left-0 w-full flex justify-center items-center addUser  h-[100vh] ${
@@ -22,7 +22,13 @@ const DeleteTripPop = ({ delPop, setDelPop }) => {
           >
             Cancel
           </button>
-          <button className="bg-[#E85C53] text-white p-2 mt-5 rounded-sm">
+          <button
+            className="bg-[#E85C53] text-white p-2 mt-5 rounded-sm"
+            onClick={() => {
+              setDelPop(!delPop);
+              handleDelete(editData._id);
+            }}
+          >
             Delete
           </button>
         </div>
