@@ -38,15 +38,12 @@ const TripList = () => {
     dispatch(getPackage());
   }, []);
 
-
   // const currentTableData = ()=> {
-    const firstPageIndex = (currentPage-1) * PageSize;
-    const lastPageIndex = firstPageIndex + PageSize;
-    // if (data && data?.data)
-    // currentTableData = data.data.slice(firstPageIndex, lastPageIndex);
+  const firstPageIndex = (currentPage - 1) * PageSize;
+  const lastPageIndex = firstPageIndex + PageSize;
+  // if (data && data?.data)
+  // currentTableData = data.data.slice(firstPageIndex, lastPageIndex);
   // };
-
-
 
   useEffect(() => {
     if (deletedPackage?.success) {
@@ -54,10 +51,8 @@ const TripList = () => {
     }
   }, [deletedPackage]);
 
-
   return (
     <>
-  
       <div className="p-3">
         <div className="p-4 bg-white item-center w-full overflow-x-scroll border-b-2">
           <table className="w-[65rem]">
@@ -81,39 +76,36 @@ const TripList = () => {
               </tr>
             </thead>
             <tbody>
-              {
-              
-              
-              data &&
+              {data &&
                 data?.data
-                .slice(firstPageIndex, lastPageIndex)
-                .map((val, index) => {
-                  return (
-                    <tr className=" tr-class text-center" key={index}>
-                      <td className="td-class font-bold  p-3">
-                        <div className="flex  items-center">
-                          <img
-                            className="px-6"
-                            // src={val.image.url}
-                            alt="logo"
+                  .slice(firstPageIndex, lastPageIndex)
+                  .map((val, index) => {
+                    return (
+                      <tr className=" tr-class text-center" key={index}>
+                        <td className="td-class font-bold  p-3">
+                          <div className="flex  items-center">
+                            <img
+                              className="px-6"
+                              // src={val.image.url}
+                              alt="logo"
+                            />
+                            {val.title}
+                          </div>
+                        </td>
+                        <td className="td-class">{val.duration}</td>
+                        <td className="td-class">{val.price}</td>
+                        <td className="td-class">{val.discountedPrice}</td>
+                        <td className="">
+                          <TripDropMenu
+                            editData={val}
+                            setEditData={setEditData}
+                            delPop={delPop}
+                            setDelPop={setDelPop}
                           />
-                          {val.title}
-                        </div>
-                      </td>
-                      <td className="td-class">{val.duration}</td>
-                      <td className="td-class">{val.price}</td>
-                      <td className="td-class">{val.discountedPrice}</td>
-                      <td className="">
-                        <TripDropMenu
-                          editData={val}
-                          setEditData={setEditData}
-                          delPop={delPop}
-                          setDelPop={setDelPop}
-                        />
-                      </td>
-                    </tr>
-                  );
-                })}
+                        </td>
+                      </tr>
+                    );
+                  })}
             </tbody>
           </table>
         </div>
@@ -129,14 +121,13 @@ const TripList = () => {
       <Pagination
         className="pagination-bar"
         currentPage={currentPage}
-        totalCount={data &&
-          data?.data.length}
+        totalCount={data && data?.data.length}
         pageSize={PageSize}
         onPageChange={(page) => setCurrentPage(page)}
       />
     </>
   );
-        // }
+  // }
 
   // },[])
 };
