@@ -41,7 +41,7 @@ const Router = () => {
         />
         <Route
           exact
-          path="/booking-list/cancel-requests"
+          path="/cancel-requests"
           element={<CancelNotification />}
         />
         <Route exact path="/signup" element={<Signup />} />
