@@ -52,14 +52,20 @@ const CurrentBookingDetails = () => {
                   setCancelPopUp(!cancelPopUp);
                 }}
               >
-                Cancel
+                {localStorage.getItem("userType")==='Admin'?"Cancel":"Request Cancellation"}
               </Link>
             </div>
             <div className="flex gap-2 ">
               <div className="flex flex-col w-[50%] sm:text-lg text-sm text-[#8E8D98] gap-5">
                 <span className="">Passenger name:</span>
                 <span className="">Other passengers:</span>
-                <li>list data</li>
+                <ol>
+                  {response.data.data.otherPassenger.map((item,index)=>{
+                    return(
+                      <li>{item.firstName} {item.lastName}</li>
+                    )
+                  })}
+                </ol>
                 <span className="">Email address:</span>
                 <span className="">Phone:</span>
                 <span className="">Address:</span>
@@ -68,7 +74,16 @@ const CurrentBookingDetails = () => {
               <div className="flex w-[50%] flex-col sm:text-lg text-sm gap-5 font-semibold">
                 <p> {response.data.data.name}</p>
                 <p> {response.data.data.passengers}3</p>
-                <li>list data</li>
+                <ul>
+                  {response.data.data.otherPassenger.map((item,index)=>{
+                    return(
+                      <li className="flex gap-4">
+                        <span>Age: {item.age} </span>
+                        <span>Sex: {item.gender}</span>
+                      </li>
+                    )
+                  })}
+                </ul>
                 <p className=" overflow-x-scroll">{response.data.data.email}</p>
                 <p>{response.data.data.phone}</p>
                 <p> {response.data.data.address}</p>
