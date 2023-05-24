@@ -20,6 +20,19 @@ const CurrentBookingDetails = () => {
     setResponse(data);
   };
 
+  const denyReq = async () => {
+    const body ={
+      cancellationStatus: "false",
+      deleteReason: "",
+      bookingStatus: "Pending",
+      link: "",
+      read: "false"
+    }
+    const updateData = await axios.get(`${API}/update-booking/${id}`,body);
+    console.log(updateData);
+    // setResponse(data);
+  };
+
   useEffect(() => {
     responseHandler();
   }, []);
@@ -55,6 +68,16 @@ const CurrentBookingDetails = () => {
                 {localStorage.getItem("userType") === "Admin"
                   ? "Cancel"
                   : "Request Cancellation"}
+              </Link>
+              <Link
+                className="flex justify-self-end border px-3 py-2 rounded-md border-black me-5"
+                onClick={() => {
+                 denyReq();
+                }}
+              >
+                {localStorage.getItem("userType") === "Admin"
+                  ? "Deny Request"
+                  : "Delete Request"}
               </Link>
             </div>
             <div className="flex gap-2 ">
@@ -92,7 +115,9 @@ const CurrentBookingDetails = () => {
                 <p>{response.data.data.phone}</p>
                 <p> {response.data.data.address}</p>
               </div>
+              
             </div>
+            <div className="w-full">{response.data.data.deleteReason}</div>
           </div>
         </div>
         {cancelPopUp ? (
