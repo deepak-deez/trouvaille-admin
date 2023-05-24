@@ -1,8 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import store from "../../redux/store";
-import { useNavigate } from "react-router-dom";
 
 const CancelDialog = (props) => {
   const { setCancelPopUp, id } = props;
@@ -13,34 +11,36 @@ const CancelDialog = (props) => {
   const API = process.env.REACT_APP_NODE_API;
   const handleResponse = async () => {
     const data = await axios.delete(`${API}/delete-booking/${userType}/${id}`);
-    console.log(data);
     setResponse(data);
   };
 
   const submitCancelRequest = async (reason) => {
-    if (userType === "Backend-user") {
+  
       const data = await axios.delete(
         `${API}/delete-booking/${userType}/${id}`
       );
-      console.log(data.data.data);
-      console.log(data.data.data.link);
-      console.log(reason);
+      setResponse(data)
       const body = {
         cancellationStatus: "true",
         deleteReason: reason,
         link: data.data.data.link,
       };
       const updateData = await axios.post(`${API}/update-booking/${id}`, body);
-      console.log(updateData);
       setResponse(updateData);
-    } else if (userType === "Admin") handleResponse();
-  };
+      console.log(updateData);
 
+   
+  };
+ 
   const handleClick = () => {
+    if (userType === "Backend-user") {
     submitCancelRequest(reasonRef.current.value);
+  } else if (userType === "Admin") 
+  handleResponse();
     setCancelPopUp(false);
     props.setSubmitDelete(true);
   };
+  console.log(response);
 
   return (
     <div className="fixed top-0 left-0 w-full flex justify-center items-center addUser   h-[100vh]">
@@ -75,7 +75,6 @@ const CancelDialog = (props) => {
         <Link
           className="bg-[#E85C53] text-white p-2 mt-5 rounded-sm"
           onClick={handleClick}
-          // to={"/booking-list/cancel-requests"}
         >
           Submit
         </Link>

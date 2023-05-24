@@ -5,7 +5,6 @@ import PageError from "./components/Error/PageError";
 
 import BookingList from "./pages/bookingList";
 import BookingDetails from "./pages/bookingDetails";
-import CancelBooking from "./pages/cancelBooking";
 import CancelNotification from "./pages/cancelNotification";
 
 import Travel from "./pages/travel";
@@ -39,11 +38,6 @@ const Router = () => {
           exact
           path="/booking-list/booking-details/:id"
           element={<BookingDetails />}
-        />
-        <Route
-          exact
-          path="/booking-list/booking-details/:id/cancel-booking"
-          element={<CancelBooking />}
         />
         <Route
           exact

@@ -6,7 +6,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const CurrentBookingDetails = () => {
-  // const [cancelBooking , setCancelBooking] = useState(false);
   const [cancelPopUp, setCancelPopUp] = useState(false);
   const [submitDelete, setSubmitDelete] = useState(false);
 
