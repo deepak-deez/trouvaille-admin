@@ -85,11 +85,12 @@ const TripList = () => {
                         <td className="td-class font-bold  p-3">
                           <div className="flex  items-center">
                             <img
-                              className="px-6"
-                              // src={val.image.url}
+                              className="mx-6 h-[62px] w-[62px]"
+                              src={val.image.url}
                               alt="logo"
                             />
                             {val.title}
+                            {console.log(val.title)}
                           </div>
                         </td>
                         <td className="td-class">{val.duration}</td>

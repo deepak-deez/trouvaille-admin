@@ -42,34 +42,37 @@ const Pagination = (props) => {
       className={classnames("pagination-container", { [className]: className })}
     >
       <li
-        className={classnames("pagination-item", {
+        className={classnames("pagination-select", {
           disabled: currentPage === 1,
         })}
         onClick={onPrevious}
       >
         <div>PREV</div>
       </li>
-      {paginationRange.map((pageNumber) => {
+      {paginationRange.map((pageNumber,index) => {
+        console.log("index : ",index);
         if (pageNumber === DOTS) {
-          return <li className="pagination-item dots">&#8230;</li>;
+          return <li className="pagination-item dots" key={index}>&#8230;</li>;
         }
 
         return (
           <li
-            className={classnames("pagination-item", {
+            className={classnames("pagination-item" , {
               selected: pageNumber === currentPage,
             })}
             onClick={() => onPageChange(pageNumber)}
+            key={index}
           >
             {pageNumber}
           </li>
         );
       })}
       <li
-        className={classnames("pagination-item", {
+        className={classnames("pagination-select", {
           disabled: currentPage === lastPage,
         })}
         onClick={onNext}
+
       >
         <div>NEXT</div>
       </li>
