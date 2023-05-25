@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import CancelDialog from "../CancelDialog/cancelDialog";
 import axios from "axios";
-
 import { useNavigate } from "react-router-dom";
+import { Hidden } from "@mui/material";
+import Swal from "sweetalert2";
 
 const CurrentBookingDetails = () => {
   const [cancelPopUp, setCancelPopUp] = useState(false);
@@ -14,10 +15,38 @@ const CurrentBookingDetails = () => {
   let { id } = useParams();
 
   const [response, setResponse] = useState();
+  const [deny, setDeny] = useState();
+  const requestedForCancel = useRef();
   const navigate = useNavigate();
   const responseHandler = async () => {
     const data = await axios.get(`${API}/booking-details/${id}`);
     setResponse(data);
+  };
+
+  const denyReq = async () => {
+    const body = {
+      cancellationStatus: "false",
+      deleteReason: "",
+      bookingStatus: "Pending",
+      link: "",
+      read: "false",
+    };
+    const updateData = await axios.post(`${API}/update-booking/${id}`, body);
+    console.log(updateData);
+    setDeny(!deny);
+    Swal.fire({
+      position: "top",
+      icon: "success",
+      title: "Done!",
+      text: `Cancel request ${
+        localStorage.getItem("userType") === "Admin" ? "denied!" : "deleted!"
+      }`,
+      showConfirmButton: false,
+      toast: true,
+      timer: 1500,
+      timerProgressBar: true,
+    });
+    // setResponse(data);
   };
 
   useEffect(() => {
@@ -25,12 +54,29 @@ const CurrentBookingDetails = () => {
   }, []);
 
   useEffect(() => {
+    responseHandler();
+  }, [deny, cancelPopUp]);
+
+  useEffect(() => {
     if (submitDelete) {
-      navigate("/booking-list");
+      Swal.fire({
+        position: "top",
+        icon: "success",
+        title: "Done!",
+        text: "Booking requested for cancellation",
+        showConfirmButton: false,
+        toast: true,
+        timer: 1500,
+        timerProgressBar: true,
+      });
     }
   }, [submitDelete]);
 
   console.log(response);
+  if (response?.data.data.cancellationStatus === "true")
+    requestedForCancel.current = "true";
+  else requestedForCancel.current = "false";
+
   if (response?.data)
     return (
       <>
@@ -42,30 +88,51 @@ const CurrentBookingDetails = () => {
             </div>
           </div>
           <div className="sm:w-[50%] w-full p-2">
-            <div className="flex justify-between items-center">
-              <p className="text-3xl font-semibold">
+            <div className="flex justify-between items-center gap-3">
+              <p className="text-3xl font-semibold my-5 w-[50%]">
                 {response.data.data.title}
               </p>
-              <Link
-                className="flex justify-self-end border px-3 py-2 rounded-md border-black me-5"
-                onClick={() => {
-                  setCancelPopUp(!cancelPopUp);
-                }}
-              >
-                {localStorage.getItem("userType") === "Admin"
-                  ? "Cancel"
-                  : "Request Cancellation"}
-              </Link>
+              <div className="flex w-[50%]">
+                <Link
+                  className={`flex border px-3 py-2 rounded-md border-black me-5 font-bold
+                ${
+                  localStorage.getItem("userType") === "Backend-user"
+                    ? requestedForCancel.current !== "true"
+                      ? "flex"
+                      : "hidden"
+                    : "flex"
+                }
+                `}
+                  onClick={() => {
+                    setCancelPopUp(!cancelPopUp);
+                  }}
+                >
+                  {localStorage.getItem("userType") === "Admin"
+                    ? "Cancel"
+                    : "Request Cancellation"}
+                </Link>
+                <Link
+                  className={` justify-self-end border px-3 py-2 rounded-md border-black me-5 bg-red-600 text-white font-bold
+                ${requestedForCancel.current !== "true" ? "hidden" : "flex"}`}
+                  onClick={() => {
+                    denyReq();
+                  }}
+                >
+                  {localStorage.getItem("userType") === "Admin"
+                    ? "Deny Request"
+                    : "Delete Cancellation Request"}
+                </Link>
+              </div>
             </div>
             <div className="flex gap-2 ">
               <div className="flex flex-col w-[50%] sm:text-lg text-sm text-[#8E8D98] gap-5">
                 <span className="">Passenger name:</span>
                 <span className="">Other passengers:</span>
-                <ol >
+                <ol>
                   {response.data.data.otherPassenger.map((item, index) => {
                     return (
-                      <li key={index} >
-                       {index+1}. {item.firstName} {item.lastName}
+                      <li className="font-semibold text-black" key={index}>
+                        {index + 1}. {item.firstName} {item.lastName}
                       </li>
                     );
                   })}
@@ -82,8 +149,10 @@ const CurrentBookingDetails = () => {
                   {response.data.data.otherPassenger.map((item, index) => {
                     return (
                       <li className="flex gap-4" key={index}>
-                        <span>Age: {item.age} </span>
-                        <span>Sex: {item.gender}</span>
+                        <span className="font-light">Age:</span>
+                        <span> {item.age} </span>
+                        <span className="font-light">Sex:</span>
+                        <span> {item.gender}</span>
                       </li>
                     );
                   })}
@@ -92,6 +161,14 @@ const CurrentBookingDetails = () => {
                 <p>{response.data.data.phone}</p>
                 <p> {response.data.data.address}</p>
               </div>
+            </div>
+
+            <div
+              className={`flex gap-2 border border-red-600 rounded-md py-5 px-3 mt-5
+               ${requestedForCancel.current === "false" ? "hidden" : "flex"}`}
+            >
+              <span className=" font-semibold">Cancellation Reason: </span>{" "}
+              <span>{response.data.data.deleteReason}</span>
             </div>
           </div>
         </div>
