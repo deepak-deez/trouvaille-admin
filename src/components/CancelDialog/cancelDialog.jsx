@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const CancelDialog = (props) => {
   const { setCancelPopUp, id } = props;
@@ -15,38 +16,42 @@ const CancelDialog = (props) => {
   };
 
   const submitCancelRequest = async (reason) => {
-  if(reason.trim()!==""){
-
-    const data = await axios.delete(
-      `${API}/delete-booking/${userType}/${id}`
-    );
-    setResponse(data)
-    const body = {
-      cancellationStatus: "true",
-      deleteReason: reason,
-      link: data.data.data.link,
-    };
-    const updateData = await axios.post(`${API}/update-booking/${id}`, body);
-    setResponse(updateData);
-    console.log(updateData);
-    setCancelPopUp(false);
-    props.setSubmitDelete(true);
-  }
-  else
-  alert("Reason field empty");
-   
+    if (reason.trim() !== "") {
+      const data = await axios.delete(
+        `${API}/delete-booking/${userType}/${id}`
+      );
+      setResponse(data);
+      const body = {
+        cancellationStatus: "true",
+        deleteReason: reason,
+        link: data.data.data.link,
+      };
+      const updateData = await axios.post(`${API}/update-booking/${id}`, body);
+      setResponse(updateData);
+      console.log(updateData);
+      setCancelPopUp(false);
+      props.setSubmitDelete(true);
+    } else
+      Swal.fire({
+        position: "top",
+        icon: "warning",
+        title: "Sorry!",
+        text: "Reason field cannot be empty",
+        showConfirmButton: false,
+        toast: true,
+        timer: 1500,
+        timerProgressBar: true,
+      });
   };
- 
+
   const handleClick = () => {
     if (userType === "Backend-user") {
-    submitCancelRequest(reasonRef.current.value);
-  } else if (userType === "Admin") 
-     { 
+      submitCancelRequest(reasonRef.current.value);
+    } else if (userType === "Admin") {
       handleResponse();
       setCancelPopUp(false);
-    props.setSubmitDelete(true);
-     }
-    
+      props.setSubmitDelete(true);
+    }
   };
   console.log(response);
 
@@ -74,9 +79,7 @@ const CancelDialog = (props) => {
             className="  border-2 p-2 "
             ref={reasonRef}
             required={
-              localStorage.getItem("userType") === "Backend-user"
-                ? true
-                : false
+              localStorage.getItem("userType") === "Backend-user" ? true : false
             }
           />
         </form>
