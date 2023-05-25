@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import "./style.scss";
+import axios from "axios";
 import eyeIcon from "../../../assets/images/adminLogin/singinForm/view.svg";
+import { useNavigate, useParams } from "react-router-dom";
 
-export default function ResetPassword() {
+
+const ResetPassword = () => {
+  const password = useRef();
+  const confirmPassword = useRef();
+  const resetNewPassword = {};
+  const [differentPassword, setDifferentPassword] = useState(false);
+  const [emptyFieldMessage, setEmptyFieldMessage] = useState(false);
+  const params = useParams();
+  const navigate = useNavigate();
+
   return (
     <div className=" my-auto reset-password-form flex flex-col items-center justify-center">
       <div className="flex flex-col w-[300px] xl:w-[360px]">
@@ -14,7 +25,8 @@ export default function ResetPassword() {
             <input
               className="bg-transparent"
               type="text"
-              placeholder="Enter you email"
+              placeholder="Enter your password"
+              ref={password}
             />
             <button type="button">
               <img className="input-icon" src={eyeIcon} alt="mail-icon" />
@@ -25,18 +37,46 @@ export default function ResetPassword() {
             <input
               className="bg-transparent"
               type="text"
-              placeholder="Enter you email"
+              placeholder="confirm your password"
+              ref={confirmPassword}
             />
             <button type="button">
               <img className="input-icon" src={eyeIcon} alt="mail-icon" />
             </button>
           </div>
 
-          <button className="mt-[27px] py-[15px] hover:bg-[#a92323] transition-colors duration-500 text-center reset-password-button">
+          <p className={differentPassword ? "block" : "hidden"}>
+            Password is not matching
+          </p>
+
+          <button
+            className="mt-[27px] py-[15px] hover:bg-[#a92323] transition-colors duration-500 text-center reset-password-button"
+            onClick={async () => {
+              if (password.current.value === confirmPassword.current.value)
+                setDifferentPassword(false);
+              else setDifferentPassword(true);
+
+              resetNewPassword["newPasswordData"] = password.current.value;
+              resetNewPassword["id"] = params.id;
+              resetNewPassword["token"] = params.token;
+              if (password.current.value.length) {
+                setEmptyFieldMessage(false);
+                const response = await axios.post(
+                  `http://localhost:7000/set-password/Backend-user`,
+                  resetNewPassword
+                );
+                if(response?.data?.success){
+                  navigate("/");
+                }
+              } else setDifferentPassword(true);
+            }}
+          >
             Reset Password
           </button>
         </form>
       </div>
     </div>
   );
-}
+};
+
+export default ResetPassword;

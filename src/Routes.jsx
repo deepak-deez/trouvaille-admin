@@ -47,6 +47,10 @@ const Router = () => {
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/forgotPassword" element={<ForgotPassword />} />
         <Route exact path="/resetPassword" element={<ResetPassword />} />
+        <Route
+          path="/token-validation/Backend-user/:id/:token"
+          element={<ResetPassword />}
+        />
       </Routes>
     </BrowserRouter>
   );
