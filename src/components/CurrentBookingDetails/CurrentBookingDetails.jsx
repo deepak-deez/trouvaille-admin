@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import CancelDialog from "../CancelDialog/cancelDialog";
 import axios from "axios";
-
 import { useNavigate } from "react-router-dom";
+import { Hidden } from "@mui/material";
 
 const CurrentBookingDetails = () => {
   const [cancelPopUp, setCancelPopUp] = useState(false);
@@ -14,6 +14,7 @@ const CurrentBookingDetails = () => {
   let { id } = useParams();
 
   const [response, setResponse] = useState();
+  const requestedForCancel = useRef()
   const navigate = useNavigate();
   const responseHandler = async () => {
     const data = await axios.get(`${API}/booking-details/${id}`);
@@ -44,6 +45,11 @@ const CurrentBookingDetails = () => {
   }, [submitDelete]);
 
   console.log(response);
+  if(response?.data.data.cancellationStatus === "true")
+  requestedForCancel.current="true"
+  else
+  requestedForCancel.current="false"
+  
   if (response?.data)
     return (
       <>
@@ -60,7 +66,10 @@ const CurrentBookingDetails = () => {
                 {response.data.data.title}
               </p>
               <Link
-                className="flex justify-self-end border px-3 py-2 rounded-md border-black me-5"
+                className={`flex justify-self-end border px-3 py-2 rounded-md border-black me-5
+                ${(localStorage.getItem("userType")==="Backend-user")? (requestedForCancel.current!=="true" ?"flex":"hidden"):"flex"
+              }
+                `}
                 onClick={() => {
                   setCancelPopUp(!cancelPopUp);
                 }}
@@ -70,14 +79,17 @@ const CurrentBookingDetails = () => {
                   : "Request Cancellation"}
               </Link>
               <Link
-                className="flex justify-self-end border px-3 py-2 rounded-md border-black me-5"
+                className={` justify-self-end border px-3 py-2 rounded-md border-black me-5  
+           ${requestedForCancel.current!=="true"?"hidden":"flex"
+              }`}
+
                 onClick={() => {
                  denyReq();
                 }}
               >
                 {localStorage.getItem("userType") === "Admin"
                   ? "Deny Request"
-                  : "Delete Request"}
+                  : "Delete Cancellation Request"}
               </Link>
             </div>
             <div className="flex gap-2 ">
@@ -117,7 +129,13 @@ const CurrentBookingDetails = () => {
               </div>
               
             </div>
-            <div className="w-full">{response.data.data.deleteReason}</div>
+            
+           
+              <div className={`w-full 
+               ${!requestedForCancel && 
+              "hidden"}`}>Reason for cancellation: {response.data.data.deleteReason}</div>
+            
+            
           </div>
         </div>
         {cancelPopUp ? (
