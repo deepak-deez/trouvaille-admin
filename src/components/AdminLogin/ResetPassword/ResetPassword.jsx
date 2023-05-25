@@ -4,7 +4,6 @@ import axios from "axios";
 import eyeIcon from "../../../assets/images/adminLogin/singinForm/view.svg";
 import { useNavigate, useParams } from "react-router-dom";
 
-
 const ResetPassword = () => {
   const password = useRef();
   const confirmPassword = useRef();
@@ -51,7 +50,8 @@ const ResetPassword = () => {
 
           <button
             className="mt-[27px] py-[15px] hover:bg-[#a92323] transition-colors duration-500 text-center reset-password-button"
-            onClick={async () => {
+            onClick={async (e) => {
+              e.preventDefault();
               if (password.current.value === confirmPassword.current.value)
                 setDifferentPassword(false);
               else setDifferentPassword(true);
@@ -59,17 +59,22 @@ const ResetPassword = () => {
               resetNewPassword["newPasswordData"] = password.current.value;
               resetNewPassword["id"] = params.id;
               resetNewPassword["token"] = params.token;
+              console.log(resetNewPassword);
               if (password.current.value.length) {
                 setEmptyFieldMessage(false);
                 const response = await axios.post(
                   `http://localhost:7000/set-password/Backend-user`,
                   resetNewPassword
                 );
-                if(response?.data?.success){
-                  navigate("/");
+                console.log(response);
+                if (response?.data?.success) {
+                  // navigate("/");
+                  console.log("ss");
+
                 }
               } else setDifferentPassword(true);
-            }}
+            }
+          }
           >
             Reset Password
           </button>
