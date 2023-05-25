@@ -1,32 +1,34 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { Outlet, Link } from "react-router-dom";
 import "./style.scss";
 import mail from "../../../assets/images/adminLogin/singinForm/mail.svg";
-import { logDOM } from "@testing-library/react";
-import { useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const URL = process.env.REACT_APP_API;
+const URL = process.env.REACT_APP_NODE_API;
+console.log(URL);
 
-export default function ForgotPassword() {
-
-  const userType = localStorage.getItem("userType")
+const ForgotPassword = () => {
+  const userType = localStorage.getItem("userType");
   const emailRef = useRef();
-  const navigate = useNavigate()
-  const handleClick = async() => {
-    console.log(emailRef.current.value);
+  const [apiMessage, setApiMessage] = useState("");
+  // const navigate = useNavigate();
+  const buttonClick = async () => {
+    // console.log(emailRef.current.value);
     const body = {
-      email: emailRef.current.value
-    }
-    const config = { "Content-type": "application/json" };
-    const response  = await axios.post(`${URL}send-reset-mail/Backend-user`, body, config);
-    console.log(response);
-    if(response?.success)
-    navigate("/resetPassword")
-    else
-    alert(response.data.message)
-  }
+      email: emailRef.current.value,
+    };
+    // const config = { "Content-type": "application/json" };
+    const response = await axios.post(
+      `${process.env.REACT_APP_NODE_API}/send-reset-mail/Backend-user`,
+      body
+    );
+    console.log(emailRef.current.value);
+    setApiMessage(response.data.message);
+    console.log(response.data.message);
+    // if (response?.success) navigate("/resetPassword");
+    // else alert(response.data.message);
+  };
 
   return (
     <div className=" my-auto forgot-password-form flex flex-col items-center justify-center">
@@ -52,7 +54,7 @@ export default function ForgotPassword() {
 
           <Link
             className="mt-[27px] py-[15px] text-center send-link-button"
-            onClick={handleClick}
+            onClick={buttonClick}
           >
             Send Link
           </Link>
@@ -60,4 +62,6 @@ export default function ForgotPassword() {
       </div>
     </div>
   );
-}
+};
+
+export default ForgotPassword;
