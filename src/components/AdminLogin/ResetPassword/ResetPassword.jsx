@@ -61,12 +61,14 @@ const ResetPassword = () => {
               resetNewPassword["token"] = params.token;
               if (password.current.value.length) {
                 setEmptyFieldMessage(false);
+                console.log(process.env.REACT_APP_NODE_API);
                 const response = await axios.post(
-                  `http://localhost:7000/set-password/Backend-user`,
+                  `${process.env.REACT_APP_NODE_API}/set-password/Backend-user`,
                   resetNewPassword
                 );
                 console.log(response);
                 if (response?.data?.success) {
+                  localStorage.removeItem("password");
                   navigate("/");
                 }
               } else setDifferentPassword(true);

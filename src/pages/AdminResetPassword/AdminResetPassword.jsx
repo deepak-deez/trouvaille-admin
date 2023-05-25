@@ -13,7 +13,7 @@ const AdminResetPassword = () => {
   const url = useLocation();
 
   const validation = async () => {
-    const response = await axios.get(`http://localhost:7000${url.pathname}`);
+    const response = await axios.get(`${process.env.REACT_APP_NODE_API}${url.pathname}`);
     console.log(response);
   }
   
