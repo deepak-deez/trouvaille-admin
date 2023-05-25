@@ -14,7 +14,7 @@ const CurrentBookingDetails = () => {
   let { id } = useParams();
 
   const [response, setResponse] = useState();
-  const requestedForCancel = useRef()
+  const requestedForCancel = useRef();
   const navigate = useNavigate();
   const responseHandler = async () => {
     const data = await axios.get(`${API}/booking-details/${id}`);
@@ -22,14 +22,14 @@ const CurrentBookingDetails = () => {
   };
 
   const denyReq = async () => {
-    const body ={
+    const body = {
       cancellationStatus: "false",
       deleteReason: "",
       bookingStatus: "Pending",
       link: "",
-      read: "false"
-    }
-    const updateData = await axios.get(`${API}/update-booking/${id}`,body);
+      read: "false",
+    };
+    const updateData = await axios.post(`${API}/update-booking/${id}`, body);
     console.log(updateData);
     // setResponse(data);
   };
@@ -45,11 +45,10 @@ const CurrentBookingDetails = () => {
   }, [submitDelete]);
 
   console.log(response);
-  if(response?.data.data.cancellationStatus === "true")
-  requestedForCancel.current="true"
-  else
-  requestedForCancel.current="false"
-  
+  if (response?.data.data.cancellationStatus === "true")
+    requestedForCancel.current = "true";
+  else requestedForCancel.current = "false";
+
   if (response?.data)
     return (
       <>
@@ -67,8 +66,13 @@ const CurrentBookingDetails = () => {
               </p>
               <Link
                 className={`flex justify-self-end border px-3 py-2 rounded-md border-black me-5
-                ${(localStorage.getItem("userType")==="Backend-user")? (requestedForCancel.current!=="true" ?"flex":"hidden"):"flex"
-              }
+                ${
+                  localStorage.getItem("userType") === "Backend-user"
+                    ? requestedForCancel.current !== "true"
+                      ? "flex"
+                      : "hidden"
+                    : "flex"
+                }
                 `}
                 onClick={() => {
                   setCancelPopUp(!cancelPopUp);
@@ -80,11 +84,9 @@ const CurrentBookingDetails = () => {
               </Link>
               <Link
                 className={` justify-self-end border px-3 py-2 rounded-md border-black me-5  
-           ${requestedForCancel.current!=="true"?"hidden":"flex"
-              }`}
-
+           ${requestedForCancel.current !== "true" ? "hidden" : "flex"}`}
                 onClick={() => {
-                 denyReq();
+                  denyReq();
                 }}
               >
                 {localStorage.getItem("userType") === "Admin"
@@ -96,11 +98,11 @@ const CurrentBookingDetails = () => {
               <div className="flex flex-col w-[50%] sm:text-lg text-sm text-[#8E8D98] gap-5">
                 <span className="">Passenger name:</span>
                 <span className="">Other passengers:</span>
-                <ol >
+                <ol>
                   {response.data.data.otherPassenger.map((item, index) => {
                     return (
-                      <li key={index} >
-                       {index+1}. {item.firstName} {item.lastName}
+                      <li key={index}>
+                        {index + 1}. {item.firstName} {item.lastName}
                       </li>
                     );
                   })}
@@ -127,15 +129,14 @@ const CurrentBookingDetails = () => {
                 <p>{response.data.data.phone}</p>
                 <p> {response.data.data.address}</p>
               </div>
-              
             </div>
-            
-           
-              <div className={`w-full 
-               ${!requestedForCancel && 
-              "hidden"}`}>Reason for cancellation: {response.data.data.deleteReason}</div>
-            
-            
+
+            <div
+              className={`w-full 
+               ${!requestedForCancel && "hidden"}`}
+            >
+              Reason for cancellation: {response.data.data.deleteReason}
+            </div>
           </div>
         </div>
         {cancelPopUp ? (
