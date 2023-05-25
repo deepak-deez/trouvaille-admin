@@ -22,7 +22,7 @@ const ResetPassword = () => {
           <p className="mt-[47px] text-[14px]">New Password</p>
           <div className="bg-white input-fields px-[23px] py-[15px] mt-[9px] flex flex-row items-center justify-between">
             <input
-              className="bg-transparent"
+              className="bg-transparent w-[100%]"
               type="text"
               placeholder="Enter your password"
               ref={password}
@@ -34,7 +34,7 @@ const ResetPassword = () => {
           <p className="mt-[47px] text-[14px]">Confirm Password</p>
           <div className="bg-white input-fields px-[23px] py-[15px] mt-[9px] flex flex-row items-center justify-between">
             <input
-              className="bg-transparent"
+              className="bg-transparent w-[100%]"
               type="text"
               placeholder="confirm your password"
               ref={confirmPassword}
@@ -56,10 +56,9 @@ const ResetPassword = () => {
                 setDifferentPassword(false);
               else setDifferentPassword(true);
 
-              resetNewPassword["newPasswordData"] = password.current.value;
+              resetNewPassword["newPassword"] = password.current.value;
               resetNewPassword["id"] = params.id;
               resetNewPassword["token"] = params.token;
-              console.log(resetNewPassword);
               if (password.current.value.length) {
                 setEmptyFieldMessage(false);
                 const response = await axios.post(
@@ -68,9 +67,7 @@ const ResetPassword = () => {
                 );
                 console.log(response);
                 if (response?.data?.success) {
-                  // navigate("/");
-                  console.log("ss");
-
+                  navigate("/");
                 }
               } else setDifferentPassword(true);
             }
