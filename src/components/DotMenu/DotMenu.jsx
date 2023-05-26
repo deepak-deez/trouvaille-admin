@@ -13,9 +13,9 @@ const DotMenu = ({
   const [showTraveldrop, setShowTraveldrop] = useState(false);
 
   return (
-    <div className="relative">
+    <div className="relative text-end">
       <button
-        className=""
+        className="mr-9"
         onClick={() => {
           setShowTraveldrop(!showTraveldrop);
         }}

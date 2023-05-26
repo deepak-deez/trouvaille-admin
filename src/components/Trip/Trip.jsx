@@ -42,7 +42,7 @@ const Trip = () => {
             data.data.map((val, index) => {
               return (
                 <div className="w-full p-5 gap-4" key={index}>
-                  <div className="p-8 bg-white rounded shadow-md">
+                  <div className="p-8 bg-white text-center rounded shadow-md">
                     <div className="flex justify-end">
                       <div>
                         <DotMenu

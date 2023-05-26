@@ -48,14 +48,14 @@ const Occasion = () => {
                 data?.data &&
                 data.data.map((item, index) => {
                   return (
-                    <tr className=" tr-class text-center" key={index}>
+                    <tr className=" tr-class text-start" key={index}>
                       <td className="td-class font-bold flex items-center p-3">
                         <div className="flex justify-between items-center ">
                           {console.log("item",item.icon)}
                           <img
                             src={item.icon.url}
                             alt=""
-                            className="h-10"
+                            className="h-[62px] w-[62px] mr-3"
                           />
                           <span className="px-2">{item.title}</span>
                         </div>

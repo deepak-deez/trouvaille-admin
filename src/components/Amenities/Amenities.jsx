@@ -45,14 +45,14 @@ const AmenitiesTable = () => {
                 data?.data &&
                 data?.data?.map((item, index) => {
                   return (
-                    <tr className=" tr-class text-center" key={index}>
-                      <td className="td-class font-bold flex items-center p-3">
-                        <img src={item.icon.url} alt="" />
+                    <tr className=" tr-class text-start" key={index}>
+                      <td className="td-class font-bold flex items-center m-3">
+                        <img src={item.icon.url} alt="" className="h-[62px] w-[62px] mr-3"/>
 
                         {item.title}
                       </td>
                       <td className="td-class">{item.description}</td>
-                      <td className="">
+                      <td className="text-end">
                         <DotMenu
                           updateData={item}
                           showDelPop={showDelPop}
