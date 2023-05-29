@@ -1,19 +1,31 @@
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { React, useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  deleteBooking,
+  getBooking,
+  updateBooking,
+} from "../../redux/actions/bookingActions";
 
 const CancelDialog = (props) => {
+  const { data, loading } = useSelector((state) => state.deleteBooking);
   const { setCancelPopUp, id } = props;
   const reasonRef = useRef();
   const [response, setResponse] = useState();
   const userType = localStorage.getItem("userType");
-  console.log(userType);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // console.log(userType);
   const API = process.env.REACT_APP_NODE_API;
   const handleResponse = async () => {
-    const data = await axios.delete(`${API}/delete-booking/${userType}/${id}`);
-    setResponse(data);
+    // const data = await axios.delete(`${API}/delete-booking/${userType}/${id}`);
+    // setResponse(data);
+    dispatch(deleteBooking(id, userType));
   };
+  console.log(data, "hii");
 
   const submitCancelRequest = async (reason) => {
     if (reason.trim() !== "") {
@@ -49,8 +61,12 @@ const CancelDialog = (props) => {
       submitCancelRequest(reasonRef.current.value);
     } else if (userType === "Admin") {
       handleResponse();
-      setCancelPopUp(false);
       props.setSubmitDelete(true);
+      setCancelPopUp(false);
+      setTimeout(() => {
+        dispatch({ type: "DELETE_BOOKING_SUCCESS", payload: null });
+        navigate("/booking-list");
+      }, 1500);
     }
   };
   console.log(response);
@@ -83,12 +99,12 @@ const CancelDialog = (props) => {
             }
           />
         </form>
-        <Link
+        <button
           className="bg-[#E85C53] text-white p-2 mt-5 rounded-sm"
           onClick={handleClick}
         >
           Submit
-        </Link>
+        </button>
       </div>
     </div>
   );

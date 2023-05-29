@@ -1,38 +1,36 @@
-import React, { useState, useEffect, useRef } from "react";
+import { React, useState, useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import CancelDialog from "../CancelDialog/cancelDialog";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Hidden } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getSingleBooking,
+  updateBooking,
+  getBooking,
+} from "../../redux/actions/bookingActions";
 import Swal from "sweetalert2";
+import LoadingScreen from "../Loading/LoadingScreen";
 
 const CurrentBookingDetails = () => {
+  const { data, loading } = useSelector((state) => state.getSingleBooking);
+  const { data: updatedBooking } = useSelector((state) => state.updateBooking);
+  const { data: deleted } = useSelector((state) => state.deleteBooking);
+  const dispatch = useDispatch();
   const [cancelPopUp, setCancelPopUp] = useState(false);
   const [submitDelete, setSubmitDelete] = useState(false);
-
-  const API = process.env.REACT_APP_NODE_API;
-
   let { id } = useParams();
+  useEffect(() => {
+    dispatch(getSingleBooking(id));
+  }, []);
 
-  const [response, setResponse] = useState();
-  const [deny, setDeny] = useState();
+  const [deny, setDeny] = useState(updatedBooking);
   const requestedForCancel = useRef();
   const navigate = useNavigate();
-  const responseHandler = async () => {
-    const data = await axios.get(`${API}/booking-details/${id}`);
-    setResponse(data);
-  };
 
   const denyReq = async () => {
-    const body = {
-      cancellationStatus: "false",
-      deleteReason: "",
-      bookingStatus: "Pending",
-      link: "",
-      read: "false",
-    };
-    const updateData = await axios.post(`${API}/update-booking/${id}`, body);
-    console.log(updateData);
+    dispatch(updateBooking(id, "false", "", "Pending", "", "false"));
+
     setDeny(!deny);
     Swal.fire({
       position: "top",
@@ -46,51 +44,52 @@ const CurrentBookingDetails = () => {
       timer: 1500,
       timerProgressBar: true,
     });
-    // setResponse(data);
   };
 
   useEffect(() => {
-    responseHandler();
-  }, []);
-
-  useEffect(() => {
-    responseHandler();
+    dispatch(getSingleBooking(id));
   }, [deny, cancelPopUp]);
 
   useEffect(() => {
-    if (submitDelete) {
+    if (deleted) {
+      dispatch(getBooking());
+
       Swal.fire({
         position: "top",
         icon: "success",
         title: "Done!",
-        text: "Booking requested for cancellation",
+        text: `Booking  ${
+          localStorage.getItem("userType") === "Admin"
+            ? "cancelled!"
+            : "requested for cancellation!"
+        }`,
         showConfirmButton: false,
         toast: true,
         timer: 1500,
         timerProgressBar: true,
       });
     }
-  }, [submitDelete]);
+  }, [deleted]);
+  console.log(deleted);
 
-  console.log(response);
-  if (response?.data.data.cancellationStatus === "true")
+  if (data?.data.cancellationStatus === "true")
     requestedForCancel.current = "true";
   else requestedForCancel.current = "false";
-
-  if (response?.data)
+  if (loading) {
+    return <LoadingScreen />;
+  } else if (data && data?.data)
     return (
       <>
-        {console.log(response.data.data)}
         <div className="flex-col flex md:flex-row w-full py-5">
           <div className="flex sm:w-[50%] w-full p-2">
             <div className="w-[100%]">
-              <img src={response.data.data.image.url} alt="img1" />
+              <img src={data?.data.image.url} alt="img1" />
             </div>
           </div>
           <div className="sm:w-[50%] w-full p-2">
             <div className="flex justify-between items-center gap-3">
               <p className="text-3xl font-semibold my-5 w-[50%]">
-                {response.data.data.title}
+                {data.data.title}
               </p>
               <div className="flex w-[50%]">
                 <Link
@@ -129,7 +128,7 @@ const CurrentBookingDetails = () => {
                 <span className="">Passenger name:</span>
                 <span className="">Other passengers:</span>
                 <ol>
-                  {response.data.data.otherPassenger.map((item, index) => {
+                  {data.data.otherPassenger.map((item, index) => {
                     return (
                       <li className="font-semibold text-black" key={index}>
                         {index + 1}. {item.firstName} {item.lastName}
@@ -143,10 +142,10 @@ const CurrentBookingDetails = () => {
               </div>
 
               <div className="flex w-[50%] flex-col sm:text-lg text-sm gap-5 font-semibold">
-                <p> {response.data.data.name}</p>
-                <p> {response.data.data.passengers}3</p>
+                <p> {data.data.name}</p>
+                <p> {data.data.passengers}3</p>
                 <ul>
-                  {response.data.data.otherPassenger.map((item, index) => {
+                  {data.data.otherPassenger.map((item, index) => {
                     return (
                       <li className="flex gap-4" key={index}>
                         <span className="font-light">Age:</span>
@@ -157,9 +156,9 @@ const CurrentBookingDetails = () => {
                     );
                   })}
                 </ul>
-                <p className=" overflow-x-scroll">{response.data.data.email}</p>
-                <p>{response.data.data.phone}</p>
-                <p> {response.data.data.address}</p>
+                <p className=" overflow-x-scroll">{data.data.email}</p>
+                <p>{data.data.phone}</p>
+                <p> {data.data.address}</p>
               </div>
             </div>
 
@@ -168,7 +167,7 @@ const CurrentBookingDetails = () => {
                ${requestedForCancel.current === "false" ? "hidden" : "flex"}`}
             >
               <span className=" font-semibold">Cancellation Reason: </span>{" "}
-              <span>{response.data.data.deleteReason}</span>
+              <span>{data.data.deleteReason}</span>
             </div>
           </div>
         </div>
