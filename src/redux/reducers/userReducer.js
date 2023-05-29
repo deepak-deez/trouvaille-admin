@@ -2,7 +2,7 @@ import { ADMIN_REQUEST, ADMIN_SUCCESS, ADMIN_FAILED } from "../constants/loginAd
 
 const initialState = {
   userDetails: null,
-  loading: false,
+  loading: true,
   error: null,
 };
 
@@ -18,14 +18,14 @@ export const userReducer = (state = initialState, action) => {
     case ADMIN_SUCCESS:
       return {
         ...state,
-        loading: true,
+        loading: false,
         userDetails: action.payload,
         error: null,
       };
     case ADMIN_FAILED:
       return {
         ...state,
-        loading: true,
+        loading: false,
         userDetails: null,
         error: action.payload,
       };

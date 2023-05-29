@@ -14,7 +14,7 @@ import {
 } from "../constants/addTripConstant";
 
 const addNewTripStateInitial = {
-  loading: false,
+  loading: true,
   data: null,
   error: null,
 };
@@ -49,7 +49,7 @@ export const addNewTipReducer = (state = addNewTripStateInitial, action) => {
 };
 
 const getTripStateInitital = {
-  loading: false,
+  loading: true,
   data: null,
   error: null,
 };
@@ -66,14 +66,14 @@ export const getTripReducer = (state = getTripStateInitital, action) => {
     case GET_TRIP_SUCCESS:
       return {
         ...state,
-        loading: true,
+        loading: false,
         data: action.payload,
         error: null,
       };
     case GET_TRIP_FAILED:
       return {
         ...state,
-        loading: true,
+        loading: false,
         data: null,
         error: action.payload,
       };
@@ -84,7 +84,7 @@ export const getTripReducer = (state = getTripStateInitital, action) => {
 };
 
 const deleteTripInitital = {
-  loading: false,
+  loading: true,
   data: null,
   error: null,
 };
@@ -101,14 +101,14 @@ export const deleteTripReducer = (state = deleteTripInitital, action) => {
     case DELETE_TRIP_SUCCESS:
       return {
         ...state,
-        loading: true,
+        loading: false,
         data: action.payload,
         error: null,
       };
     case DELETE_TRIP_FAILED:
       return {
         ...state,
-        loading: true,
+        loading: false,
         data: null,
         error: action.payload,
       };
@@ -119,7 +119,7 @@ export const deleteTripReducer = (state = deleteTripInitital, action) => {
 };
 
 const updateTripInitial = {
-  loading: false,
+  loading: true,
   data: null,
   error: null,
 };
@@ -136,14 +136,14 @@ export const updateTripReducer = (state = updateTripInitial, action) => {
     case UPDATE_TRIP_SUCCESS:
       return {
         ...state,
-        loading: true,
+        loading: false,
         data: action.payload,
         error: null,
       };
     case UPDATE_TRIP_FAILED:
       return {
         ...state,
-        loading: true,
+        loading: false,
         data: null,
         error: action.payload,
       };

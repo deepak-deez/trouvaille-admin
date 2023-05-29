@@ -14,7 +14,7 @@ import {
 } from "../constants/addUserConstant.js";
 
 const addNewUserStateInitial = {
-  loading: false,
+  loading: true,
   data: null,
   error: null,
 };
@@ -49,7 +49,7 @@ export const addNewUserReducer = (state = addNewUserStateInitial, action) => {
 };
 
 const getUserStateInitial = {
-  loading: false,
+  loading: true,
   data: null,
   error: null,
 };
@@ -66,7 +66,7 @@ export const getUserReducer = (state = getUserStateInitial, action) => {
     case GET_USER_SUCCESS:
       return {
         ...state,
-        loading: true,
+        loading: false,
         error: null,
         data: action.payload,
       };
@@ -74,7 +74,7 @@ export const getUserReducer = (state = getUserStateInitial, action) => {
       return {
         ...state,
         data: null,
-        loading: true,
+        loading: false,
         error: action.payload,
       };
     default: {
@@ -84,7 +84,7 @@ export const getUserReducer = (state = getUserStateInitial, action) => {
 };
 
 const updateUserStateInitial = {
-  loading: false,
+  loading: true,
   data: null,
   error: null,
 };
@@ -101,7 +101,7 @@ export const updateUserReducer = (state = updateUserStateInitial, action) => {
     case UPDATE_USER_SUCCESS:
       return {
         ...state,
-        loading: true,
+        loading: false,
         error: null,
         data: action.payload,
       };
@@ -109,7 +109,7 @@ export const updateUserReducer = (state = updateUserStateInitial, action) => {
       return {
         ...state,
         data: null,
-        loading: true,
+        loading: false,
         error: action.payload,
       };
     default: {
@@ -119,7 +119,7 @@ export const updateUserReducer = (state = updateUserStateInitial, action) => {
 };
 
 const delUserStateInitial = {
-  loading: false,
+  loading: true,
   data: null,
   error: null,
 };
@@ -136,7 +136,7 @@ export const delUserReducer = (state = delUserStateInitial, action) => {
     case DELETE_USER_SUCCESS:
       return {
         ...state,
-        loading: true,
+        loading: false,
         error: null,
         data: action.payload,
       };
@@ -144,7 +144,7 @@ export const delUserReducer = (state = delUserStateInitial, action) => {
       return {
         ...state,
         data: null,
-        loading: true,
+        loading: false,
         error: action.payload,
       };
     default: {
