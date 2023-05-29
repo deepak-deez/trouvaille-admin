@@ -6,6 +6,7 @@ import UpdatePop from "../UpdatePop/UpdatePop";
 import DeletePop from "../DeletePop/DeletePop";
 import { useDispatch, useSelector } from "react-redux";
 import { getTrip } from "../../redux/actions/tripAction";
+import LoadingScreen from "../Loading/LoadingScreen";
 
 const Trip = () => {
   const [showAdd, setShowAdd] = useState(false);
@@ -14,7 +15,7 @@ const Trip = () => {
   const [editData, setEditData] = useState("");
   const dispatch = useDispatch();
 
-  const { data } = useSelector((state) => state.getTrip);
+  const { data, loading } = useSelector((state) => state.getTrip);
   console.log(data);
 
   useEffect(() => {
@@ -23,6 +24,7 @@ const Trip = () => {
 
   return (
     <>
+      {loading && <LoadingScreen />}
       <div className="w-full p-5">
         <div className="flex justify-end">
           <button

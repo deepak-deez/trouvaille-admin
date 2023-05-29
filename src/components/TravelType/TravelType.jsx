@@ -7,6 +7,7 @@ import DeletePop from "../DeletePop/DeletePop";
 import DotMenu from "../DotMenu/DotMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { getTrip } from "../../redux/actions/tripAction";
+import LoadingScreen from "../Loading/LoadingScreen";
 
 const TravelType = () => {
   const [showAdd, setShowAdd] = useState(false);
@@ -15,7 +16,7 @@ const TravelType = () => {
   const [editData, setEditData] = useState("");
   const dispatch = useDispatch();
 
-  const { data } = useSelector((state) => state.getTrip);
+  const { data, loading } = useSelector((state) => state.getTrip);
 
   useEffect(() => {
     dispatch(getTrip("travel"));
@@ -23,6 +24,7 @@ const TravelType = () => {
 
   return (
     <>
+      {loading && <LoadingScreen />}
       <div className="w-full p-5">
         <div className="flex justify-end">
           <button
@@ -40,8 +42,8 @@ const TravelType = () => {
           {data &&
             data?.data &&
             data.data.map((item, index) => {
-              console.log("item : ",item.icon.url);
-              const icon=item.icon.url;
+              console.log("item : ", item.icon.url);
+              const icon = item.icon.url;
 
               return (
                 <div className="w-full p-5 gap-4 h-[25vh]" key={index}>
@@ -59,11 +61,7 @@ const TravelType = () => {
                       </div>
                     </div>
                     <div className="flex justify-center py-2">
-                      <img
-                        src={icon}
-                        alt=""
-                        className="h-10"
-                      />
+                      <img src={icon} alt="" className="h-10" />
                     </div>
                     <h3 className="text-center font-semibold py-2">
                       {item.title}

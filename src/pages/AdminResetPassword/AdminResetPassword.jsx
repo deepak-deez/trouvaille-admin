@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import Router from "../../Routes";
 import "./style.scss";
 import axios from "axios";
@@ -7,20 +7,29 @@ import NavBarLogin from "../../components/AdminLogin/LoginNavbar/NavBarLogin.jsx
 import NavBarSigninForm from "../../components/AdminLogin/NavBarLoginForm/NavBarLoginForm";
 import ResetPassword from "../../components/AdminLogin/ResetPassword/ResetPassword.jsx";
 import Footer from "../../components/AdminLogin/FooterComponent/Footer.jsx";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const AdminResetPassword = () => {
+  const navigate = useNavigate();
   const url = useLocation();
+  const [res, setRes] = useState();
+  console.log(url);
 
   const validation = async () => {
-    const response = await axios.get(`${process.env.REACT_APP_NODE_API}${url.pathname}`);
+    const response = await axios.get(
+      `${process.env.REACT_APP_NODE_API}${url.pathname}`
+    );
     console.log(response);
-  }
-  
+    setRes(response);
+    if (response.data.success === false) {
+      console.log("hii");
+    }
+  };
 
   useEffect(() => {
     validation();
-  },[]);
+  }, []);
+
   return (
     <header className="login-page flex">
       <LoginBanner />

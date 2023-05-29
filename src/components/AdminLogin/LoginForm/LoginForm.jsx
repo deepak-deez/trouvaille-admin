@@ -96,7 +96,7 @@ export default function LoginForm() {
           </div>
           <div className="flex flex-row mt-[26px] justify-between text-[14px] items-center">
             <p>Password</p>
-            <Link className="text-[#727A86]" to="/forgotPassword">
+            <Link className="text-[#727A86]" to="/forgot-password">
               Forgot Password?
             </Link>
           </div>

@@ -7,13 +7,14 @@ import DeletePop from "../DeletePop/DeletePop";
 import occasionBrowserIcon from "../../assets/images/occasion/occasion-browse-icon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { getTrip } from "../../redux/actions/tripAction";
+import LoadingScreen from "../Loading/LoadingScreen";
 
 const Occasion = () => {
   const [showAdd, setShowAdd] = useState(false);
   const [showUpdatePop, setShowUpdatePop] = useState(false);
   const [showDelPop, setShowDelPop] = useState(false);
   const [editData, setEditData] = useState("");
-  const { data } = useSelector((state) => state.getTrip);
+  const { data, loading } = useSelector((state) => state.getTrip);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -22,6 +23,7 @@ const Occasion = () => {
 
   return (
     <>
+      {loading && <LoadingScreen />}
       <div className="p-3">
         <div className="p-4 bg-white item-center w-full border-b-2">
           <table className="w-[100%]">
@@ -51,7 +53,7 @@ const Occasion = () => {
                     <tr className=" tr-class text-start" key={index}>
                       <td className="td-class font-bold flex items-center p-3">
                         <div className="flex justify-between items-center ">
-                          {console.log("item",item.icon)}
+                          {console.log("item", item.icon)}
                           <img
                             src={item.icon.url}
                             alt=""

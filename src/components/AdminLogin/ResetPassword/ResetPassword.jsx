@@ -16,7 +16,7 @@ const ResetPassword = () => {
   return (
     <div className=" my-auto reset-password-form flex flex-col items-center justify-center">
       <div className="flex flex-col w-[300px] xl:w-[360px]">
-        <h2 className="text-[34px] ">Reset your Password</h2>
+        <h2 className="text-[34px] ">Set your New Password</h2>
         <p>Your new password must be different from previous used password.</p>
         <form action="">
           <p className="mt-[47px] text-[14px]">New Password</p>
