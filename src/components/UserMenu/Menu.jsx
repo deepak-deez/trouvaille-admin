@@ -8,7 +8,7 @@ const Menu = ({ setEditPop, setEditable, data, delPop, setDelPop }) => {
   return (
     <div className="relative">
       <button
-        className=""
+        className="font-bold"
         onClick={() => {
           setMenu(!menu);
         }}
@@ -17,7 +17,7 @@ const Menu = ({ setEditPop, setEditable, data, delPop, setDelPop }) => {
       </button>
 
       <div
-        className={` absolute top-0 bg-white rounded-lg w-[45%] p-3 flex shadow-[5px_10px_25px_rgba(102,101,130,0.15)] flex-col justify-center items-start z-50 ${
+        className={` absolute top-0 left-5 bg-white rounded-lg p-3 px-5 flex shadow-[5px_10px_25px_rgba(102,101,130,0.15)] flex-col justify-center items-start z-50 ${
           !menu && "hidden"
         }`}
       >
@@ -29,16 +29,16 @@ const Menu = ({ setEditPop, setEditable, data, delPop, setDelPop }) => {
           }}
         >
           <span> Edit </span>
-          <img className="ms-10" src={editIcon} alt="edit" />
+          <img className="ms-5" src={editIcon} alt="edit" />
         </button>
         <button
-          className="flex justify-center items-center"
+          className="flex justify-between items-center"
           onClick={() => {
             setDelPop(!delPop);
             setEditable(data);
           }}
         >
-          Delete <img className="ms-6" src={delIcon} alt="delete" />
+         <span> Delete</span> <img className="" src={delIcon} alt="delete" />
         </button>
       </div>
     </div>
