@@ -20,7 +20,7 @@ const ForgotPassword = () => {
     };
     // const config = { "Content-type": "application/json" };
     const response = await axios.post(
-      `${process.env.REACT_APP_NODE_API}/send-reset-mail/${userType}`,
+      `${process.env.REACT_APP_NODE_API}/send-reset-mail/Backend-user`,
       body
     );
     console.log(emailRef.current.value);

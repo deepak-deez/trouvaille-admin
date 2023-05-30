@@ -51,7 +51,7 @@ const CurrentBookingDetails = () => {
   }, [deny, cancelPopUp]);
 
   useEffect(() => {
-    if (deleted) {
+    if (submitDelete) {
       dispatch(getBooking());
 
       Swal.fire({
@@ -69,8 +69,7 @@ const CurrentBookingDetails = () => {
         timerProgressBar: true,
       });
     }
-  }, [deleted]);
-  console.log(deleted);
+  }, [submitDelete]);
 
   if (data?.data.cancellationStatus === "true")
     requestedForCancel.current = "true";
