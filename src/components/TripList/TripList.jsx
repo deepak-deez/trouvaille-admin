@@ -11,6 +11,7 @@ import {
   deletePackage,
 } from "../../redux/actions/addPackageActions";
 import { useDispatch, useSelector } from "react-redux";
+import LoadingScreen from "../Loading/LoadingScreen";
 
 let PageSize = 3;
 
@@ -19,7 +20,7 @@ const TripList = () => {
   const [delPop, setDelPop] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
-  const { data, error } = useSelector((state) => state.getPackage);
+  const { data, loading } = useSelector((state) => state.getPackage);
   const { data: deletedPackage } = useSelector((state) => state.deletePackage);
   const API = process.env.REACT_APP_NODE_API;
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ const TripList = () => {
 
   return (
     <>
+      {loading && <LoadingScreen />}
       <div className="p-3">
         <div className="p-4 bg-white item-center w-full overflow-x-scroll border-b-2">
           <table className="w-[65rem]">

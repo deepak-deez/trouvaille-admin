@@ -6,7 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const URL = process.env.REACT_APP_NODE_API;
-console.log(URL);
+
 
 const ForgotPassword = () => {
   const userType = localStorage.getItem("userType");
@@ -33,7 +33,7 @@ const ForgotPassword = () => {
   return (
     <div className=" my-auto forgot-password-form flex flex-col items-center justify-center">
       <div className="flex flex-col w-[300px] xl:w-[360px]">
-        <h2 className="text-[34px] ">Set Profile Password</h2>
+        <h2 className="text-[34px] ">Reset Password</h2>
         <p>
           Enter the email associated with your account and we will send an email
           with instructions to reset your password.

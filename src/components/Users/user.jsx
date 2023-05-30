@@ -6,6 +6,7 @@ import EditUser from "../EditUser/EditUser";
 import DeleteUser from "../DeleteUser/DeleteUser";
 import { getUser } from "../../redux/actions/addUserAction";
 import { useDispatch, useSelector } from "react-redux";
+import LoadingScreen from "../Loading/LoadingScreen";
 
 const User = () => {
   const [addPop, setAddPop] = useState(false);
@@ -14,7 +15,7 @@ const User = () => {
   const [editable, setEditable] = useState("");
   const dispatch = useDispatch();
 
-  const { data } = useSelector((state) => state.getUser);
+  const { data, loading } = useSelector((state) => state.getUser);
 
   useEffect(() => {
     dispatch(getUser("Backend-user"));
@@ -22,6 +23,8 @@ const User = () => {
 
   return (
     <>
+      {/* <LoadingScreen /> */}
+      {loading && <LoadingScreen />}
       <div className="p-3">
         <div className="p-4 bg-white item-center w-full overflow-x-scroll border-b-2">
           <table className="w-[65rem]">

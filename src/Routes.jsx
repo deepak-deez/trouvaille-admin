@@ -31,7 +31,11 @@ const Router = () => {
         <Route exact path="/trip-categories" element={<Tripcat />} />
         <Route exact path="/list-of-trips" element={<TripListPage />} />
         <Route exact path="/trip-list/add-trip" element={<AddNewTrip />} />
-        <Route exact path="/update-module/trip-package/:id" element={<UpdateTrip />} />
+        <Route
+          exact
+          path="/update-module/trip-package/:id"
+          element={<UpdateTrip />}
+        />
         <Route exact path="/trip-list/edit-trip/:id" element={<UpdateTrip />} />
         <Route exact path="*" element={<PageError />} />
         <Route exact path="/booking-list" element={<BookingList />} />
@@ -40,16 +44,12 @@ const Router = () => {
           path="/booking-list/booking-details/:id"
           element={<BookingDetails />}
         />
-        <Route
-          exact
-          path="/cancel-requests"
-          element={<CancelNotification />}
-        />
+        <Route exact path="/cancel-requests" element={<CancelNotification />} />
         <Route exact path="/signup" element={<Signup />} />
-        <Route exact path="/forgotPassword" element={<ForgotPassword />} />
-        <Route exact path="/resetPassword" element={<ResetPassword />} />
+        <Route exact path="/forgot-password" element={<ForgotPassword />} />
+        <Route exact path="/reset-password" element={<ResetPassword />} />
         <Route
-          path="/token-validation/Backend-user/:id/:token"
+          path="/token-validation/:user/:id/:token"
           element={<ResetPassword />}
         />
       </Routes>

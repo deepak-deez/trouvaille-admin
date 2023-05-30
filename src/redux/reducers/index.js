@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { logInUserReducer } from "./userReducerTest";
-import {userReducer} from "./userReducer";
+import { userReducer } from "./userReducer";
 import {
   addNewUserReducer,
   updateUserReducer,
@@ -21,6 +21,13 @@ import {
   deletePackageReducer,
 } from "./addPackageReducers";
 
+import {
+  getBookingReducer,
+  getSingleBookingReducer,
+  updateBookingReducer,
+  deleteBookingReducer,
+} from "./bookingReducer";
+
 const rootReducer = combineReducers({
   logInUser: logInUserReducer,
   addNewUser: addNewUserReducer,
@@ -36,7 +43,11 @@ const rootReducer = combineReducers({
   addPackage: addPackageReducer,
   updatePackage: updatePackageReducer,
   deletePackage: deletePackageReducer,
-  userLogin: userReducer
+  userLogin: userReducer,
+  getBooking: getBookingReducer,
+  getSingleBooking: getSingleBookingReducer,
+  updateBooking: updateBookingReducer,
+  deleteBooking: deleteBookingReducer,
 });
 
 export default rootReducer;

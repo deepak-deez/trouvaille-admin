@@ -6,13 +6,14 @@ import AddNewPop from "../AddNewPop/AddNewPop";
 import DeletePop from "../DeletePop/DeletePop";
 import { useDispatch, useSelector } from "react-redux";
 import { getTrip } from "../../redux/actions/tripAction";
+import LoadingScreen from "../Loading/LoadingScreen";
 const AmenitiesTable = () => {
   const [showAdd, setShowAdd] = useState(false);
   const [showDelPop, setShowDelPop] = useState(false);
   const [showUpdatePop, setShowUpdatePop] = useState(false);
   const [editData, setEditData] = useState("");
   const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.getTrip);
+  const { data, loading } = useSelector((state) => state.getTrip);
 
   useEffect(() => {
     dispatch(getTrip("amenity"));
@@ -20,6 +21,7 @@ const AmenitiesTable = () => {
 
   return (
     <>
+      {loading && <LoadingScreen />}
       <div className="p-3">
         <div className="p-4 bg-white item-center w-full overflow-x-scroll border-b-2">
           <table className="w-[100%]">
@@ -47,7 +49,11 @@ const AmenitiesTable = () => {
                   return (
                     <tr className=" tr-class text-start" key={index}>
                       <td className="td-class font-bold flex items-center m-3">
-                        <img src={item.icon.url} alt="" className="h-[62px] w-[62px] mr-3"/>
+                        <img
+                          src={item.icon.url}
+                          alt=""
+                          className="h-[62px] w-[62px] mr-3"
+                        />
 
                         {item.title}
                       </td>
