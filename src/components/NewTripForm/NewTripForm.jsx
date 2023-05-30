@@ -55,9 +55,9 @@ const NewTripForm = () => {
 
   const [arrayDate, setArrayDate] = useState();
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(arrayDate);
-  },[arrayDate])
+  }, [arrayDate]);
 
   const dispatch = useDispatch();
 
@@ -200,7 +200,7 @@ const NewTripForm = () => {
           </h2>
           <label className=" text-gray-400">Duration</label>
           <DateRangeComp duration={duration} setDuration={setDuration} />
-          <div>
+          <div className="mr-2">
             {duration && (
               <MultipleDateInputs
                 duration={duration}

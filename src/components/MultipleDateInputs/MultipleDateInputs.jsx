@@ -24,11 +24,11 @@ const MultipleDateInputs = ({ duration, setArrayDate, arrayDate }) => {
   };
 
   return (
-    <div className="grid grid-cols-2 ">
+    <div className="grid grid-cols-2 gap-2">
       {Array.isArray(arrayDate) &&
         counter === 1 &&
         arrayDate?.map((input, key) => (
-          <div className=" flex flex-col m-2" key={key}>
+          <div className=" flex flex-col " key={key}>
             <label> {input?.date}</label>
             <input
               placeholder="Details"
