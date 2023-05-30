@@ -16,25 +16,19 @@ const BookingList = () => {
         <Sidebar />
         <div className="w-full bg-[#f5f7f7] ">
           <Navbar heading="Booking List" userName={email} />
-          <div className="md:h-[90vh] p-5">
-            <div className="bg-white overflow-x-scroll ">
-              <table className="w-full ">
-                <thead className="w-full text-[#8383A9] ">
-                  <tr>
-                    <th className="py-5">Trip Title</th>
-                    <th className="py-5 ">Passenger Name</th>
-                    <th className="py-5">Email</th>
-                    <th className="py-5">Phone number</th>
-                    <th className="py-5">
-                      <span className="rounded-full"></span> Status
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <BookingItems  />
-                </tbody>
-              </table>
-            </div>
+          <div className="bg-white overflow-x-scroll md:h-[90vh] p-5 w-full ">
+          <div className="hidden md:grid grid-cols-6 gap-3 text-[#8383A9] text-center font-bold">
+            <span className="py-5">Trip Title</span>
+            <span className="py-5 ">Passenger Name</span>
+            <span className="py-5">Email</span>
+            <span className="py-5">Phone number</span>
+            <span className="py-5">
+              <span className="rounded-full"></span> Status
+            </span>
+          </div>
+          <div>
+            <BookingItems />
+          </div>
           </div>
           <Footer />
         </div>

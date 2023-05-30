@@ -24,12 +24,12 @@ const AmenitiesTable = () => {
       {loading && <LoadingScreen />}
       <div className="p-3">
         <div className="p-4 bg-white item-center w-full overflow-x-scroll border-b-2">
-          <table className="w-[100%]">
-            <thead>
-              <tr className="tr-class">
-                <th className="p-3">Amenity Title</th>
-                <th>Description</th>
-                <th>
+          <div className="w-[100%]">
+            <div>
+              <div className="tr-class md:grid md:grid-cols-3 flex items-center text-center justify-center">
+                <div className="p-3 hidden md:block">Amenity Title</div>
+                <div className="p-3 hidden md:block">Description</div>
+                <div>
                   <button
                     className="text-[#E75C54]"
                     onClick={() => {
@@ -39,26 +39,25 @@ const AmenitiesTable = () => {
                     Add New Amenities
                     <i className=" ms-5 red-dot fa-solid fa-circle-plus"></i>
                   </button>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
+                </div>
+              </div>
+            </div>
+            <div>
               {data &&
                 data?.data &&
                 data?.data?.map((item, index) => {
                   return (
-                    <tr className=" tr-class text-start" key={index}>
-                      <td className="td-class font-bold flex items-center m-3">
+                    <div className=" tr-class flex flex-col md:grid md:grid-cols-3 text-start" key={index}>
+                      <div className="td-class font-bold w-100 flex flex-col md:flex-row md:columns-2 md:gap-3 items-center m-3 order-2 md:order-1">
                         <img
                           src={item.icon.url}
                           alt=""
                           className="h-[62px] w-[62px] mr-3"
                         />
-
-                        {item.title}
-                      </td>
-                      <td className="td-class">{item.description}</td>
-                      <td className="text-end">
+                        <span className="">{item.title}</span>
+                      </div>
+                      <p className="td-class order-3 md:order-2 text-center justify-center md:flex md:items-center w-100">{item.description}</p>
+                      <div className="text-end order-1 md:order-3 flex items-center justify-end">
                         <DotMenu
                           updateData={item}
                           showDelPop={showDelPop}
@@ -67,12 +66,12 @@ const AmenitiesTable = () => {
                           setShowUpdatePop={setShowUpdatePop}
                           setEditData={setEditData}
                         />
-                      </td>
-                    </tr>
+                      </div>
+                    </div>
                   );
                 })}
-            </tbody>
-          </table>
+            </div>
+          </div>
         </div>
       </div>
       {showAdd && (
