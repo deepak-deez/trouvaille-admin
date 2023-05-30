@@ -9,13 +9,14 @@ import Faq from "../Faq/Faq";
 import StatusMenu from "../StatusMenu/StatusMenu";
 import imgToUrl from "../../functions/imgToUrl";
 import Swal from "sweetalert2";
-
+import DateRangeComp from "../DateRange/DateRangeComp";
 import {
   Occassion,
   TripCategory,
   TravelType,
   Status,
 } from "./tripFormSelect.jsx";
+import MultipleDateInputs from "../MultipleDateInputs/MultipleDateInputs";
 // import DateRangePickerComp from "../DateRangePickerComp/DateRangePickerComp";
 
 const NewTripForm = () => {
@@ -31,10 +32,11 @@ const NewTripForm = () => {
   const [tripCategory, setTripCategory] = useState([]);
   const [occasions, setOccasions] = useState([]);
   const [travelType, setTravelType] = useState([]);
-  const [duration, setDuration] = useState("");
+
   const [price, setPrice] = useState("");
   const [discountedPrice, setDiscountedPrice] = useState("");
   const [amenities, setAmenities] = useState([]);
+  const [duration, setDuration] = useState("");
   const [faq, setFaq] = useState([
     {
       question: "",
@@ -51,6 +53,12 @@ const NewTripForm = () => {
     },
   ]);
 
+  const [arrayDate, setArrayDate] = useState();
+
+  useEffect(()=>{
+    console.log(arrayDate);
+  },[arrayDate])
+
   const dispatch = useDispatch();
 
   function handleChange(e) {
@@ -64,33 +72,17 @@ const NewTripForm = () => {
   }
 
   const submitHandler = () => {
-    console.log(title, "title");
-    console.log(image, "urlimg");
-    console.log(duration, "duration");
-    console.log(tripCategory.map((trip)=>(trip.value)), "tripcat");
-    console.log(placeNumber, "placeNumber");
-    console.log(maximumGuests, "maximumGuest");
-    console.log(tripHighlights, "tripHighlights");
-    console.log(price, "price");
-    console.log(discountedPrice, "discountedPrice");
-    console.log(occasions.map((occasion)=>(occasion.value)), "occasions");
-    console.log(amenities, "amenities");
-    console.log(travelType.value, "travelType");
-    console.log(briefd, "briefd");
-    console.log(faq, "faq");
-    console.log(status.value, "status");
-
     if (
       title &&
       image &&
       duration &&
-      tripCategory.map((trip)=>(trip.value)) &&
+      tripCategory.map((trip) => trip.value) &&
       placeNumber &&
       maximumGuests &&
       tripHighlights &&
       price &&
       discountedPrice &&
-      occasions.map((occasion)=>(occasion.value)) &&
+      occasions.map((occasion) => occasion.value) &&
       travelType.value &&
       amenities &&
       briefd &&
@@ -100,51 +92,23 @@ const NewTripForm = () => {
       dispatch(
         addPackage(
           title,
-      image ,
-      duration ,
-      [],
-      tripCategory.map((trip)=>(trip.value)) ,
-      placeNumber ,
-      maximumGuests ,
-      tripHighlights ,
-      price ,
-      discountedPrice ,
-      occasions.map((occasion)=>(occasion.value)) ,
-      travelType.value ,
-      amenities ,
-      briefd ,
-      faq ,
-      status.value
+          image,
+          duration,
+          arrayDate,
+          tripCategory.map((trip) => trip.value),
+          placeNumber,
+          maximumGuests,
+          tripHighlights,
+          price,
+          discountedPrice,
+          occasions.map((occasion) => occasion.value),
+          travelType.value,
+          amenities,
+          briefd,
+          faq,
+          status.value
         )
       );
-
-      // setTitle("");
-      // setImage("");
-      // setd("");
-      // setStatus("");
-      // setPlaceNumber("");
-      // setMaximumGuest("");
-      // setTripCategory([]);
-      // setOccasions([]);
-      // setTravelType([]);
-      // setDuration("");
-      // setPrice("");
-      // setDiscountedPrice("");
-      // setAmenities([
-      //   {
-      //     Question: "",
-      //     Name: "",
-      //     Answer: "",
-      //   },
-      // ]);
-      // setFaq([
-      //   {
-      //     Title: "",
-      //     Name: "",
-      //     d: "",
-      //     icon: "",
-      //   },
-      // ]);
     } else {
       Swal.fire({
         className: "pop-top",
@@ -160,8 +124,6 @@ const NewTripForm = () => {
       });
     }
   };
-  console.log(discountedPrice);
-  console.log(price);
 
   useEffect(() => {
     if (addedPackage?.success) {
@@ -237,14 +199,16 @@ const NewTripForm = () => {
             Trip Duration & Day Activities
           </h2>
           <label className=" text-gray-400">Duration</label>
-          <input
-            className="border-2 py-2 rounded-md"
-            type="date"
-            value={duration}
-            onChange={(e) => {
-              setDuration(e.target.value);
-            }}
-          />
+          <DateRangeComp duration={duration} setDuration={setDuration} />
+          <div>
+            {duration && (
+              <MultipleDateInputs
+                duration={duration}
+                arrayDate={arrayDate}
+                setArrayDate={setArrayDate}
+              />
+            )}
+          </div>
         </div>
         <div className="p-2 flex flex-col space-y-2">
           <div className="flex-col flex md:flex-row justify-between ">
@@ -334,7 +298,11 @@ const NewTripForm = () => {
           </div>
         </div>
         <div className="p-2 flex flex-col space-y-2 ">
-          <TagsInput heading="Amenities" tags={amenities} setTags={setAmenities} />
+          <TagsInput
+            heading="Amenities"
+            tags={amenities}
+            setTags={setAmenities}
+          />
         </div>
         <div className="p-2 flex flex-col space-y-2 ">
           <label className=" text-gray-400">Brief description</label>
