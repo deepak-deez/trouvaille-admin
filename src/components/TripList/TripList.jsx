@@ -57,44 +57,45 @@ const TripList = () => {
       {loading && <LoadingScreen />}
       <div className="p-3">
         <div className="p-4 bg-white item-center w-full overflow-x-scroll border-b-2">
-          <table className="w-[65rem]">
-            <thead>
-              <tr className="tr-class">
-                <th className="p-3">Trip Title</th>
-                <th>Duration</th>
-                <th>Price</th>
-                <th>Discounted Price</th>
-                <th>
+          <div className="w-full">
+
+              <div className="tr-class md:grid md:grid-cols-5">
+                <p className="p-3 hidden md:block">Trip Title</p>
+                <p className="p-3 hidden md:block">Duration</p>
+                <p className="p-3 hidden md:block">Price</p>
+                <p className="p-3 hidden md:block">Discounted Price</p>
+                <div className="flex items-center justify-center">
                   <button
                     className="text-[#E75C54]"
                     onClick={() => {
                       navigate("/trip-list/add-trip");
                     }}
                   >
-                    Add New Trip
+                    <span>Add New Trip</span>
                     <i className=" red-dot fa-solid fa-circle-plus"></i>
                   </button>
-                </th>
-              </tr>
-            </thead>
+                </div>
+
+            </div>
             <tbody>
               {data &&
                 data?.data
                   .slice(firstPageIndex, lastPageIndex)
                   .map((val, index) => {
                     return (
-                      <tr className=" tr-class text-center" key={index}>
-                        <td className="td-class font-bold  p-3">
-                          <div className="flex  items-center">
+                     <div>
+                       <tr className=" tr-class mb-4 md:my-0 flex flex-col md:grid  md:grid-cols-6 w-full md:gap-3 text-center" key={index}>
+                        <div className="td-class font-bold p-1 md:py-5 flex flex-col md:flex-row  md:gap-3 items-center">
+
                             <img
-                              className="mx-6 h-[62px] w-[62px]"
+                              className="mx-6 md:h-[62px] md:w-[62px]"
                               src={val.image.url}
                               alt="logo"
                             />
-                            {val.title}
-                            {console.log(val.title)}
-                          </div>
-                        </td>
+                           <span> {val.title}</span>
+
+
+                        </div>
                         <td className="td-class">{val.duration}</td>
                         <td className="td-class">{val.price}</td>
                         <td className="td-class">{val.discountedPrice}</td>
@@ -107,10 +108,11 @@ const TripList = () => {
                           />
                         </td>
                       </tr>
+                     </div>
                     );
                   })}
             </tbody>
-          </table>
+          </div>
         </div>
         {delPop && (
           <DeleteTripPop
