@@ -3,6 +3,11 @@ import { React, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getBooking } from "../../redux/actions/bookingActions";
+// import FaUserAlt from "react-icons/md"
+import PersonIcon from '@mui/icons-material/Person';
+import EmailIcon from '@mui/icons-material/Email';
+import PhoneIcon from '@mui/icons-material/Phone';
+import InfoIcon from '@mui/icons-material/Info';
 
 const BookingItems = () => {
   const { data } = useSelector((state) => state.getBooking);
@@ -15,42 +20,64 @@ const BookingItems = () => {
   if (data && data?.data)
     return data?.data.map((items, index) => {
       return (
-        <tr key={index}>
-          <td className="p-3 flex justify-start items-center ">
-            <img className="w-[10%]" src={items.image.url} alt="" />{" "}
-            {items.title}
-          </td>
-          <td className="p-3">{items.name}</td>
-          <td className="p-3">{items.email}</td>
-          <td className="p-3">{items.phone}</td>
+        <div key={index} className="mb-4 md:my-0 flex flex-col md:grid  md:grid-cols-6 w-full md:gap-3 text-center">
+          <p className="p-1 md:py-5 flex flex-col md:flex-row  md:gap-3 items-center">
+            <img className="md:w-[62px] min-w-[62px] max-h-[250px] max-w-[350px] md:h-[62px] object-fill w-[90%] h-80 rounded-md my-4 md:my-0" src={items.image.url} alt="" />{" "}
+            <span className="font-semibold text-start text-ellipsis overflow-hidden">{items.title}</span>
+          </p>
+          <div className="flex items-center justify-between md:justify-center p-3">
+         <span className="md:hidden">
+         <PersonIcon />
+         </span>
+          <p className="md:py-5">{items.name}</p>
+          </div>
+          
+          <div className="flex items-center justify-between md:justify-center p-3">
+          <span className="md:hidden">
+          <EmailIcon />
+          </span>
+          <p className="md:py-5">{items.email}</p>
+          </div>
+          <div className="flex items-center justify-between md:justify-center p-3">
+          <span className="md:hidden">
+          <PhoneIcon />
+          </span>
+          <p className="md:py-5">{items.phone}</p>
 
-          <td
-            className={`p-3 text-orange-400 flex font-semibold items-center gap-1 ${
+          </div>
+
+          <div className="flex items-center justify-between md:justify-center p-3">
+          <span className="md:hidden">
+          <InfoIcon />
+          </span>
+          <p
+            className={`md:py-5 text-orange-400 flex font-semibold items-center gap-1 ${
               items.bookingStatus === "pending" ? "flex" : "hidden"
             }`}
           >
             <span className="w-[1rem] h-[1rem]  rounded-full bg-orange-400"></span>
             <span>Pending</span>
-          </td>
+          </p>
 
-          <td
-            className={`p-3 text-green-600 flex font-semibold items-center gap-1 ${
+          <p
+            className={`md:py-5 text-green-600 flex font-semibold items-center gap-1 ${
               items.bookingStatus === "confirm" ? "flex" : "hidden"
             }`}
           >
             <span className="w-[1rem] h-[1rem]  rounded-full bg-green-400"></span>
             <span>Confirm</span>
-          </td>
+          </p>
+          </div>
 
-          <td className="p-3">
+          <div className="md:py-5 flex justify-center md:items-center">
             <Link
-              className="border border-black px-3 py-1 rounded-md font-semibold"
+              className="border border-black px-3 py-1 rounded-md font-semibold "
               to={"/booking-list/booking-details/" + items._id}
             >
               View
             </Link>
-          </td>
-        </tr>
+          </div>
+        </div>
       );
     });
 };
