@@ -3,7 +3,6 @@ import { React, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getBooking } from "../../redux/actions/bookingActions";
-// import FaUserAlt from "react-icons/md"
 import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
