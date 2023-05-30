@@ -17,7 +17,7 @@ import {
 } from "../constants/addPackageConstants";
 
 const getSinglePackageStateInitial = {
-  loading: true,
+  loading: false,
   data: null,
   error: null,
 };
@@ -54,7 +54,7 @@ export const getSinglePackageReducer = (
 };
 
 const addPackageStateInitial = {
-  loading: true,
+  loading: false,
   data: null,
   error: null,
 };
@@ -89,7 +89,7 @@ export const addPackageReducer = (state = addPackageStateInitial, action) => {
 };
 
 const updatePackageStateInitial = {
-  loading: true,
+  loading: false,
   data: null,
   error: null,
 };
@@ -127,7 +127,7 @@ export const updatePackageReducer = (
 };
 
 const getPackageStateInitial = {
-  loading: true,
+  loading: false,
   data: null,
   error: null,
 };
@@ -162,7 +162,7 @@ export const getPackageReducer = (state = getPackageStateInitial, action) => {
 };
 
 const deletePackageStateInitial = {
-  loading: true,
+  loading: false,
   data: null,
   error: null,
 };

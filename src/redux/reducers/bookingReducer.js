@@ -14,7 +14,7 @@ import {
 } from "../constants/bookingConstants";
 
 const getSingleBookingStateInitial = {
-  loading: true,
+  loading: false,
   data: null,
   error: null,
 };
@@ -51,7 +51,7 @@ export const getSingleBookingReducer = (
 };
 
 const updateBookingStateInitial = {
-  loading: true,
+  loading: false,
   data: null,
   error: null,
 };
@@ -89,7 +89,7 @@ export const updateBookingReducer = (
 };
 
 const getBookingStateInitial = {
-  loading: true,
+  loading: false,
   data: null,
   error: null,
 };
@@ -124,7 +124,7 @@ export const getBookingReducer = (state = getBookingStateInitial, action) => {
 };
 
 const deleteBookingStateInitial = {
-  loading: true,
+  loading: false,
   data: null,
   error: null,
 };

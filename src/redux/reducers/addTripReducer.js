@@ -14,7 +14,7 @@ import {
 } from "../constants/addTripConstant";
 
 const addNewTripStateInitial = {
-  loading: true,
+  loading: false,
   data: null,
   error: null,
 };
@@ -49,7 +49,7 @@ export const addNewTipReducer = (state = addNewTripStateInitial, action) => {
 };
 
 const getTripStateInitital = {
-  loading: true,
+  loading: false,
   data: null,
   error: null,
 };
@@ -84,7 +84,7 @@ export const getTripReducer = (state = getTripStateInitital, action) => {
 };
 
 const deleteTripInitital = {
-  loading: true,
+  loading: false,
   data: null,
   error: null,
 };
@@ -119,7 +119,7 @@ export const deleteTripReducer = (state = deleteTripInitital, action) => {
 };
 
 const updateTripInitial = {
-  loading: true,
+  loading: false,
   data: null,
   error: null,
 };

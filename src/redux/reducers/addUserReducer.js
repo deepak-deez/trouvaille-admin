@@ -14,7 +14,7 @@ import {
 } from "../constants/addUserConstant.js";
 
 const addNewUserStateInitial = {
-  loading: true,
+  loading: false,
   data: null,
   error: null,
 };
@@ -49,7 +49,7 @@ export const addNewUserReducer = (state = addNewUserStateInitial, action) => {
 };
 
 const getUserStateInitial = {
-  loading: true,
+  loading: false,
   data: null,
   error: null,
 };
@@ -84,7 +84,7 @@ export const getUserReducer = (state = getUserStateInitial, action) => {
 };
 
 const updateUserStateInitial = {
-  loading: true,
+  loading: false,
   data: null,
   error: null,
 };
@@ -119,7 +119,7 @@ export const updateUserReducer = (state = updateUserStateInitial, action) => {
 };
 
 const delUserStateInitial = {
-  loading: true,
+  loading: false,
   data: null,
   error: null,
 };

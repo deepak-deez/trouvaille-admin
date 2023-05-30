@@ -2,7 +2,7 @@ import { ADMIN_REQUEST, ADMIN_SUCCESS, ADMIN_FAILED } from "../constants/loginAd
 
 const initialState = {
   userDetails: null,
-  loading: true,
+  loading: false,
   error: null,
 };
 
