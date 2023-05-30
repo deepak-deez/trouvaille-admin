@@ -54,7 +54,7 @@ const User = () => {
                 data.data.map((val, index) => {
                   return (
                     <div
-                      className="sm:grid sm:grid-cols-4 flex flex-col gap-2  tr-class "
+                      className="sm:grid sm:grid-cols-4 flex flex-col gap-2 sm:py-4 tr-class "
                       key={index}
                     >
                       <div className="td-class font-bold flex justify-between sm:justify-center order-2 sm:order-1">

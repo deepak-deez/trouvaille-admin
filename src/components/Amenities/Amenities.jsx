@@ -54,10 +54,9 @@ const AmenitiesTable = () => {
                           alt=""
                           className="h-[62px] w-[62px] mr-3"
                         />
-
                         <span className="">{item.title}</span>
                       </div>
-                      <p className="td-class order-3 md:order-2 text-center flex items-center">{item.description}</p>
+                      <p className="td-class order-3 md:order-2 text-center justify-center md:flex md:items-center w-100">{item.description}</p>
                       <div className="text-end order-1 md:order-3 flex items-center justify-end">
                         <DotMenu
                           updateData={item}
