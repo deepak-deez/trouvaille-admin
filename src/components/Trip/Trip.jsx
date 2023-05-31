@@ -21,7 +21,7 @@ const Trip = () => {
   useEffect(() => {
     dispatch(getTrip("category"));
   }, []);
-
+  console.log(data);
   return (
     <>
       {loading && <LoadingScreen />}

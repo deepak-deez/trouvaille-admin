@@ -11,16 +11,16 @@ import imgToUrl from "../../functions/imgToUrl";
 import Swal from "sweetalert2";
 import DateRangeComp from "../DateRange/DateRangeComp";
 import {
-  Occassion,
-  TripCategory,
-  TravelType,
   Status,
+  GetOptions,
 } from "./tripFormSelect.jsx";
 import MultipleDateInputs from "../MultipleDateInputs/MultipleDateInputs";
 import LoadingScreen from "../Loading/LoadingScreen";
 // import DateRangePickerComp from "../DateRangePickerComp/DateRangePickerComp";
 
 const NewTripForm = () => {
+  const { occassionOptions, tripCategoryOptions, travelTypeOptions } =
+    GetOptions();
   const { data } = useSelector((state) => state.getPackage);
   const { data: addedPackage, loading } = useSelector(
     (state) => state.addPackage
@@ -220,7 +220,7 @@ const NewTripForm = () => {
               <div className="flex flex-col w-full">
                 <label className=" text-gray-400 ">Trip category</label>
                 <SelectMenu
-                  options={TripCategory}
+                  options={tripCategoryOptions}
                   value={tripCategory}
                   width="100%"
                   setvalue={setTripCategory}
@@ -285,7 +285,7 @@ const NewTripForm = () => {
               <div className="flex flex-col w-full">
                 <label className=" text-gray-400">Occassion's</label>
                 <SelectMenu
-                  options={Occassion}
+                  options={occassionOptions}
                   width="91%"
                   value={occasions}
                   setvalue={setOccasions}
@@ -295,7 +295,7 @@ const NewTripForm = () => {
                 <label className=" text-gray-400">Travel type</label>
                 <StatusMenu
                   width="91%"
-                  options={TravelType}
+                  options={travelTypeOptions}
                   value={travelType}
                   setvalue={setTravelType}
                 />

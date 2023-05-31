@@ -11,7 +11,45 @@ import {
   GET_TRIP_REQUEST,
   GET_TRIP_FAILED,
   GET_TRIP_SUCCESS,
+  GET_ALL_TYPE_FAILED,
+  GET_ALL_TYPE_SUCCESS,
+  GET_ALL_TYPE_REQUEST,
 } from "../constants/addTripConstant";
+
+const getAllTypeStateInitial = {
+  loading: false,
+  data: null,
+  error: null,
+};
+
+export const getAllTypeReducer = (state = getAllTypeStateInitial, action) => {
+  switch (action.type) {
+    case GET_ALL_TYPE_REQUEST:
+      return {
+        ...state,
+        data: null,
+        loading: true,
+        error: null,
+      };
+    case GET_ALL_TYPE_SUCCESS:
+      return {
+        ...state,
+        data: action.payload,
+        loading: false,
+        error: null,
+      };
+    case GET_ALL_TYPE_FAILED:
+      return {
+        ...state,
+        data: null,
+        loading: false,
+        error: action.payload,
+      };
+    default: {
+      return state;
+    }
+  }
+};
 
 const addNewTripStateInitial = {
   loading: false,

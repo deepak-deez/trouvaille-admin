@@ -6,11 +6,6 @@ import TagsInput from "../TagsInput/TagsInput";
 import SelectMenu from "../SelectMenu/SelectMenu";
 import Faq from "../Faq/Faq";
 import StatusMenu from "../StatusMenu/StatusMenu";
-import {
-  Occassion,
-  TripCategory,
-  TravelType,
-} from "../NewTripForm/tripFormSelect.jsx";
 
 const UpdateTripForm = ({ editData, setEditData }) => {
   const { id } = useParams();
@@ -80,7 +75,7 @@ const UpdateTripForm = ({ editData, setEditData }) => {
           <div className="flex-col flex md:flex-row justify-between ">
             <div className="flex flex-col w-full">
               <label className=" text-gray-400 ">Trip category</label>
-              <SelectMenu options={TripCategory} width="100%" />
+              <SelectMenu options="" width="100%" />
             </div>
             <div className="flex flex-col md:px-3">
               <label className=" text-gray-400">No. of places</label>
@@ -115,11 +110,11 @@ const UpdateTripForm = ({ editData, setEditData }) => {
           <div className="flex justify-between w-full">
             <div className="flex flex-col w-full">
               <label className=" text-gray-400">Occassion's</label>
-              <SelectMenu options={Occassion} width="91%" />
+              <SelectMenu options="" width="91%" />
             </div>
             <div className="flex flex-col w-full">
               <label className=" text-gray-400">Travel type</label>
-              <SelectMenu options={TravelType} width="91%" />
+              <SelectMenu options="" width="91%" />
             </div>
           </div>
         </div>
