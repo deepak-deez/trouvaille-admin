@@ -1,16 +1,5 @@
 import { React, useState } from "react";
-function Faq({ faqFields, setFaqFields }) {
- 
-  const addInputField = () => {
-    setFaqFields([
-      ...faqFields,
-      {
-        question: "",
-        name: "",
-        answer: "",
-      },
-    ]);
-  };
+function Faq({ faqFields, setFaqFields, addFaqField }) {
   const removefaqFields = (index) => {
     const rows = [...faqFields];
     rows.splice(index, 1);
@@ -27,15 +16,7 @@ function Faq({ faqFields, setFaqFields }) {
   };
   return (
     <div className="col-sm-8">
-      <div className="flex justify-between">
-        <h1 className=" font-bold">FAQ </h1>
-        <button
-          className="border-2 border-red-500 px-2 rounded-md text-red-500 "
-          onClick={addInputField}
-        >
-          Add More
-        </button>
-      </div>
+   
       {faqFields.map((data, index) => {
         return (
           <div className="row my-3" key={index}>
