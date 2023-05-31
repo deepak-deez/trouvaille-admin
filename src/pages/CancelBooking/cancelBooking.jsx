@@ -1,8 +1,8 @@
 import React from "react";
-import Footer from "../components/Footer/Footer";
-import Navbar from "../components/Navbar/Navbar";
-import Sidebar from "../components/Sidebar/Sidebar";
-import CurrentBookingDetails from "../components/CurrentBookingDetails/CurrentBookingDetails";
+import Footer from "../../components/Footer/Footer";
+import Navbar from "../../components/Navbar/Navbar";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import CurrentBookingDetails from "../../components/CurrentBookingDetails/CurrentBookingDetails";
 
 const CancelBooking = () => {
   let email = localStorage.getItem("email");

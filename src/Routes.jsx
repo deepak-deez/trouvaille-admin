@@ -1,19 +1,19 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Dashboard from "./pages/dashboard";
+import Dashboard from "./pages/Dashboard/dashboard";
 import PageError from "./components/Error/PageError";
 
-import BookingList from "./pages/bookingList";
-import BookingDetails from "./pages/bookingDetails";
-import CancelNotification from "./pages/cancelNotification";
+import BookingList from "./pages/BookingList/bookingList";
+import BookingDetails from "./pages/BookingDetails/bookingDetails";
+import CancelNotification from "./pages/CancelNotification/cancelNotification";
 
-import Travel from "./pages/travel";
-import OccasionPage from "./pages/occasionPage";
-import AmenitiesPage from "./pages/amenitiesPage";
-import Tripcat from "./pages/tripcat";
-import TripListPage from "./pages/tripListPage";
-import AddNewTrip from "./pages/addNewTrip";
-import UpdateTrip from "./pages/UpdateTrip";
+import Travel from "./pages/Travel/travel";
+import OccasionPage from "./pages/Occasion/occasionPage";
+import AmenitiesPage from "./pages/Amenities/amenitiesPage";
+import Tripcat from "./pages/TripCategory/tripcat";
+import TripListPage from "./pages/TripList/tripListPage";
+import AddNewTrip from "./pages/AddNewTrip/addNewTrip";
+import UpdateTrip from "./pages/UpdateTrip/UpdateTrip";
 import AdminLogin from "./pages/AdminLoginForm/AdminLoginForm.jsx";
 import ForgotPassword from "./pages/AdminForgotPassword/AdminForgotPassword.jsx";
 import ResetPassword from "./pages/AdminResetPassword/AdminResetPassword.jsx";

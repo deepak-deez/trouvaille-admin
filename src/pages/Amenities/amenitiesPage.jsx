@@ -1,8 +1,8 @@
 import React from "react";
-import Sidebar from "../components/Sidebar/Sidebar";
-import Navbar from "../components/Navbar/Navbar";
-import Footer from "../components/Footer/Footer";
-import AmenitiesTable from "../components/Amenities/Amenities";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../components/Footer/Footer";
+import AmenitiesTable from "../../components/Amenities/Amenities";
 
 const AmenitiesPage = () => {
   let email = localStorage.getItem("email");

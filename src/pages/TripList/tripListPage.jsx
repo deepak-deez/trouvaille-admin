@@ -1,8 +1,8 @@
 import React from "react";
-import Sidebar from "../components/Sidebar/Sidebar";
-import Navbar from "../components/Navbar/Navbar";
-import Footer from "../components/Footer/Footer";
-import TripList from "../components/TripList/TripList";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../components/Footer/Footer";
+import TripList from "../../components/TripList/TripList";
 
 const TripListPage = () => {
   let email = localStorage.getItem("email");

@@ -1,7 +1,7 @@
 import React from "react";
-import Sidebar from "../components/Sidebar/Sidebar";
-import Navbar from "../components/Navbar/Navbar";
-import UpdateTripForm from "../components/UpdatetripForm/UpdateTripForm";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import Navbar from "../../components/Navbar/Navbar";
+import UpdateTripForm from "../../components/UpdatetripForm/UpdateTripForm";
 
 const UpdateTrip = () => {
   let email = localStorage.getItem("email");

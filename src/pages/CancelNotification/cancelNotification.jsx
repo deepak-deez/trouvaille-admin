@@ -1,10 +1,10 @@
 import React from "react";
-import CancellationRequest from "../components/CancellationRequest/CancellationRequest";
-import Sidebar from "../components/Sidebar/Sidebar";
-import Navbar from "../components/Navbar/Navbar";
-import Footer from "../components/Footer/Footer";
-import LoadingScreen from "../components/Loading/LoadingScreen";
-import { getSingleBooking } from "../redux/actions/bookingActions";
+import CancellationRequest from "../../components/CancellationRequest/CancellationRequest";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../components/Footer/Footer";
+import LoadingScreen from "../../components/Loading/LoadingScreen";
+import { getSingleBooking } from "../../redux/actions/bookingActions";
 import { useSelector } from "react-redux";
 
 const CancelNotification = () => {

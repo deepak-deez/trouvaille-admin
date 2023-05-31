@@ -1,10 +1,10 @@
 import { react } from "react";
-import Sidebar from "../components/Sidebar/Sidebar";
-import Navbar from "../components/Navbar/Navbar";
-import Footer from "../components/Footer/Footer";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../components/Footer/Footer";
 import { useSelector } from "react-redux";
-import BookingItems from "../components/BookingItem/BookingItems";
-import LoadingScreen from "../components/Loading/LoadingScreen";
+import BookingItems from "../../components/BookingItem/BookingItems";
+import LoadingScreen from "../../components/Loading/LoadingScreen";
 
 const BookingList = () => {
   const { loading } = useSelector((state) => state.getBooking);

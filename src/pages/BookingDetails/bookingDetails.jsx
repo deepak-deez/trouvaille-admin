@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Sidebar from "../components/Sidebar/Sidebar";
-import Navbar from "../components/Navbar/Navbar";
-import Footer from "../components/Footer/Footer";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../components/Footer/Footer";
 
-import CurrentBookingDetails from "../components/CurrentBookingDetails/CurrentBookingDetails";
+import CurrentBookingDetails from "../../components/CurrentBookingDetails/CurrentBookingDetails";
 
 const BookingDetails = () => {
   let email = localStorage.getItem("email");
