@@ -38,13 +38,13 @@ const Trip = () => {
             <i className=" ml-2 red-dot fa-solid fa-circle-plus"></i>
           </button>
         </div>
-        <div className="grid lg:grid-cols-4">
+        <div className="grid lg:grid-cols-4 sm:grid-cols-2">
           {data &&
             data?.data &&
             data.data.map((val, index) => {
               return (
                 <div className="w-full p-5 gap-4" key={index}>
-                  <div className="p-8 bg-white text-center rounded shadow-md">
+                  <div className="p-8 bg-white h-[100%] text-center rounded shadow-md">
                     <div className="flex justify-end">
                       <div>
                         <DotMenu
@@ -61,7 +61,7 @@ const Trip = () => {
                       <img src={val.icon.url} alt="" className="h-10" />
                     </div>
                     <h3 className="text-center font-semibold">{val.title}</h3>
-                    <p className="text-gray-600 w-full md:h-[10vh] overflow-scroll">
+                    <p className="text-gray-600 w-full  line-clamp-4">
                       {val.description}
                     </p>
                   </div>

@@ -58,7 +58,7 @@ const Occasion = () => {
                           <span className="px-2">{item.title}</span>
                         </div>
                       <p className="td-class order-3 md:order-2 text-center justify-center md:flex md:items-center">{item.description}</p>
-                      <div className="text-end order-1 md:order-3 flex items-center justify-end">
+                      <div className="text-end order-1 md:order-3 flex items-center md:justify-center justify-end">
                         <DotMenu
                           updateData={item}
                           showDelPop={showDelPop}
