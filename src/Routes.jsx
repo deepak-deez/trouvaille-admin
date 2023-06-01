@@ -36,7 +36,6 @@ const Router = () => {
           path="/update-module/trip-package/:id"
           element={<UpdateTrip />}
         />
-        <Route exact path="/trip-list/edit-trip/:id" element={<UpdateTrip />} />
         <Route exact path="*" element={<PageError />} />
         <Route exact path="/booking-list" element={<BookingList />} />
         <Route

@@ -12,6 +12,7 @@ import {
   updateTripReducer,
   deleteTripReducer,
   getTripReducer,
+  getAllTypeReducer,
 } from "./addTripReducer";
 import {
   getSinglePackageReducer,
@@ -48,6 +49,7 @@ const rootReducer = combineReducers({
   getSingleBooking: getSingleBookingReducer,
   updateBooking: updateBookingReducer,
   deleteBooking: deleteBookingReducer,
+  getAllType: getAllTypeReducer,
 });
 
 export default rootReducer;

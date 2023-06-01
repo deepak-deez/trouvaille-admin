@@ -80,7 +80,11 @@ const TripList = () => {
                 </div>
 
             </div>
+
+        
+
             <div className="w-full">
+
               {data &&
                 data?.data
                   .slice(firstPageIndex, lastPageIndex)

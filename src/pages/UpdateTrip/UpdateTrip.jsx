@@ -6,7 +6,7 @@ import UpdateTripForm from "../../components/UpdatetripForm/UpdateTripForm";
 const UpdateTrip = () => {
   let email = localStorage.getItem("email");
   return (
-    <div className="flex h-full">
+    <div className="flex h-screen">
       <Sidebar />
       <div className="w-full">
         <Navbar heading="Edit Trip" userName={email} />

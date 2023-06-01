@@ -55,10 +55,7 @@ export const getPackage = () => async (dispatch) => {
       "Content-Type": "application/json",
     };
 
-    const { data } = await axios.get(
-      `${API}/get-module/trip-package`,
-      header
-    );
+    const { data } = await axios.get(`${API}/get-module/trip-package`, header);
     dispatch({
       type: GET_PACKAGE_SUCCESS,
       payload: data,
@@ -76,7 +73,7 @@ export const addPackage =
     title,
     image,
     duration,
-    activities=[],
+    activities = [],
     tripCategory,
     placeNumber,
     maximumGuests,
@@ -112,7 +109,7 @@ export const addPackage =
         amenities,
         briefDescription,
         faq,
-        status
+        status,
       };
 
       const header = {
@@ -140,38 +137,73 @@ export const addPackage =
     }
   };
 
-export const updatePackage = (name, id) => async (dispatch) => {
-  try {
-    dispatch({
-      type: UPDATE_PACKAGE_REQUEST,
-    });
+export const updatePackage =
+  (
+    title,
+    image,
+    duration,
+    activities = [],
+    tripCategory,
+    placeNumber,
+    maximumGuests,
+    tripHighlights,
+    price,
+    discountedPrice,
+    occasions,
+    travelType,
+    amenities,
+    briefDescription,
+    faq,
+    status,
+    id
+  ) =>
+  async (dispatch) => {
+    try {
+      dispatch({
+        type: UPDATE_PACKAGE_REQUEST,
+      });
 
-    const header = {
-      "Content-Type": "application/json",
-    };
+      const header = {
+        "Content-Type": "application/json",
+      };
 
-    const body = {
-      id,
-      name,
-    };
+      const body = {
+        id,
+        title,
+        image,
+        duration,
+        activities,
+        tripCategory,
+        placeNumber,
+        maximumGuests,
+        tripHighlights,
+        price,
+        discountedPrice,
+        occasions,
+        travelType,
+        amenities,
+        briefDescription,
+        faq,
+        status,
+      };
 
-    const { data } = await axios.post(
-      `${API}/update-module/trip-package/${id}`,
-      body,
-      header
-    );
+      const { data } = await axios.post(
+        `${API}/update-module/trip-package/${id}`,
+        body,
+        header
+      );
 
-    dispatch({
-      type: UPDATE_PACKAGE_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: UPDATE_PACKAGE_FAILED,
-      payload: error.message,
-    });
-  }
-};
+      dispatch({
+        type: UPDATE_PACKAGE_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_PACKAGE_FAILED,
+        payload: error.message,
+      });
+    }
+  };
 
 export const deletePackage = (id) => async (dispatch) => {
   try {

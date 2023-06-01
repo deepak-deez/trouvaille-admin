@@ -13,9 +13,37 @@ import {
   GET_TRIP_REQUEST,
   GET_TRIP_FAILED,
   GET_TRIP_SUCCESS,
+  GET_ALL_TYPE_REQUEST,
+  GET_ALL_TYPE_FAILED,
+  GET_ALL_TYPE_SUCCESS,
 } from "../constants/addTripConstant";
 
 const API = process.env.REACT_APP_NODE_API;
+
+export const getAllType =
+  (feature1, feature2, feature3, feature4) => async (dispatch) => {
+    try {
+      dispatch({
+        type: GET_ALL_TYPE_REQUEST,
+      });
+      const header = {
+        "Content-Type": "application/json",
+      };
+
+      const { data } = await axios.get(
+        `${API}/get-options/${feature1}/${feature2}/${feature3}/${feature4}`
+      );
+      dispatch({
+        type: GET_ALL_TYPE_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_ALL_TYPE_FAILED,
+        payload: error.message,
+      });
+    }
+  };
 
 export const addNewTip =
   (image, title, description, feature) => async (dispatch) => {

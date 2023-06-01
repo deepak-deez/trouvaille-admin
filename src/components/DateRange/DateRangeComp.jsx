@@ -7,14 +7,14 @@ import { addDays } from "date-fns";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
-const DateRangeComp = ({ setDuration, duration }) => {
-  const [range, setRange] = useState([
-    {
-      startDate: new Date(),
-      endDate: addDays(new Date(), 1),
-      key: "selection",
-    },
-  ]);
+const DateRangeComp = ({ setDuration, duration, range, setRange }) => {
+  const dateMonthFromat = duration?.split("-");
+  console.log(dateMonthFromat);
+  const apiStartDate = `${dateMonthFromat[0]}`;
+  const apiEndDate = `${dateMonthFromat[1]}`;
+  console.log(apiStartDate);
+  console.log(apiEndDate);
+
 
   const [open, setOpen] = useState(false);
   const refOne = useRef(null);

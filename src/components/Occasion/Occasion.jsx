@@ -20,6 +20,7 @@ const Occasion = () => {
   useEffect(() => {
     dispatch(getTrip("occasion"));
   }, []);
+  
 
   return (
     <>

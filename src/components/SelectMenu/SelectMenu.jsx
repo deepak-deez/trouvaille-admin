@@ -3,9 +3,9 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import "./style.scss";
 
-const SelectMenu = ({ options, width, setvalue }) => {
+const SelectMenu = ({ options, value, width, setvalue }) => {
   const animatedComponents = makeAnimated();
-
+  console.log(value);
   return (
     <div className="">
       <div className="">
@@ -22,6 +22,7 @@ const SelectMenu = ({ options, width, setvalue }) => {
               color: "#CD4B43",
             }),
           }}
+          value={value}
           options={options}
           components={animatedComponents}
           isMulti

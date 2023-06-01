@@ -10,18 +10,17 @@ import StatusMenu from "../StatusMenu/StatusMenu";
 import imgToUrl from "../../functions/imgToUrl";
 import Swal from "sweetalert2";
 import DateRangeComp from "../DateRange/DateRangeComp";
-import {
-  Occassion,
-  TripCategory,
-  TravelType,
-  Status,
-} from "./tripFormSelect.jsx";
+import { Status, GetOptions } from "./tripFormSelect.jsx";
 import MultipleDateInputs from "../MultipleDateInputs/MultipleDateInputs";
 import LoadingScreen from "../Loading/LoadingScreen";
-// import DateRangePickerComp from "../DateRangePickerComp/DateRangePickerComp";
+import addDays from "date-fns/addDays";
+import { useNavigate } from "react-router-dom";
 
 const NewTripForm = () => {
+  const { occassionOptions, tripCategoryOptions, travelTypeOptions } =
+    GetOptions();
   const { data } = useSelector((state) => state.getPackage);
+  const navigate = useNavigate();
   const { data: addedPackage, loading } = useSelector(
     (state) => state.addPackage
   );
@@ -40,14 +39,20 @@ const NewTripForm = () => {
   const [discountedPrice, setDiscountedPrice] = useState("");
   const [amenities, setAmenities] = useState([]);
   const [duration, setDuration] = useState("");
-  const [faq, setFaq] = useState([
+  const [range, setRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: addDays(new Date(), 1),
+      key: "selection",
+    },
+  ]);
+  const [faqFields, setFaqFields] = useState([
     {
       question: "",
-      name: "",
       answer: "",
     },
   ]);
-  const [tripHighlights, setTripHighlights] = useState([
+  const [inputFields, setInputFields] = useState([
     {
       title: "",
       name: "",
@@ -56,6 +61,26 @@ const NewTripForm = () => {
     },
   ]);
 
+  const addInputField = () => {
+    setInputFields([
+      ...inputFields,
+      {
+        title: "",
+        name: "",
+        description: "",
+        icon: "",
+      },
+    ]);
+  };
+  const addFaqField = () => {
+    setFaqFields([
+      ...faqFields,
+      {
+        question: "",
+        answer: "",
+      },
+    ]);
+  };
   const [arrayDate, setArrayDate] = useState();
 
   useEffect(() => {
@@ -82,14 +107,14 @@ const NewTripForm = () => {
       tripCategory.map((trip) => trip.value) &&
       placeNumber &&
       maximumGuests &&
-      tripHighlights &&
+      inputFields &&
       price &&
       discountedPrice &&
       occasions.map((occasion) => occasion.value) &&
       travelType.value &&
       amenities &&
       briefd &&
-      faq &&
+      faqFields &&
       status.value
     ) {
       dispatch(
@@ -101,14 +126,14 @@ const NewTripForm = () => {
           tripCategory.map((trip) => trip.value),
           placeNumber,
           maximumGuests,
-          tripHighlights,
+          inputFields,
           price,
           discountedPrice,
           occasions.map((occasion) => occasion.value),
           travelType.value,
           amenities,
           briefd,
-          faq,
+          faqFields,
           status.value
         )
       );
@@ -144,6 +169,7 @@ const NewTripForm = () => {
         timer: 2000,
         timerProgressBar: true,
       });
+      navigate("/list-of-trips");
     } else if (addedPackage?.success === false) {
       Swal.fire({
         position: "center",
@@ -204,7 +230,12 @@ const NewTripForm = () => {
               Trip Duration & Day Activities
             </h2>
             <label className=" text-gray-400">Duration</label>
-            <DateRangeComp duration={duration} setDuration={setDuration} />
+            <DateRangeComp
+              duration={duration}
+              setDuration={setDuration}
+              range={range}
+              setRange={setRange}
+            />
             <div className="mr-2">
               {duration && (
                 <MultipleDateInputs
@@ -220,7 +251,7 @@ const NewTripForm = () => {
               <div className="flex flex-col w-full">
                 <label className=" text-gray-400 ">Trip category</label>
                 <SelectMenu
-                  options={TripCategory}
+                  options={tripCategoryOptions}
                   value={tripCategory}
                   width="100%"
                   setvalue={setTripCategory}
@@ -251,9 +282,18 @@ const NewTripForm = () => {
             </div>
           </div>
           <div className="p-2 flex flex-col space-y-2">
+            <div className="flex justify-between">
+              <h1 className=" font-bold">Trip Highlights</h1>
+              <button
+                className="border-2 border-red-500 px-2 rounded-md text-red-500 "
+                onClick={addInputField}
+              >
+                Add New
+              </button>
+            </div>
             <MultipleTripForm
-              inputFields={tripHighlights}
-              setInputFields={setTripHighlights}
+              inputFields={inputFields}
+              setInputFields={setInputFields}
             />
           </div>
           <div className="p-2 grid grid-col-4 flex-col space-y-2">
@@ -285,7 +325,7 @@ const NewTripForm = () => {
               <div className="flex flex-col w-full">
                 <label className=" text-gray-400">Occassion's</label>
                 <SelectMenu
-                  options={Occassion}
+                  options={occassionOptions}
                   width="91%"
                   value={occasions}
                   setvalue={setOccasions}
@@ -295,7 +335,7 @@ const NewTripForm = () => {
                 <label className=" text-gray-400">Travel type</label>
                 <StatusMenu
                   width="91%"
-                  options={TravelType}
+                  options={travelTypeOptions}
                   value={travelType}
                   setvalue={setTravelType}
                 />
@@ -324,7 +364,20 @@ const NewTripForm = () => {
             />
           </div>
           <div className="p-2 flex flex-col space-y-2 ">
-            <Faq faqFields={faq} setFaqFields={setFaq} />
+            <div className="flex justify-between">
+              <h1 className=" font-bold">FAQ </h1>
+              <button
+                className="border-2 border-red-500 px-2 rounded-md text-red-500 "
+                onClick={addFaqField}
+              >
+                Add More
+              </button>
+            </div>
+            <Faq
+              faqFields={faqFields}
+              setFaqFields={setFaqFields}
+              addFaqField={addFaqField}
+            />
           </div>
           <div className="p-2 flex flex-col space-y-2 ">
             <div className=" flex justify-between items-center w-full space-x-3">

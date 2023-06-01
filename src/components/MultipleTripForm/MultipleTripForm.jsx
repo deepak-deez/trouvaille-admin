@@ -1,8 +1,15 @@
 import { React, useState } from "react";
 import imgToUrl from "../../functions/imgToUrl";
 
-function MultipleTripForm({ inputFields, setInputFields }) {
+function MultipleTripForm({
+  inputFields,
+  setInputFields,
+  editMode,
+  setEditMode,
+}) {
+  console.log(editMode);
   function imageChange(index, e) {
+    setEditMode(false);
     let uplImg = e.target.files[0];
     imgToUrl(uplImg).then((res) => {
       console.log(res);
@@ -11,17 +18,9 @@ function MultipleTripForm({ inputFields, setInputFields }) {
       setInputFields(list);
     });
   }
-  const addInputField = () => {
-    setInputFields([
-      ...inputFields,
-      {
-        title: "",
-        name: "",
-        description: "",
-        icon: "",
-      },
-    ]);
-  };
+  console.log(inputFields);
+  console.log(editMode);
+
   const removeInputFields = (index) => {
     const rows = [...inputFields];
     rows.splice(index, 1);
@@ -38,15 +37,6 @@ function MultipleTripForm({ inputFields, setInputFields }) {
   };
   return (
     <div className="col-sm-8">
-      <div className="flex justify-between">
-        <h1 className=" font-bold">Trip Highlights</h1>
-        <button
-          className="border-2 border-red-500 px-2 rounded-md text-red-500 "
-          onClick={addInputField}
-        >
-          Add New
-        </button>
-      </div>
       {inputFields.map((data, index) => {
         return (
           <div className="row my-3" key={index}>
@@ -90,7 +80,7 @@ function MultipleTripForm({ inputFields, setInputFields }) {
               <div className=" flex flex-col md:flex-row justify-start items-center space-x-2 relative">
                 {data.icon ? (
                   <img
-                    src={data.icon}
+                    src={editMode ? data.icon.url : data.icon}
                     alt="browserIcon"
                     className="w-[30%] md:w-[20%]  md:h-[10vh]"
                   />

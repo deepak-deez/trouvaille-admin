@@ -7,7 +7,7 @@ import TripList from "../../components/TripList/TripList";
 const TripListPage = () => {
   let email = localStorage.getItem("email");
   return (
-    <div className="flex h-full">
+    <div className="flex h-screen">
       <Sidebar />
       <div className="w-full bg-[#f5f7f7] ">
         <Navbar heading="List Of Trips" userName={email} />
