@@ -15,7 +15,7 @@ const DotMenu = ({
   return (
     <div className="relative text-end">
       <button
-        className="mr-9"
+        className="mr-5"
         onClick={() => {
           setShowTraveldrop(!showTraveldrop);
         }}

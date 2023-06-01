@@ -28,7 +28,7 @@ const Occasion = () => {
       <div className="p-3">
         <div className="p-4 bg-white item-center w-full border-b-2">
           <div className="w-[100%]">
-              <div className="tr-class md:grid md:grid-cols-3 text-center">
+              <div className="tr-class md:grid md:grid-cols-3 text-[#8383A9] text-center">
                 <p className="p-3 hidden md:block">Occasion Title</p>
                 <p className="p-3 hidden md:block">Description</p>
                 <div className="w-100  flex items-center justify-center ">
@@ -59,7 +59,7 @@ const Occasion = () => {
                           <span className="px-2">{item.title}</span>
                         </div>
                       <p className="td-class order-3 md:order-2 text-center justify-center md:flex md:items-center">{item.description}</p>
-                      <div className="text-end order-1 md:order-3 flex items-center justify-end">
+                      <div className="text-end order-1 md:order-3 flex items-center md:justify-center justify-end">
                         <DotMenu
                           updateData={item}
                           showDelPop={showDelPop}

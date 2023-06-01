@@ -38,7 +38,7 @@ const TravelType = () => {
             <i className=" ml-2 red-dot fa-solid fa-circle-plus"></i>
           </button>
         </div>
-        <div className="grid lg:grid-cols-4">
+        <div className="grid lg:grid-cols-4 sm:grid-cols-2">
           {data &&
             data?.data &&
             data.data.map((item, index) => {
@@ -46,8 +46,8 @@ const TravelType = () => {
               const icon = item.icon.url;
 
               return (
-                <div className="w-full p-5 gap-4 h-[25vh]" key={index}>
-                  <div className="p-4 bg-white text-center rounded shadow-md">
+                <div className="w-full p-5 gap-4" key={index}>
+                  <div className="p-4 bg-white h-[100%] text-center rounded shadow-md">
                     <div className="flex justify-end">
                       <div>
                         <DotMenu
@@ -66,7 +66,7 @@ const TravelType = () => {
                     <h3 className="text-center font-semibold py-2">
                       {item.title}
                     </h3>
-                    <p className="text-gray-600 w-full md:h-[10vh] overflow-y-scroll ">
+                    <p className="text-gray-600 w-full line-clamp-4 ">
                       {item.description}
                     </p>
                   </div>

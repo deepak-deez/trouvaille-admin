@@ -32,11 +32,11 @@ const User = () => {
         <div className="p-4 bg-white item-center w-full overflow-x-scroll border-b-2">
           <div className="w-full">
             <div>
-              <div className="tr-class sm:grid items-center sm:grid-cols-4 gap-2">
-                <th className="p-3 hidden sm:block">User Name</th>
-                <th className="p-3 hidden sm:block">Email Address</th>
-                <th className="p-3 hidden sm:block">Phone Number</th>
-                <th className="p-3 flex items-center justify-center">
+              <div className="tr-class sm:grid items-center text-[#8383A9] text-center sm:grid-cols-4 gap-2">
+                <p className="p-3 hidden sm:block ">User Name</p>
+                <p className="p-3 hidden sm:block">Email Address</p>
+                <p className="p-3 hidden sm:block">Phone Number</p>
+                <div className="p-3 flex items-center justify-center">
                   <button
                     className="flex items-center text-[#E75C54] "
                     onClick={() => {
@@ -46,7 +46,7 @@ const User = () => {
                     <span>Add A New User</span>
                     <i className="ms-2 red-dot fa-solid fa-circle-plus"></i>
                   </button>
-                </th>
+                </div>
               </div>
             </div>
             <div>

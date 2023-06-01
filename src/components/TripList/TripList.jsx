@@ -12,6 +12,9 @@ import {
 } from "../../redux/actions/addPackageActions";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingScreen from "../Loading/LoadingScreen";
+import ScheduleIcon from '@mui/icons-material/Schedule';
+import DiscountIcon from '@mui/icons-material/Discount';
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 
 let PageSize = 3;
 
@@ -59,7 +62,7 @@ const TripList = () => {
         <div className="p-4 bg-white item-center w-full overflow-x-scroll border-b-2">
           <div className="w-full">
 
-              <div className="tr-class md:grid md:grid-cols-5">
+              <div className="tr-class md:grid md:grid-cols-5 text-[#8383A9] text-center">
                 <p className="p-3 hidden md:block">Trip Title</p>
                 <p className="p-3 hidden md:block">Duration</p>
                 <p className="p-3 hidden md:block">Price</p>
@@ -77,18 +80,21 @@ const TripList = () => {
                 </div>
 
             </div>
-            <tbody className=" ">
+
+        
+
+            <div className="w-full">
+
               {data &&
                 data?.data
                   .slice(firstPageIndex, lastPageIndex)
                   .map((val, index) => {
                     return (
-                     <div>
-                       <tr className=" tr-class mb-4 md:my-0 flex flex-col md:grid  md:grid-cols-6 w-full md:gap-3 text-center" key={index}>
-                        <div className="td-class font-bold p-1 md:py-5 flex flex-col md:flex-row  md:gap-3 items-center">
+                       <div className=" tr-class mb-4 md:my-0 flex flex-col md:grid items-center md:grid-cols-5 w-full gap-3 md:gap-1 text-center" key={index}>
+                        <div className="td-class font-bold p-1 md:py-5 flex flex-col md:flex-row  gap-3 items-center">
 
                             <img
-                              className="mx-6 md:h-[62px] md:w-[62px]"
+                              className="w-80 max-w-[350px] max-h-[250px] md:h-[62px] md:w-[62px] rounded-md"
                               src={val.image.url}
                               alt="logo"
                             />
@@ -96,22 +102,29 @@ const TripList = () => {
 
 
                         </div>
-                        <td className="td-class">{val.duration}</td>
-                        <td className="td-class">{val.price}</td>
-                        <td className="td-class">{val.discountedPrice}</td>
-                        <td className="">
+                        <p className="td-class w-80 flex justify-between md:w-full md:justify-center md:order-1 order-2">
+                          <span className="md:hidden"><ScheduleIcon/></span>
+                          <span>{val.duration}</span>
+                          </p>
+                        <p className="td-class flex justify-between w-80 md:w-full md:justify-center md:order-2 order-3">
+                        <span className="md:hidden"><CurrencyRupeeIcon/></span>
+                        <span>{val.price}</span>
+                        </p>
+                        <p className="td-class flex justify-between w-80 md:w-full md:justify-center md:order-3 order-4">
+                          <span className="md:hidden"><DiscountIcon/></span>
+                        {val.discountedPrice}</p>
+                        <div className="td-class md:order-4 order-1 w-80 md:w-full">
                           <TripDropMenu
                             editData={val}
                             setEditData={setEditData}
                             delPop={delPop}
                             setDelPop={setDelPop}
                           />
-                        </td>
-                      </tr>
-                     </div>
+                        </div>
+                      </div>
                     );
                   })}
-            </tbody>
+            </div>
           </div>
         </div>
         {delPop && (
