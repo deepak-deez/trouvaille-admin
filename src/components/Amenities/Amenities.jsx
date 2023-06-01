@@ -26,7 +26,7 @@ const AmenitiesTable = () => {
         <div className="p-4 bg-white item-center w-full overflow-x-scroll border-b-2">
           <div className="w-[100%]">
             <div>
-              <div className="tr-class md:grid md:grid-cols-3 flex items-center text-center justify-center">
+              <div className="tr-class md:grid md:grid-cols-3 flex text-[#8383A9] items-center text-center justify-center">
                 <div className="p-3 hidden md:block">Amenity Title</div>
                 <div className="p-3 hidden md:block">Description</div>
                 <div>
@@ -57,7 +57,7 @@ const AmenitiesTable = () => {
                         <span className="">{item.title}</span>
                       </div>
                       <p className="td-class order-3 md:order-2 text-center justify-center md:flex md:items-center w-100">{item.description}</p>
-                      <div className="text-end order-1 md:order-3 flex items-center justify-end">
+                      <div className="text-end order-1 md:order-3 flex items-center justify-end md:justify-center">
                         <DotMenu
                           updateData={item}
                           showDelPop={showDelPop}

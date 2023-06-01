@@ -79,13 +79,13 @@ const CurrentBookingDetails = () => {
   } else if (data && data?.data)
     return (
       <>
-        <div className="flex-col flex md:flex-row w-full py-5">
-          <div className="flex sm:w-[50%] w-full p-2">
-            <div className="w-[100%]">
-              <img src={data?.data.image.url} alt="img1" />
+        <div className="flex-col flex md:flex-row w-full item-center py-5">
+          <div className="flex md:w-[50%] w-full p-2">
+            <div className="w-[100%] md:mx-4 md:mt-4 mx-2 my-2 flex items-center justify-center md:justify-start">
+              <img className="object-cover w-[350px] h-[350px] sm:w-full md:w-full md:h-[400px] rounded-md" src={data?.data.image.url} alt="img1" />
             </div>
           </div>
-          <div className="sm:w-[50%] w-full p-2">
+          <div className="mx-2 md:w-[50%] self-center sm:w-full sm:self-start p-2 ">
             <div className="flex justify-between items-center gap-3">
               <p className="text-3xl font-semibold my-5 w-[50%]">
                 {data.data.title}
@@ -123,7 +123,7 @@ const CurrentBookingDetails = () => {
               </div>
             </div>
             <div className="flex gap-2 ">
-              <div className="flex flex-col w-[50%] sm:text-lg text-sm text-[#8E8D98] gap-5">
+              <div className="flex flex-col w-[50%] sm:text-md md:text-lg text-sm text-[#8E8D98] gap-5">
                 <span className="">Passenger name:</span>
                 <span className="">Other passengers:</span>
                 <ol>
@@ -140,7 +140,7 @@ const CurrentBookingDetails = () => {
                 <span className="">Address:</span>
               </div>
 
-              <div className="flex w-[50%] flex-col sm:text-lg text-sm gap-5 font-semibold">
+              <div className="flex w-[50%] flex-col sm:text-md md:text-lg text-sm gap-5 font-semibold">
                 <p> {data.data.name}</p>
                 <p> {data.data.passengers}3</p>
                 <ul>
