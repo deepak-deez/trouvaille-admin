@@ -7,7 +7,7 @@ import AmenitiesTable from "../../components/Amenities/Amenities";
 const AmenitiesPage = () => {
   let email = localStorage.getItem("email");
   return (
-    <div className="flex h-full">
+    <div className="flex h-screen">
       <Sidebar />
       <div className="w-full bg-[#f5f7f7] ">
         <Navbar heading="All Amenities" userName={email} />

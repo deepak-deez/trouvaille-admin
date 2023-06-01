@@ -1,7 +1,10 @@
 import { React, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addPackage, getPackage } from "../../redux/actions/addPackageActions";
+import {
+  addPackage,
+  updatePackage,
+} from "../../redux/actions/addPackageActions";
 import tempIcon from "../../assets/images/trip-list/AddNewTrip-icon.svg";
 import MultipleTripForm from "../MultipleTripForm/MultipleTripForm";
 import TagsInput from "../TagsInput/TagsInput";
@@ -15,6 +18,8 @@ import { GetOptions, Status } from "../NewTripForm/tripFormSelect";
 import MultipleDateInputs from "../MultipleDateInputs/MultipleDateInputs";
 import LoadingScreen from "../Loading/LoadingScreen";
 import { getSinglePackage } from "../../redux/actions/addPackageActions";
+import addDays from "date-fns/addDays";
+import convertDate from "../../functions/monthFormat";
 
 const NewTripForm = () => {
   const { id } = useParams();
@@ -23,8 +28,8 @@ const NewTripForm = () => {
   const { occassionOptions, tripCategoryOptions, travelTypeOptions } =
     GetOptions();
   const { data } = useSelector((state) => state.getSinglePackage);
-  const { data: addedPackage, loading } = useSelector(
-    (state) => state.addPackage
+  const { data: updatedPackage, loading } = useSelector(
+    (state) => state.updatePackage
   );
   const [title, setTitle] = useState("");
   const [file, setFile] = useState();
@@ -40,6 +45,14 @@ const NewTripForm = () => {
   const [discountedPrice, setDiscountedPrice] = useState("");
   const [amenities, setAmenities] = useState([]);
   const [duration, setDuration] = useState("");
+  const [editMode, setEditMode] = useState(true);
+  const [range, setRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: addDays(new Date(), 1),
+      key: "selection",
+    },
+  ]);
   const [arrayDate, setArrayDate] = useState();
   const [faqFields, setFaqFields] = useState([
     {
@@ -56,6 +69,8 @@ const NewTripForm = () => {
       icon: "",
     },
   ]);
+
+  console.log(data);
   const addFaqField = () => {
     setFaqFields([
       ...faqFields,
@@ -107,12 +122,25 @@ const NewTripForm = () => {
       // data?.data[0]?.occasions?.forEach((item) => {
       //   return setOccasions([...occasions, { label: item, value: item }]);
       // });
+      setDuration(data?.data[0].duration);
+      setRange([
+        {
+          startDate: new Date(
+            convertDate(data?.data[0].duration.split("-")[0])
+          ),
+          endDate: new Date(convertDate(data?.data[0].duration.split("-")[1])),
+          key: "selection",
+        },
+      ]);
     }
   }, [data]);
   console.log(data?.data[0]?.tripCategory);
   console.log(tripCategory, "after map");
 
   const submitHandler = () => {
+    console.log(id);
+    console.log(title);
+    console.log(image);
     if (
       title &&
       image &&
@@ -131,7 +159,8 @@ const NewTripForm = () => {
       status.value
     ) {
       dispatch(
-        addPackage(
+        updatePackage(
+          id,
           title,
           image,
           duration,
@@ -167,8 +196,8 @@ const NewTripForm = () => {
   };
 
   useEffect(() => {
-    if (addedPackage?.success) {
-      console.log(addedPackage);
+    if (updatedPackage?.success) {
+      console.log(updatedPackage);
       // set addedPackage to null
       dispatch({ type: "ADD_PACKAGE_SUCCESS", payload: null });
       Swal.fire({
@@ -176,19 +205,19 @@ const NewTripForm = () => {
         width: "40vh",
         icon: "success",
         title: "Success",
-        text: addedPackage.message,
+        text: updatedPackage.message,
         showConfirmButton: false,
         toast: false,
         timer: 2000,
         timerProgressBar: true,
       });
-    } else if (addedPackage?.success === false) {
+    } else if (updatedPackage?.success === false) {
       Swal.fire({
         position: "center",
         width: "40vh",
         icon: "error",
         title: "failed",
-        text: addedPackage.message,
+        text: updatedPackage.message,
         showConfirmButton: false,
         toast: false,
         timer: 2000,
@@ -196,7 +225,7 @@ const NewTripForm = () => {
       });
       dispatch({ type: "ADD_PACKAGE_SUCCESS", payload: null });
     }
-  }, [addedPackage]);
+  }, [updatedPackage]);
 
   return (
     <>
@@ -242,7 +271,12 @@ const NewTripForm = () => {
               Trip Duration & Day Activities
             </h2>
             <label className=" text-gray-400">Duration</label>
-            <DateRangeComp duration={duration} setDuration={setDuration} />
+            <DateRangeComp
+              duration={duration}
+              setDuration={setDuration}
+              range={range}
+              setRange={setRange}
+            />
             <div className="mr-2">
               {duration && (
                 <MultipleDateInputs
@@ -310,6 +344,8 @@ const NewTripForm = () => {
               inputFields={inputFields}
               setInputFields={setInputFields}
               res={data?.data[0].tripHighlights}
+              editMode={editMode}
+              setEditMode={setEditMode}
             />
           </div>
           <div className="p-2 grid grid-col-4 flex-col space-y-2">

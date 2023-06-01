@@ -13,11 +13,14 @@ import DateRangeComp from "../DateRange/DateRangeComp";
 import { Status, GetOptions } from "./tripFormSelect.jsx";
 import MultipleDateInputs from "../MultipleDateInputs/MultipleDateInputs";
 import LoadingScreen from "../Loading/LoadingScreen";
+import addDays from "date-fns/addDays";
+import { useNavigate } from "react-router-dom";
 
 const NewTripForm = () => {
   const { occassionOptions, tripCategoryOptions, travelTypeOptions } =
     GetOptions();
   const { data } = useSelector((state) => state.getPackage);
+  const navigate = useNavigate();
   const { data: addedPackage, loading } = useSelector(
     (state) => state.addPackage
   );
@@ -36,6 +39,13 @@ const NewTripForm = () => {
   const [discountedPrice, setDiscountedPrice] = useState("");
   const [amenities, setAmenities] = useState([]);
   const [duration, setDuration] = useState("");
+  const [range, setRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: addDays(new Date(), 1),
+      key: "selection",
+    },
+  ]);
   const [faqFields, setFaqFields] = useState([
     {
       question: "",
@@ -159,6 +169,7 @@ const NewTripForm = () => {
         timer: 2000,
         timerProgressBar: true,
       });
+      navigate("/list-of-trips");
     } else if (addedPackage?.success === false) {
       Swal.fire({
         position: "center",
@@ -219,7 +230,12 @@ const NewTripForm = () => {
               Trip Duration & Day Activities
             </h2>
             <label className=" text-gray-400">Duration</label>
-            <DateRangeComp duration={duration} setDuration={setDuration} />
+            <DateRangeComp
+              duration={duration}
+              setDuration={setDuration}
+              range={range}
+              setRange={setRange}
+            />
             <div className="mr-2">
               {duration && (
                 <MultipleDateInputs

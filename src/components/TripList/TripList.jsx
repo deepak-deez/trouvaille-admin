@@ -77,7 +77,7 @@ const TripList = () => {
                 </div>
 
             </div>
-            <tbody>
+            <tbody className=" ">
               {data &&
                 data?.data
                   .slice(firstPageIndex, lastPageIndex)

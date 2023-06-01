@@ -16,7 +16,7 @@ const Navbar = ({ heading, userName }) => {
           }}
         />
         <img className="w-[25px]" src={userIcon} alt="usericon" />
-        <h3>{"hi " + userName}</h3>
+        <h3 className="text-xs md:text-md truncate">{"hi " + userName}</h3>
       </div>
     </div>
   );

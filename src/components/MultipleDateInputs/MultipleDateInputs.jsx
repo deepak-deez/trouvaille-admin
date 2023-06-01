@@ -4,6 +4,7 @@ import dateRange from "../../functions/dateRange";
 import convertDate from "../../functions/monthFormat";
 
 const MultipleDateInputs = ({ duration, setArrayDate, arrayDate }) => {
+  console.log(duration);
   const date = duration.split(" ");
   const startDate = date[0];
   const endDate = date[2];
