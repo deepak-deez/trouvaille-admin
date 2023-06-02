@@ -11,10 +11,10 @@ const AddNewTrip = () => {
       <Sidebar />
       <div className="w-full">
         <Navbar heading="Add New Trip" userName={email} />
-        <div className="md:h-[90vh]">
+        <div className="md:h-[90vh] overflow-y-auto">
           <NewTripForm />
         </div>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </div>
   );

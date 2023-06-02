@@ -10,7 +10,7 @@ const UpdateTrip = () => {
       <Sidebar />
       <div className="w-full">
         <Navbar heading="Edit Trip" userName={email} />
-        <div className="md:h-[90vh]">
+        <div className="md:h-[90vh] overflow-y-auto">
           <UpdateTripForm />
         </div>
         {/* <Footer /> */}

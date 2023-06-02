@@ -16,7 +16,7 @@ import ScheduleIcon from '@mui/icons-material/Schedule';
 import DiscountIcon from '@mui/icons-material/Discount';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 
-let PageSize = 3;
+let PageSize = 5;
 
 const TripList = () => {
   const [editData, setEditData] = useState("");
@@ -25,7 +25,6 @@ const TripList = () => {
   const navigate = useNavigate();
   const { data, loading } = useSelector((state) => state.getPackage);
   const { data: deletedPackage } = useSelector((state) => state.deletePackage);
-  const API = process.env.REACT_APP_NODE_API;
   const dispatch = useDispatch();
   // const list=useState([]);
   // console.log(data);

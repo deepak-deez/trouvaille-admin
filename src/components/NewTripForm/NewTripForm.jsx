@@ -39,6 +39,7 @@ const NewTripForm = () => {
   const [discountedPrice, setDiscountedPrice] = useState("");
   const [amenities, setAmenities] = useState([]);
   const [duration, setDuration] = useState("");
+  const [editMode, setEditMode] = useState(false);
   const [range, setRange] = useState([
     {
       startDate: new Date(),
@@ -294,6 +295,8 @@ const NewTripForm = () => {
             <MultipleTripForm
               inputFields={inputFields}
               setInputFields={setInputFields}
+              editMode={editMode}
+              setEditMode={setEditMode}
             />
           </div>
           <div className="p-2 grid grid-col-4 flex-col space-y-2">

@@ -138,7 +138,7 @@ const NewTripForm = () => {
   console.log(tripCategory, "after map");
 
   const submitHandler = () => {
-    console.log(id);
+    console.log(id, "id");
     console.log(title);
     console.log(image);
     if (
