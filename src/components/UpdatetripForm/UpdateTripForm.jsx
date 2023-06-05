@@ -110,7 +110,20 @@ const NewTripForm = () => {
 
   useEffect(() => {
     if (data && data?.data) {
-      console.log(tripCategory);
+      setStatus({
+        label: data && data.data[0].status,
+        value: data && data.data[0].status,
+      });
+      setBriefd(data && data.data[0].briefDescription);
+      setTravelType({
+        label: data && data.data[0].travelType,
+        value: data && data.data[0].travelType,
+      });
+      setDiscountedPrice(data.data[0].discountedPrice);
+      setPrice(data?.data[0].price);
+      setMaximumGuests(data?.data[0].maximumGuests);
+      setPlaceNumber(data?.data[0].placeNumber);
+      setTitle(data && data?.data[0].title);
       setInputFields(data?.data[0].tripHighlights);
       setFaqFields(data?.data[0].faq);
       setAmenities(data?.data[0].amenities);
@@ -158,6 +171,7 @@ const NewTripForm = () => {
       faqFields &&
       status.value
     ) {
+      console.log("nkjjhftgxdfgchvjk");
       dispatch(
         updatePackage(
           id,
@@ -226,6 +240,7 @@ const NewTripForm = () => {
       dispatch({ type: "ADD_PACKAGE_SUCCESS", payload: null });
     }
   }, [updatedPackage]);
+  console.log(updatedPackage);
 
   return (
     <>
@@ -260,7 +275,7 @@ const NewTripForm = () => {
             <input
               className="border-2 py-2 rounded-md"
               type="text"
-              value={title ? title : data && data?.data[0].title}
+              value={title}
               onChange={(e) => {
                 setTitle(e.target.value);
               }}
@@ -303,11 +318,7 @@ const NewTripForm = () => {
                 <input
                   className="border-2 py-2 rounded-md"
                   type="number"
-                  value={
-                    placeNumber
-                      ? placeNumber
-                      : data && data?.data[0].placeNumber
-                  }
+                  value={placeNumber}
                   onChange={(e) => {
                     setPlaceNumber(e.target.value);
                   }}
@@ -318,11 +329,7 @@ const NewTripForm = () => {
                 <input
                   className="border-2 py-2 rounded-md"
                   type="number"
-                  value={
-                    maximumGuests
-                      ? maximumGuests
-                      : data && data?.data[0].maximumGuests
-                  }
+                  value={maximumGuests}
                   onChange={(e) => {
                     setMaximumGuests(e.target.value);
                   }}
@@ -355,7 +362,7 @@ const NewTripForm = () => {
                 <input
                   className="border-2 py-2 rounded-md w-[90%]"
                   type="number"
-                  value={price ? price : data && data?.data[0].price}
+                  value={price}
                   onChange={(e) => {
                     setPrice(e.target.value);
                   }}
@@ -366,11 +373,7 @@ const NewTripForm = () => {
                 <input
                   className="border-2 py-2 rounded-md w-[90%]"
                   type="number"
-                  value={
-                    discountedPrice
-                      ? discountedPrice
-                      : data && data.data[0].discountedPrice
-                  }
+                  value={discountedPrice}
                   onChange={(e) => {
                     setDiscountedPrice(e.target.value);
                   }}
@@ -392,14 +395,7 @@ const NewTripForm = () => {
                 <StatusMenu
                   width="91%"
                   options={travelTypeOptions}
-                  value={
-                    travelType
-                      ? travelType
-                      : {
-                          label: data && data.data[0].travelType,
-                          value: data && data.data[0].travelType,
-                        }
-                  }
+                  value={travelType}
                   setvalue={setTravelType}
                 />
               </div>
@@ -420,7 +416,7 @@ const NewTripForm = () => {
               type="text"
               className="border-2 rounded-md resize-none"
               name="d"
-              value={briefd ? briefd : data && data.data[0].briefDescription}
+              value={briefd}
               onChange={(e) => {
                 setBriefd(e.target.value);
               }}
@@ -447,14 +443,7 @@ const NewTripForm = () => {
               <StatusMenu
                 width="100%"
                 options={Status}
-                value={
-                  status
-                    ? status
-                    : {
-                        label: data && data.data[0].status,
-                        value: data && data.data[0].status,
-                      }
-                }
+                value={status}
                 setvalue={setStatus}
               />
               <button

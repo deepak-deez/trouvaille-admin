@@ -24,7 +24,7 @@ const Sidebar = (props) => {
       </button>
       {/* </div> */}
       <div
-        className={`mainSideBar z-50 absolute md:static xl:flex md:w-[40%] p-5 flex-col bg-white h-full ${
+        className={`mainSideBar z-50 absolute  xl:static xl:flex md:w-[40%] p-5 flex-col bg-white h-full ${
           !show && "hidden-bar"
         }`}
       >
@@ -48,7 +48,7 @@ const Sidebar = (props) => {
                   key={index}
                 >
                   <img src={item.icon} alt="" />
-                  <h3 className="ms-5" onClick={() => {}}>
+                  <h3 className="ms-5" >
                     {item.heading}
                   </h3>
                 </NavLink>

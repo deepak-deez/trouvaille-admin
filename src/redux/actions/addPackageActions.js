@@ -139,6 +139,7 @@ export const addPackage =
 
 export const updatePackage =
   (
+    id,
     title,
     image,
     duration,
@@ -154,8 +155,7 @@ export const updatePackage =
     amenities,
     briefDescription,
     faq,
-    status,
-    id
+    status
   ) =>
   async (dispatch) => {
     try {
