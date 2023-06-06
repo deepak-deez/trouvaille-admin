@@ -5,13 +5,12 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import CurrentBookingDetails from "../../components/CurrentBookingDetails/CurrentBookingDetails";
 
 const CancelBooking = () => {
-  let email = localStorage.getItem("email");
   return (
     <div className="relative">
       <div className="flex">
         <Sidebar />
         <div className="w-full bg-[#f5f7f7] ">
-          <Navbar heading="All Users" userName={email} />
+          <Navbar heading="All Users"/>
           <div className="md:h-[90vh]">
             <CurrentBookingDetails />
           </div>

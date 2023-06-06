@@ -8,14 +8,13 @@ import LoadingScreen from "../../components/Loading/LoadingScreen";
 
 const BookingList = () => {
   const { loading } = useSelector((state) => state.getBooking);
-  let email = localStorage.getItem("email");
   return (
     <>
       {loading && <LoadingScreen />}
       <div className="flex h-screen">
         <Sidebar />
         <div className="w-full bg-[#f5f7f7] ">
-          <Navbar heading="Booking List" userName={email} />
+          <Navbar heading="Booking List"/>
           <div className="bg-white overflow-x-scroll md:h-[90vh] p-5 w-full ">
 
         

@@ -43,19 +43,17 @@ export default function LoginForm() {
       localStorage.setItem("email", emailRef.current.value);
       localStorage.setItem("password", passwordRef.current.value);
       localStorage.setItem("token", userDetails.data.token);
-      localStorage.setItem("userType", userDetails.data.userDetails.userType);
+     
       localStorage.setItem("rememberMe", checked);
     } else {
       localStorage.removeItem("email", emailRef.current.value);
       localStorage.removeItem("password", passwordRef.current.value);
       localStorage.removeItem("token", userDetails.data.token);
-      localStorage.removeItem(
-        "userType",
-        userDetails.data.userDetails.userType
-      );
 
       localStorage.setItem("rememberMe", checked);
     }
+    localStorage.setItem("userType", userDetails.data.userDetails.userType);
+    localStorage.setItem("userName", userDetails.data.userDetails.userName);
     Cookies.set("TOKEN", userDetails.data.token, { expires: 7 });
   };
 

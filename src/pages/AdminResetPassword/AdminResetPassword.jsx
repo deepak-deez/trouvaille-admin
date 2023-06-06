@@ -8,6 +8,7 @@ import NavBarSigninForm from "../../components/AdminLogin/NavBarLoginForm/NavBar
 import ResetPassword from "../../components/AdminLogin/ResetPassword/ResetPassword.jsx";
 import Footer from "../../components/AdminLogin/FooterComponent/Footer.jsx";
 import { useLocation, useNavigate } from "react-router-dom";
+import PageError from "../../components/Error/PageError";
 
 const AdminResetPassword = () => {
   const navigate = useNavigate();
@@ -31,18 +32,28 @@ const AdminResetPassword = () => {
   }, []);
 
   return (
-    <header className="login-page flex">
-      <LoginBanner />
-      <div className="signin-container flex flex-col bg-white">
-        <NavBarLogin />
-        <div className="flex flex-col my-auto mt-[5rem] lg:mt-[8rem] justify-center items-center">
-          <ResetPassword />
-          <NavBarSigninForm />
+    <>
+    {
+      res?.data?.success === true?
+      <header className="login-page flex">
+        <LoginBanner />
+        <div className="signin-container flex flex-col bg-white">
+          <NavBarLogin />
+          <div className="flex flex-col my-auto mt-[5rem] lg:mt-[8rem] justify-center items-center">
+            <ResetPassword />
+            <NavBarSigninForm />
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-    </header>
-  );
+      </header>
+      :
+      
+       <PageError/>
+      
+    }
+    </>
+    
+  )
 };
 
 export default AdminResetPassword;
