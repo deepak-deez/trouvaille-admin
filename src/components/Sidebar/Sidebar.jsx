@@ -4,6 +4,7 @@ import "./Sidebar.scss";
 import mainLogo from "../../assets/images/navbar/Site-logo.svg";
 import SideBarLinks from "./sidebarData";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 
 const Sidebar = (props) => {
   const [show, setShow] = useState(false);
@@ -61,9 +62,9 @@ const Sidebar = (props) => {
           className={`sidebar-footer relative left-0 bottom-0 w-full h-[10%] md:mt-30`}
         >
           <div className="bg-[#E85C53] p-3 text-center">
-            <a className="text-white" href="superAdmins">
+            <Link className="text-white" to="/superAdmins">
               Contact Super Admin
-            </a>
+            </Link>
           </div>
           <div className="flex flex-col justify-center items-center mt-5 ">
             <h4 className="text-[#E85C53] font-semibold ">Admin Dashboard</h4>
