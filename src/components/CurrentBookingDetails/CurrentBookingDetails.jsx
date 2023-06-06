@@ -29,7 +29,8 @@ const CurrentBookingDetails = () => {
   const requestedForCancel = useRef();
   const navigate = useNavigate();
   const storeData = store.getState();
-  const userType = storeData.userLogin.userDetails.userDetails.userType;
+  console.log(storeData);
+  const userType = storeData.userLogin.userDetails.data.userDetails.userType;
 
   const denyReq = async () => {
     dispatch(updateBooking(id, "false", "", "Pending", "", "false"));
@@ -39,9 +40,7 @@ const CurrentBookingDetails = () => {
       position: "top",
       icon: "success",
       title: "Done!",
-      text: `Cancel request ${
-        userType === "Admin" ? "denied!" : "deleted!"
-      }`,
+      text: `Cancel request ${userType === "Admin" ? "denied!" : "deleted!"}`,
       showConfirmButton: false,
       toast: true,
       timer: 1500,
@@ -62,9 +61,7 @@ const CurrentBookingDetails = () => {
         icon: "success",
         title: "Done!",
         text: `Booking  ${
-          userType === "Admin"
-            ? "cancelled!"
-            : "requested for cancellation!"
+          userType === "Admin" ? "cancelled!" : "requested for cancellation!"
         }`,
         showConfirmButton: false,
         toast: true,
@@ -85,7 +82,11 @@ const CurrentBookingDetails = () => {
         <div className="flex-col flex md:flex-row w-full item-center py-5">
           <div className="flex md:w-[50%] w-full p-2">
             <div className="w-[100%] md:mx-4 md:mt-4 mx-2 my-2 flex items-center justify-center md:justify-start">
-              <img className="object-cover w-[350px] h-[350px] sm:w-full md:w-full md:h-[400px] rounded-md" src={data?.data.image.url} alt="img1" />
+              <img
+                className="object-cover w-[350px] h-[350px] sm:w-full md:w-full md:h-[400px] rounded-md"
+                src={data?.data.image.url}
+                alt="img1"
+              />
             </div>
           </div>
           <div className="mx-2 md:w-[50%] self-center sm:w-full sm:self-start p-2 ">
@@ -108,9 +109,7 @@ const CurrentBookingDetails = () => {
                     setCancelPopUp(!cancelPopUp);
                   }}
                 >
-                  {userType === "Admin"
-                    ? "Cancel"
-                    : "Request Cancellation"}
+                  {userType === "Admin" ? "Cancel" : "Request Cancellation"}
                 </Link>
                 <Link
                   className={` justify-self-end border px-3 py-2 rounded-md border-black me-5 bg-red-600 text-white font-bold

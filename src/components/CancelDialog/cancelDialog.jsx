@@ -18,11 +18,11 @@ const CancelDialog = (props) => {
   } = useSelector((state) => state.deleteBooking);
 
   const storeData = store.getState();
-  console.log(storeData.userLogin.userDetails.userDetails.userType);
+  console.log(storeData.userLogin.userDetails.data.userDetails.userType);
   const { data: updatedBooking } = useSelector((state) => state.updateBooking);
   const { setCancelPopUp, id } = props;
   const reasonRef = useRef();
-  const userType = storeData.userLogin.userDetails.userDetails.userType;
+  const userType = storeData.userLogin.userDetails.data.userDetails.userType;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
