@@ -16,8 +16,6 @@ const BookingList = () => {
         <div className="w-full bg-[#f5f7f7] ">
           <Navbar heading="Booking List"/>
           <div className="bg-white overflow-x-scroll md:h-[90vh] p-5 w-full ">
-
-        
           <div className="hidden md:grid grid-cols-6 gap-3 text-[#8383A9] text-center">
             <span className="py-5">Trip Title</span>
             <span className="py-5 ">Passenger Name</span>

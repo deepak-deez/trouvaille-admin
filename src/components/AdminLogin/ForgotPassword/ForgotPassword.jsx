@@ -9,12 +9,11 @@ const URL = process.env.REACT_APP_NODE_API;
 
 
 const ForgotPassword = () => {
-  const userType = localStorage.getItem("userType");
+
   const emailRef = useRef();
   const [apiMessage, setApiMessage] = useState("");
   // const navigate = useNavigate();
   const buttonClick = async () => {
-    // console.log(emailRef.current.value);
     const body = {
       email: emailRef.current.value,
     };

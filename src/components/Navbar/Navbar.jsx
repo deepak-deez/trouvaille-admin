@@ -2,10 +2,11 @@ import React from "react";
 import { MdNotificationsNone } from "react-icons/md";
 import userIcon from "../../assets/images/navbar/user-icon.png";
 import { useNavigate } from "react-router-dom";
-import store from "../../redux/store"
+import store from "../../redux/store";
 
 const Navbar = ({ heading}) => {
   let storeData= store.getState()
+  console.log(storeData.userLogin.userDetails);
   let userName = storeData.userLogin.userDetails.userDetails.userName;
   const navigate = useNavigate();
   return (

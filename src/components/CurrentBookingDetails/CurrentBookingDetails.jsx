@@ -11,6 +11,7 @@ import {
 } from "../../redux/actions/bookingActions";
 import Swal from "sweetalert2";
 import LoadingScreen from "../Loading/LoadingScreen";
+import store from "../../redux/store";
 
 const CurrentBookingDetails = () => {
   const { data, loading } = useSelector((state) => state.getSingleBooking);
@@ -27,6 +28,8 @@ const CurrentBookingDetails = () => {
   const [deny, setDeny] = useState(updatedBooking);
   const requestedForCancel = useRef();
   const navigate = useNavigate();
+  const storeData = store.getState();
+  const userType = storeData.userLogin.userDetails.userDetails.userType;
 
   const denyReq = async () => {
     dispatch(updateBooking(id, "false", "", "Pending", "", "false"));
@@ -37,7 +40,7 @@ const CurrentBookingDetails = () => {
       icon: "success",
       title: "Done!",
       text: `Cancel request ${
-        localStorage.getItem("userType") === "Admin" ? "denied!" : "deleted!"
+        userType === "Admin" ? "denied!" : "deleted!"
       }`,
       showConfirmButton: false,
       toast: true,
@@ -59,7 +62,7 @@ const CurrentBookingDetails = () => {
         icon: "success",
         title: "Done!",
         text: `Booking  ${
-          localStorage.getItem("userType") === "Admin"
+          userType === "Admin"
             ? "cancelled!"
             : "requested for cancellation!"
         }`,
@@ -94,7 +97,7 @@ const CurrentBookingDetails = () => {
                 <Link
                   className={`flex border px-3 py-2 rounded-md border-black me-5 font-bold
                 ${
-                  localStorage.getItem("userType") === "Backend-user"
+                  userType === "Backend-user"
                     ? requestedForCancel.current !== "true"
                       ? "flex"
                       : "hidden"
@@ -105,7 +108,7 @@ const CurrentBookingDetails = () => {
                     setCancelPopUp(!cancelPopUp);
                   }}
                 >
-                  {localStorage.getItem("userType") === "Admin"
+                  {userType === "Admin"
                     ? "Cancel"
                     : "Request Cancellation"}
                 </Link>
@@ -116,7 +119,7 @@ const CurrentBookingDetails = () => {
                     denyReq();
                   }}
                 >
-                  {localStorage.getItem("userType") === "Admin"
+                  {userType === "Admin"
                     ? "Deny Request"
                     : "Delete Cancellation Request"}
                 </Link>
