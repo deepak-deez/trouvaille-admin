@@ -8,14 +8,13 @@ import { getSingleBooking } from "../../redux/actions/bookingActions";
 import { useSelector } from "react-redux";
 
 const CancelNotification = () => {
-  let email = localStorage.getItem("email");
   return (
     <>
       <div>
         <div className="flex h-screen">
           <Sidebar />
           <div className="w-full bg-[#f5f7f7] ">
-            <Navbar heading="Notifications" userName={email} />
+            <Navbar heading="Notifications"/>
             <div className="md:h-[90vh] flex flex-col">
               <CancellationRequest />
             </div>

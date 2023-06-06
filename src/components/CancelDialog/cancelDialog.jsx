@@ -8,6 +8,7 @@ import {
   updateBooking,
 } from "../../redux/actions/bookingActions";
 import LoadingScreen from "../Loading/LoadingScreen";
+import store from "../../redux/store";
 
 const CancelDialog = (props) => {
   const {
@@ -15,10 +16,13 @@ const CancelDialog = (props) => {
     data: deletedBooking,
     loading,
   } = useSelector((state) => state.deleteBooking);
+
+  const storeData = store.getState();
+  console.log(storeData.userLogin.userDetails.userDetails.userType);
   const { data: updatedBooking } = useSelector((state) => state.updateBooking);
   const { setCancelPopUp, id } = props;
   const reasonRef = useRef();
-  const userType = localStorage.getItem("userType");
+  const userType = storeData.userLogin.userDetails.userDetails.userType;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -85,7 +89,7 @@ const CancelDialog = (props) => {
               className="  border-2 p-2 "
               ref={reasonRef}
               required={
-                localStorage.getItem("userType") === "Backend-user"
+                userType === "Backend-user"
                   ? true
                   : false
               }
