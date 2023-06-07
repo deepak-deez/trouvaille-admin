@@ -9,7 +9,7 @@ import LoadingScreen from "../Loading/LoadingScreen";
 
 const Navbar = ({ heading }) => {
   const [profilePop, setProfilePop] = useState(false);
-  // const [profilePop, setProfilePop] = useState(false);
+
 
   const { userDetails, loading } = useSelector((state) => state.userLogin);
   console.log(userDetails);
@@ -57,11 +57,15 @@ const Navbar = ({ heading }) => {
           src={userIcon}
           alt="usericon"
         />
-        {/* <ProfilePop /> */}
+        
         <h3 className="text-xs md:text-md truncate">hi</h3>
         <h3>{userName}</h3>
       </div>
+      {
+        profilePop && <ProfilePop/>
+      }
     </div>
+    
   );
 };
 
