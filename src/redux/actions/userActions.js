@@ -19,7 +19,7 @@ export const getUsers = (email, password) => async (dispatch) => {
     const body = {
       email,
       password,
-      type: "Admin",
+      type: "",
     };
 
     const { data } = await axios.post(`${URL}/login/Admin`, body, config);
