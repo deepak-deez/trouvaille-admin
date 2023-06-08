@@ -5,13 +5,11 @@ import User from "../../components/Users/user";
 import Footer from "../../components/Footer/Footer";
 
 const Dashboard = () => {
-  let email = localStorage.getItem("email");
-
   return (
     <div className="flex h-screen">
       <Sidebar />
       <div className="w-full bg-[#f5f7f7] ">
-        <Navbar heading="All Users" userName={email} />
+        <Navbar heading="All Users"/>
         <div className="md:h-[90vh]">
           <User />
         </div>

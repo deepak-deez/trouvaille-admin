@@ -5,12 +5,11 @@ import Footer from "../../components/Footer/Footer";
 import AmenitiesTable from "../../components/Amenities/Amenities";
 
 const AmenitiesPage = () => {
-  let email = localStorage.getItem("email");
   return (
     <div className="flex h-screen">
       <Sidebar />
       <div className="w-full bg-[#f5f7f7] ">
-        <Navbar heading="All Amenities" userName={email} />
+        <Navbar heading="All Amenities"/>
         <div className="md:h-[90vh]">
           <AmenitiesTable />
         </div>

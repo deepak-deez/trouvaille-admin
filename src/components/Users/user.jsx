@@ -10,15 +10,21 @@ import LoadingScreen from "../Loading/LoadingScreen";
 import PersonIcon from "@mui/icons-material/Person";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
+import Pagination from "../Pagination/Pagination";
+
+let PageSize = 10;
 
 const User = () => {
   const [addPop, setAddPop] = useState(false);
   const [editPop, setEditPop] = useState(false);
   const [delPop, setDelPop] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const [editable, setEditable] = useState("");
   const dispatch = useDispatch();
 
   const { data, loading } = useSelector((state) => state.getUser);
+  const firstPageIndex = (currentPage - 1) * PageSize;
+  const lastPageIndex = firstPageIndex + PageSize;
 
   useEffect(() => {
     dispatch(getUser("Backend-user"));
@@ -51,43 +57,45 @@ const User = () => {
             </div>
             <div>
               {data &&
-                data.data.map((val, index) => {
-                  return (
-                    <div
-                      className="sm:grid sm:grid-cols-4 flex flex-col gap-2 sm:py-4 tr-class "
-                      key={index}
-                    >
-                      <div className="td-class font-bold flex justify-between sm:justify-center order-2 sm:order-1">
-                        <div className="sm:hidden">
-                          <PersonIcon />
+                data.data
+                  .slice(firstPageIndex, lastPageIndex)
+                  .map((val, index) => {
+                    return (
+                      <div
+                        className="sm:grid sm:grid-cols-4 flex flex-col gap-2 sm:py-4 tr-class "
+                        key={index}
+                      >
+                        <div className="td-class font-bold flex justify-between sm:justify-center order-2 sm:order-1">
+                          <div className="sm:hidden">
+                            <PersonIcon />
+                          </div>
+                          <span>{val.userName}</span>
                         </div>
-                        <span>{val.userName}</span>
-                      </div>
-                      <div className="td-class flex justify-between order-3 sm:justify-center sm:order-2">
-                        <div className="sm:hidden">
-                          <EmailIcon />
+                        <div className="td-class flex justify-between order-3 sm:justify-center sm:order-2">
+                          <div className="sm:hidden">
+                            <EmailIcon />
+                          </div>
+                          <span>{val.email}</span>
                         </div>
-                        <span>{val.email}</span>
-                      </div>
-                      <div className="td-class flex justify-between order-4 sm:justify-center sm:order-3">
-                        <div className="sm:hidden">
-                          <PhoneIcon />
+                        <div className="td-class flex justify-between order-4 sm:justify-center sm:order-3">
+                          <div className="sm:hidden">
+                            <PhoneIcon />
+                          </div>
+                          <span>{val.phone}</span>
                         </div>
-                        <span>{val.phone}</span>
+                        <div className="flex justify-start ms-2 sm:justify-center order-1 sm:order-4 ">
+                          <Menu
+                            editPop={editPop}
+                            setEditPop={setEditPop}
+                            setEditable={setEditable}
+                            data={val}
+                            delPop={delPop}
+                            setDelPop={setDelPop}
+                          />
+                        </div>
                       </div>
-                      <div className="flex justify-start ms-2 sm:justify-center order-1 sm:order-4 ">
-                        <Menu
-                          editPop={editPop}
-                          setEditPop={setEditPop}
-                          setEditable={setEditable}
-                          data={val}
-                          delPop={delPop}
-                          setDelPop={setDelPop}
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
             </div>
           </div>
         </div>
@@ -99,6 +107,13 @@ const User = () => {
       {delPop && (
         <DeleteUser delPop={delPop} setDelPop={setDelPop} data={editable} />
       )}
+      <Pagination
+        className="pagination-bar"
+        currentPage={currentPage}
+        totalCount={data && data?.data.length}
+        pageSize={PageSize}
+        onPageChange={(page) => setCurrentPage(page)}
+      />
     </>
   );
 };

@@ -19,22 +19,15 @@ export const getUsers = (email, password) => async (dispatch) => {
     const body = {
       email,
       password,
-      type: "Admin",
+      type: "",
     };
-    console.log(`${URL}/login/Admin`);
+
     const { data } = await axios.post(`${URL}/login/Admin`, body, config);
-    console.log(data);
-    if (data.status == 200) {
-      dispatch({
-        type: ADMIN_SUCCESS,
-        payload: data,
-      });
-    } else if (data.status == 500) {
-      dispatch({
-        type: ADMIN_FAILED,
-        payload: data,
-      });
-    }
+    localStorage.setItem("userDetails", JSON.stringify(data));
+    dispatch({
+      type: ADMIN_SUCCESS,
+      payload: data,
+    });
   } catch (error) {
     dispatch({
       type: ADMIN_FAILED,

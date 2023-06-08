@@ -8,19 +8,26 @@ import DotMenu from "../DotMenu/DotMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { getTrip } from "../../redux/actions/tripAction";
 import LoadingScreen from "../Loading/LoadingScreen";
+import Pagination from "../Pagination/Pagination";
+
+let PageSize = 8;
 
 const TravelType = () => {
   const [showAdd, setShowAdd] = useState(false);
   const [showUpdatePop, setShowUpdatePop] = useState(false);
   const [showDelPop, setShowDelPop] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const [editData, setEditData] = useState("");
   const dispatch = useDispatch();
 
   const { data, loading } = useSelector((state) => state.getTrip);
 
+  const firstPageIndex = (currentPage - 1) * PageSize;
+  const lastPageIndex = firstPageIndex + PageSize;
+
   useEffect(() => {
     dispatch(getTrip("travel"));
-  }, []);
+  }, []); 
 
   return (
     <>
@@ -41,7 +48,9 @@ const TravelType = () => {
         <div className="grid lg:grid-cols-4 sm:grid-cols-2">
           {data &&
             data?.data &&
-            data.data.map((item, index) => {
+            data.data
+            .slice(firstPageIndex,lastPageIndex)
+            .map((item, index) => {
               console.log("item : ", item.icon.url);
               const icon = item.icon.url;
 
@@ -106,6 +115,13 @@ const TravelType = () => {
           updateData={editData}
         />
       )}
+      <Pagination
+        className="pagination-bar"
+        currentPage={currentPage}
+        totalCount={data && data?.data.length}
+        pageSize={PageSize}
+        onPageChange={(page) => setCurrentPage(page)}
+      />
     </>
   );
 };

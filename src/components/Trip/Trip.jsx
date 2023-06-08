@@ -7,16 +7,22 @@ import DeletePop from "../DeletePop/DeletePop";
 import { useDispatch, useSelector } from "react-redux";
 import { getTrip } from "../../redux/actions/tripAction";
 import LoadingScreen from "../Loading/LoadingScreen";
+import Pagination from "../Pagination/Pagination";
+
+let PageSize = 8;
 
 const Trip = () => {
   const [showAdd, setShowAdd] = useState(false);
   const [showDelPop, setShowDelPop] = useState(false);
   const [showUpdatePop, setShowUpdatePop] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const [editData, setEditData] = useState("");
   const dispatch = useDispatch();
 
   const { data, loading } = useSelector((state) => state.getTrip);
   console.log(data);
+  const firstPageIndex = (currentPage - 1) * PageSize;
+  const lastPageIndex = firstPageIndex + PageSize;
 
   useEffect(() => {
     dispatch(getTrip("category"));
@@ -41,7 +47,9 @@ const Trip = () => {
         <div className="grid lg:grid-cols-4 sm:grid-cols-2">
           {data &&
             data?.data &&
-            data.data.map((val, index) => {
+            data.data
+            .slice(firstPageIndex, lastPageIndex)
+            .map((val, index) => {
               return (
                 <div className="w-full p-5 gap-4" key={index}>
                   <div className="p-8 bg-white h-[100%] text-center rounded shadow-md">
@@ -100,6 +108,13 @@ const Trip = () => {
           feature="category"
         />
       )}
+      <Pagination
+        className="pagination-bar"
+        currentPage={currentPage}
+        totalCount={data && data?.data.length}
+        pageSize={PageSize}
+        onPageChange={(page) => setCurrentPage(page)}
+      />
     </>
   );
 };
