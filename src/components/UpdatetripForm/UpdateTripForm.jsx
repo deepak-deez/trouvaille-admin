@@ -127,7 +127,8 @@ const NewTripForm = () => {
       setInputFields(data?.data[0].tripHighlights);
       setFaqFields(data?.data[0].faq);
       setAmenities(data?.data[0].amenities);
-      setFile(data?.data[0].image.url);
+      setFile(data?.data[0].image);
+      setArrayDate(data?.data[0].activities);
       // errors
       data?.data[0]?.tripCategory?.map((item) => {
         setTripCategory([...tripCategory, { label: item, value: item }]);
@@ -147,52 +148,39 @@ const NewTripForm = () => {
       ]);
     }
   }, [data]);
-  console.log(data?.data[0]?.tripCategory);
-  console.log(tripCategory, "after map");
+
+
 
   const submitHandler = () => {
-    console.log(id, "id");
-    console.log(title);
-    console.log(image);
-    if (
-      title &&
-      image &&
-      duration &&
-      tripCategory.map((trip) => trip.value) &&
-      placeNumber &&
-      maximumGuests &&
-      inputFields &&
-      price &&
-      discountedPrice &&
-      occasions.map((occasion) => occasion.value) &&
-      travelType.value &&
-      amenities &&
-      briefd &&
-      faqFields &&
-      status.value
-    ) {
-      console.log("nkjjhftgxdfgchvjk");
-      dispatch(
-        updatePackage(
-          id,
-          title,
-          image,
-          duration,
-          arrayDate,
-          tripCategory.map((trip) => trip.value),
-          placeNumber,
-          maximumGuests,
-          inputFields,
-          price,
-          discountedPrice,
-          occasions.map((occasion) => occasion.value),
-          travelType.value,
-          amenities,
-          briefd,
-          faqFields,
-          status.value
-        )
-      );
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("images", image);
+    formData.append("duration", duration);
+    formData.append("activities", JSON.stringify(arrayDate));
+    formData.append(
+      "tripCategory",
+      JSON.stringify(tripCategory.map((trip) => trip.value))
+    );
+    formData.append("placeNumber", placeNumber);
+    formData.append("maximumGuests", maximumGuests);
+
+    for (let i = 0; i < inputFields.length; i++) {
+      formData.append("images", inputFields[i].images);
+    }
+    formData.append("tripHighlights", JSON.stringify(inputFields));
+    formData.append("price", price);
+    formData.append("discountedPrice", discountedPrice);
+    formData.append(
+      "occasions",
+      JSON.stringify(occasions.map((occasion) => occasion.value))
+    );
+    formData.append("travelType", JSON.stringify(travelType.value));
+    formData.append("amenities", JSON.stringify(amenities));
+    formData.append("briefDescription", briefd);
+    formData.append("faq", JSON.stringify(faqFields));
+    formData.append("status", status.value);
+    if (formData) {
+      dispatch(updatePackage(id, formData));
     } else {
       Swal.fire({
         className: "pop-top",
@@ -350,7 +338,6 @@ const NewTripForm = () => {
             <MultipleTripForm
               inputFields={inputFields}
               setInputFields={setInputFields}
-              res={data?.data[0].tripHighlights}
               editMode={editMode}
               setEditMode={setEditMode}
             />

@@ -7,18 +7,21 @@ function MultipleTripForm({
   editMode,
   setEditMode,
 }) {
-  console.log(editMode);
+  // console.log(editMode);
   function imageChange(index, e) {
-    setEditMode(false);
-    let uplImg = e.target.files[0];
-    imgToUrl(uplImg).then((res) => {
-      console.log(res);
-      const list = [...inputFields];
-      list[index]["icon"] = res;
-      setInputFields(list);
-    });
+    const list = [...inputFields];
+    list[index]["images"] = e.target.files[0];
+    list[index]["showIcon"] = URL.createObjectURL(e.target.files[0]);
+    setInputFields(list);
+
+    // imgToUrl(uplImg).then((res) => {
+    //   console.log(res);
+    //   const list = [...inputFields];
+    //   list[index]["icon"] = res;
+    //   setInputFields(list);
+    // });
   }
-  console.log(inputFields);
+  console.log(inputFields, "ghgh");
   console.log(editMode);
 
   const removeInputFields = (index) => {
@@ -35,6 +38,9 @@ function MultipleTripForm({
     list[index][name] = value;
     setInputFields(list);
   };
+
+  
+
   return (
     <div className="col-sm-8">
       {inputFields.map((data, index) => {
@@ -78,9 +84,24 @@ function MultipleTripForm({
             </div>
             <div className="py-4">
               <div className=" flex flex-col md:flex-row justify-start items-center space-x-2 relative">
-                {data.icon ? (
+                {console.log(data, "hkgjfh")}
+                {editMode ? (
+                  data.icon ? (
+                    <img
+                      src={
+                        data.hasOwnProperty("showIcon")
+                          ? data.showIcon
+                          : data.icon
+                      }
+                      alt="browserIcon"
+                      className="w-[30%] md:w-[20%]  md:h-[10vh]"
+                    />
+                  ) : (
+                    <h1 className="text-gray-400">Icon</h1>
+                  )
+                ) : data.images ? (
                   <img
-                    src={editMode ? data.icon.url : data.icon}
+                    src={editMode ? data.images : data.showIcon}
                     alt="browserIcon"
                     className="w-[30%] md:w-[20%]  md:h-[10vh]"
                   />

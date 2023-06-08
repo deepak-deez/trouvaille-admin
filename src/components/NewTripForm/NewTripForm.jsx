@@ -58,7 +58,8 @@ const NewTripForm = () => {
       title: "",
       name: "",
       description: "",
-      icon: "",
+      images: "",
+      showIcon: "",
     },
   ]);
 
@@ -69,7 +70,8 @@ const NewTripForm = () => {
         title: "",
         name: "",
         description: "",
-        icon: "",
+        images: "",
+        showIcon: "",
       },
     ]);
   };
@@ -92,52 +94,39 @@ const NewTripForm = () => {
 
   function handleChange(e) {
     setFile(URL.createObjectURL(e.target.files[0]));
-    let uplImg = e.target.files[0];
-    imgToUrl(uplImg).then((res) => {
-      console.log(res);
-      let data_Url = res;
-      setImage(data_Url);
-    });
+    setImage(e.target.files[0]);
   }
 
   const submitHandler = () => {
-    if (
-      title &&
-      image &&
-      duration &&
-      tripCategory.map((trip) => trip.value) &&
-      placeNumber &&
-      maximumGuests &&
-      inputFields &&
-      price &&
-      discountedPrice &&
-      occasions.map((occasion) => occasion.value) &&
-      travelType.value &&
-      amenities &&
-      briefd &&
-      faqFields &&
-      status.value
-    ) {
-      dispatch(
-        addPackage(
-          title,
-          image,
-          duration,
-          arrayDate,
-          tripCategory.map((trip) => trip.value),
-          placeNumber,
-          maximumGuests,
-          inputFields,
-          price,
-          discountedPrice,
-          occasions.map((occasion) => occasion.value),
-          travelType.value,
-          amenities,
-          briefd,
-          faqFields,
-          status.value
-        )
-      );
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("images", image);
+    formData.append("duration", duration);
+    formData.append("activities", JSON.stringify(arrayDate));
+    formData.append(
+      "tripCategory",
+      JSON.stringify(tripCategory.map((trip) => trip.value))
+    );
+    formData.append("placeNumber", placeNumber);
+    formData.append("maximumGuests", maximumGuests);
+    
+    for (let i = 0; i < inputFields.length; i++) {
+      formData.append("images", inputFields[i].images);
+    }
+    formData.append("tripHighlights", JSON.stringify(inputFields));
+    formData.append("price", price);
+    formData.append("discountedPrice", discountedPrice);
+    formData.append(
+      "occasions",
+      JSON.stringify(occasions.map((occasion) => occasion.value))
+    );
+    formData.append("travelType", JSON.stringify(travelType.value));
+    formData.append("amenities", JSON.stringify(amenities));
+    formData.append("briefDescription", briefd);
+    formData.append("faq", JSON.stringify(faqFields));
+    formData.append("status", status.value);
+    if (formData) {
+      dispatch(addPackage(formData));
     } else {
       Swal.fire({
         className: "pop-top",

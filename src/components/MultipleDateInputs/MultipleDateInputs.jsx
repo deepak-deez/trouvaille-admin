@@ -4,7 +4,7 @@ import dateRange from "../../functions/dateRange";
 import convertDate from "../../functions/monthFormat";
 
 const MultipleDateInputs = ({ duration, setArrayDate, arrayDate }) => {
-  console.log(duration);
+  console.log(arrayDate, "arrayDate");
   const date = duration.split(" ");
   const startDate = date[0];
   const endDate = date[2];
@@ -19,8 +19,10 @@ const MultipleDateInputs = ({ duration, setArrayDate, arrayDate }) => {
     setCounter(1);
   }, [newStartdate, newEnddate]);
 
-  const handleChange = (input, e) => {
-    input.details = e.target.value;
+  const handleChange = (key, e) => {
+    let newarr = [...arrayDate];
+    arrayDate[key].details = e.target.value;
+    setArrayDate(newarr);
   };
 
   return (
@@ -35,8 +37,9 @@ const MultipleDateInputs = ({ duration, setArrayDate, arrayDate }) => {
               className=" border p-3 "
               type="text"
               onChange={(e) => {
-                handleChange(input, e);
+                handleChange(key, e);
               }}
+              value={input?.details}
             />
           </div>
         ))}

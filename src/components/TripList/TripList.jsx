@@ -91,7 +91,7 @@ const TripList = () => {
                         <div className="td-class font-bold p-1 md:py-5 flex flex-col md:flex-row  gap-3 items-center">
                           <img
                             className="w-80 max-w-[350px] max-h-[250px] md:h-[62px] md:w-[62px] rounded-md"
-                            src={val.image.url}
+                            src={val.image}
                             alt="logo"
                           />
                           <span> {val.title}</span>
