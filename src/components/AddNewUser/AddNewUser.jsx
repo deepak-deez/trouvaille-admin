@@ -4,10 +4,11 @@ import "./style.scss";
 import { addNewUser, getUser } from "../../redux/actions/addUserAction";
 import Swal from "sweetalert2";
 import validator from "validator";
+import LoadingScreen from "../Loading/LoadingScreen";
 
 const AddNewUser = ({ setAddPop, addPop }) => {
   const { data } = useSelector((state) => state.getUser);
-  const { data: addedUser } = useSelector((state) => state.addNewUser);
+  const { data: addedUser, loading } = useSelector((state) => state.addNewUser);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
@@ -130,7 +131,7 @@ const AddNewUser = ({ setAddPop, addPop }) => {
             className="bg-[#E85C53] text-white p-2 mt-5 rounded-sm"
             onClick={addUserHandler}
           >
-            Submit
+            {loading ? <LoadingScreen /> : "Submit"}
           </button>
         </div>
       </div>

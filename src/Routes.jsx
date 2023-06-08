@@ -36,7 +36,7 @@ const Router = () => {
           path="/update-module/trip-package/:id"
           element={<UpdateTrip />}
         />
-        <Route exact path="*" element={<PageError />} />
+
         <Route exact path="/booking-list" element={<BookingList />} />
         <Route
           exact
@@ -51,6 +51,7 @@ const Router = () => {
           path="/token-validation/:user/:id/:token"
           element={<ResetPassword />}
         />
+        <Route exact path="*" element={<PageError />} />
       </Routes>
     </BrowserRouter>
   );

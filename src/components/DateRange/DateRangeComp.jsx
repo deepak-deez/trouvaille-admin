@@ -15,7 +15,6 @@ const DateRangeComp = ({ setDuration, duration, range, setRange }) => {
   console.log(apiStartDate);
   console.log(apiEndDate);
 
-
   const [open, setOpen] = useState(false);
   const refOne = useRef(null);
 
@@ -47,6 +46,7 @@ const DateRangeComp = ({ setDuration, duration, range, setRange }) => {
     if (refOne.current && !refOne.current.contains(e.target)) {
       setOpen(false);
     }
+    console.log(refOne);
   };
 
   return (
