@@ -60,6 +60,7 @@ const NewTripForm = () => {
       answer: "",
     },
   ]);
+  const [indexes, setIndexes] = useState([]);
 
   const [inputFields, setInputFields] = useState([
     {
@@ -89,12 +90,7 @@ const NewTripForm = () => {
 
   function handleChange(e) {
     setFile(URL.createObjectURL(e.target.files[0]));
-    let uplImg = e.target.files[0];
-    imgToUrl(uplImg).then((res) => {
-      console.log(res);
-      let data_Url = res;
-      setImage(data_Url);
-    });
+    setImage(e.target.files[0]);
   }
   const addInputField = () => {
     setInputFields([
@@ -149,13 +145,14 @@ const NewTripForm = () => {
     }
   }, [data]);
 
-
+  console.log(indexes);
 
   const submitHandler = () => {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("images", image);
     formData.append("duration", duration);
+    formData.append("indexes", JSON.stringify(indexes)); 
     formData.append("activities", JSON.stringify(arrayDate));
     formData.append(
       "tripCategory",
@@ -336,6 +333,7 @@ const NewTripForm = () => {
               </button>
             </div>
             <MultipleTripForm
+              setIndexes={setIndexes}
               inputFields={inputFields}
               setInputFields={setInputFields}
               editMode={editMode}

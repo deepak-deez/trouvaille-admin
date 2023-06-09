@@ -51,8 +51,8 @@ const TravelType = () => {
             data.data
             .slice(firstPageIndex,lastPageIndex)
             .map((item, index) => {
-              console.log("item : ", item.icon.url);
-              const icon = item.icon.url;
+              console.log("item : ", item.icon);
+              const icon = item.icon;
 
               return (
                 <div className="w-full p-5 gap-4" key={index}>

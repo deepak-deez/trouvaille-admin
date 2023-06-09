@@ -2,6 +2,7 @@ import { React, useState } from "react";
 import imgToUrl from "../../functions/imgToUrl";
 
 function MultipleTripForm({
+  setIndexes,
   inputFields,
   setInputFields,
   editMode,
@@ -12,8 +13,10 @@ function MultipleTripForm({
     const list = [...inputFields];
     list[index]["images"] = e.target.files[0];
     list[index]["showIcon"] = URL.createObjectURL(e.target.files[0]);
+
     setInputFields(list);
 
+    editMode && setIndexes((prev) => [...prev, index + 1]);
     // imgToUrl(uplImg).then((res) => {
     //   console.log(res);
     //   const list = [...inputFields];
@@ -38,8 +41,6 @@ function MultipleTripForm({
     list[index][name] = value;
     setInputFields(list);
   };
-
-  
 
   return (
     <div className="col-sm-8">
@@ -86,7 +87,7 @@ function MultipleTripForm({
               <div className=" flex flex-col md:flex-row justify-start items-center space-x-2 relative">
                 {console.log(data, "hkgjfh")}
                 {editMode ? (
-                  data.icon ? (
+                  data.icon || data.showIcon ? (
                     <img
                       src={
                         data.hasOwnProperty("showIcon")
@@ -97,6 +98,7 @@ function MultipleTripForm({
                       className="w-[30%] md:w-[20%]  md:h-[10vh]"
                     />
                   ) : (
+                    // <p>{data.icon}</p>
                     <h1 className="text-gray-400">Icon</h1>
                   )
                 ) : data.images ? (
@@ -128,7 +130,9 @@ function MultipleTripForm({
               {inputFields.length !== 1 ? (
                 <button
                   className="border-2 border-red-500 px-2 rounded-md text-red-500 "
-                  onClick={removeInputFields}
+                  onClick={() => {
+                    removeInputFields(index);
+                  }}
                 >
                   Remove
                 </button>

@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTrip } from "../../redux/actions/tripAction";
 import LoadingScreen from "../Loading/LoadingScreen";
 import Pagination from "../Pagination/Pagination";
+import "./style.scss";
 
 let PageSize = 6;
 
@@ -62,9 +63,9 @@ const Occasion = () => {
                       >
                         <div className="flex  items-center font-bold p-3 w-100 flex-col md:flex-row md:columns-2 md:gap-3 order-2 md:order-1">
                           <img
-                            src={item.icon.url}
+                            src={item.icon}
                             alt=""
-                            className="h-[62px] w-[62px] mr-3"
+                            className="h-[62px] img-filter w-[62px] mr-3"
                           />
                           <span className="px-2">{item.title}</span>
                         </div>

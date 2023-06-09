@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTrip } from "../../redux/actions/tripAction";
 import LoadingScreen from "../Loading/LoadingScreen";
 import Pagination from "../Pagination/Pagination";
+import "./style.scss";
 
 let PageSize = 8;
 
@@ -47,9 +48,7 @@ const Trip = () => {
         <div className="grid lg:grid-cols-4 sm:grid-cols-2">
           {data &&
             data?.data &&
-            data.data
-            .slice(firstPageIndex, lastPageIndex)
-            .map((val, index) => {
+            data.data.slice(firstPageIndex, lastPageIndex).map((val, index) => {
               return (
                 <div className="w-full p-5 gap-4" key={index}>
                   <div className="p-8 bg-white h-[100%] text-center rounded shadow-md">
@@ -66,7 +65,7 @@ const Trip = () => {
                       </div>
                     </div>
                     <div className="flex justify-center">
-                      <img src={val.icon} alt="" className="h-10" />
+                      <img src={val.icon} alt="" className="h-10 img-filter" />
                     </div>
                     <h3 className="text-center font-semibold">{val.title}</h3>
                     <p className="text-gray-600 w-full  line-clamp-4">
