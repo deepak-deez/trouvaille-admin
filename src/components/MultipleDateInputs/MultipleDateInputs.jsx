@@ -3,7 +3,12 @@ import getNumberOfDays from "../../functions/noOfDates";
 import dateRange from "../../functions/dateRange";
 import convertDate from "../../functions/monthFormat";
 
-const MultipleDateInputs = ({ duration, setArrayDate, arrayDate }) => {
+const MultipleDateInputs = ({
+  duration,
+  setArrayDate,
+  arrayDate,
+  editMode,
+}) => {
   console.log(arrayDate, "arrayDate");
   const date = duration.split(" ");
   const startDate = date[0];

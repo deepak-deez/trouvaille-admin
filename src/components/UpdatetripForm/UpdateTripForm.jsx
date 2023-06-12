@@ -85,7 +85,6 @@ const NewTripForm = () => {
   useEffect(() => {
     dispatch(getSinglePackage(id));
   }, []);
-  console.log(data);
   const dispatch = useDispatch();
 
   function handleChange(e) {
@@ -97,7 +96,6 @@ const NewTripForm = () => {
 
     setIndexes(obj);
   }
-  console.log(file);
   const addInputField = () => {
     setInputFields([
       ...inputFields,
@@ -130,15 +128,18 @@ const NewTripForm = () => {
       setFaqFields(data?.data[0].faq);
       setAmenities(data?.data[0].amenities);
       setFile(data?.data[0].image);
-      setArrayDate(data?.data[0].activities);
+      setArrayDate(data?.data[0]?.activities);
       // errors
       data?.data[0]?.tripCategory?.map((item) => {
         setTripCategory([...tripCategory, { label: item, value: item }]);
       });
-      // data?.data[0]?.occasions?.forEach((item) => {
-      //   return setOccasions([...occasions, { label: item, value: item }]);
-      // });
+
+      data?.data[0]?.occasions?.forEach((item) => {
+        return setOccasions([...occasions, { label: item, value: item }]);
+      });
+
       setDuration(data?.data[0].duration);
+      console.log(duration);
       setRange([
         {
           startDate: new Date(
@@ -150,8 +151,6 @@ const NewTripForm = () => {
       ]);
     }
   }, [data]);
-
-  console.log(indexes);
 
   const submitHandler = () => {
     const formData = new FormData();
@@ -238,7 +237,6 @@ const NewTripForm = () => {
       dispatch({ type: "UPDATE_PACKAGE_SUCCESS", payload: null });
     }
   }, [updatedPackage]);
-  console.log(updatedPackage);
 
   return (
     <>
@@ -296,6 +294,7 @@ const NewTripForm = () => {
                   duration={duration}
                   arrayDate={arrayDate}
                   setArrayDate={setArrayDate}
+                  editMode={editMode}
                 />
               )}
             </div>

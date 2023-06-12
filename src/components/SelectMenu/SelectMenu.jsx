@@ -5,7 +5,6 @@ import "./style.scss";
 
 const SelectMenu = ({ options, value, width, setvalue }) => {
   const animatedComponents = makeAnimated();
-  console.log(value);
   return (
     <div className="">
       <div className="">

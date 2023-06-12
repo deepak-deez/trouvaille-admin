@@ -8,11 +8,8 @@ import "react-date-range/dist/theme/default.css";
 
 const DateRangeComp = ({ setDuration, duration, range, setRange }) => {
   const dateMonthFromat = duration?.split("-");
-  console.log(dateMonthFromat);
   const apiStartDate = `${dateMonthFromat[0]}`;
   const apiEndDate = `${dateMonthFromat[1]}`;
-  console.log(apiStartDate);
-  console.log(apiEndDate);
 
   const [open, setOpen] = useState(false);
   const refOne = useRef(null);

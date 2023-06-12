@@ -29,8 +29,6 @@ function MultipleTripForm({
     //   setInputFields(list);
     // });
   }
-  console.log(inputFields, "ghgh");
-  console.log(editMode);
 
   const removeInputFields = (index) => {
     const rows = [...inputFields];
@@ -90,7 +88,6 @@ function MultipleTripForm({
             </div>
             <div className="py-4">
               <div className=" flex flex-col md:flex-row justify-start items-center space-x-2 relative">
-                {console.log(data, "hkgjfh")}
                 {editMode ? (
                   data.icon || data.showIcon ? (
                     <img
