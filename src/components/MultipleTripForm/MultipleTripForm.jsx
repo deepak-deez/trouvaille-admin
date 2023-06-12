@@ -16,7 +16,12 @@ function MultipleTripForm({
 
     setInputFields(list);
 
-    editMode && setIndexes((prev) => [...prev, index + 1 ]);
+    // if(in)
+    editMode &&
+      setIndexes((prev) => {
+        if (prev.includes(index + 1) === false) return [...prev, index + 1];
+        else return [...prev];
+      });
     // imgToUrl(uplImg).then((res) => {
     //   console.log(res);
     //   const list = [...inputFields];
