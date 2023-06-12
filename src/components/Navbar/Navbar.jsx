@@ -36,8 +36,12 @@ const Navbar = ({ heading }) => {
   //   }
   // }, [userDetails]);
   const navigate = useNavigate();
+  // useEffect(() => {
+  //   console.log(profilePop, "navbar");
+  // }, [profilePop]);
 
   // if (loading)
+  console.log(profilePop, "img");
   return (
     <div className="flex justify-between items-center bg-[#dbe6f5] ml-10 xl:m-0 col-span-10 p-5">
       <h2 className="font-bold ">{heading}</h2>
@@ -57,7 +61,9 @@ const Navbar = ({ heading }) => {
             src={userIcon}
             alt="usericon"
           />
-          {profilePop && <ProfilePop />}
+          {profilePop && (
+            <ProfilePop setProfilePop={setProfilePop} profilePop={profilePop} />
+          )}
         </div>
 
         <h3 className="text-xs md:text-md truncate">hi</h3>

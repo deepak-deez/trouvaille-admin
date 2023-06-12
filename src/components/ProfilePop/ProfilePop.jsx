@@ -1,10 +1,10 @@
 import Cookies from "js-cookie";
-import React from "react";
+import { React, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./style.scss";
 
-const ProfilePop = () => {
+const ProfilePop = ({ setProfilePop, profilePop }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   function logout() {
@@ -19,10 +19,29 @@ const ProfilePop = () => {
   const userType = userDetails?.data?.userDetails.userType;
   const UserId = userDetails?.data?.userDetails._id;
   //   const UserId=id.slice(1,10)
+  const refProfile = useRef(null);
 
+  useEffect(() => {
+    document.addEventListener("click", hideOnClickOutside, true);
+  }, []);
+
+  //   useEffect(() => {
+  //     console.log(profilePop, "use");
+  //   }, [profilePop]);
+
+  const hideOnClickOutside = (e) => {
+    if (refProfile.current && !refProfile.current.contains(e.target)) {
+      setProfilePop(false);
+    }
+    console.log("hii");
+  };
+  console.log(profilePop, "use Ref");
   return (
     <>
-      <div className="bg-[#F5F9FF] z-30  w-[15rem] rounded-lg h-[15rem] absolute  top-8 right-[-4.5rem]">
+      <div
+        ref={refProfile}
+        className="bg-[#F5F9FF] z-30  w-[15rem] rounded-lg h-[15rem] absolute  top-8 right-[-4.5rem]"
+      >
         <div
           className="arrow-up absolute right-[80px] top-[-10px]
             "
