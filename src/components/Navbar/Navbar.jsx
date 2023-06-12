@@ -10,7 +10,6 @@ import LoadingScreen from "../Loading/LoadingScreen";
 const Navbar = ({ heading }) => {
   const [profilePop, setProfilePop] = useState(false);
 
-
   const { userDetails, loading } = useSelector((state) => state.userLogin);
   console.log(userDetails);
 
@@ -42,30 +41,29 @@ const Navbar = ({ heading }) => {
   return (
     <div className="flex justify-between items-center bg-[#dbe6f5] ml-10 xl:m-0 col-span-10 p-5">
       <h2 className="font-bold ">{heading}</h2>
-      <div className="flex justify-center items-center px-5 space-x-2">
+      <div className="flex justify-center items-center px-5 space-x-2 ">
         <MdNotificationsNone
           className="hover: cursor-pointer"
           onClick={() => {
             navigate("/cancel-requests");
           }}
         />
-        <img
-          onClick={() => {
-            setProfilePop(!profilePop);
-          }}
-          className="w-[25px]"
-          src={userIcon}
-          alt="usericon"
-        />
-        
+        <div className="relative flex items-center justify-center">
+          <img
+            onClick={() => {
+              setProfilePop(!profilePop);
+            }}
+            className="w-[25px]"
+            src={userIcon}
+            alt="usericon"
+          />
+          {profilePop && <ProfilePop />}
+        </div>
+
         <h3 className="text-xs md:text-md truncate">hi</h3>
-        <h3>{userName}</h3>
+        <h3 className="w-[]">{userName}</h3>
       </div>
-      {
-        profilePop && <ProfilePop/>
-      }
     </div>
-    
   );
 };
 

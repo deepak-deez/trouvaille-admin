@@ -16,7 +16,7 @@ function MultipleTripForm({
 
     setInputFields(list);
 
-    editMode && setIndexes((prev) => [...prev, index + 1]);
+    editMode && setIndexes((prev) => [...prev, index + 1 ]);
     // imgToUrl(uplImg).then((res) => {
     //   console.log(res);
     //   const list = [...inputFields];

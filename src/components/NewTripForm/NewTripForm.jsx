@@ -109,7 +109,7 @@ const NewTripForm = () => {
     );
     formData.append("placeNumber", placeNumber);
     formData.append("maximumGuests", maximumGuests);
-    
+
     for (let i = 0; i < inputFields.length; i++) {
       formData.append("images", inputFields[i].images);
     }

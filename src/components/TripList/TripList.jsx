@@ -63,7 +63,7 @@ const TripList = () => {
             <div className="tr-class md:grid md:grid-cols-5 text-[#8383A9] text-center">
               <p className="p-3 hidden md:block">Trip Title</p>
               <p className="p-3 hidden md:block">Duration</p>
-              <p className="p-3 hidden md:block">Price</p>
+              <p className="p-3 hidden md:block"> Price</p>
               <p className="p-3 hidden md:block">Discounted Price</p>
               <div className="flex items-center justify-center">
                 <button
@@ -106,13 +106,13 @@ const TripList = () => {
                           <span className="md:hidden">
                             <CurrencyRupeeIcon />
                           </span>
-                          <span>{val.price}</span>
+                          <span> ₹ {val.price}</span>
                         </p>
                         <p className="td-class flex justify-between w-80 md:w-full md:justify-center md:order-3 order-4">
                           <span className="md:hidden">
                             <DiscountIcon />
                           </span>
-                          {val.discountedPrice}
+                          ₹ {val.discountedPrice}
                         </p>
                         <div className="td-class md:order-4 order-1 w-80 md:w-full">
                           <TripDropMenu

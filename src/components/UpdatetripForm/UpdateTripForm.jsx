@@ -91,6 +91,12 @@ const NewTripForm = () => {
   function handleChange(e) {
     setFile(URL.createObjectURL(e.target.files[0]));
     setImage(e.target.files[0]);
+    const obj = indexes;
+
+    if(obj[0]!==0)
+    obj.unshift(0);
+
+    setIndexes(obj);
   }
   const addInputField = () => {
     setInputFields([
@@ -152,7 +158,7 @@ const NewTripForm = () => {
     formData.append("title", title);
     formData.append("images", image);
     formData.append("duration", duration);
-    formData.append("indexes", JSON.stringify(indexes)); 
+    formData.append("indexes", JSON.stringify(indexes));
     formData.append("activities", JSON.stringify(arrayDate));
     formData.append(
       "tripCategory",
