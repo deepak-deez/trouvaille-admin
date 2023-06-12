@@ -98,6 +98,7 @@ const NewTripForm = () => {
 
     setIndexes(obj);
   }
+  console.log(file);
   const addInputField = () => {
     setInputFields([
       ...inputFields,
@@ -156,9 +157,15 @@ const NewTripForm = () => {
   const submitHandler = () => {
     const formData = new FormData();
     formData.append("title", title);
-    formData.append("images", image);
+    if(!image){
+      formData.append("images", file);
+    }
+    else{
+      formData.append("images", image);
+    }
+
     formData.append("duration", duration);
-    formData.append("indexes", JSON.stringify(indexes));
+    formData.append("indexes", JSON.stringify(indexes)); 
     formData.append("activities", JSON.stringify(arrayDate));
     formData.append(
       "tripCategory",
