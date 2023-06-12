@@ -84,7 +84,7 @@ const CurrentBookingDetails = () => {
             <div className="w-[100%] md:mx-4 md:mt-4 mx-2 my-2 flex items-center justify-center md:justify-start">
               <img
                 className="object-cover w-[350px] h-[350px] sm:w-full md:w-full md:h-[400px] rounded-md"
-                src={data?.data.image.url}
+                src={data?.data.tripDetails?.image}
                 alt="img1"
               />
             </div>

@@ -20,6 +20,7 @@ const BookingItems = () => {
     dispatch(getBooking());
   }, []);
 
+
   const firstPageIndex = (currentPage - 1) * PageSize;
   const lastPageIndex = firstPageIndex + PageSize;
   return (
@@ -35,9 +36,10 @@ const BookingItems = () => {
                 <p className="p-1 md:py-5 flex flex-col md:flex-row  md:gap-3 items-center">
                   <img
                     className="md:w-[62px] min-w-[62px] max-h-[250px] max-w-[350px] md:h-[62px] object-fill w-[90%] h-80 rounded-md my-4 md:my-0"
-                    src={items.image.url}
-                    alt=""
-                  />{" "}
+                    src={items.tripDetails?.image}
+                    alt="Package-Icon"
+                  />
+
                   <span className="font-semibold text-start text-ellipsis overflow-hidden">
                     {items.title}
                   </span>
@@ -97,7 +99,7 @@ const BookingItems = () => {
             </>
           );
         })}
-      ;
+
       <Pagination
         className="pagination-bar"
         currentPage={currentPage}

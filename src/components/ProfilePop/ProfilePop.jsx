@@ -13,29 +13,25 @@ const ProfilePop = ({ setProfilePop, profilePop }) => {
     dispatch({ type: "ADMIN_SUCCESS", payload: null });
     navigate("/");
   }
-
+  const refProfile = useRef(null);
   const { userDetails } = useSelector((state) => state.userLogin);
   const userName = userDetails?.data?.userDetails.userName;
   const userType = userDetails?.data?.userDetails.userType;
   const UserId = userDetails?.data?.userDetails._id;
-  //   const UserId=id.slice(1,10)
-  const refProfile = useRef(null);
+
+  useEffect(() => {
+    console.log(profilePop, "use");
+  }, [profilePop]);
 
   useEffect(() => {
     document.addEventListener("click", hideOnClickOutside, true);
   }, []);
 
-  //   useEffect(() => {
-  //     console.log(profilePop, "use");
-  //   }, [profilePop]);
-
   const hideOnClickOutside = (e) => {
     if (refProfile.current && !refProfile.current.contains(e.target)) {
       setProfilePop(false);
     }
-    console.log("hii");
   };
-  console.log(profilePop, "use Ref");
   return (
     <>
       <div

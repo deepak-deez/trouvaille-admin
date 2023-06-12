@@ -21,14 +21,13 @@ const Trip = () => {
   const dispatch = useDispatch();
 
   const { data, loading } = useSelector((state) => state.getTrip);
-  console.log(data);
   const firstPageIndex = (currentPage - 1) * PageSize;
   const lastPageIndex = firstPageIndex + PageSize;
 
   useEffect(() => {
     dispatch(getTrip("category"));
   }, []);
-  console.log(data);
+
   return (
     <>
       {loading && <LoadingScreen />}

@@ -11,7 +11,6 @@ const Navbar = ({ heading }) => {
   const [profilePop, setProfilePop] = useState(false);
 
   const { userDetails, loading } = useSelector((state) => state.userLogin);
-  console.log(userDetails);
 
   // console.log(
   //   "asdsadadas" + JSON.stringify(userDetails?.data?.userDetails.userName)
@@ -41,7 +40,6 @@ const Navbar = ({ heading }) => {
   // }, [profilePop]);
 
   // if (loading)
-  console.log(profilePop, "img");
   return (
     <div className="flex justify-between items-center bg-[#dbe6f5] ml-10 xl:m-0 col-span-10 p-5">
       <h2 className="font-bold ">{heading}</h2>

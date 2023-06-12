@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addPackage,
@@ -23,7 +23,6 @@ import convertDate from "../../functions/monthFormat";
 
 const NewTripForm = () => {
   const { id } = useParams();
-  console.log(id);
 
   const { occassionOptions, tripCategoryOptions, travelTypeOptions } =
     GetOptions();
@@ -46,6 +45,7 @@ const NewTripForm = () => {
   const [amenities, setAmenities] = useState([]);
   const [duration, setDuration] = useState("");
   const [editMode, setEditMode] = useState(true);
+  const navigate = useNavigate();
   const [range, setRange] = useState([
     {
       startDate: new Date(),
@@ -93,8 +93,7 @@ const NewTripForm = () => {
     setImage(e.target.files[0]);
     const obj = indexes;
 
-    if(obj[0]!==0)
-    obj.unshift(0);
+    if (obj[0] !== 0) obj.unshift(0);
 
     setIndexes(obj);
   }
@@ -157,15 +156,14 @@ const NewTripForm = () => {
   const submitHandler = () => {
     const formData = new FormData();
     formData.append("title", title);
-    if(!image){
+    if (!image) {
       formData.append("images", file);
-    }
-    else{
+    } else {
       formData.append("images", image);
     }
 
     formData.append("duration", duration);
-    formData.append("indexes", JSON.stringify(indexes)); 
+    formData.append("indexes", JSON.stringify(indexes));
     formData.append("activities", JSON.stringify(arrayDate));
     formData.append(
       "tripCategory",
@@ -210,8 +208,7 @@ const NewTripForm = () => {
   useEffect(() => {
     if (updatedPackage?.success) {
       console.log(updatedPackage);
-      // set addedPackage to null
-      dispatch({ type: "ADD_PACKAGE_SUCCESS", payload: null });
+      dispatch({ type: "UPDATE_PACKAGE_SUCCESS", payload: null });
       Swal.fire({
         position: "center",
         width: "40vh",
@@ -223,6 +220,9 @@ const NewTripForm = () => {
         timer: 2000,
         timerProgressBar: true,
       });
+      setTimeout(() => {
+        navigate("/list-of-trips");
+      }, 2000);
     } else if (updatedPackage?.success === false) {
       Swal.fire({
         position: "center",
@@ -235,7 +235,7 @@ const NewTripForm = () => {
         timer: 2000,
         timerProgressBar: true,
       });
-      dispatch({ type: "ADD_PACKAGE_SUCCESS", payload: null });
+      dispatch({ type: "UPDATE_PACKAGE_SUCCESS", payload: null });
     }
   }, [updatedPackage]);
   console.log(updatedPackage);

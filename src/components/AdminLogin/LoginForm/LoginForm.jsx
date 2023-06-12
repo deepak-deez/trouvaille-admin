@@ -51,6 +51,18 @@ export default function LoginForm() {
     if (error) {
       console.log(error);
       setapiMessage(error.message);
+      Swal.fire({
+        position: "center",
+        width: "40vh",
+        icon: "error",
+        title: "failed",
+        text: error.response.data.message,
+        showConfirmButton: false,
+        toast: false,
+        timer: 2000,
+        timerProgressBar: true,
+      });
+      dispatch({ type: "ADMIN_FAILED", payload: null });
     }
   }, [error]);
 

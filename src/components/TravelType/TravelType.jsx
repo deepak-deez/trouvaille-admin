@@ -38,7 +38,6 @@ const TravelType = () => {
             className="text-[#E75C54] font-bold"
             onClick={() => {
               setShowAdd(!showAdd);
-              console.log("hii");
             }}
           >
             Add Travel Type
@@ -51,7 +50,7 @@ const TravelType = () => {
             data.data
             .slice(firstPageIndex,lastPageIndex)
             .map((item, index) => {
-              console.log("item : ", item.icon);
+              // console.log("item : ", item.icon);
               const icon = item.icon;
 
               return (

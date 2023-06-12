@@ -26,6 +26,7 @@ const AmenitiesTable = () => {
   useEffect(() => {
     dispatch(getTrip("amenity"));
   }, []);
+  
 
   return (
     <>
