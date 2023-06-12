@@ -8,8 +8,7 @@ import axios from "axios";
 const URL = process.env.REACT_APP_NODE_API;
 
 export const getUsers = (email, password) => async (dispatch) => {
-  console.log(URL);
-  console.log(password);
+
   try {
     dispatch({
       type: ADMIN_REQUEST,
@@ -23,11 +22,14 @@ export const getUsers = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(`${URL}/login/Admin`, body, config);
-    localStorage.setItem("userDetails", JSON.stringify(data));
+
     dispatch({
       type: ADMIN_SUCCESS,
       payload: data,
     });
+    if (data?.success) {
+      localStorage.setItem("userDetails", JSON.stringify(data));
+    }
   } catch (error) {
     dispatch({
       type: ADMIN_FAILED,

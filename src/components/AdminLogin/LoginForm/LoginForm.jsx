@@ -9,6 +9,7 @@ import { getUsers } from "../../../redux/actions/userActions";
 import { useSelector, useDispatch } from "react-redux";
 import store from "../../../redux/store.js";
 import LoadingScreen from "../../Loading/LoadingScreen";
+import Swal from "sweetalert2";
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -26,11 +27,23 @@ export default function LoginForm() {
     localStorage.getItem("rememberMe") === "true" ? true : false
   );
 
-  console.log(store.getState());
+  console.log(userDetails);
   useEffect(() => {
     if (userDetails?.success) {
       handleRemember(userDetails);
       navigate("/dashboard");
+    } else if (userDetails?.success === false) {
+      Swal.fire({
+        position: "center",
+        width: "40vh",
+        icon: "error",
+        title: "failed",
+        text: userDetails.message,
+        showConfirmButton: false,
+        toast: false,
+        timer: 2000,
+        timerProgressBar: true,
+      });
     }
   }, [userDetails]);
 
@@ -60,10 +73,11 @@ export default function LoginForm() {
     Cookies.set("TOKEN", userDetails.data.token, { expires: 7 });
   };
 
-  const signInHandler = async () => {
+  const signInHandler = () => {
+    console.log(details["email"]);
     details["email"] = emailRef.current.value;
     details["password"] = passwordRef.current.value;
-    if (!!emailRef.current.value.length && !!passwordRef.current.value) {
+    if (emailRef.current.value.length && passwordRef.current.value) {
       setemptyFeildMessage(false);
       dispatch(getUsers(emailRef.current.value, passwordRef.current.value));
     } else {
