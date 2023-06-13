@@ -27,6 +27,8 @@ const AdminResetPassword = () => {
     }
   };
 
+  console.log(res);
+
   useEffect(() => {
     validation();
   }, []);

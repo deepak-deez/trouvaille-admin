@@ -25,7 +25,6 @@ const CancellationRequest = () => {
   const API = process.env.REACT_APP_NODE_API;
   const handleRequest = async () => {
     const data = await axios.get(`${API}/get-cancel-booking-request`);
-    console.log(data);
     setResponse(data);
   };
 

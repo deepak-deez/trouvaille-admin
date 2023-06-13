@@ -15,6 +15,7 @@ import MultipleDateInputs from "../MultipleDateInputs/MultipleDateInputs";
 import LoadingScreen from "../Loading/LoadingScreen";
 import addDays from "date-fns/addDays";
 import { useNavigate } from "react-router-dom";
+import convertYearDate from "../../functions/yearMonthDate";
 
 const NewTripForm = () => {
   const { occassionOptions, tripCategoryOptions, travelTypeOptions } =
@@ -96,9 +97,11 @@ const NewTripForm = () => {
     setFile(URL.createObjectURL(e.target.files[0]));
     setImage(e.target.files[0]);
   }
-  const dateMonthFromat = duration?.split("-");
-  const startDate = `${dateMonthFromat[0]}`;
-  const endDate = `${dateMonthFromat[1]}`;
+  const dateMonthFromat = duration?.split(" - ");
+  const startDate = convertYearDate(`${dateMonthFromat[0]}`);
+  const endDate = convertYearDate(`${dateMonthFromat[1]}`);
+
+  console.log(startDate, endDate);
 
   const submitHandler = () => {
     const formData = new FormData();

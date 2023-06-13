@@ -48,9 +48,9 @@ const ProfilePop = ({ setProfilePop, profilePop }) => {
           <h3 className=""> Name: {userName}</h3>
           <h3 className=""> Id: {UserId}</h3>
           <h3 className=""> UserType: {userType}</h3>
-          <button className=" w-[80%] bg-[#E75C54] p-1 rounded-md text-white ">
+          {/* <button className=" w-[80%] bg-[#E75C54] p-1 rounded-md text-white ">
             Edit Profile
-          </button>
+          </button> */}
           <button
             className=" w-[80%] bg-[#E75C54] p-1 rounded-md text-white "
             onClick={() => {

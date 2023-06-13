@@ -12,9 +12,39 @@ import {
   GET_SINGLE_BOOKING_FAILED,
   GET_SINGLE_BOOKING_SUCCESS,
   GET_SINGLE_BOOKING_REQUEST,
+  GET_NOTIFICATION_FAILED,
+  GET_NOTIFICATION_REQUEST,
+  GET_NOTIFICATION_SUCCESS,
 } from "../constants/bookingConstants";
 
 const API = process.env.REACT_APP_NODE_API;
+
+export const getNotification = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: GET_NOTIFICATION_REQUEST,
+    });
+
+    const header = {
+      "Content-type": "application/json",
+    };
+
+    const { data } = await axios.get(
+      `${API}/get-cancel-booking-request`,
+      header
+    );
+
+    dispatch({
+      type: GET_NOTIFICATION_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_NOTIFICATION_FAILED,
+      error: error.message,
+    });
+  }
+};
 
 export const getSingleBooking = (id) => async (dispatch) => {
   try {

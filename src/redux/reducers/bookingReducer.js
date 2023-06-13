@@ -11,13 +11,56 @@ import {
   GET_SINGLE_BOOKING_FAILED,
   GET_SINGLE_BOOKING_SUCCESS,
   GET_SINGLE_BOOKING_REQUEST,
+  GET_NOTIFICATION_FAILED,
+  GET_NOTIFICATION_REQUEST,
+  GET_NOTIFICATION_SUCCESS,
 } from "../constants/bookingConstants";
+
+const getNotificationStateInitial = {
+  loading: false,
+  data: null,
+  error: null,
+};
+
+export const getNotificationReducer = (
+  state = getNotificationStateInitial,
+  action
+) => {
+  switch (action.type) {
+    case GET_NOTIFICATION_REQUEST:
+      return {
+        ...state,
+        data: null,
+        loading: true,
+        error: null,
+      };
+    case GET_NOTIFICATION_SUCCESS:
+      return {
+        ...state,
+        data: action.payload,
+        loading: false,
+        error: null,
+      };
+    case GET_NOTIFICATION_FAILED:
+      return {
+        ...state,
+        data: null,
+        loading: false,
+        error: action.payload,
+      };
+
+    default: {
+      return state;
+    }
+  }
+};
 
 const getSingleBookingStateInitial = {
   loading: false,
   data: null,
   error: null,
 };
+
 export const getSingleBookingReducer = (
   state = getSingleBookingStateInitial,
   action
