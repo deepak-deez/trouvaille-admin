@@ -20,6 +20,7 @@ import LoadingScreen from "../Loading/LoadingScreen";
 import { getSinglePackage } from "../../redux/actions/addPackageActions";
 import addDays from "date-fns/addDays";
 import convertDate from "../../functions/monthFormat";
+import convertYearDate from "../../functions/yearMonthDate";
 
 const NewTripForm = () => {
   const { id } = useParams();
@@ -153,12 +154,11 @@ const NewTripForm = () => {
       ]);
     }
     if (data?.data[0].duration) {
-      const dateMonthFromat = duration?.split("-");
-      setStartDate(`${dateMonthFromat[0]}`);
-      setEndDate(`${dateMonthFromat[1]}`);
+      const dateMonthFromat = duration?.split(" - ");
+      setStartDate(convertYearDate(`${dateMonthFromat[0]}`));
+      setEndDate(convertYearDate(`${dateMonthFromat[1]}`));
     }
   }, [data]);
-
 
   const submitHandler = () => {
     const formData = new FormData();
