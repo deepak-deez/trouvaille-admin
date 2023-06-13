@@ -46,6 +46,8 @@ const NewTripForm = () => {
   const [duration, setDuration] = useState("");
   const [editMode, setEditMode] = useState(true);
   const navigate = useNavigate();
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [range, setRange] = useState([
     {
       startDate: new Date(),
@@ -150,7 +152,13 @@ const NewTripForm = () => {
         },
       ]);
     }
+    if (data?.data[0].duration) {
+      const dateMonthFromat = duration?.split("-");
+      setStartDate(`${dateMonthFromat[0]}`);
+      setEndDate(`${dateMonthFromat[1]}`);
+    }
   }, [data]);
+
 
   const submitHandler = () => {
     const formData = new FormData();
@@ -162,6 +170,8 @@ const NewTripForm = () => {
     }
 
     formData.append("duration", duration);
+    formData.append("startDate", startDate);
+    formData.append("endDate", endDate);
     formData.append("indexes", JSON.stringify(indexes));
     formData.append("activities", JSON.stringify(arrayDate));
     formData.append(

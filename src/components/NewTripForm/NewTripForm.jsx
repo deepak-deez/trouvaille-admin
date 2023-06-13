@@ -85,7 +85,7 @@ const NewTripForm = () => {
     ]);
   };
   const [arrayDate, setArrayDate] = useState();
-
+  console.log(duration);
   useEffect(() => {
     console.log(arrayDate);
   }, [arrayDate]);
@@ -96,12 +96,17 @@ const NewTripForm = () => {
     setFile(URL.createObjectURL(e.target.files[0]));
     setImage(e.target.files[0]);
   }
+  const dateMonthFromat = duration?.split("-");
+  const startDate = `${dateMonthFromat[0]}`;
+  const endDate = `${dateMonthFromat[1]}`;
 
   const submitHandler = () => {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("images", image);
     formData.append("duration", duration);
+    formData.append("startDate", startDate);
+    formData.append("endDate", endDate);
     formData.append("activities", JSON.stringify(arrayDate));
     formData.append(
       "tripCategory",
