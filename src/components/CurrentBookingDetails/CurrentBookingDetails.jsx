@@ -23,7 +23,7 @@ const CurrentBookingDetails = () => {
   let { id } = useParams();
   useEffect(() => {
     dispatch(getSingleBooking(id));
-  }, []);
+  }, [id]);
 
   const [deny, setDeny] = useState(updatedBooking);
   const requestedForCancel = useRef();
