@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import delIcon from "../../assets/images/user/delete.svg";
 import editIcon from "../../assets/images/user/edit-icon.svg";
+import store from "../../redux/store";
 
 const Menu = ({ setEditPop, setEditable, data, delPop, setDelPop }) => {
   const [menu, setMenu] = useState(false);
+  const storeData = store.getState();
+  console.log(storeData);
+  const userType = storeData.userLogin.userDetails.data.userDetails.userType;
 
   return (
     <div className="relative">
       <button
-        className="font-bold"
+        className= {`font-bold   ${(userType=="Admin")? "flex" : "hidden"} `}
         onClick={() => {
           setMenu(!menu);
         }}

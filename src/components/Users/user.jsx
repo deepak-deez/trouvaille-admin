@@ -11,6 +11,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import Pagination from "../Pagination/Pagination";
+import store from "../../redux/store";
 
 let PageSize = 10;
 
@@ -21,13 +22,17 @@ const User = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [editable, setEditable] = useState("");
   const dispatch = useDispatch();
-
   const { data, loading } = useSelector((state) => state.getUser);
   const firstPageIndex = (currentPage - 1) * PageSize;
   const lastPageIndex = firstPageIndex + PageSize;
+  const storeData = store.getState();
+  console.log(storeData);
+  const userType = storeData.userLogin.userDetails.data.userDetails.userType;
+  
 
   useEffect(() => {
     dispatch(getUser("Backend-user"));
+    console.log(userType);
   }, []);
 
   return (
@@ -38,11 +43,11 @@ const User = () => {
         <div className="p-4 bg-white item-center w-full overflow-x-scroll border-b-2">
           <div className="w-full">
             <div>
-              <div className="tr-class sm:grid items-center text-[#8383A9] text-center sm:grid-cols-4 gap-2">
+              <div className={`tr-class sm:grid items-center text-[#8383A9] text-center ${(userType=="Admin")? "sm:grid-cols-4" : "sm:grid-cols-3"}  gap-2`}>
                 <p className="p-3 hidden sm:block ">User Name</p>
                 <p className="p-3 hidden sm:block">Email Address</p>
                 <p className="p-3 hidden sm:block">Phone Number</p>
-                <div className="p-3 flex items-center justify-center">
+                <div className={`p-3 flex items-center justify-center ${(userType=="Admin")? "flex" : "hidden"}`}>
                   <button
                     className="flex items-center text-[#E75C54] "
                     onClick={() => {
@@ -62,7 +67,7 @@ const User = () => {
                   .map((val, index) => {
                     return (
                       <div
-                        className="sm:grid sm:grid-cols-4 flex flex-col gap-2 sm:py-4 tr-class "
+                        className={`sm:grid ${(userType=="Admin")? "sm:grid-cols-4" : "sm:grid-cols-3"} flex flex-col gap-2 sm:py-4 tr-class `}
                         key={index}
                       >
                         <div className="td-class font-bold flex justify-between sm:justify-center order-2 sm:order-1">
@@ -84,7 +89,7 @@ const User = () => {
                           <span>{val.phone}</span>
                         </div>
                         <div className="flex justify-start ms-2 sm:justify-center order-1 sm:order-4 ">
-                          <Menu
+                          < Menu
                             editPop={editPop}
                             setEditPop={setEditPop}
                             setEditable={setEditable}
