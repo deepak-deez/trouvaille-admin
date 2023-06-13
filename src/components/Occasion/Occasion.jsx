@@ -10,6 +10,7 @@ import { getTrip } from "../../redux/actions/tripAction";
 import LoadingScreen from "../Loading/LoadingScreen";
 import Pagination from "../Pagination/Pagination";
 import "./style.scss";
+import Nodata from "../Nodata/Nodata";
 
 let PageSize = 6;
 
@@ -49,43 +50,46 @@ const Occasion = () => {
                 </button>
               </div>
             </div>
-            <div>
-              {/* {console.log("Data : ",data)} */}
-              {data &&
-                data?.data &&
-                data.data
-                  .slice(firstPageIndex, lastPageIndex)
-                  .map((item, index) => {
-                    return (
-                      <div
-                        className=" tr-class text-start md:grid md:grid-cols-3"
-                        key={index}
-                      >
-                        <div className="flex  items-center font-bold p-3 w-100 flex-col md:flex-row md:columns-2 md:gap-3 order-2 md:order-1">
-                          <img
-                            src={item.icon}
-                            alt=""
-                            className="h-[62px] img-filter w-[62px] mr-3"
-                          />
-                          <span className="px-2">{item.title}</span>
+            {data && data.data.length !== 0 ? (
+              <div>
+                {data &&
+                  data?.data &&
+                  data.data
+                    .slice(firstPageIndex, lastPageIndex)
+                    .map((item, index) => {
+                      return (
+                        <div
+                          className=" tr-class text-start md:grid md:grid-cols-3"
+                          key={index}
+                        >
+                          <div className="flex  items-center font-bold p-3 w-100 flex-col md:flex-row md:columns-2 md:gap-3 order-2 md:order-1">
+                            <img
+                              src={item.icon}
+                              alt=""
+                              className="h-[62px] img-filter w-[62px] mr-3"
+                            />
+                            <span className="px-2">{item.title}</span>
+                          </div>
+                          <p className="td-class order-3 md:order-2 text-center justify-center md:flex md:items-center">
+                            {item.description}
+                          </p>
+                          <div className="text-end order-1 md:order-3 flex items-center md:justify-center justify-end">
+                            <DotMenu
+                              updateData={item}
+                              showDelPop={showDelPop}
+                              setShowDelPop={setShowDelPop}
+                              showUpdatePop={showUpdatePop}
+                              setShowUpdatePop={setShowUpdatePop}
+                              setEditData={setEditData}
+                            />
+                          </div>
                         </div>
-                        <p className="td-class order-3 md:order-2 text-center justify-center md:flex md:items-center">
-                          {item.description}
-                        </p>
-                        <div className="text-end order-1 md:order-3 flex items-center md:justify-center justify-end">
-                          <DotMenu
-                            updateData={item}
-                            showDelPop={showDelPop}
-                            setShowDelPop={setShowDelPop}
-                            showUpdatePop={showUpdatePop}
-                            setShowUpdatePop={setShowUpdatePop}
-                            setEditData={setEditData}
-                          />
-                        </div>
-                      </div>
-                    );
-                  })}
-            </div>
+                      );
+                    })}
+              </div>
+            ) : (
+              <Nodata name="Occasion" />
+            )}
           </div>
         </div>
       </div>

@@ -11,6 +11,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import Pagination from "../Pagination/Pagination";
+import Nodata from "../Nodata/Nodata";
 
 let PageSize = 10;
 
@@ -32,72 +33,75 @@ const User = () => {
 
   return (
     <>
-      {/* <LoadingScreen /> */}
       {loading && <LoadingScreen />}
       <div className="p-3">
         <div className="p-4 bg-white item-center w-full overflow-x-scroll border-b-2">
-          <div className="w-full">
-            <div>
-              <div className="tr-class sm:grid items-center text-[#8383A9] text-center sm:grid-cols-4 gap-2">
-                <p className="p-3 hidden sm:block ">User Name</p>
-                <p className="p-3 hidden sm:block">Email Address</p>
-                <p className="p-3 hidden sm:block">Phone Number</p>
-                <div className="p-3 flex items-center justify-center">
-                  <button
-                    className="flex items-center text-[#E75C54] "
-                    onClick={() => {
-                      setAddPop(!addPop);
-                    }}
-                  >
-                    <span>Add A New User</span>
-                    <i className="ms-2 red-dot fa-solid fa-circle-plus"></i>
-                  </button>
+          {data && data.data.length !== 0 ? (
+            <div className="w-full">
+              <div>
+                <div className="tr-class sm:grid items-center text-[#8383A9] text-center sm:grid-cols-4 gap-2">
+                  <p className="p-3 hidden sm:block ">User Name</p>
+                  <p className="p-3 hidden sm:block">Email Address</p>
+                  <p className="p-3 hidden sm:block">Phone Number</p>
+                  <div className="p-3 flex items-center justify-center">
+                    <button
+                      className="flex items-center text-[#E75C54] "
+                      onClick={() => {
+                        setAddPop(!addPop);
+                      }}
+                    >
+                      <span>Add A New User</span>
+                      <i className="ms-2 red-dot fa-solid fa-circle-plus"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
+              <div>
+                {data &&
+                  data.data
+                    .slice(firstPageIndex, lastPageIndex)
+                    .map((val, index) => {
+                      return (
+                        <div
+                          className="sm:grid sm:grid-cols-4 flex flex-col gap-2 sm:py-4 tr-class "
+                          key={index}
+                        >
+                          <div className="td-class font-bold flex justify-between sm:justify-center order-2 sm:order-1">
+                            <div className="sm:hidden">
+                              <PersonIcon />
+                            </div>
+                            <span>{val.userName}</span>
+                          </div>
+                          <div className="td-class flex justify-between order-3 sm:justify-center sm:order-2">
+                            <div className="sm:hidden">
+                              <EmailIcon />
+                            </div>
+                            <span>{val.email}</span>
+                          </div>
+                          <div className="td-class flex justify-between order-4 sm:justify-center sm:order-3">
+                            <div className="sm:hidden">
+                              <PhoneIcon />
+                            </div>
+                            <span>{val.phone}</span>
+                          </div>
+                          <div className="flex justify-start ms-2 sm:justify-center order-1 sm:order-4 ">
+                            <Menu
+                              editPop={editPop}
+                              setEditPop={setEditPop}
+                              setEditable={setEditable}
+                              data={val}
+                              delPop={delPop}
+                              setDelPop={setDelPop}
+                            />
+                          </div>
+                        </div>
+                      );
+                    })}
+              </div>
             </div>
-            <div>
-              {data &&
-                data.data
-                  .slice(firstPageIndex, lastPageIndex)
-                  .map((val, index) => {
-                    return (
-                      <div
-                        className="sm:grid sm:grid-cols-4 flex flex-col gap-2 sm:py-4 tr-class "
-                        key={index}
-                      >
-                        <div className="td-class font-bold flex justify-between sm:justify-center order-2 sm:order-1">
-                          <div className="sm:hidden">
-                            <PersonIcon />
-                          </div>
-                          <span>{val.userName}</span>
-                        </div>
-                        <div className="td-class flex justify-between order-3 sm:justify-center sm:order-2">
-                          <div className="sm:hidden">
-                            <EmailIcon />
-                          </div>
-                          <span>{val.email}</span>
-                        </div>
-                        <div className="td-class flex justify-between order-4 sm:justify-center sm:order-3">
-                          <div className="sm:hidden">
-                            <PhoneIcon />
-                          </div>
-                          <span>{val.phone}</span>
-                        </div>
-                        <div className="flex justify-start ms-2 sm:justify-center order-1 sm:order-4 ">
-                          <Menu
-                            editPop={editPop}
-                            setEditPop={setEditPop}
-                            setEditable={setEditable}
-                            data={val}
-                            delPop={delPop}
-                            setDelPop={setDelPop}
-                          />
-                        </div>
-                      </div>
-                    );
-                  })}
-            </div>
-          </div>
+          ) : (
+            <Nodata name="user" />
+          )}
         </div>
       </div>
       {addPop && <AddNewUser setAddPop={setAddPop} addPop={addPop} />}

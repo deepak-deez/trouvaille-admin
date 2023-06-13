@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTrip } from "../../redux/actions/tripAction";
 import LoadingScreen from "../Loading/LoadingScreen";
 import Pagination from "../Pagination/Pagination";
+import Nodata from "../Nodata/Nodata";
 
 let PageSize = 8;
 
@@ -27,7 +28,7 @@ const TravelType = () => {
 
   useEffect(() => {
     dispatch(getTrip("travel"));
-  }, []); 
+  }, []);
 
   return (
     <>
@@ -44,44 +45,47 @@ const TravelType = () => {
             <i className=" ml-2 red-dot fa-solid fa-circle-plus"></i>
           </button>
         </div>
-        <div className="grid lg:grid-cols-4 sm:grid-cols-2">
-          {data &&
-            data?.data &&
-            data.data
-            .slice(firstPageIndex,lastPageIndex)
-            .map((item, index) => {
-              // console.log("item : ", item.icon);
-              const icon = item.icon;
+        {data && data.data.length !== 0 ? (
+          <div className="grid lg:grid-cols-4 sm:grid-cols-2">
+            {data &&
+              data?.data &&
+              data.data
+                .slice(firstPageIndex, lastPageIndex)
+                .map((item, index) => {
+                  const icon = item.icon;
 
-              return (
-                <div className="w-full p-5 gap-4" key={index}>
-                  <div className="p-4 bg-white h-[100%] text-center rounded shadow-md">
-                    <div className="flex justify-end">
-                      <div>
-                        <DotMenu
-                          updateData={item}
-                          showDelPop={showDelPop}
-                          setShowDelPop={setShowDelPop}
-                          showUpdatePop={showUpdatePop}
-                          setShowUpdatePop={setShowUpdatePop}
-                          setEditData={setEditData}
-                        />
+                  return (
+                    <div className="w-full p-5 gap-4" key={index}>
+                      <div className="p-4 bg-white h-[100%] text-center rounded shadow-md">
+                        <div className="flex justify-end">
+                          <div>
+                            <DotMenu
+                              updateData={item}
+                              showDelPop={showDelPop}
+                              setShowDelPop={setShowDelPop}
+                              showUpdatePop={showUpdatePop}
+                              setShowUpdatePop={setShowUpdatePop}
+                              setEditData={setEditData}
+                            />
+                          </div>
+                        </div>
+                        <div className="flex justify-center py-2">
+                          <img src={icon} alt="" className="h-10" />
+                        </div>
+                        <h3 className="text-center font-semibold py-2">
+                          {item.title}
+                        </h3>
+                        <p className="text-gray-600 w-full line-clamp-4 ">
+                          {item.description}
+                        </p>
                       </div>
                     </div>
-                    <div className="flex justify-center py-2">
-                      <img src={icon} alt="" className="h-10" />
-                    </div>
-                    <h3 className="text-center font-semibold py-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-600 w-full line-clamp-4 ">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-        </div>
+                  );
+                })}
+          </div>
+        ) : (
+          <Nodata name="Travel Type" />
+        )}
       </div>
       {showAdd && (
         <AddNewPop
