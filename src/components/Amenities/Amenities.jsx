@@ -26,7 +26,6 @@ const AmenitiesTable = () => {
   useEffect(() => {
     dispatch(getTrip("amenity"));
   }, []);
-  
 
   return (
     <>
@@ -59,7 +58,10 @@ const AmenitiesTable = () => {
                   .map((item, index) => {
                     return (
                       <div
-                        className=" tr-class flex flex-col md:grid md:grid-cols-3 text-start"
+                        className={
+                          " tr-class flex flex-col md:grid md:grid-cols-3 text-start border-[2px] p-5 md:border-none mb-5 " +
+                          (index % 2 == 0 ? " bg-[#F5F9FF]" : "")
+                        }
                         key={index}
                       >
                         <div className="td-class font-bold w-100 flex flex-col md:flex-row md:columns-2 md:gap-3 items-center m-3 order-2 md:order-1">
@@ -70,10 +72,10 @@ const AmenitiesTable = () => {
                           />
                           <span className="">{item.title}</span>
                         </div>
-                        <p className="td-class order-3 md:order-2 text-center justify-center md:flex md:items-center w-100">
+                        <p className="td-class order-3 md:order-2 text-center md:text-start justify-center my-auto md:items-center w-100">
                           {item.description}
                         </p>
-                        <div className="text-end order-1 md:order-3 flex items-center justify-end md:justify-center">
+                        <div className="text-center order-1 md:order-3 flex items-center justify-end md:justify-center">
                           <DotMenu
                             updateData={item}
                             showDelPop={showDelPop}

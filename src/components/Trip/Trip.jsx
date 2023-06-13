@@ -44,13 +44,13 @@ const Trip = () => {
             <i className=" ml-2 red-dot fa-solid fa-circle-plus"></i>
           </button>
         </div>
-        <div className="grid lg:grid-cols-4 sm:grid-cols-2">
+        <div className="trips-grid-container">
           {data &&
             data?.data &&
             data.data.slice(firstPageIndex, lastPageIndex).map((val, index) => {
               return (
-                <div className="w-full p-5 gap-4" key={index}>
-                  <div className="p-8 bg-white h-[100%] text-center rounded shadow-md">
+                <div className="p-5 gap-4" key={index}>
+                  <div className="p-8 flex flex-col gap-5 bg-white h-[100%] text-center rounded shadow-md">
                     <div className="flex justify-end">
                       <div>
                         <DotMenu
