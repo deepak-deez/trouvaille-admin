@@ -24,7 +24,7 @@ const DotMenu = ({
       </button>
 
       <div
-        className={` absolute  top-6 w-[7rem] right-0 p-4 bg-white rounded-lg flex shadow-[5px_10px_25px_rgba(102,101,130,0.15)] flex-col justify-between items-start ${
+        className={` absolute  z-50 top-6 w-[7rem] right-0 p-4 bg-white rounded-lg flex shadow-[5px_10px_25px_rgba(102,101,130,0.15)] flex-col justify-between items-start ${
           !showTraveldrop && "hidden"
         }`}
       >

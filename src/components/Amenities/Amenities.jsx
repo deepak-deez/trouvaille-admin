@@ -7,17 +7,26 @@ import DeletePop from "../DeletePop/DeletePop";
 import { useDispatch, useSelector } from "react-redux";
 import { getTrip } from "../../redux/actions/tripAction";
 import LoadingScreen from "../Loading/LoadingScreen";
+import Pagination from "../Pagination/Pagination";
+import "./style.scss";
+
+let PageSize = 8;
+
 const AmenitiesTable = () => {
   const [showAdd, setShowAdd] = useState(false);
   const [showDelPop, setShowDelPop] = useState(false);
   const [showUpdatePop, setShowUpdatePop] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const [editData, setEditData] = useState("");
   const dispatch = useDispatch();
   const { data, loading } = useSelector((state) => state.getTrip);
 
+  const firstPageIndex = (currentPage - 1) * PageSize;
+  const lastPageIndex = firstPageIndex + PageSize;
   useEffect(() => {
     dispatch(getTrip("amenity"));
   }, []);
+  
 
   return (
     <>
@@ -45,31 +54,38 @@ const AmenitiesTable = () => {
             <div>
               {data &&
                 data?.data &&
-                data?.data?.map((item, index) => {
-                  return (
-                    <div className=" tr-class flex flex-col md:grid md:grid-cols-3 text-start" key={index}>
-                      <div className="td-class font-bold w-100 flex flex-col md:flex-row md:columns-2 md:gap-3 items-center m-3 order-2 md:order-1">
-                        <img
-                          src={item.icon.url}
-                          alt=""
-                          className="h-[62px] w-[62px] mr-3"
-                        />
-                        <span className="">{item.title}</span>
+                data?.data
+                  .slice(firstPageIndex, lastPageIndex)
+                  .map((item, index) => {
+                    return (
+                      <div
+                        className=" tr-class flex flex-col md:grid md:grid-cols-3 text-start"
+                        key={index}
+                      >
+                        <div className="td-class font-bold w-100 flex flex-col md:flex-row md:columns-2 md:gap-3 items-center m-3 order-2 md:order-1">
+                          <img
+                            src={item.icon}
+                            alt=""
+                            className="h-[62px] img-filter w-[62px] mr-3"
+                          />
+                          <span className="">{item.title}</span>
+                        </div>
+                        <p className="td-class order-3 md:order-2 text-center justify-center md:flex md:items-center w-100">
+                          {item.description}
+                        </p>
+                        <div className="text-end order-1 md:order-3 flex items-center justify-end md:justify-center">
+                          <DotMenu
+                            updateData={item}
+                            showDelPop={showDelPop}
+                            setShowDelPop={setShowDelPop}
+                            showUpdatePop={showUpdatePop}
+                            setShowUpdatePop={setShowUpdatePop}
+                            setEditData={setEditData}
+                          />
+                        </div>
                       </div>
-                      <p className="td-class order-3 md:order-2 text-center justify-center md:flex md:items-center w-100">{item.description}</p>
-                      <div className="text-end order-1 md:order-3 flex items-center justify-end md:justify-center">
-                        <DotMenu
-                          updateData={item}
-                          showDelPop={showDelPop}
-                          setShowDelPop={setShowDelPop}
-                          showUpdatePop={showUpdatePop}
-                          setShowUpdatePop={setShowUpdatePop}
-                          setEditData={setEditData}
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
             </div>
           </div>
         </div>
@@ -104,6 +120,13 @@ const AmenitiesTable = () => {
           feature="amenity"
         />
       )}
+      <Pagination
+        className="pagination-bar"
+        currentPage={currentPage}
+        totalCount={data && data?.data.length}
+        pageSize={PageSize}
+        onPageChange={(page) => setCurrentPage(page)}
+      />
     </>
   );
 };

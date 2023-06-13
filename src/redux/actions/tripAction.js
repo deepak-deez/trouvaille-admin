@@ -45,36 +45,31 @@ export const getAllType =
     }
   };
 
-export const addNewTip =
-  (image, title, description, feature) => async (dispatch) => {
-    try {
-      dispatch({
-        type: ADD_TRIP_REQUEST,
-      });
-      const header = {
-        "Content-Type": "application/json",
-      };
-      const body = {
-        image,
-        title,
-        description,
-      };
-      const { data } = await axios.post(
-        `${API}/create-feature/${feature}`,
-        body,
-        header
-      );
-      dispatch({
-        type: ADD_TRIP_SUCCESS,
-        payload: data,
-      });
-    } catch (error) {
-      dispatch({
-        type: ADD_TRIP_FAILED,
-        payload: error.message,
-      });
-    }
-  };
+export const addNewTip = (formdata, feature) => async (dispatch) => {
+  try {
+    dispatch({
+      type: ADD_TRIP_REQUEST,
+    });
+    const header = {
+      "Content-Type": "application/json",
+    };
+    const body = formdata;
+    const { data } = await axios.post(
+      `${API}/create-feature/${feature}`,
+      body,
+      header
+    );
+    dispatch({
+      type: ADD_TRIP_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ADD_TRIP_FAILED,
+      payload: error.message,
+    });
+  }
+};
 
 export const getTrip = (feature) => async (dispatch) => {
   try {

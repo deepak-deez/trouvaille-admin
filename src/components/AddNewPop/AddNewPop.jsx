@@ -10,14 +10,21 @@ const AddNewPop = (props) => {
   const { data: addedTrip } = useSelector((state) => state.addNewTip);
   const [name, setName] = useState("");
   const [file, setFile] = useState();
-  const [imgUrl, setImgUrl] = useState("");
+  const [img, setImg] = useState("");
   const [description, setDescription] = useState("");
 
   const dispatch = useDispatch();
 
   const addNewHandler = () => {
-    if (imgUrl && name && description) {
-      dispatch(addNewTip(imgUrl, name, description, feature));
+ 
+    const formdata = new FormData();
+    formdata.append("image", img);
+    formdata.append("title", name);
+    formdata.append("description", description);
+  
+    console.log(formdata);
+    if (formdata) {
+      dispatch(addNewTip(formdata, feature));
       setName("");
       setDescription("");
     }
@@ -59,17 +66,10 @@ const AddNewPop = (props) => {
     }
   });
 
-
   function handleChange(e) {
     if (e.target.files.length !== 0) {
       setFile(URL.createObjectURL(e.target.files[0]));
-      let uplImg = e.target.files[0];
-      console.log(uplImg);
-      imgToUrl(uplImg).then((res) => {
-        console.log(res);
-        setImgUrl(res);
-      });
-      console.log(imgUrl);
+      setImg(e.target.files[0]);
     }
   }
 

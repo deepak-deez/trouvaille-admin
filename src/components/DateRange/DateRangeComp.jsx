@@ -2,19 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import { DateRange } from "react-date-range";
 
 import format from "date-fns/format";
-import { addDays } from "date-fns";
 
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
 const DateRangeComp = ({ setDuration, duration, range, setRange }) => {
   const dateMonthFromat = duration?.split("-");
-  console.log(dateMonthFromat);
   const apiStartDate = `${dateMonthFromat[0]}`;
   const apiEndDate = `${dateMonthFromat[1]}`;
-  console.log(apiStartDate);
-  console.log(apiEndDate);
-
 
   const [open, setOpen] = useState(false);
   const refOne = useRef(null);
@@ -47,6 +42,7 @@ const DateRangeComp = ({ setDuration, duration, range, setRange }) => {
     if (refOne.current && !refOne.current.contains(e.target)) {
       setOpen(false);
     }
+    console.log(refOne);
   };
 
   return (

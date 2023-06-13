@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addPackage,
@@ -23,7 +23,6 @@ import convertDate from "../../functions/monthFormat";
 
 const NewTripForm = () => {
   const { id } = useParams();
-  console.log(id);
 
   const { occassionOptions, tripCategoryOptions, travelTypeOptions } =
     GetOptions();
@@ -46,6 +45,7 @@ const NewTripForm = () => {
   const [amenities, setAmenities] = useState([]);
   const [duration, setDuration] = useState("");
   const [editMode, setEditMode] = useState(true);
+  const navigate = useNavigate();
   const [range, setRange] = useState([
     {
       startDate: new Date(),
@@ -60,6 +60,7 @@ const NewTripForm = () => {
       answer: "",
     },
   ]);
+  const [indexes, setIndexes] = useState([]);
 
   const [inputFields, setInputFields] = useState([
     {
@@ -84,17 +85,16 @@ const NewTripForm = () => {
   useEffect(() => {
     dispatch(getSinglePackage(id));
   }, []);
-  console.log(data);
   const dispatch = useDispatch();
 
   function handleChange(e) {
     setFile(URL.createObjectURL(e.target.files[0]));
-    let uplImg = e.target.files[0];
-    imgToUrl(uplImg).then((res) => {
-      console.log(res);
-      let data_Url = res;
-      setImage(data_Url);
-    });
+    setImage(e.target.files[0]);
+    const obj = indexes;
+
+    if (obj[0] !== 0) obj.unshift(0);
+
+    setIndexes(obj);
   }
   const addInputField = () => {
     setInputFields([
@@ -110,19 +110,36 @@ const NewTripForm = () => {
 
   useEffect(() => {
     if (data && data?.data) {
-      console.log(tripCategory);
+      setStatus({
+        label: data && data.data[0].status,
+        value: data && data.data[0].status,
+      });
+      setBriefd(data && data.data[0].briefDescription);
+      setTravelType({
+        label: data && data.data[0].travelType,
+        value: data && data.data[0].travelType,
+      });
+      setDiscountedPrice(data.data[0].discountedPrice);
+      setPrice(data?.data[0].price);
+      setMaximumGuests(data?.data[0].maximumGuests);
+      setPlaceNumber(data?.data[0].placeNumber);
+      setTitle(data && data?.data[0].title);
       setInputFields(data?.data[0].tripHighlights);
       setFaqFields(data?.data[0].faq);
       setAmenities(data?.data[0].amenities);
-      setFile(data?.data[0].image.url);
+      setFile(data?.data[0].image);
+      setArrayDate(data?.data[0]?.activities);
       // errors
       data?.data[0]?.tripCategory?.map((item) => {
         setTripCategory([...tripCategory, { label: item, value: item }]);
       });
-      // data?.data[0]?.occasions?.forEach((item) => {
-      //   return setOccasions([...occasions, { label: item, value: item }]);
-      // });
+
+      data?.data[0]?.occasions?.forEach((item) => {
+        return setOccasions([...occasions, { label: item, value: item }]);
+      });
+
       setDuration(data?.data[0].duration);
+      console.log(duration);
       setRange([
         {
           startDate: new Date(
@@ -134,51 +151,43 @@ const NewTripForm = () => {
       ]);
     }
   }, [data]);
-  console.log(data?.data[0]?.tripCategory);
-  console.log(tripCategory, "after map");
 
   const submitHandler = () => {
-    console.log(id, "id");
-    console.log(title);
-    console.log(image);
-    if (
-      title &&
-      image &&
-      duration &&
-      tripCategory.map((trip) => trip.value) &&
-      placeNumber &&
-      maximumGuests &&
-      inputFields &&
-      price &&
-      discountedPrice &&
-      occasions.map((occasion) => occasion.value) &&
-      travelType.value &&
-      amenities &&
-      briefd &&
-      faqFields &&
-      status.value
-    ) {
-      dispatch(
-        updatePackage(
-          id,
-          title,
-          image,
-          duration,
-          arrayDate,
-          tripCategory.map((trip) => trip.value),
-          placeNumber,
-          maximumGuests,
-          inputFields,
-          price,
-          discountedPrice,
-          occasions.map((occasion) => occasion.value),
-          travelType.value,
-          amenities,
-          briefd,
-          faqFields,
-          status.value
-        )
-      );
+    const formData = new FormData();
+    formData.append("title", title);
+    if (!image) {
+      formData.append("images", file);
+    } else {
+      formData.append("images", image);
+    }
+
+    formData.append("duration", duration);
+    formData.append("indexes", JSON.stringify(indexes));
+    formData.append("activities", JSON.stringify(arrayDate));
+    formData.append(
+      "tripCategory",
+      JSON.stringify(tripCategory.map((trip) => trip.value))
+    );
+    formData.append("placeNumber", placeNumber);
+    formData.append("maximumGuests", maximumGuests);
+
+    for (let i = 0; i < inputFields.length; i++) {
+      formData.append("images", inputFields[i].images);
+    }
+    formData.append("tripHighlights", JSON.stringify(inputFields));
+    formData.append("price", price);
+    formData.append("discountedPrice", discountedPrice);
+    formData.append(
+      "occasions",
+      JSON.stringify(occasions.map((occasion) => occasion.value))
+    );
+    formData.append("travelType", JSON.stringify(travelType.value));
+    formData.append("amenities", JSON.stringify(amenities));
+    formData.append("briefDescription", briefd);
+    formData.append("faq", JSON.stringify(faqFields));
+    formData.append("status", status.value);
+    if (formData) {
+      dispatch(updatePackage(id, formData));
     } else {
       Swal.fire({
         className: "pop-top",
@@ -198,8 +207,7 @@ const NewTripForm = () => {
   useEffect(() => {
     if (updatedPackage?.success) {
       console.log(updatedPackage);
-      // set addedPackage to null
-      dispatch({ type: "ADD_PACKAGE_SUCCESS", payload: null });
+      dispatch({ type: "UPDATE_PACKAGE_SUCCESS", payload: null });
       Swal.fire({
         position: "center",
         width: "40vh",
@@ -211,6 +219,9 @@ const NewTripForm = () => {
         timer: 2000,
         timerProgressBar: true,
       });
+      setTimeout(() => {
+        navigate("/list-of-trips");
+      }, 2000);
     } else if (updatedPackage?.success === false) {
       Swal.fire({
         position: "center",
@@ -223,7 +234,7 @@ const NewTripForm = () => {
         timer: 2000,
         timerProgressBar: true,
       });
-      dispatch({ type: "ADD_PACKAGE_SUCCESS", payload: null });
+      dispatch({ type: "UPDATE_PACKAGE_SUCCESS", payload: null });
     }
   }, [updatedPackage]);
 
@@ -260,7 +271,7 @@ const NewTripForm = () => {
             <input
               className="border-2 py-2 rounded-md"
               type="text"
-              value={title ? title : data && data?.data[0].title}
+              value={title}
               onChange={(e) => {
                 setTitle(e.target.value);
               }}
@@ -283,6 +294,7 @@ const NewTripForm = () => {
                   duration={duration}
                   arrayDate={arrayDate}
                   setArrayDate={setArrayDate}
+                  editMode={editMode}
                 />
               )}
             </div>
@@ -303,11 +315,7 @@ const NewTripForm = () => {
                 <input
                   className="border-2 py-2 rounded-md"
                   type="number"
-                  value={
-                    placeNumber
-                      ? placeNumber
-                      : data && data?.data[0].placeNumber
-                  }
+                  value={placeNumber}
                   onChange={(e) => {
                     setPlaceNumber(e.target.value);
                   }}
@@ -318,11 +326,7 @@ const NewTripForm = () => {
                 <input
                   className="border-2 py-2 rounded-md"
                   type="number"
-                  value={
-                    maximumGuests
-                      ? maximumGuests
-                      : data && data?.data[0].maximumGuests
-                  }
+                  value={maximumGuests}
                   onChange={(e) => {
                     setMaximumGuests(e.target.value);
                   }}
@@ -341,9 +345,9 @@ const NewTripForm = () => {
               </button>
             </div>
             <MultipleTripForm
+              setIndexes={setIndexes}
               inputFields={inputFields}
               setInputFields={setInputFields}
-              res={data?.data[0].tripHighlights}
               editMode={editMode}
               setEditMode={setEditMode}
             />
@@ -355,7 +359,7 @@ const NewTripForm = () => {
                 <input
                   className="border-2 py-2 rounded-md w-[90%]"
                   type="number"
-                  value={price ? price : data && data?.data[0].price}
+                  value={price}
                   onChange={(e) => {
                     setPrice(e.target.value);
                   }}
@@ -366,11 +370,7 @@ const NewTripForm = () => {
                 <input
                   className="border-2 py-2 rounded-md w-[90%]"
                   type="number"
-                  value={
-                    discountedPrice
-                      ? discountedPrice
-                      : data && data.data[0].discountedPrice
-                  }
+                  value={discountedPrice}
                   onChange={(e) => {
                     setDiscountedPrice(e.target.value);
                   }}
@@ -392,14 +392,7 @@ const NewTripForm = () => {
                 <StatusMenu
                   width="91%"
                   options={travelTypeOptions}
-                  value={
-                    travelType
-                      ? travelType
-                      : {
-                          label: data && data.data[0].travelType,
-                          value: data && data.data[0].travelType,
-                        }
-                  }
+                  value={travelType}
                   setvalue={setTravelType}
                 />
               </div>
@@ -420,7 +413,7 @@ const NewTripForm = () => {
               type="text"
               className="border-2 rounded-md resize-none"
               name="d"
-              value={briefd ? briefd : data && data.data[0].briefDescription}
+              value={briefd}
               onChange={(e) => {
                 setBriefd(e.target.value);
               }}
@@ -447,14 +440,7 @@ const NewTripForm = () => {
               <StatusMenu
                 width="100%"
                 options={Status}
-                value={
-                  status
-                    ? status
-                    : {
-                        label: data && data.data[0].status,
-                        value: data && data.data[0].status,
-                      }
-                }
+                value={status}
                 setvalue={setStatus}
               />
               <button

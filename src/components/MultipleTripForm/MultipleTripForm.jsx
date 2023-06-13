@@ -2,24 +2,33 @@ import { React, useState } from "react";
 import imgToUrl from "../../functions/imgToUrl";
 
 function MultipleTripForm({
+  setIndexes,
   inputFields,
   setInputFields,
   editMode,
   setEditMode,
 }) {
-  console.log(editMode);
+  // console.log(editMode);
   function imageChange(index, e) {
-    setEditMode(false);
-    let uplImg = e.target.files[0];
-    imgToUrl(uplImg).then((res) => {
-      console.log(res);
-      const list = [...inputFields];
-      list[index]["icon"] = res;
-      setInputFields(list);
-    });
+    const list = [...inputFields];
+    list[index]["images"] = e.target.files[0];
+    list[index]["showIcon"] = URL.createObjectURL(e.target.files[0]);
+
+    setInputFields(list);
+
+    // if(in)
+    editMode &&
+      setIndexes((prev) => {
+        if (prev.includes(index + 1) === false) return [...prev, index + 1];
+        else return [...prev];
+      });
+    // imgToUrl(uplImg).then((res) => {
+    //   console.log(res);
+    //   const list = [...inputFields];
+    //   list[index]["icon"] = res;
+    //   setInputFields(list);
+    // });
   }
-  console.log(inputFields);
-  console.log(editMode);
 
   const removeInputFields = (index) => {
     const rows = [...inputFields];
@@ -35,6 +44,7 @@ function MultipleTripForm({
     list[index][name] = value;
     setInputFields(list);
   };
+
   return (
     <div className="col-sm-8">
       {inputFields.map((data, index) => {
@@ -78,9 +88,24 @@ function MultipleTripForm({
             </div>
             <div className="py-4">
               <div className=" flex flex-col md:flex-row justify-start items-center space-x-2 relative">
-                {data.icon ? (
+                {editMode ? (
+                  data.icon || data.showIcon ? (
+                    <img
+                      src={
+                        data.hasOwnProperty("showIcon")
+                          ? data.showIcon
+                          : data.icon
+                      }
+                      alt="browserIcon"
+                      className="w-[30%] md:w-[20%]  md:h-[10vh]"
+                    />
+                  ) : (
+                    // <p>{data.icon}</p>
+                    <h1 className="text-gray-400">Icon</h1>
+                  )
+                ) : data.images ? (
                   <img
-                    src={editMode ? data.icon.url : data.icon}
+                    src={editMode ? data.images : data.showIcon}
                     alt="browserIcon"
                     className="w-[30%] md:w-[20%]  md:h-[10vh]"
                   />
@@ -107,7 +132,9 @@ function MultipleTripForm({
               {inputFields.length !== 1 ? (
                 <button
                   className="border-2 border-red-500 px-2 rounded-md text-red-500 "
-                  onClick={removeInputFields}
+                  onClick={() => {
+                    removeInputFields(index);
+                  }}
                 >
                   Remove
                 </button>
