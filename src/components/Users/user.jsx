@@ -28,7 +28,6 @@ const User = () => {
   const storeData = store.getState();
   console.log(storeData);
   const userType = storeData.userLogin.userDetails.data.userDetails.userType;
-  
 
   useEffect(() => {
     dispatch(getUser("Backend-user"));
@@ -43,11 +42,19 @@ const User = () => {
         <div className="p-4 bg-white item-center w-full overflow-x-scroll border-b-2">
           <div className="w-full">
             <div>
-              <div className={`tr-class sm:grid items-center text-[#8383A9] text-center ${(userType=="Admin")? "sm:grid-cols-4" : "sm:grid-cols-3"}  gap-2`}>
-                <p className="p-3 hidden sm:block ">User Name</p>
+              <div
+                className={`tr-class sm:grid items-center text-[#8383A9] ${
+                  userType == "Admin" ? "sm:grid-cols-4" : "sm:grid-cols-3"
+                }  gap-2`}
+              >
+                <p className="pr-3 hidden sm:block ">User Name</p>
                 <p className="p-3 hidden sm:block">Email Address</p>
                 <p className="p-3 hidden sm:block">Phone Number</p>
-                <div className={`p-3 flex items-center justify-center ${(userType=="Admin")? "flex" : "hidden"}`}>
+                <div
+                  className={`p-3 text-[#E75C54 flex items-center justify-center ${
+                    userType == "Admin" ? "flex" : "hidden"
+                  }`}
+                >
                   <button
                     className="flex items-center text-[#E75C54] "
                     onClick={() => {
@@ -67,29 +74,42 @@ const User = () => {
                   .map((val, index) => {
                     return (
                       <div
-                        className={`sm:grid ${(userType=="Admin")? "sm:grid-cols-4" : "sm:grid-cols-3"} flex flex-col gap-2 sm:py-4 tr-class `}
+                        className={`sm:grid items-start ${
+                          userType == "Admin"
+                            ? "sm:grid-cols-4"
+                            : "sm:grid-cols-3"
+                        } flex flex-col gap-2 sm:py-4 tr-class `}
                         key={index}
                       >
-                        <div className="td-class font-bold flex justify-between sm:justify-center order-2 sm:order-1">
+                        <div className="td-class font-bold flex justify-start gap-10  order-2 sm:order-1">
                           <div className="sm:hidden">
                             <PersonIcon />
                           </div>
-                          <span>{val.userName}</span>
+                          <p>
+                            <span className="sm:hidden mr-10">:</span>
+                            {val.userName}
+                          </p>
                         </div>
-                        <div className="td-class flex justify-between order-3 sm:justify-center sm:order-2">
+                        <div className="td-class flex justify-start gap-10 order-3  sm:order-2">
                           <div className="sm:hidden">
                             <EmailIcon />
                           </div>
-                          <span>{val.email}</span>
+                          <p>
+                            <span className="sm:hidden mr-10">:</span>
+                            {val.email}
+                          </p>
                         </div>
-                        <div className="td-class flex justify-between order-4 sm:justify-center sm:order-3">
+                        <div className="td-class flex justify-start gap-10 order-4  sm:order-3">
                           <div className="sm:hidden">
                             <PhoneIcon />
                           </div>
-                          <span>{val.phone}</span>
+                          <p>
+                            <span className="sm:hidden mr-10">:</span>
+                            {val.phone}
+                          </p>
                         </div>
-                        <div className="flex justify-start ms-2 sm:justify-center order-1 sm:order-4 ">
-                          < Menu
+                        <div className="flex justify-start ms-2  order-1 sm:order-4 ">
+                          <Menu
                             editPop={editPop}
                             setEditPop={setEditPop}
                             setEditable={setEditable}

@@ -58,11 +58,11 @@ const TripList = () => {
   return (
     <>
       {loading && <LoadingScreen />}
-      <div className="p-3">
+      <div className="md:p-3">
         <div className="p-4 bg-white item-center w-full overflow-x-scroll border-b-2">
           <div className="w-full">
-            <div className="tr-class md:grid md:grid-cols-5 text-[#8383A9] text-center">
-              <p className="p-3 hidden md:block">Trip Title</p>
+            <div className="tr-class md:grid md:grid-cols-5 text-[#8383A9] text-start">
+              <p className="pr-3 my-auto  hidden md:block">Trip Title</p>
               <p className="p-3 hidden md:block">Duration</p>
               <p className="p-3 hidden md:block"> Price</p>
               <p className="p-3 hidden md:block">Discounted Price</p>
@@ -79,43 +79,48 @@ const TripList = () => {
               </div>
             </div>
             {data && data.data.length !== 0 ? (
-              <div className="w-full">
+              <div className="w-full flex flex-col">
                 {data &&
                   data?.data
                     .slice(firstPageIndex, lastPageIndex)
                     .map((val, index) => {
                       return (
                         <div
-                          className=" tr-class mb-4 md:my-0 flex flex-col md:grid items-center md:grid-cols-5 w-full gap-3 md:gap-1 text-center"
+                          className={
+                            "relative tr-class my-5 md:my-0 flex flex-col md:grid items-center md:grid-cols-5 w-full gap-3 md:gap-1 border-[2px] py-5 md:border-0 text-start" +
+                            (index % 2 == 0 ? " bg-[#F5F9FF]" : "")
+                          }
                           key={index}
                         >
-                          <div className="td-class font-bold p-1 md:py-5 flex flex-col md:flex-row  gap-3 items-center">
+                          <div className="td-class font-bold p-1 md:m-auto  flex flex-col md:flex-row  gap-3 ">
                             <img
-                              className="w-80 max-w-[350px] max-h-[250px] md:h-[62px] md:w-[62px] rounded-md"
+                              className="min-[400px]:w-[20rem] max-w-[350px] max-h-[250px] md:h-[62px] md:w-[62px] rounded-md"
                               src={val.image}
                               alt="logo"
                             />
-                            <span> {val.title}</span>
+                            <p className="my-auto text-center md:text-start">
+                              {val.title}
+                            </p>
                           </div>
-                          <p className="td-class w-80 flex justify-between md:w-full md:justify-center md:order-1 order-2">
-                            <span className="md:hidden">
+                          <p className="td-class w-80 flex justify-center md:w-full md:justify-center md:order-1 order-2">
+                            <p className="md:hidden">
                               <ScheduleIcon />
-                            </span>
-                            <span>{val.duration}</span>
+                            </p>
+                            <p>{val.duration}</p>
                           </p>
-                          <p className="td-class flex justify-between w-80 md:w-full md:justify-center md:order-2 order-3">
-                            <span className="md:hidden">
+                          <p className="td-class flex justify-center w-80 md:w-full  md:order-2 order-3">
+                            <p className="md:hidden">
                               <CurrencyRupeeIcon />
-                            </span>
-                            <span> ₹ {val.price}</span>
+                            </p>
+                            <p> ₹ {val.price}</p>
                           </p>
-                          <p className="td-class flex justify-between w-80 md:w-full md:justify-center md:order-3 order-4">
-                            <span className="md:hidden">
+                          <p className="td-class flex justify-center w-80 md:w-full md:order-3 order-4">
+                            <p className="md:hidden">
                               <DiscountIcon />
-                            </span>
+                            </p>
                             ₹ {val.discountedPrice}
                           </p>
-                          <div className="td-class md:order-4 order-1 w-80 md:w-full">
+                          <div className="td-class mx-auto md:order-4 order-1 w-80 md:w-full absolute md:static md:flex justify-center top-5 right-[320px] ml-auto">
                             <TripDropMenu
                               editData={val}
                               setEditData={setEditData}

@@ -1,36 +1,63 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./Sidebar.scss";
 import mainLogo from "../../assets/images/navbar/Site-logo.svg";
 import SideBarLinks from "./sidebarData";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import "../../style.scss";
 
 const Sidebar = (props) => {
   const [show, setShow] = useState(false);
+  const [closingAnimation, setClosingAnimation] = useState(false);
+  const [openningAnimaionName, setOpenningAnimaionName] = useState("");
+  const [closingAnimationName, setClosingAnimationName] = useState("");
+
+  useEffect(() => {
+    const windowWidth = window.innerWidth;
+    if (windowWidth <= 1280) {
+      setOpenningAnimaionName(" openning-amimation-x ");
+      setClosingAnimationName(" closing-animation-x ");
+    } else {
+      setOpenningAnimaionName("");
+      setClosingAnimationName("");
+    }
+  }, []);
+
+  const handleShow = () => {
+    if (show) {
+      setClosingAnimation(!closingAnimation);
+      setTimeout(() => {
+        setShow(!show);
+      }, 500);
+    } else {
+      setClosingAnimation(!closingAnimation);
+      setShow(!show);
+    }
+  };
 
   return (
     <>
       {/* <div className="p-4 xl:p-0 relative"> */}
       <button
-        className="navbar_toggle absolute top-[2%] left-2 block xl:hidden bg-[#E85C53] text-white hover:text-white px-2 py-1"
+        className="navbar_toggle absolute top-[1rem] left-2 block xl:hidden bg-[#E85C53] text-white hover:text-white px-2 py-1 "
         style={{
           zIndex: "20000",
         }}
-        onClick={() => {
-          setShow(!show);
-        }}
+        onClick={handleShow}
       >
         <i className="fa-solid fa-bars"></i>
       </button>
       {/* </div> */}
       <div
-        className={`mainSideBar z-50 absolute  xl:static xl:flex md:w-[40%] p-5 flex-col bg-white h-full ${
-          !show && "hidden-bar"
-        }`}
+        className={
+          `mainSideBar z-[60] fixed top-0 xl:static xl:flex md:w-[40%] p-5 flex-col bg-white h-full sidebar-shadow  ${
+            !show && " hidden-bar "
+          }` + (closingAnimation ? openningAnimaionName : closingAnimationName)
+        }
       >
         <div className="h-[80%]">
-          <div className={`sidebar-logo flex p-3 px-4 justify-between `}>
+          <div className={`sidebar-logo flex p-3 px-4 `}>
             <div className="flex justify-center px-3 items-center">
               <img src={mainLogo} alt="logo" />
             </div>
@@ -40,7 +67,7 @@ const Sidebar = (props) => {
             </div>
           </div>
 
-          <div className={`sidebar-Links`}>
+          <div className={`sidebar-Links flex flex-col gap-5 md:gap-0`}>
             {SideBarLinks.map((item, index) => {
               return (
                 <NavLink
@@ -49,9 +76,7 @@ const Sidebar = (props) => {
                   key={index}
                 >
                   <img src={item.icon} alt="" />
-                  <h3 className="ms-5" >
-                    {item.heading}
-                  </h3>
+                  <h3 className="ms-5">{item.heading}</h3>
                 </NavLink>
               );
             })}
