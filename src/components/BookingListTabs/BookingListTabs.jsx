@@ -4,7 +4,7 @@ import "./style.scss";
 const BookingListTabs = (props) => {
   const { setActiveStatusTab, activeStatusTab } = props;
   return (
-    <div className="grid grid-cols-5  bg-[#f5f9ff] font-semibold">
+    <div className="grid grid-cols-5 cursor-pointer  bg-[#f5f9ff] font-semibold">
       <div
         className={
           "p-3 text-center  " +

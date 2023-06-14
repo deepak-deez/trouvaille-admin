@@ -12,6 +12,7 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import InfoIcon from "@mui/icons-material/Info";
 import Pagination from "../Pagination/Pagination";
 import Nodata from "../Nodata/Nodata";
+import { statusColor } from "../../functions/statusColor";
 
 let PageSize = 6;
 
@@ -46,6 +47,8 @@ const BookingItems = (props) => {
   useEffect(() => {
     setDataMap(booking);
   }, [booking]);
+
+  console.log(data);
 
   const firstPageIndex = (currentPage - 1) * PageSize;
   const lastPageIndex = firstPageIndex + PageSize;
@@ -98,26 +101,12 @@ const BookingItems = (props) => {
                         <span className="md:hidden">
                           <InfoIcon />
                         </span>
+                        
                         <p
-                          className={`md:py-5 text-orange-400 flex font-semibold items-center gap-1 ${
-                            items.bookingStatus === "pending"
-                              ? "flex"
-                              : "hidden"
-                          }`}
+                          className={`md:py-5  flex font-semibold items-center gap-1  ` + `text-${statusColor(items?.bookingStatus)}-400`}
                         >
-                          <span className="w-[1rem] h-[1rem]  rounded-full bg-orange-400"></span>
-                          <span>Pending</span>
-                        </p>
-
-                        <p
-                          className={`md:py-5 text-green-600 flex font-semibold items-center gap-1 ${
-                            items.bookingStatus === "confirm"
-                              ? "flex"
-                              : "hidden"
-                          }`}
-                        >
-                          <span className="w-[1rem] h-[1rem]  rounded-full bg-green-400"></span>
-                          <span>Confirm</span>
+                          <span className={`w-[1rem] h-[1rem]  rounded-full `+ `bg-${statusColor(items?.bookingStatus)}-400`}></span>
+                          <span>{items.bookingStatus}</span>
                         </p>
                       </div>
 
