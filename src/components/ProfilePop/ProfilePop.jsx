@@ -36,7 +36,7 @@ const ProfilePop = ({ setProfilePop, profilePop }) => {
     <>
       <div
         ref={refProfile}
-        className="bg-[#F5F9FF] z-30  w-[15rem] rounded-lg h-[15rem] absolute  top-8 right-[-4.5rem]"
+        className="bg-[#F5F9FF] z-30  w-[15rem] rounded-lg h-[15rem] absolute  top-8 right-[-0.5rem]"
       >
         <div
           className="arrow-up absolute right-[80px] top-[-10px]

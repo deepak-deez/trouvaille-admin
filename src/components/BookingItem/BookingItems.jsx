@@ -35,9 +35,12 @@ const BookingItems = () => {
                   <>
                     <div
                       key={index}
-                      className="mb-4 md:my-0 flex flex-col md:grid  md:grid-cols-6 w-full md:gap-3 text-center"
+                      className={
+                        "mb-4 md:my-0 flex flex-col md:grid  md:grid-cols-6 w-full md:gap-3 text-start gap-5" +
+                        (index % 2 == 0 ? " bg-[#F5F9FF]" : "")
+                      }
                     >
-                      <p className="p-1 md:py-5 flex flex-col md:flex-row  md:gap-3 items-center">
+                      <div className="p-1 md:py-5 flex flex-col md:flex-row  md:gap-3 items-center">
                         <img
                           className="md:w-[62px] min-w-[62px] max-h-[250px] max-w-[350px] md:h-[62px] object-fill w-[90%] h-80 rounded-md my-4 md:my-0"
                           src={items.tripDetails?.image}
@@ -47,28 +50,33 @@ const BookingItems = () => {
                         <span className="font-semibold text-start text-ellipsis overflow-hidden">
                           {items.title}
                         </span>
-                      </p>
-                      <div className="flex items-center justify-between md:justify-center p-3">
+                      </div>
+                      <div className="flex items-center justify-between md:p-3">
                         <span className="md:hidden">
                           <PersonIcon />
                         </span>
                         <p className="md:py-5">{items.name}</p>
                       </div>
 
-                      <div className="flex items-center justify-between md:justify-center p-3">
+                      <div className="flex items-center overflow-auto justify-between md:p-3 mr-4">
                         <span className="md:hidden">
                           <EmailIcon />
                         </span>
                         <p className="md:py-5">{items.email}</p>
+                        {/* <input
+                          className="md:py-5 "
+                          defaultValue={items.email}
+                          disabled={true}
+                        /> */}
                       </div>
-                      <div className="flex items-center justify-between md:justify-center p-3">
+                      <div className="flex items-center justify-between md:p-3">
                         <span className="md:hidden">
                           <PhoneIcon />
                         </span>
                         <p className="md:py-5">{items.phone}</p>
                       </div>
 
-                      <div className="flex items-center justify-between md:justify-center p-3">
+                      <div className="flex items-center justify-between md:p-3">
                         <span className="md:hidden">
                           <InfoIcon />
                         </span>
@@ -95,7 +103,7 @@ const BookingItems = () => {
                         </p>
                       </div>
 
-                      <div className="md:py-5 flex justify-center md:items-center">
+                      <div className="md:py-5 flex md:items-center">
                         <Link
                           className="border border-black px-3 py-1 rounded-md font-semibold "
                           to={"/booking-list/booking-details/" + items._id}
@@ -113,7 +121,7 @@ const BookingItems = () => {
       )}
 
       <Pagination
-        className="pagination-bar"
+        className="pagination-bar flex justify-end"
         currentPage={currentPage}
         totalCount={data && data?.data.length}
         pageSize={PageSize}

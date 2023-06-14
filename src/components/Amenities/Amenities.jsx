@@ -36,8 +36,8 @@ const AmenitiesTable = () => {
           <div className="w-[100%]">
             <div>
               <div className="tr-class md:grid md:grid-cols-3 flex text-[#8383A9] items-center text-center justify-center">
-                <div className="p-3 hidden md:block">Amenity Title</div>
-                <div className="p-3 hidden md:block">Description</div>
+                <div className="p-3 hidden md:block mr-auto">Amenity Title</div>
+                <div className="p-3 hidden md:block mr-auto">Description</div>
                 <div>
                   <button
                     className="text-[#E75C54]"
@@ -128,7 +128,7 @@ const AmenitiesTable = () => {
         />
       )}
       <Pagination
-        className="pagination-bar"
+        className="pagination-bar flex justify-end"
         currentPage={currentPage}
         totalCount={data && data?.data.length}
         pageSize={PageSize}

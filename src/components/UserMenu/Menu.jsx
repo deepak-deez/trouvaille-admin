@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import delIcon from "../../assets/images/user/delete.svg";
 import editIcon from "../../assets/images/user/edit-icon.svg";
 import store from "../../redux/store";
+import { useLocation } from "react-router-dom";
 
 const Menu = ({ setEditPop, setEditable, data, delPop, setDelPop }) => {
   const [menu, setMenu] = useState(false);
+  const location = useLocation();
+  const curretPageLocation = location.pathname;
   const storeData = store.getState();
   console.log(storeData);
   const userType = storeData.userLogin.userDetails.data.userDetails.userType;
@@ -12,7 +15,7 @@ const Menu = ({ setEditPop, setEditable, data, delPop, setDelPop }) => {
   return (
     <div className="relative">
       <button
-        className= {`font-bold   ${(userType=="Admin")? "flex" : "hidden"} `}
+        className={`font-bold   ${userType == "Admin" ? "flex" : "hidden"} `}
         onClick={() => {
           setMenu(!menu);
         }}
@@ -21,9 +24,14 @@ const Menu = ({ setEditPop, setEditable, data, delPop, setDelPop }) => {
       </button>
 
       <div
-        className={` w-[7rem] absolute top-0 left-5 bg-white rounded-lg p-3 px-5 flex shadow-[5px_10px_25px_rgba(102,101,130,0.15)] flex-col justify-center items-start z-50 ${
-          !menu && "hidden"
-        }`}
+        className={
+          ` w-[7rem] absolute top-0 left-5 bg-white rounded-lg p-3 px-5 flex shadow-[5px_10px_25px_rgba(102,101,130,0.15)] flex-col justify-center items-start z-50 ${
+            !menu && "hidden"
+          } ` +
+          (curretPageLocation === "/dashboard"
+            ? " translate-x-[-100%] translate-y-5 "
+            : "")
+        }
       >
         <button
           className="flex justify-between items-center w-full"

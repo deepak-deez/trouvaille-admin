@@ -16,7 +16,7 @@ const Navbar = ({ heading }) => {
   const userName = userDetails?.data?.userDetails.userName;
   const navigate = useNavigate();
   return (
-    <div className="flex justify-between w-full z-50 items-center bg-[#dbe6f5] xl:m-0 col-span-10 p-5">
+    <div className="flex justify-between sticky py-5 top-0 w-full z-50 items-center bg-[#dbe6f5] xl:m-0 col-span-10 p-5">
       <h2 className="font-bold ml-10 ">{heading}</h2>
       <div className="flex justify-center items-center px-5 space-x-2 ">
         <div className="realtive">

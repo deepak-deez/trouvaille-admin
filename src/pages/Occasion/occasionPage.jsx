@@ -6,11 +6,11 @@ import Footer from "../../components/Footer/Footer";
 
 const OccasionPage = () => {
   return (
-    <div className="flex h-screen">
+    <div className="flex">
       <Sidebar />
-      <div className="w-full bg-[#f5f7f7] ">
+      <div className="w-full bg-[#f5f7f7] h-[100vh] overflow-scroll md:pb-16">
         <Navbar heading="Occasions List" />
-        <div className="md:h-[90vh]">
+        <div>
           <Occasion />
         </div>
         <Footer />

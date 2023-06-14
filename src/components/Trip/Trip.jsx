@@ -119,7 +119,7 @@ const Trip = () => {
         />
       )}
       <Pagination
-        className="pagination-bar"
+        className="pagination-bar flex justify-end"
         currentPage={currentPage}
         totalCount={data && data?.data.length}
         pageSize={PageSize}

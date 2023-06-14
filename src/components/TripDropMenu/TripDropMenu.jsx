@@ -6,12 +6,17 @@ import UpdateTripForm from "../UpdatetripForm/UpdateTripForm";
 import { useDispatch } from "react-redux";
 import { deleteTrip } from "../../redux/actions/tripAction";
 
-const TripDropMenu = ({ editData, setEditData, delPop, setDelPop, deleteTripState, setdeleteTripState }) => {
- 
- 
+const TripDropMenu = ({
+  editData,
+  setEditData,
+  delPop,
+  setDelPop,
+  deleteTripState,
+  setdeleteTripState,
+}) => {
   // console.log(editData);
   const [showPop, setShowPop] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   return (
@@ -26,8 +31,8 @@ const TripDropMenu = ({ editData, setEditData, delPop, setDelPop, deleteTripStat
       </button>
 
       <div
-        className={` absolute top-0 bg-white rounded-lg w-[45%] p-2 flex shadow-[5px_10px_25px_rgba(102,101,130,0.15)] flex-col justify-center items-start ${
-          !showPop && "hidden"
+        className={` absolute top-5 z-[70] bg-white rounded-lg w-[40%] p-2 flex shadow-[5px_10px_25px_rgba(102,101,130,0.15)] flex-col justify-center items-start ${
+          !showPop && " hidden "
         }`}
       >
         <button
@@ -44,7 +49,7 @@ const TripDropMenu = ({ editData, setEditData, delPop, setDelPop, deleteTripStat
           className="flex justify-between items-center w-full"
           onClick={() => {
             setDelPop(!delPop);
-            setEditData(editData)
+            setEditData(editData);
           }}
         >
           Delete <img src={delIcon} alt="delete" />
