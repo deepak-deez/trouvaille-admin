@@ -8,11 +8,9 @@ const Dashboard = () => {
   return (
     <div className="flex h-screen">
       <Sidebar />
-      <div className="w-full bg-[#f5f7f7] ">
-        <Navbar heading="All Users"/>
-        <div className="md:h-[90vh]">
-          <User />
-        </div>
+      <div className="w-full bg-[#f5f7f7] h-screen overflow-auto md:pb-16">
+        <Navbar heading="All Users" />
+        <User />
         <Footer />
       </div>
     </div>

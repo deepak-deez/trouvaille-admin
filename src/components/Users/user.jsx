@@ -38,7 +38,7 @@ const User = () => {
     <>
       {/* <LoadingScreen /> */}
       {loading && <LoadingScreen />}
-      <div className="p-3">
+      <div className="p-3 h-full md:h-auto">
         <div className="p-4 bg-white item-center w-full overflow-x-scroll border-b-2">
           <div className="w-full">
             <div>

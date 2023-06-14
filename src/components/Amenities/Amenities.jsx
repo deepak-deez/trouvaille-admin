@@ -31,7 +31,7 @@ const AmenitiesTable = () => {
   return (
     <>
       {loading && <LoadingScreen />}
-      <div className="p-3">
+      <div className="p-3 ">
         <div className="p-4 bg-white item-center w-full overflow-x-scroll border-b-2">
           <div className="w-[100%]">
             <div>

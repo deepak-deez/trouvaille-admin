@@ -187,8 +187,8 @@ const NewTripForm = () => {
   return (
     <>
       {loading && <LoadingScreen />}
-      <div className="flex-col flex md:flex-row">
-        <div className="md:w-1/3 bg-[#f5f7f7] rounded-lg m-4 p-4 h-[50%]">
+      <div className="flex-col flex xl:flex-row">
+        <div className="md:w-1/3 bg-[#f5f7f7] rounded-lg m-4 p-4 h-[50%] mx-auto">
           <div className="flex justify-center">
             {file ? (
               <img src={file} alt="browserIcon" />
