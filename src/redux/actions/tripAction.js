@@ -40,7 +40,7 @@ export const getAllType =
     } catch (error) {
       dispatch({
         type: GET_ALL_TYPE_FAILED,
-        payload: error.message,
+        payload: error.response.data.message,
       });
     }
   };
@@ -66,7 +66,7 @@ export const addNewTip = (formdata, feature) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: ADD_TRIP_FAILED,
-      payload: error.message,
+      payload: error.response.data.message,
     });
   }
 };
@@ -88,7 +88,7 @@ export const getTrip = (feature) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_TRIP_FAILED,
-      payload: error.message,
+      payload: error.response.data.message,
     });
   }
 };
@@ -112,7 +112,7 @@ export const deleteTrip = (id, feature) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: DELETE_TRIP_FAILED,
-      payload: error.message,
+      payload: error.response.data.message,
     });
   }
 };
@@ -143,7 +143,7 @@ export const updateTrip =
     } catch (error) {
       dispatch({
         type: UPDATE_TRIP_FAILED,
-        payload: error.message,
+        payload: error.response.data.message,
       });
     }
   };
