@@ -15,9 +15,35 @@ import {
   GET_NOTIFICATION_FAILED,
   GET_NOTIFICATION_REQUEST,
   GET_NOTIFICATION_SUCCESS,
+  GET_BOOKING_BY_STATUS_FAILED,
+  GET_BOOKING_BY_STATUS_REQUEST,
+  GET_BOOKING_BY_STATUS_SUCCESS,
 } from "../constants/bookingConstants";
 
 const API = process.env.REACT_APP_NODE_API;
+
+export const getBookingByStatus = (status) => async (dispatch) => {
+  console.log(status);
+  try {
+    dispatch({
+      type: GET_BOOKING_BY_STATUS_REQUEST,
+    });
+    const header = {
+      "Content-Type": "application/json",
+    };
+    const { data } = await axios.get(`${API}/get-booking/${status}`, header);
+
+    dispatch({
+      type: GET_BOOKING_BY_STATUS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_BOOKING_BY_STATUS_FAILED,
+      payload: error.message,
+    });
+  }
+};
 
 export const getNotification = () => async (dispatch) => {
   try {

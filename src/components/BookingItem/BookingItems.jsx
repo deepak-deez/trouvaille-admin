@@ -2,7 +2,10 @@ import axios from "axios";
 import { React, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getBooking } from "../../redux/actions/bookingActions";
+import {
+  getBooking,
+  getBookingByStatus,
+} from "../../redux/actions/bookingActions";
 import PersonIcon from "@mui/icons-material/Person";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
@@ -12,23 +15,46 @@ import Nodata from "../Nodata/Nodata";
 
 let PageSize = 6;
 
-const BookingItems = () => {
+const BookingItems = (props) => {
   const { data } = useSelector((state) => state.getBooking);
+  const { data: booking } = useSelector((state) => state.getBookingByStatus);
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
+  const [dataMap, setDataMap] = useState();
 
   useEffect(() => {
-    dispatch(getBooking());
-  }, []);
+    console.log(props.activeStatusTab);
+    if (props.activeStatusTab === "All") {
+      dispatch(getBooking());
+      dispatch({
+        type: "GET_BOOKING_BY_STATUS_SUCCESS",
+        payload: null,
+      });
+    } else {
+      dispatch(getBookingByStatus(props.activeStatusTab));
+      dispatch({
+        type: "GET_BOOKING_SUCCESS",
+        payload: null,
+      });
+    }
+  }, [props.activeStatusTab]);
+
+  useEffect(() => {
+    setDataMap(data);
+  }, [data]);
+
+  useEffect(() => {
+    setDataMap(booking);
+  }, [booking]);
 
   const firstPageIndex = (currentPage - 1) * PageSize;
   const lastPageIndex = firstPageIndex + PageSize;
   return (
     <>
-      {data && data.data.length !== 0 ? (
+      {dataMap && (dataMap.data.length !== 0 || dataMap.data === null) ? (
         <div>
-          {data &&
-            data?.data
+          {dataMap &&
+            dataMap?.data
               .slice(firstPageIndex, lastPageIndex)
               .map((items, index) => {
                 return (
