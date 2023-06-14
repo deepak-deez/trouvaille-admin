@@ -12,11 +12,11 @@ import Nodata from "../Nodata/Nodata";
 
 let PageSize = 6;
 
-const BookingItems = () => {
+const BookingItems = (props) => {
   const { data } = useSelector((state) => state.getBooking);
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
-
+  console.log(props.activeStatusTab);
   useEffect(() => {
     dispatch(getBooking());
   }, []);
