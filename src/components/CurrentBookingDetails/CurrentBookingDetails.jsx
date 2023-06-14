@@ -12,6 +12,7 @@ import {
 import Swal from "sweetalert2";
 import LoadingScreen from "../Loading/LoadingScreen";
 import store from "../../redux/store";
+import StatusMenu from "../StatusMenu/StatusMenu";
 
 const CurrentBookingDetails = () => {
   const { data, loading } = useSelector((state) => state.getSingleBooking);
@@ -20,7 +21,13 @@ const CurrentBookingDetails = () => {
   const dispatch = useDispatch();
   const [cancelPopUp, setCancelPopUp] = useState(false);
   const [submitDelete, setSubmitDelete] = useState(false);
+  const [status, setStatus] = useState("");
   let { id } = useParams();
+  const options = [
+    { label: "Confirm", value: "Confirm " },
+    { label: "Pending", value: "Pending" },
+    { label: "Completed", value: "Completed" },
+  ];
   useEffect(() => {
     dispatch(getSingleBooking(id));
   }, [id]);
@@ -50,8 +57,12 @@ const CurrentBookingDetails = () => {
 
   useEffect(() => {
     dispatch(getSingleBooking(id));
+    if(data&&data.data){
+      console.log(data,"fdsfghjkl;jhgfdsaghjkljhgf");
+    }
   }, [deny, cancelPopUp]);
 
+  
   useEffect(() => {
     if (submitDelete) {
       dispatch(getBooking());
@@ -91,7 +102,7 @@ const CurrentBookingDetails = () => {
           </div>
           <div className="mx-2 md:w-[50%] self-center sm:w-full sm:self-start p-2 ">
             <div className="flex justify-between items-center gap-3">
-              <p className="text-3xl font-semibold my-5 w-[50%]">
+              <p className="text-3xl  my-5 w-[50%]">
                 {data.data.title}
               </p>
               <div className="flex w-[50%]">
@@ -131,7 +142,7 @@ const CurrentBookingDetails = () => {
                 <ol>
                   {data.data.otherPassenger.map((item, index) => {
                     return (
-                      <li className="font-semibold text-black" key={index}>
+                      <li className=" text-black" key={index}>
                         {index + 1}. {item.firstName} {item.lastName}
                       </li>
                     );
@@ -140,9 +151,10 @@ const CurrentBookingDetails = () => {
                 <span className="">Email address:</span>
                 <span className="">Phone:</span>
                 <span className="">Address:</span>
+                <span className="">Status:</span>
               </div>
 
-              <div className="flex w-[50%] flex-col sm:text-md md:text-lg text-sm gap-5 font-semibold">
+              <div className="flex w-[50%] flex-col sm:text-md md:text-lg text-sm gap-5 ">
                 <p> {data.data.name}</p>
                 <p> {data.data.passengers}3</p>
                 <ul>
@@ -160,6 +172,14 @@ const CurrentBookingDetails = () => {
                 <p className=" overflow-x-scroll">{data.data.email}</p>
                 <p>{data.data.phone}</p>
                 <p> {data.data.address}</p>
+                <StatusMenu
+                  value={status}
+                  setvalue={setStatus}
+                  options={options}
+                />
+                <button className=" bg-red-500 p-2 rounded-md text-white">
+                  Update Status
+                </button>
               </div>
             </div>
 
@@ -167,7 +187,7 @@ const CurrentBookingDetails = () => {
               className={`flex gap-2 border border-red-600 rounded-md py-5 px-3 mt-5
                ${requestedForCancel.current === "false" ? "hidden" : "flex"}`}
             >
-              <span className=" font-semibold">Cancellation Reason: </span>{" "}
+              <span className=" ">Cancellation Reason: </span>{" "}
               <span>{data.data.deleteReason}</span>
             </div>
           </div>

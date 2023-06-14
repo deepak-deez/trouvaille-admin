@@ -8,20 +8,23 @@ import LoadingScreen from "../Loading/LoadingScreen";
 
 const AddNewUser = ({ setAddPop, addPop }) => {
   const { data } = useSelector((state) => state.getUser);
-  const { data: addedUser, loading } = useSelector((state) => state.addNewUser);
+  const {
+    data: addedUser,
+    loading,
+    error,
+  } = useSelector((state) => state.addNewUser);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [error, setError] = useState(null);
+  const [errors, setErrorText] = useState(null);
   const dispatch = useDispatch();
-  console.log(data);
-  console.log(addedUser);
+
   const validateEmail = (e) => {
     setEmail(e.target.value);
 
     if (validator.isEmail(email)) {
-      setError(null);
+      setErrorText(null);
     } else {
-      setError("Enter valid Email!");
+      setErrorText("Enter valid Email!");
     }
   };
 
@@ -81,6 +84,23 @@ const AddNewUser = ({ setAddPop, addPop }) => {
     }
   }, [addedUser]);
 
+  useEffect(() => {
+    if (error) {
+      Swal.fire({
+        position: "center",
+        width: "40vh",
+        icon: "error",
+        title: "failed",
+        text: error.response.data.message,
+        showConfirmButton: false,
+        toast: false,
+        timer: 2000,
+        timerProgressBar: true,
+      });
+      dispatch({ type: "ADD_USER_FAILED", payload: null });
+    }
+  }, [error]);
+
   return (
     <div
       className={`fixed top-0 left-0 w-full flex justify-center items-center addUser   h-[100vh] ${
@@ -124,7 +144,7 @@ const AddNewUser = ({ setAddPop, addPop }) => {
           />
         </form>
 
-        {error && <h2 style={{ color: "red" }}>{error}</h2>}
+        {errors && <h2 style={{ color: "red" }}>{errors}</h2>}
 
         <div className="flex item-center justify-center">
           <button

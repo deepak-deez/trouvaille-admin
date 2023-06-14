@@ -4,11 +4,11 @@ import { updateUser, getUser } from "../../redux/actions/addUserAction";
 import Swal from "sweetalert2";
 
 const EditUser = ({ editPop, setEditPop, data }) => {
-  const { data: updatedUser } = useSelector((state) => state.updateUser);
+  const { data: updatedUser, error } = useSelector((state) => state.updateUser);
   const [name, setName] = useState(data.userName);
   const [email, setEmail] = useState(data.email);
   const [phone, setPhone] = useState(data.phone);
-  const [error, setError] = useState(null);
+  const [errorText, setErrorText] = useState(null);
 
   const id = data._id;
   const dispatch = useDispatch();
@@ -54,6 +54,25 @@ const EditUser = ({ editPop, setEditPop, data }) => {
       dispatch({ type: "UPDATE_USER_SUCCESS", payload: null });
     }
   }, [updatedUser]);
+  console.log(updatedUser, "updatedUser");
+  useEffect(() => {
+    if (error) {
+      console.log("ERROR : ", error);
+      Swal.fire({
+        position: "center",
+        width: "40vh",
+        icon: "error",
+        title: "failed",
+        text: error,
+        showConfirmButton: false,
+        toast: false,
+        timer: 2000,
+        timerProgressBar: true,
+      });
+      dispatch({ type: "UPDATE_USER_FAILED", payload: null });
+    }
+  }, [error]);
+  console.log(error);
 
   return (
     <div
@@ -104,13 +123,13 @@ const EditUser = ({ editPop, setEditPop, data }) => {
               setPhone(phoneVal);
               if (phoneVal.length > 10) {
                 console.log(phoneVal.length);
-                setError("Enter Valid Number");
+                setErrorText("Enter Valid Number");
               } else if (phoneVal.length === 10) {
-                setError("Valid Number");
+                setErrorText("Valid Number");
               }
             }}
           />
-          {error && <h2 style={{ color: "red" }}>{error}</h2>}
+          {errorText && <h2 style={{ color: "red" }}>{errorText}</h2>}
         </form>
         <div className="flex item-center justify-center gap-6 ">
           <button

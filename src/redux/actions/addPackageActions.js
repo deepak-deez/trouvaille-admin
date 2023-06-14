@@ -40,7 +40,7 @@ export const getSinglePackage = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_SINGLE_PACKAGE_FAILED,
-      payload: error.message,
+      payload: error.response.data.message,
     });
   }
 };
@@ -63,7 +63,7 @@ export const getPackage = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_PACKAGE_FAILED,
-      payload: error.message,
+      payload: error.response.data.message,
     });
   }
 };
@@ -96,7 +96,7 @@ export const addPackage = (formdata) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: ADD_PACKAGE_FAILED,
-      payload: error.message,
+      payload: error.response.data.message,
     });
   }
 };
@@ -126,7 +126,7 @@ export const updatePackage = (id, formData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: UPDATE_PACKAGE_FAILED,
-      payload: error.message,
+      payload: error.response.data.message,
     });
   }
 };
@@ -151,7 +151,7 @@ export const deletePackage = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: DELETE_PACKAGE_FAILED,
-      payload: error.message,
+      payload: error.response.data.message,
     });
   }
 };

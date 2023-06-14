@@ -33,7 +33,7 @@ export const logInUser = (email, password, type) => async (dispatch) => {
   } catch {
     dispatch({
       type: USER_LOGIN_FAILED,
-      payload: error.message,
+      payload: error.response.data.message,
     });
   }
 };

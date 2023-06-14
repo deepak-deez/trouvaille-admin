@@ -38,7 +38,7 @@ export const addNewUser = (name, email, type) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: ADD_USER_FAILED,
-      payload: error.message,
+      payload: error.response.data.message,
     });
   }
 };
@@ -60,7 +60,7 @@ export const getUser = (type) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_USER_FAILED,
-      payload: error.message,
+      payload: error.response.data.message,
     });
   }
 };
@@ -81,14 +81,16 @@ export const updateUser =
         phone,
       };
       const { data } = await axios.post(`${API}/update/${type}`, body, header);
+      console.log("Data : ", data);
       dispatch({
         type: UPDATE_USER_SUCCESS,
         payload: data,
       });
     } catch (error) {
+      console.log("ERROR:", error);
       dispatch({
         type: UPDATE_USER_FAILED,
-        payload: error.message,
+        payload: error.response.data.message,
       });
     }
   };
@@ -109,7 +111,7 @@ export const delUser = (id, type) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: DELETE_USER_FAILED,
-      payload: error.message,
+      payload: error.response.data.message,
     });
   }
 };

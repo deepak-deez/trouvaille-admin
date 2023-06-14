@@ -63,7 +63,7 @@ export const getSingleBooking = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_SINGLE_BOOKING_FAILED,
-      payload: error.message,
+      payload: error.response.data.message,
     });
   }
 };
@@ -89,7 +89,7 @@ export const deleteBooking = (id, userType) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: DELETE_BOOKING_FAILED,
-      payload: error.message,
+      payload: error.response.data.message,
     });
   }
 };
@@ -111,7 +111,7 @@ export const getBooking = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_BOOKING_FAILED,
-      payload: error.message,
+      payload: error.response.data.message,
     });
   }
 };
@@ -147,7 +147,7 @@ export const updateBooking =
     } catch (error) {
       dispatch({
         type: UPDATE_BOOKING_FAILED,
-        payload: error.message,
+        payload: error.response.data.message,
       });
     }
   };
