@@ -14,8 +14,48 @@ import {
   GET_NOTIFICATION_FAILED,
   GET_NOTIFICATION_REQUEST,
   GET_NOTIFICATION_SUCCESS,
+  GET_BOOKING_BY_STATUS_FAILED,
+  GET_BOOKING_BY_STATUS_SUCCESS,
+  GET_BOOKING_BY_STATUS_REQUEST,
 } from "../constants/bookingConstants";
 
+const getBookingByStatusStateInitial = {
+  loading: false,
+  data: null,
+  error: null,
+};
+
+export const getBookingByStatusReducer = (
+  state = getBookingByStatusStateInitial,
+  action
+) => {
+  switch (action.type) {
+    case GET_BOOKING_BY_STATUS_REQUEST:
+      return {
+        ...state,
+        data: null,
+        loading: true,
+        error: null,
+      };
+    case GET_BOOKING_BY_STATUS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        data: action.payload,
+      };
+    case GET_BOOKING_BY_STATUS_FAILED:
+      return {
+        ...state,
+        data: null,
+        loading: false,
+        error: action.payload,
+      };
+    default: {
+      return state;
+    }
+  }
+};
 const getNotificationStateInitial = {
   loading: false,
   data: null,

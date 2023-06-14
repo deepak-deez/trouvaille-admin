@@ -4,7 +4,7 @@ const BookingListTabs = (props) => {
     const {setActiveStatusTab,activeStatusTab} = props
   return (
     
-    <div className='grid grid-cols-5 py-4 font-semibold'>
+    <div className='grid grid-cols-5 p-2 bg-white font-semibold'>
         <div className={"p-3 text-center " + (activeStatusTab ==="All"? "text-red-400 active":"")} onClick={()=>setActiveStatusTab("All") }>All</div>
         <div className={"p-3 text-center " + (activeStatusTab ==="Confirmed"?"text-red-400 active":"")} onClick={()=>setActiveStatusTab("Confirmed")}>Confirmed</div>
         <div className={"p-3 text-center " + (activeStatusTab ==="Pending"?"text-red-400 active":"")} onClick={()=>setActiveStatusTab("Pending")}>Pending</div>
