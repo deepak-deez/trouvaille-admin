@@ -23,6 +23,7 @@ const CurrentBookingDetails = () => {
   const [submitDelete, setSubmitDelete] = useState(false);
   const [status, setStatus] = useState("");
   let { id } = useParams();
+
   const options = [
     { label: "Confirm", value: "Confirm " },
     { label: "Pending", value: "Pending" },
@@ -31,6 +32,15 @@ const CurrentBookingDetails = () => {
   useEffect(() => {
     dispatch(getSingleBooking(id));
   }, [id]);
+
+  useEffect(() => {
+    if (data && data.data) {
+      setStatus({
+        label: data && data.data.bookingStatus,
+        value: data && data.data.bookingStatus,
+      });
+    }
+  }, [data]);
 
   const [deny, setDeny] = useState(updatedBooking);
   const requestedForCancel = useRef();
@@ -57,12 +67,8 @@ const CurrentBookingDetails = () => {
 
   useEffect(() => {
     dispatch(getSingleBooking(id));
-    if(data&&data.data){
-      console.log(data,"fdsfghjkl;jhgfdsaghjkljhgf");
-    }
   }, [deny, cancelPopUp]);
 
-  
   useEffect(() => {
     if (submitDelete) {
       dispatch(getBooking());
@@ -102,9 +108,7 @@ const CurrentBookingDetails = () => {
           </div>
           <div className="mx-2 md:w-[50%] self-center sm:w-full sm:self-start p-2 ">
             <div className="flex justify-between items-center gap-3">
-              <p className="text-3xl  my-5 w-[50%]">
-                {data.data.title}
-              </p>
+              <p className="text-3xl  my-5 w-[50%]">{data.data.title}</p>
               <div className="flex w-[50%]">
                 <Link
                   className={`flex border px-3 py-2 rounded-md border-black me-5 font-bold
