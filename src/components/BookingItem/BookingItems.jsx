@@ -36,7 +36,7 @@ const BookingItems = () => {
                     <div
                       key={index}
                       className={
-                        "mb-4 md:my-0 flex flex-col md:grid  md:grid-cols-6 w-full md:gap-3 text-start gap-5" +
+                        "mb-4 p-5 md:p-0 md:my-0 flex flex-col md:grid  md:grid-cols-6 w-full md:gap-3 text-start gap-5" +
                         (index % 2 == 0 ? " bg-[#F5F9FF]" : "")
                       }
                     >
@@ -58,11 +58,13 @@ const BookingItems = () => {
                         <p className="md:py-5">{items.name}</p>
                       </div>
 
-                      <div className="flex items-center overflow-auto justify-between md:p-3 mr-4">
+                      <div className="flex items-center justify-between md:p-3">
                         <span className="md:hidden">
                           <EmailIcon />
                         </span>
-                        <p className="md:py-5">{items.email}</p>
+                        <p className="md:py-5 text-ellipsis overflow-hidden">
+                          {items.email}
+                        </p>
                         {/* <input
                           className="md:py-5 "
                           defaultValue={items.email}

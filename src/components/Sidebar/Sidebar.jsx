@@ -43,7 +43,7 @@ const Sidebar = (props) => {
       <button
         className="navbar_toggle absolute top-[1rem] left-2 block xl:hidden bg-[#E85C53] text-white hover:text-white px-2 py-1 "
         style={{
-          zIndex: "20000",
+          zIndex: "100",
         }}
         onClick={handleShow}
       >
@@ -52,7 +52,7 @@ const Sidebar = (props) => {
       {/* </div> */}
       <div
         className={
-          `mainSideBar z-[60] fixed top-0 xl:static xl:flex w-full sm:w-[60%] lg:w-[40%] 2xl:w-[30%] p-5 flex-col bg-white h-screen sidebar-shadow  ${
+          `mainSideBar z-[90] fixed top-0 xl:static xl:flex w-full sm:w-[60%] lg:w-[40%] 2xl:w-[30%] p-5 flex-col bg-white h-screen sidebar-shadow  ${
             !show && " hidden-bar "
           }` + (closingAnimation ? openningAnimaionName : closingAnimationName)
         }
@@ -68,7 +68,7 @@ const Sidebar = (props) => {
             </div>
           </div>
 
-          <div className={`sidebar-Links flex flex-col gap-5 md:gap-0`}>
+          <div className={`sidebar-Links flex flex-col `}>
             {SideBarLinks.map((item, index) => {
               return (
                 <NavLink

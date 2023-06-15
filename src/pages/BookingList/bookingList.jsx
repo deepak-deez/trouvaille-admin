@@ -13,7 +13,7 @@ const BookingList = () => {
       {loading && <LoadingScreen />}
       <div className="flex h-screen">
         <Sidebar />
-        <div className="w-full bg-[#f5f7f7] h-full md:pb-16">
+        <div className="w-full h-screen overflow-auto bg-[#f5f7f7] md:pb-16">
           <Navbar heading="Booking List" />
           <div className="bg-white  overflow-auto p-5 w-full ">
             <div className="hidden md:grid grid-cols-6 gap-3 text-[#8383A9] text-start">
