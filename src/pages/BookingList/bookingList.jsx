@@ -15,7 +15,7 @@ const BookingList = () => {
       {loading && <LoadingScreen />}
       <div className="flex h-screen">
         <Sidebar />
-        <div className="w-full bg-[#f5f7f7] h-full md:pb-16">
+        <div className="w-full h-screen overflow-auto bg-[#f5f7f7] md:pb-16">
           <Navbar heading="Booking List" />
           <BookingListTabs
             activeStatusTab={activeStatusTab}

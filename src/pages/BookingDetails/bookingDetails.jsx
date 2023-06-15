@@ -9,9 +9,9 @@ const BookingDetails = () => {
   return (
     <div className="flex h-screen">
       <Sidebar />
-      <div className="w-full bg-[#f5f7f7] ">
-        <Navbar heading="Booking Details"/>
-        <div className="md:h-[90vh] overflow-y-auto flex flex-col">
+      <div className="w-full bg-[#f5f7f7] h-screen overflow-auto">
+        <Navbar heading="Booking Details" />
+        <div className="flex flex-col">
           <CurrentBookingDetails />
         </div>
         <Footer />
