@@ -10,7 +10,7 @@ const Travel = () => {
       <Sidebar />
       <div className="w-full bg-[#f5f7f7] h-[100vh] overflow-auto md:pb-16">
         <Navbar heading="Travel Type List" />
-        <div>
+        <div className="h-screen">
           <TravelType />
         </div>
         <Footer />
