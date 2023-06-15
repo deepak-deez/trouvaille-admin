@@ -18,6 +18,7 @@ import AdminLogin from "./pages/AdminLoginForm/AdminLoginForm.jsx";
 import ForgotPassword from "./pages/AdminForgotPassword/AdminForgotPassword.jsx";
 import ResetPassword from "./pages/AdminResetPassword/AdminResetPassword.jsx";
 import Signup from "./pages/AdminSignUp/AdminSignUp.jsx";
+import BookingNotesPage from "./pages/BookingNotesPage/BookingNotesPage";
 
 const Router = () => {
   return (
@@ -38,6 +39,7 @@ const Router = () => {
         />
 
         <Route exact path="/booking-list" element={<BookingList />} />
+        <Route exact path="/booking-notes" element={<BookingNotesPage />} />
         <Route
           exact
           path="/booking-list/booking-details/:id"

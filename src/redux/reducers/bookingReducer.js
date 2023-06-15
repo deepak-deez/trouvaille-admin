@@ -20,7 +20,170 @@ import {
   UPDATE_BOOKING_STATUS_FAILED,
   UPDATE_BOOKING_STATUS_REQUEST,
   UPDATE_BOOKING_STATUS_SUCCESS,
+  ADD_BOOKING_NOTE_FAILED,
+  ADD_BOOKING_NOTE_REQUEST,
+  ADD_BOOKING_NOTE_SUCCESS,
+  GET_BOOKING_NOTE_FAILED,
+  GET_BOOKING_NOTE_REQUEST,
+  GET_BOOKING_NOTE_SUCCESS,
+  UPDATE_BOOKING_NOTE_FAILED,
+  UPDATE_BOOKING_NOTE_REQUEST,
+  UPDATE_BOOKING_NOTE_SUCCESS,
+  DELETE_BOOKING_NOTE_FAILED,
+  DELETE_BOOKING_NOTE_REQUEST,
+  DELETE_BOOKING_NOTE_SUCCESS,
 } from "../constants/bookingConstants";
+
+
+const addBookingNoteStateInitial = {
+  loading: false,
+  data: null,
+  error: null,
+};
+export const addBookingNoteReducer = (
+  state = addBookingNoteStateInitial,
+  action
+) => {
+  switch (action.type) {
+    case ADD_BOOKING_NOTE_REQUEST:
+      return {
+        ...state,
+        data: null,
+        loading: true,
+        error: null,
+      };
+    case ADD_BOOKING_NOTE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        data: action.payload,
+      };
+    case ADD_BOOKING_NOTE_FAILED:
+      return {
+        ...state,
+        data: null,
+        loading: false,
+        error: action.payload,
+      };
+    default: {
+      return state;
+    }
+  }
+};
+
+const deleteBookingNoteStateInitial = {
+  loading: false,
+  data: null,
+  error: null,
+};
+
+export const deleteBookingNoteReducer = (
+  state = deleteBookingNoteStateInitial,
+  action
+) => {
+  switch (action.type) {
+    case DELETE_BOOKING_NOTE_REQUEST:
+      return {
+        ...state,
+        data: null,
+        loading: true,
+        error: null,
+      };
+    case DELETE_BOOKING_NOTE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        data: action.payload,
+      };
+    case DELETE_BOOKING_NOTE_FAILED:
+      return {
+        ...state,
+        data: null,
+        loading: false,
+        error: action.payload,
+      };
+    default: {
+      return state;
+    }
+  }
+};
+
+const getBookingNoteStateInitial = {
+  loading: false,
+  data: null,
+  error: null,
+};
+
+export const getBookingNoteReducer = (
+  state = getBookingNoteStateInitial,
+  action
+) => {
+  switch (action.type) {
+    case GET_BOOKING_NOTE_REQUEST:
+      return {
+        ...state,
+        data: null,
+        loading: true,
+        error: null,
+      };
+    case GET_BOOKING_NOTE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        data: action.payload,
+      };
+    case GET_BOOKING_NOTE_FAILED:
+      return {
+        ...state,
+        data: null,
+        loading: false,
+        error: action.payload,
+      };
+    default: {
+      return state;
+    }
+  }
+};
+
+const updateBookingNoteStateInitial = {
+  loading: false,
+  data: null,
+  error: null,
+};
+export const updateBookingNoteReducer = (
+  state = updateBookingNoteStateInitial,
+  action
+) => {
+  switch (action.type) {
+    case UPDATE_BOOKING_NOTE_REQUEST:
+      return {
+        ...state,
+        data: null,
+        loading: true,
+        error: null,
+      };
+    case UPDATE_BOOKING_NOTE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        data: action.payload,
+      };
+    case UPDATE_BOOKING_NOTE_FAILED:
+      return {
+        ...state,
+        data: null,
+        loading: false,
+        error: action.payload,
+      };
+    default: {
+      return state;
+    }
+  }
+};
 
 const updateBookingStatusStateInitial = {
   loading: false,
