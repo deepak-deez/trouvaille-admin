@@ -8,6 +8,7 @@ import {
   getSingleBooking,
   updateBooking,
   getBooking,
+  updateBookingStatus,
 } from "../../redux/actions/bookingActions";
 import Swal from "sweetalert2";
 import LoadingScreen from "../Loading/LoadingScreen";
@@ -18,10 +19,15 @@ const CurrentBookingDetails = () => {
   const { data, loading } = useSelector((state) => state.getSingleBooking);
   const { data: updatedBooking } = useSelector((state) => state.updateBooking);
   const { data: deleted } = useSelector((state) => state.deleteBooking);
+  const { data: updatedStatus } = useSelector(
+    (state) => state.updateBookingStatus
+  );
   const dispatch = useDispatch();
   const [cancelPopUp, setCancelPopUp] = useState(false);
   const [submitDelete, setSubmitDelete] = useState(false);
   const [status, setStatus] = useState("");
+  const [update, setUpdate] = useState(false);
+
   let { id } = useParams();
 
   const options = [
@@ -29,6 +35,7 @@ const CurrentBookingDetails = () => {
     { label: "Pending", value: "Pending" },
     { label: "Completed", value: "Completed" },
   ];
+
   useEffect(() => {
     dispatch(getSingleBooking(id));
   }, [id]);
@@ -46,7 +53,6 @@ const CurrentBookingDetails = () => {
   const requestedForCancel = useRef();
   const navigate = useNavigate();
   const storeData = store.getState();
-  console.log(storeData);
   const userType = storeData.userLogin.userDetails.data.userDetails.userType;
 
   const denyReq = async () => {
@@ -87,6 +93,32 @@ const CurrentBookingDetails = () => {
       });
     }
   }, [submitDelete]);
+
+  const updateStatus = () => {
+    if (id && status.value) {
+      dispatch(updateBookingStatus(id, status.value));
+    }
+  };
+
+  useEffect(() => {
+    if (updatedStatus) {
+      dispatch({ type: "UPDATE_BOOKING_STATUS_SUCCESS", payload: null });
+      Swal.fire({
+        position: "center",
+        width: "40vh",
+        icon: "success",
+        title: "Success",
+        text: updatedStatus.message,
+        showConfirmButton: false,
+        toast: false,
+        timer: 2000,
+        timerProgressBar: true,
+      });
+      setTimeout(() => {
+        navigate("/booking-list");
+      }, 2000);
+    }
+  }, [updatedStatus]);
 
   if (data?.data.cancellationStatus === "true")
     requestedForCancel.current = "true";
@@ -178,12 +210,22 @@ const CurrentBookingDetails = () => {
                 <p> {data.data.address}</p>
                 <StatusMenu
                   value={status}
-                  setvalue={setStatus}
+                  onChange={(e) => {
+                    setStatus(e);
+                    setUpdate(true);
+                  }}
                   options={options}
                 />
-                <button className=" bg-red-500 p-2 rounded-md text-white">
-                  Update Status
-                </button>
+                {update && (
+                  <button
+                    className=" bg-red-500 p-2 rounded-md text-white"
+                    onClick={() => {
+                      updateStatus();
+                    }}
+                  >
+                    Update Status
+                  </button>
+                )}
               </div>
             </div>
 

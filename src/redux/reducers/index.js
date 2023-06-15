@@ -29,6 +29,7 @@ import {
   deleteBookingReducer,
   getNotificationReducer,
   getBookingByStatusReducer,
+  updateBookingStatusStateReducer,
 } from "./bookingReducer";
 
 const rootReducer = combineReducers({
@@ -49,6 +50,7 @@ const rootReducer = combineReducers({
   userLogin: userReducer,
   getNotification: getNotificationReducer,
   getBooking: getBookingReducer,
+  updateBookingStatus: updateBookingStatusStateReducer,
   getBookingByStatus: getBookingByStatusReducer,
   getSingleBooking: getSingleBookingReducer,
   updateBooking: updateBookingReducer,

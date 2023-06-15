@@ -18,12 +18,46 @@ import {
   GET_BOOKING_BY_STATUS_FAILED,
   GET_BOOKING_BY_STATUS_REQUEST,
   GET_BOOKING_BY_STATUS_SUCCESS,
+  UPDATE_BOOKING_STATUS_REQUEST,
+  UPDATE_BOOKING_STATUS_FAILED,
+  UPDATE_BOOKING_STATUS_SUCCESS,
 } from "../constants/bookingConstants";
 
 const API = process.env.REACT_APP_NODE_API;
 
+export const updateBookingStatus = (id, bookingStatus) => async (dispatch) => {
+  console.log(id);
+  try {
+    dispatch({
+      type: UPDATE_BOOKING_STATUS_REQUEST,
+    });
+
+    const body = {
+      bookingStatus,
+    };
+
+    const header = { "Content-Type": "application/json" };
+
+    const { data } = await axios.post(
+      `${API}/update-booking-status/${id}`,
+      body,
+      header
+    );
+    console.log(data);
+
+    dispatch({
+      type: UPDATE_BOOKING_STATUS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_BOOKING_STATUS_FAILED,
+      payload: error.response.data.message,
+    });
+  }
+};
+
 export const getBookingByStatus = (status) => async (dispatch) => {
-  console.log(status);
   try {
     dispatch({
       type: GET_BOOKING_BY_STATUS_REQUEST,
@@ -143,7 +177,7 @@ export const getBooking = () => async (dispatch) => {
 };
 
 export const updateBooking =
-  (id, status, reason, bookingStatus, read, notificationLink) =>
+  (id, status, reason, read) =>
   async (dispatch) => {
     try {
       dispatch({
@@ -152,8 +186,6 @@ export const updateBooking =
       const body = {
         cancellationStatus: status,
         deleteReason: reason,
-        bookingStatus: bookingStatus,
-        link: notificationLink,
         read: read,
       };
       const header = {

@@ -337,7 +337,9 @@ const NewTripForm = () => {
                   width="91%"
                   options={travelTypeOptions}
                   value={travelType}
-                  setvalue={setTravelType}
+                  onChange={(e) => {
+                    setTravelType(e);
+                  }}
                 />
               </div>
             </div>
@@ -385,7 +387,9 @@ const NewTripForm = () => {
                 width="100%"
                 options={Status}
                 value={status}
-                setvalue={setStatus}
+                onChange={(e) => {
+                  setStatus(e);
+                }}
               />
               <button
                 className="bg-[#CD4B43] rounded-md w-1/2 p-3"
