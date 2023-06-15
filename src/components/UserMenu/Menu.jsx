@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import delIcon from "../../assets/images/user/delete.svg";
 import editIcon from "../../assets/images/user/edit-icon.svg";
 import store from "../../redux/store";
@@ -11,9 +11,21 @@ const Menu = ({ setEditPop, setEditable, data, delPop, setDelPop }) => {
   const storeData = store.getState();
   console.log(storeData);
   const userType = storeData.userLogin.userDetails.data.userDetails.userType;
+  const refDotMenu=useRef(null)
+
+  const handleClickOutside=(e)=>{
+    if(refDotMenu.current && !refDotMenu.current.contains(e.target)){
+      setMenu(false)
+    }
+  }
+  
+  useEffect(()=>{
+    document.addEventListener("click",handleClickOutside,"true")
+    console.log(refDotMenu ,"reference");
+  },[])
 
   return (
-    <div className="relative">
+    <div className="relative" ref={refDotMenu}>
       <button
         className={`font-bold   ${userType == "Admin" ? "flex" : "hidden"} `}
         onClick={() => {

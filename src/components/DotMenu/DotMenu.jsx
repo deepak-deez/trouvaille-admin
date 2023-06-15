@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useEffect, useState, useRef } from "react";
 import delIcon from "../../assets/images/user/delete.svg";
 import editIcon from "../../assets/images/user/edit-icon.svg";
 
@@ -11,9 +11,21 @@ const DotMenu = ({
   setShowDelPop,
 }) => {
   const [showTraveldrop, setShowTraveldrop] = useState(false);
+const refDotMenu=useRef(null)
+
+const handleClickOutside=(e)=>{
+  if(refDotMenu.current && !refDotMenu.current.contains(e.target)){
+    setShowTraveldrop(false)
+  }
+}
+
+useEffect(()=>{
+  document.addEventListener("click",handleClickOutside,"true")
+  console.log(refDotMenu ,"reference");
+},[])
 
   return (
-    <div className="relative text-end">
+    <div ref={refDotMenu} className="relative text-end">
       <button
         className="mr-5"
         onClick={() => {
