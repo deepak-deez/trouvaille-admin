@@ -21,9 +21,131 @@ import {
   UPDATE_BOOKING_STATUS_REQUEST,
   UPDATE_BOOKING_STATUS_FAILED,
   UPDATE_BOOKING_STATUS_SUCCESS,
+  ADD_BOOKING_NOTE_FAILED,
+  ADD_BOOKING_NOTE_REQUEST,
+  ADD_BOOKING_NOTE_SUCCESS,
+  GET_BOOKING_NOTE_FAILED,
+  GET_BOOKING_NOTE_REQUEST,
+  GET_BOOKING_NOTE_SUCCESS,
+  UPDATE_BOOKING_NOTE_FAILED,
+  UPDATE_BOOKING_NOTE_REQUEST,
+  UPDATE_BOOKING_NOTE_SUCCESS,
+  DELETE_BOOKING_NOTE_FAILED,
+  DELETE_BOOKING_NOTE_REQUEST,
+  DELETE_BOOKING_NOTE_SUCCESS,
 } from "../constants/bookingConstants";
 
 const API = process.env.REACT_APP_NODE_API;
+
+export const updateBookingNote = (id, note) => async (dispatch) => {
+  try {
+    dispatch({
+      type: UPDATE_BOOKING_NOTE_REQUEST,
+    });
+
+    const header = {
+      "Content-Type": "application/json",
+    };
+
+    const body = {
+      note,
+    };
+    const { data } = await axios.post(
+      `${API}/update-booking-note/${id}`,
+      body,
+      header
+    );
+
+    dispatch({
+      type: UPDATE_BOOKING_NOTE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_BOOKING_NOTE_FAILED,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const deleteBookingNote = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: DELETE_BOOKING_NOTE_REQUEST,
+    });
+
+    const header = {
+      "Content-Type": "application/json",
+    };
+
+    const { data } = await axios.delete(
+      `${API}/delete-booking-note/${id}`,
+      header
+    );
+
+    dispatch({
+      type: DELETE_BOOKING_NOTE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: DELETE_BOOKING_NOTE_FAILED,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const getBookingNote = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: GET_BOOKING_NOTE_REQUEST,
+    });
+
+    const header = {
+      "Content-Type": "application/json",
+    };
+
+    const { data } = await axios.get(`${API}/get-booking-note`, header);
+
+    dispatch({
+      type: GET_BOOKING_NOTE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_BOOKING_NOTE_FAILED,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const addBookingNote = (note) => async (dispatch) => {
+  try {
+    dispatch({
+      type: ADD_BOOKING_NOTE_REQUEST,
+    });
+
+    const header = {
+      "Content-Type": "application/json",
+    };
+
+    const body = {
+      note,
+    };
+
+    const { data } = await axios.post(`${API}/add-booking-note`, body, header);
+
+    dispatch({
+      type: ADD_BOOKING_NOTE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ADD_BOOKING_NOTE_FAILED,
+      payload: error.response.data.message,
+    });
+  }
+};
 
 export const updateBookingStatus = (id, bookingStatus) => async (dispatch) => {
   console.log(id);
@@ -176,36 +298,34 @@ export const getBooking = () => async (dispatch) => {
   }
 };
 
-export const updateBooking =
-  (id, status, reason, read) =>
-  async (dispatch) => {
-    try {
-      dispatch({
-        type: UPDATE_BOOKING_REQUEST,
-      });
-      const body = {
-        cancellationStatus: status,
-        deleteReason: reason,
-        read: read,
-      };
-      const header = {
-        "Content-Type": "application/json",
-      };
-      const { data } = await axios.post(
-        `${API}/update-booking/${id}`,
-        body,
-        header
-      );
-      console.log(data);
+export const updateBooking = (id, status, reason, read) => async (dispatch) => {
+  try {
+    dispatch({
+      type: UPDATE_BOOKING_REQUEST,
+    });
+    const body = {
+      cancellationStatus: status,
+      deleteReason: reason,
+      read: read,
+    };
+    const header = {
+      "Content-Type": "application/json",
+    };
+    const { data } = await axios.post(
+      `${API}/update-booking/${id}`,
+      body,
+      header
+    );
+    console.log(data);
 
-      dispatch({
-        type: UPDATE_BOOKING_SUCCESS,
-        payload: data,
-      });
-    } catch (error) {
-      dispatch({
-        type: UPDATE_BOOKING_FAILED,
-        payload: error.response.data.message,
-      });
-    }
-  };
+    dispatch({
+      type: UPDATE_BOOKING_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_BOOKING_FAILED,
+      payload: error.response.data.message,
+    });
+  }
+};

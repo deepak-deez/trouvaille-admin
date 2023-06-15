@@ -5,6 +5,7 @@ import offerIcon from "../../assets/images/Sidebar/offer-icon.svg";
 import b2bIcon from "../../assets/images/Sidebar/b2b-icon.svg";
 import faqIcon from "../../assets/images/Sidebar/faq-icon.svg";
 import genericIcon from "../../assets/images/Sidebar/generic-icon.svg";
+import notesIcon from "../../assets/images/Sidebar/Notes-icon.png"
 
 const SideBarLinks = [
   {
@@ -41,6 +42,11 @@ const SideBarLinks = [
     icon: genericIcon,
     heading: "Booking List",
     path: "/booking-list",
+  },
+  {
+    icon: offerIcon,
+    heading: "Booking Notes",
+    path: "/booking-notes",
   },
 ];
 

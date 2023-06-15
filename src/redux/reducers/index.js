@@ -30,6 +30,10 @@ import {
   getNotificationReducer,
   getBookingByStatusReducer,
   updateBookingStatusStateReducer,
+  addBookingNoteReducer,
+  deleteBookingNoteReducer,
+  getBookingNoteReducer,
+  updateBookingNoteReducer,
 } from "./bookingReducer";
 
 const rootReducer = combineReducers({
@@ -51,6 +55,10 @@ const rootReducer = combineReducers({
   getNotification: getNotificationReducer,
   getBooking: getBookingReducer,
   updateBookingStatus: updateBookingStatusStateReducer,
+  addBookingNote: addBookingNoteReducer,
+  deleteBookingNote: deleteBookingNoteReducer,
+  getBookingNote: getBookingNoteReducer,
+  updateBookingNote: updateBookingNoteReducer,
   getBookingByStatus: getBookingByStatusReducer,
   getSingleBooking: getSingleBookingReducer,
   updateBooking: updateBookingReducer,
