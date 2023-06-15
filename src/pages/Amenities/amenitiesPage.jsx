@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import AmenitiesTable from "../../components/Amenities/Amenities";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const AmenitiesPage = () => {
+  const { userDetails, error, loading } = useSelector(
+    (state) => state.userLogin
+  );
+  const navigate= useNavigate()
+  useEffect(()=>{
+    if(userDetails===null)
+    navigate("/")
+  })
   return (
     <div className="flex">
       <Sidebar />
