@@ -1,4 +1,4 @@
-import { react, useState } from "react";
+import { react, useEffect, useState } from "react";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
@@ -6,10 +6,20 @@ import { useSelector } from "react-redux";
 import BookingItems from "../../components/BookingItem/BookingItems";
 import LoadingScreen from "../../components/Loading/LoadingScreen";
 import BookingListTabs from "../../components/BookingListTabs/BookingListTabs";
+import { useNavigate } from "react-router-dom";
 
 const BookingList = () => {
   const { loading } = useSelector((state) => state.getBooking);
   const [activeStatusTab, setActiveStatusTab] = useState("All");
+  const { userDetails} = useSelector(
+    (state) => state.userLogin
+  );
+  const navigate= useNavigate()
+  useEffect(()=>{
+    if(userDetails===null)
+    navigate("/")
+  })
+
   return (
     <>
       {loading && <LoadingScreen />}

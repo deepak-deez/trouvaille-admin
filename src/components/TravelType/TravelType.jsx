@@ -119,7 +119,7 @@ const TravelType = () => {
         />
       )}
       <Pagination
-        className="pagination-bar flex justify-end lg:fixed w-full bottom-16"
+        className="pagination-bar flex justify-end"
         currentPage={currentPage}
         totalCount={data && data?.data.length}
         pageSize={PageSize}
