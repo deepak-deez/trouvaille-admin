@@ -7,9 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const URL = process.env.REACT_APP_NODE_API;
 
-
 const ForgotPassword = () => {
-
   const emailRef = useRef();
   const [apiMessage, setApiMessage] = useState("");
   // const navigate = useNavigate();
@@ -41,7 +39,7 @@ const ForgotPassword = () => {
           <p className="mt-[47px] text-[14px]">Email Address</p>
           <div className="bg-white input-fields px-[23px] py-[15px] mt-[9px] flex flex-row items-center justify-between">
             <input
-              className="bg-transparent"
+              className="bg-transparent outline-none"
               type="text"
               placeholder="Enter you email"
               ref={emailRef}
