@@ -17,9 +17,8 @@ import DiscountIcon from "@mui/icons-material/Discount";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import Nodata from "../Nodata/Nodata";
 
-let PageSize = 6;
-
 const TripList = () => {
+  let PageSize = 6;
   const [editData, setEditData] = useState("");
   const [delPop, setDelPop] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -61,8 +60,10 @@ const TripList = () => {
       <div className="md:p-3">
         <div className="p-4 bg-white item-center w-full overflow-x-scroll border-b-2">
           <div className="w-full">
-            <div className="tr-class md:grid md:grid-cols-5 text-[#8383A9] text-start">
-              <p className="pr-3 my-auto  hidden md:block">Trip Title</p>
+            <div className="tr-class md:grid md:grid-cols-5 text-[#8383A9] text-center">
+              <p className="pr-3 my-auto  hidden md:block text-start ml-10">
+                Trip Title
+              </p>
               <p className="p-3 hidden md:block">Duration</p>
               <p className="p-3 hidden md:block"> Price</p>
               <p className="p-3 hidden md:block">Discounted Price</p>
@@ -87,12 +88,12 @@ const TripList = () => {
                       return (
                         <div
                           className={
-                            "relative tr-class my-5 md:my-0 flex flex-col md:grid items-center md:grid-cols-5 w-full gap-3 md:gap-1 border-[2px] py-5 md:border-0 text-start" +
+                            "relative tr-class my-5 md:my-0 flex flex-col md:grid items-center justify-start md:grid-cols-5 w-full gap-3 md:gap-1 border-[2px] py-5 md:border-0 text-start px-5" +
                             (index % 2 == 0 ? " bg-[#F5F9FF]" : "")
                           }
                           key={index}
                         >
-                          <div className="td-class font-bold p-1 md:m-auto  flex flex-col md:flex-row  gap-3 ">
+                          <div className="td-class font-bold p-1 md:m-auto  flex flex-col  md:flex-row gap-3 w-full">
                             <img
                               className="min-[400px]:w-[20rem] max-w-[350px] max-h-[250px] md:h-[62px] md:w-[62px] rounded-md"
                               src={val.image}
@@ -102,25 +103,25 @@ const TripList = () => {
                               {val.title}
                             </p>
                           </div>
-                          <p className="td-class w-80 flex justify-center md:w-full md:justify-center md:order-1 order-2">
-                            <p className="md:hidden">
+                          <div className="td-class w-80 flex justify-center md:w-full md:justify-center md:order-1 order-2 my-auto">
+                            <div className="md:hidden">
                               <ScheduleIcon />
-                            </p>
+                            </div>
                             <p>{val.duration}</p>
-                          </p>
-                          <p className="td-class flex justify-center w-80 md:w-full  md:order-2 order-3">
-                            <p className="md:hidden">
+                          </div>
+                          <div className="td-class flex justify-center w-80 md:w-full  md:order-2 order-3 my-auto">
+                            <div className="md:hidden">
                               <CurrencyRupeeIcon />
-                            </p>
+                            </div>
                             <p> ₹ {val.price}</p>
-                          </p>
-                          <p className="td-class flex justify-center w-80 md:w-full md:order-3 order-4">
-                            <p className="md:hidden">
+                          </div>
+                          <div className="td-class flex justify-center w-80 md:w-full md:order-3 order-4 my-auto">
+                            <div className="md:hidden">
                               <DiscountIcon />
-                            </p>
+                            </div>
                             ₹ {val.discountedPrice}
-                          </p>
-                          <div className="td-class mx-auto md:order-4 order-1 w-80 md:w-full absolute md:static md:flex justify-center top-5 right-[320px] ml-auto">
+                          </div>
+                          <div className="td-class mx-auto md:order-4 order-1 md:w-full absolute md:static md:flex justify-center bottom-5 left-5 ml-auto rounded-full border-[2px] border-blue-200 md:border-none pb-2 px-2 my-auto">
                             <TripDropMenu
                               editData={val}
                               setEditData={setEditData}
@@ -147,7 +148,7 @@ const TripList = () => {
         )}
       </div>
       <Pagination
-        className="pagination-bar"
+        className="pagination-bar justify-end"
         currentPage={currentPage}
         totalCount={data && data?.data.length}
         pageSize={PageSize}

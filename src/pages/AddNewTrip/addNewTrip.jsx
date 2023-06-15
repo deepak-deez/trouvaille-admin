@@ -6,11 +6,11 @@ import Footer from "../../components/Footer/Footer";
 
 const AddNewTrip = () => {
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen overflow-auto">
       <Sidebar />
-      <div className="w-full">
+      <div className="w-full h-screen overflow-auto md:pb-16 ">
         <Navbar heading="Add New Trip" />
-        <div className="md:h-[90vh] overflow-y-auto">
+        <div className="p-5 lg:px-10 lg:py-5">
           <NewTripForm />
         </div>
         <Footer />

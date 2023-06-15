@@ -2,11 +2,11 @@ import React from "react";
 import "./style.scss";
 const Footer = () => {
   return (
-    <footer className="flex flex-col sm:flex-row  w-full fixed bottom-0 md:p-5 justify-start items-center bg-[#ffff]">
-      <a href="dashboard" className="text-[#E75C54] px-3">
+    <footer className="flex flex-col sm:flex-row  w-full md:fixed bottom-0 px-5 py-2 md:p-5 justify-start items-start bg-[#F3F7FC]">
+      <a href="dashboard" className="text-[#E75C54] sm:px-3">
         Trouvaille
       </a>
-      <h5 className="px-4 text-center">2021 All Rights Reserved,</h5>
+      <h5 className="sm:px-4 text-center">2021 All Rights Reserved,</h5>
       <a className="sidebar-text font-semibold" href="policy">
         Policy
       </a>

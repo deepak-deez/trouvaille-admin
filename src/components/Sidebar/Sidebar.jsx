@@ -5,6 +5,7 @@ import mainLogo from "../../assets/images/navbar/Site-logo.svg";
 import SideBarLinks from "./sidebarData";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import SuperAdminIcon from "../../assets/images/Sidebar/robotSvg.svg";
 import "../../style.scss";
 
 const Sidebar = (props) => {
@@ -51,12 +52,12 @@ const Sidebar = (props) => {
       {/* </div> */}
       <div
         className={
-          `mainSideBar z-[60] fixed top-0 xl:static xl:flex md:w-[40%] p-5 flex-col bg-white h-full sidebar-shadow  ${
+          `mainSideBar z-[60] fixed top-0 xl:static xl:flex w-full sm:w-[60%] lg:w-[40%] 2xl:w-[30%] p-5 flex-col bg-white h-screen sidebar-shadow  ${
             !show && " hidden-bar "
           }` + (closingAnimation ? openningAnimaionName : closingAnimationName)
         }
       >
-        <div className="h-[80%]">
+        <div className="h-full">
           <div className={`sidebar-logo flex p-3 px-4 `}>
             <div className="flex justify-center px-3 items-center">
               <img src={mainLogo} alt="logo" />
@@ -84,8 +85,13 @@ const Sidebar = (props) => {
         </div>
 
         <div
-          className={`sidebar-footer relative left-0 bottom-0 w-full h-[10%] md:mt-30`}
+          className={`sidebar-footer sticky left-0 bottom-0 w-full md:mt-30`}
         >
+          <img
+            src={SuperAdminIcon}
+            alt="superAdminIcon"
+            className="fixed bottom-[7rem] md:bottom-[8rem]"
+          />
           <div className="bg-[#E85C53] p-3 text-center">
             <Link className="text-white" to="/superAdmins">
               Contact Super Admin

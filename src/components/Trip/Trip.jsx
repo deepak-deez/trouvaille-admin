@@ -45,7 +45,8 @@ const Trip = () => {
           </button>
         </div>
         {data && data.data.length !== 0 ? (
-          <div className="trips-grid-container">
+          <div className="grid sm:grid-cols-2 2xl:grid-cols-4">
+            {/* Change The Classname to "trips-grid-container" to display the grids auto flow */}
             {data &&
               data?.data &&
               data.data
@@ -119,7 +120,7 @@ const Trip = () => {
         />
       )}
       <Pagination
-        className="pagination-bar"
+        className="pagination-bar flex justify-end"
         currentPage={currentPage}
         totalCount={data && data?.data.length}
         pageSize={PageSize}

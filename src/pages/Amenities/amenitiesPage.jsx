@@ -6,11 +6,11 @@ import AmenitiesTable from "../../components/Amenities/Amenities";
 
 const AmenitiesPage = () => {
   return (
-    <div className="flex h-screen">
+    <div className="flex">
       <Sidebar />
-      <div className="w-full bg-[#f5f7f7] ">
-        <Navbar heading="All Amenities"/>
-        <div className="md:h-[90vh]">
+      <div className="w-full bg-[#f5f7f7] h-[100vh] overflow-auto md:pb-16">
+        <Navbar heading="All Amenities" />
+        <div className="">
           <AmenitiesTable />
         </div>
         <Footer />

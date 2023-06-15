@@ -15,13 +15,13 @@ const NotificationPop = ({ setNotificationPopup, notificationPopup }) => {
 
   return (
     <div
-      className="bg-[#F5F9FF] z-50  w-[25rem] rounded-lg h-[2rem] absolute  top-[3rem] right-[3.5rem]"
+      className="bg-[#F5F9FF] z-50  w-[15rem] sm:w-[25rem] rounded-lg h-[2rem] absolute  top-[3rem] right-[3.5rem]"
       onClick={() => {
         setNotificationPopup(false);
       }}
     >
       <div
-        className="arrow-up absolute right-[80px] top-[-10px]
+        className="arrow-up absolute right-3 sm:right-[5rem] top-[-10px]
             "
       ></div>
 

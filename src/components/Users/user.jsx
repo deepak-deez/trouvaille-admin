@@ -38,14 +38,14 @@ const User = () => {
     <>
       {/* <LoadingScreen /> */}
       {loading && <LoadingScreen />}
-      <div className="p-3">
+      <div className="p-3 h-full md:h-auto">
         <div className="p-4 bg-white item-center w-full overflow-x-scroll border-b-2">
           <div className="w-full">
             <div>
               <div
                 className={`tr-class sm:grid items-center text-[#8383A9] ${
                   userType == "Admin" ? "sm:grid-cols-4" : "sm:grid-cols-3"
-                }  gap-2`}
+                }  gap-2 px-5`}
               >
                 <p className="pr-3 hidden sm:block ">User Name</p>
                 <p className="p-3 hidden sm:block">Email Address</p>
@@ -74,11 +74,14 @@ const User = () => {
                   .map((val, index) => {
                     return (
                       <div
-                        className={`sm:grid items-start ${
-                          userType == "Admin"
-                            ? "sm:grid-cols-4"
-                            : "sm:grid-cols-3"
-                        } flex flex-col gap-2 sm:py-4 tr-class `}
+                        className={
+                          `sm:grid items-start ${
+                            userType == "Admin"
+                              ? "sm:grid-cols-4"
+                              : "sm:grid-cols-3"
+                          } flex flex-col gap-2 sm:py-4 tr-class px-5 ` +
+                          (index % 2 == 0 ? " bg-[#F5F9FF]" : "")
+                        }
                         key={index}
                       >
                         <div className="td-class font-bold flex justify-start gap-10  order-2 sm:order-1">
@@ -108,7 +111,7 @@ const User = () => {
                             {val.phone}
                           </p>
                         </div>
-                        <div className="flex justify-start ms-2  order-1 sm:order-4 ">
+                        <div className="flex ms-2 w-full justify-end sm:justify-center order-1 sm:order-4">
                           <Menu
                             editPop={editPop}
                             setEditPop={setEditPop}

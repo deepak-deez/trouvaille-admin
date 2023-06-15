@@ -14,7 +14,7 @@ const TagsInput = ({ heading, tags, setTags }) => {
     <div className="w-full">
       <h2 className=" text-gray-400 py-2">{heading}</h2>
       <div className="tags-input overflow-scroll ">
-        <div className=" p-2 grid gap-2 grid-cols-4  text-[#CD4B43]">
+        <div className=" gap-2  text-[#CD4B43]">
           {tags.map((tag, index) => {
             return (
               <div
