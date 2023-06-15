@@ -15,11 +15,34 @@ const Navbar = ({ heading }) => {
   const { userDetails } = useSelector((state) => state.userLogin);
   const userName = userDetails?.data?.userDetails.userName;
   const navigate = useNavigate();
+  const refProfile = useRef(null);
+  const refNotification = useRef(null);
+
+  useEffect(() => {
+    document.addEventListener("click", hideOnClickOutsideProfile, true);
+    document.addEventListener("click", hideOnClickOutsideNotification, true);
+  }, []);
+
+  const hideOnClickOutsideProfile = (e) => {
+    if (refProfile.current && !refProfile.current.contains(e.target)) {
+      setProfilePop(false);
+    }
+  };
+
+  const hideOnClickOutsideNotification = (e) => {
+    if (
+      refNotification.current &&
+      !refNotification.current.contains(e.target)
+    ) {
+      setNotificationPopup(false);
+    }
+  };
+
   return (
     <div className="flex justify-between sticky py-5 top-0 w-full z-50 items-center bg-[#dbe6f5] xl:m-0 col-span-10 p-5">
       <h2 className="font-bold ml-10 ">{heading}</h2>
       <div className="flex justify-center items-center px-5 space-x-2 ">
-        <div className="realtive">
+        <div ref={refNotification} className="realtive">
           <MdNotificationsNone
             className="hover: cursor-pointer "
             onClick={() => {
@@ -35,7 +58,10 @@ const Navbar = ({ heading }) => {
           )}
         </div>
 
-        <div className="relative flex items-center justify-center">
+        <div
+          ref={refProfile}
+          className="relative flex items-center justify-center"
+        >
           <img
             onClick={() => {
               setProfilePop(!profilePop);

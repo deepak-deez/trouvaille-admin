@@ -10,11 +10,19 @@ export default function SignUp() {
         <form action="">
           <p className="mt-[25px] text-[14px]">Email Address</p>
           <div className="bg-white w-100 input-fields px-[23px] py-[10px] mt-[9px]">
-            <input type="text" placeholder="Enter you email" />
+            <input
+              className="outline-none"
+              type="text"
+              placeholder="Enter you email"
+            />
           </div>
           <p className="mt-[10px] text-[14px]">Phone Number</p>
           <div className="bg-white w-100 input-fields px-[23px] py-[10px] mt-[9px]">
-            <input type="text" placeholder="Enter you email" />
+            <input
+              className="outline-none"
+              type="text"
+              placeholder="Enter you email"
+            />
           </div>
           <p className="mt-[10px] text-[14px]">Password</p>
           <div className="bg-white input-fields px-[23px] mt-[9px] flex flex-row items-center justify-between">
