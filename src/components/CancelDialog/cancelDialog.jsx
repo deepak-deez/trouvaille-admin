@@ -32,7 +32,7 @@ const CancelDialog = (props) => {
 
   const submitCancelRequest = async (reason) => {
     if (reason.trim() !== "") {
-      dispatch(updateBooking(id, "true", reason, "confim", "", "false"));
+      dispatch(updateBooking(id, "true", reason, "false"));
       console.log(updatedBooking, "hiii");
       setCancelPopUp(false);
       props.setSubmitDelete(true);

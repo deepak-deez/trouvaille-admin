@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import Select from "react-select";
 
-const StatusMenu = ({ width, options, value, setvalue }) => {
+const StatusMenu = ({ width, options, value, onChange }) => {
   return (
     <div className="">
       <Select
@@ -15,9 +15,7 @@ const StatusMenu = ({ width, options, value, setvalue }) => {
         options={options}
         placeholder="Select Status"
         value={value}
-        onChange={(e) => {
-          setvalue(e);
-        }}
+        onChange={onChange}
       />
     </div>
   );

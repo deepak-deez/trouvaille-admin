@@ -17,7 +17,48 @@ import {
   GET_BOOKING_BY_STATUS_FAILED,
   GET_BOOKING_BY_STATUS_SUCCESS,
   GET_BOOKING_BY_STATUS_REQUEST,
+  UPDATE_BOOKING_STATUS_FAILED,
+  UPDATE_BOOKING_STATUS_REQUEST,
+  UPDATE_BOOKING_STATUS_SUCCESS,
 } from "../constants/bookingConstants";
+
+const updateBookingStatusStateInitial = {
+  loading: false,
+  data: null,
+  error: null,
+};
+
+export const updateBookingStatusStateReducer = (
+  state = updateBookingStatusStateInitial,
+  action
+) => {
+  switch (action.type) {
+    case UPDATE_BOOKING_STATUS_REQUEST:
+      return {
+        ...state,
+        data: null,
+        loading: true,
+        error: null,
+      };
+    case UPDATE_BOOKING_STATUS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        data: action.payload,
+      };
+    case UPDATE_BOOKING_STATUS_FAILED:
+      return {
+        ...state,
+        data: null,
+        loading: false,
+        error: action.payload,
+      };
+    default: {
+      return state;
+    }
+  }
+};
 
 const getBookingByStatusStateInitial = {
   loading: false,
