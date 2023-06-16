@@ -26,12 +26,10 @@ const User = () => {
   const firstPageIndex = (currentPage - 1) * PageSize;
   const lastPageIndex = firstPageIndex + PageSize;
   const storeData = store.getState();
-  console.log(storeData);
   const userType = storeData.userLogin.userDetails?.data.userDetails.userType;
 
   useEffect(() => {
     dispatch(getUser("Backend-user"));
-    console.log(userType);
   }, []);
 
   return (

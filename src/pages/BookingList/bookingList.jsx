@@ -40,7 +40,6 @@ const BookingList = () => {
               <span className="py-5">Status</span>
               <span className="py-5 text-[#E85C53]">Action</span>
             </div>
-            {console.log(activeStatusTab)}
             <div>
               <BookingItems
                 activeStatusTab={activeStatusTab}

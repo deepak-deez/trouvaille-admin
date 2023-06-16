@@ -1,7 +1,6 @@
 import Swal from "sweetalert2";
 
 const AlertComponent = (type, data, warningText) => {
-  console.log(type, data);
   try {
     if (type === "success") {
       Swal.fire({

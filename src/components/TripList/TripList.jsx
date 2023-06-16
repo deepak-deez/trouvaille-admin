@@ -35,6 +35,7 @@ const TripList = () => {
       setDelPop(!delPop);
       dispatch({ type: "DELETE_PACKAGE_SUCCESS", payload: null });
       AlertComponent("success", deletedPackage);
+      setCurrentPage(1);
     } else if (deletedPackage?.success === false) {
       AlertComponent("failed", deletedPackage);
       dispatch({ type: "DELETE_PACKAGE_SUCCESS", payload: null });
@@ -47,7 +48,6 @@ const TripList = () => {
 
   const firstPageIndex = (currentPage - 1) * PageSize;
   const lastPageIndex = firstPageIndex + PageSize;
- 
 
   useEffect(() => {
     if (deletedPackage?.success) {

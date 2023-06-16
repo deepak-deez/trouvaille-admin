@@ -148,7 +148,6 @@ export const addBookingNote = (note) => async (dispatch) => {
 };
 
 export const updateBookingStatus = (id, bookingStatus) => async (dispatch) => {
-  console.log(id);
   try {
     dispatch({
       type: UPDATE_BOOKING_STATUS_REQUEST,
@@ -165,7 +164,6 @@ export const updateBookingStatus = (id, bookingStatus) => async (dispatch) => {
       body,
       header
     );
-    console.log(data);
 
     dispatch({
       type: UPDATE_BOOKING_STATUS_SUCCESS,
@@ -267,7 +265,6 @@ export const deleteBooking = (id, userType) => async (dispatch) => {
       type: DELETE_BOOKING_SUCCESS,
       payload: data,
     });
-    console.log(data);
   } catch (error) {
     dispatch({
       type: DELETE_BOOKING_FAILED,
@@ -316,7 +313,6 @@ export const updateBooking = (id, status, reason, read) => async (dispatch) => {
       body,
       header
     );
-    console.log(data);
 
     dispatch({
       type: UPDATE_BOOKING_SUCCESS,

@@ -77,7 +77,6 @@ const NewTripForm = () => {
     },
   ]);
 
-  console.log(data);
   const addFaqField = () => {
     setFaqFields([
       ...faqFields,
@@ -144,7 +143,6 @@ const NewTripForm = () => {
       });
 
       setDuration(data?.data[0].duration);
-      console.log(duration);
       setRange([
         {
           startDate: new Date(
@@ -207,7 +205,6 @@ const NewTripForm = () => {
 
   useEffect(() => {
     if (updatedPackage?.success) {
-      console.log(updatedPackage);
       dispatch({ type: "UPDATE_PACKAGE_SUCCESS", payload: null });
       AlertComponent("success", updatedPackage);
       setTimeout(() => {

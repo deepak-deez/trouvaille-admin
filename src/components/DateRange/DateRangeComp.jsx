@@ -42,7 +42,6 @@ const DateRangeComp = ({ setDuration, duration, range, setRange }) => {
     if (refOne.current && !refOne.current.contains(e.target)) {
       setOpen(false);
     }
-    console.log(refOne);
   };
 
   return (

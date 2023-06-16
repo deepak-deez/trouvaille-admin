@@ -8,7 +8,6 @@ function MultipleTripForm({
   editMode,
   setEditMode,
 }) {
-  // console.log(editMode);
   function imageChange(index, e) {
     const list = [...inputFields];
     list[index]["images"] = e.target.files[0];
@@ -16,31 +15,21 @@ function MultipleTripForm({
 
     setInputFields(list);
 
-    // if(in)
     editMode &&
       setIndexes((prev) => {
         if (prev.includes(index + 1) === false) return [...prev, index + 1];
         else return [...prev];
       });
-    // imgToUrl(uplImg).then((res) => {
-    //   console.log(res);
-    //   const list = [...inputFields];
-    //   list[index]["icon"] = res;
-    //   setInputFields(list);
-    // });
   }
 
   const removeInputFields = (index) => {
     const rows = [...inputFields];
     rows.splice(index, 1);
     setInputFields(rows);
-    console.log(rows);
   };
   const handleChange = (index, e) => {
     const { name, value } = e.target;
-    console.log(name);
     const list = [...inputFields];
-    console.log(list);
     list[index][name] = value;
     setInputFields(list);
   };

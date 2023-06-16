@@ -9,7 +9,6 @@ const MultipleDateInputs = ({
   arrayDate,
   editMode,
 }) => {
-  console.log(arrayDate, "arrayDate");
   const date = duration.split(" ");
   const startDate = date[0];
   const endDate = date[2];

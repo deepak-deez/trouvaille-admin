@@ -29,7 +29,7 @@ const BookingNote = () => {
   useEffect(() => {
     dispatch(getBookingNote());
   }, []);
-  console.log(data);
+
 
   return (
     <>

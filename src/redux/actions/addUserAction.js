@@ -18,7 +18,6 @@ const API = process.env.REACT_APP_NODE_API;
 
 export const addNewUser = (name, email, type) => async (dispatch) => {
   try {
-    console.log(name, email, type);
     dispatch({
       type: ADD_USER_REQUEST,
     });
@@ -30,7 +29,6 @@ export const addNewUser = (name, email, type) => async (dispatch) => {
       email,
     };
     const { data } = await axios.post(`${API}/add/${type}`, body, header);
-    console.log(data);
     dispatch({
       type: ADD_USER_SUCCESS,
       payload: data,
@@ -81,13 +79,12 @@ export const updateUser =
         phone,
       };
       const { data } = await axios.post(`${API}/update/${type}`, body, header);
-      console.log("Data : ", data);
+  
       dispatch({
         type: UPDATE_USER_SUCCESS,
         payload: data,
       });
     } catch (error) {
-      console.log("ERROR:", error);
       dispatch({
         type: UPDATE_USER_FAILED,
         payload: error.response.data.message,

@@ -22,7 +22,6 @@ const Pagination = (props) => {
     pageSize,
   });
 
-  // console.log(totalCount);
 
   if (currentPage === 0 || paginationRange.length < 2) {
     return null;
@@ -50,7 +49,6 @@ const Pagination = (props) => {
         <div>PREV</div>
       </li>
       {paginationRange.map((pageNumber,index) => {
-        console.log("index : ",index);
         if (pageNumber === DOTS) {
           return <li className="pagination-item dots" key={index}>&#8230;</li>;
         }

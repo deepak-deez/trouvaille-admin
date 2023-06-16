@@ -7,7 +7,7 @@ const imgToUrl = async (image) => {
   formData.append("file", image);
   formData.append("upload_preset", "trouvaille");
   formData.append("cloud_name", `${CLOUD_NAME}`);
-  console.log(formData);
+
   await fetch(`${CLOUD_API}/${CLOUD_NAME}/image/upload`, {
     method: "post",
     body: formData,

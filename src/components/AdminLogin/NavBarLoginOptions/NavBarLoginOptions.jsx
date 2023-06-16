@@ -8,12 +8,12 @@ export default function NavBarLoginOptions() {
       <p className="new-user-text text-[12px] lg:text-[14px] m-auto">
         New to here?
       </p>
-      <Link
+      {/* <Link
         className="create-account-button py-[9px] m-auto px-[20px]"
         to="/signup"
       >
         Create an account
-      </Link>
+      </Link> */}
     </div>
   );
 }

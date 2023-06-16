@@ -21,7 +21,6 @@ const handleClickOutside=(e)=>{
 
 useEffect(()=>{
   document.addEventListener("click",handleClickOutside,"true")
-  console.log(refDotMenu ,"reference");
 },[])
 
   return (

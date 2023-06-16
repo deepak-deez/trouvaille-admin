@@ -9,7 +9,6 @@ const Menu = ({ setEditPop, setEditable, data, delPop, setDelPop }) => {
   const location = useLocation();
   const curretPageLocation = location.pathname;
   const storeData = store.getState();
-  console.log(storeData);
   const userType = storeData.userLogin.userDetails.data.userDetails.userType;
   const refDotMenu=useRef(null)
 
@@ -21,7 +20,6 @@ const Menu = ({ setEditPop, setEditable, data, delPop, setDelPop }) => {
   
   useEffect(()=>{
     document.addEventListener("click",handleClickOutside,"true")
-    console.log(refDotMenu ,"reference");
   },[])
 
   return (

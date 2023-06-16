@@ -19,7 +19,6 @@ const CancelDialog = (props) => {
   } = useSelector((state) => state.deleteBooking);
 
   const storeData = store.getState();
-  console.log(storeData.userLogin.userDetails.data.userDetails.userType);
   const { data: updatedBooking } = useSelector((state) => state.updateBooking);
   const { setCancelPopUp, id } = props;
   const reasonRef = useRef();
@@ -34,7 +33,6 @@ const CancelDialog = (props) => {
   const submitCancelRequest = async (reason) => {
     if (reason.trim() !== "") {
       dispatch(updateBooking(id, "true", reason, "false"));
-      console.log(updatedBooking, "hiii");
       setCancelPopUp(false);
       props.setSubmitDelete(true);
     } else AlertComponent("warning", "", "Reason field cannot be empty");
