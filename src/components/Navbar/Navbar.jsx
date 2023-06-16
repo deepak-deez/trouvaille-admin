@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { MdNotificationsNone } from "react-icons/md";
-import userIcon from "../../assets/images/navbar/user-icon.png";
+import userIcon from "../../assets/images/navbar/user.svg";
 import { useNavigate } from "react-router-dom";
 import store from "../../redux/store";
 import ProfilePop from "../ProfilePop/ProfilePop";
