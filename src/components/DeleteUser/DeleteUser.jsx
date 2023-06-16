@@ -2,10 +2,12 @@ import { React, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { delUser, getUser } from "../../redux/actions/addUserAction";
 import Swal from "sweetalert2";
+import AlertComponent from "../Alerts/AlertComponent";
 
 const DeleteUser = ({ delPop, setDelPop, data }) => {
   const dispatch = useDispatch();
-  const { data: deletedUser } = useSelector((state) => state.delUser);
+  const { data: deletedUser, error } = useSelector((state) => state.delUser);
+  const id = data._id;
 
   const DelHandler = () => {
     if (id) {
@@ -15,39 +17,23 @@ const DeleteUser = ({ delPop, setDelPop, data }) => {
 
   useEffect(() => {
     if (deletedUser?.success) {
-      console.log(deletedUser);
       dispatch(getUser("Backend-user"));
       setDelPop(!delPop);
-
-      // set deletedUser to null
       dispatch({ type: "DELETE_USER_SUCCESS", payload: null });
-      Swal.fire({
-        position: "top",
-        icon: "success",
-        title: "Success",
-        text: deletedUser.message,
-        showConfirmButton: false,
-        // toast: true,
-        timer: 1500,
-        timerProgressBar: true,
-      });
+      AlertComponent("success", deletedUser);
     } else if (deletedUser?.success === false) {
-      Swal.fire({
-        position: "center",
-        width: "40vh",
-        icon: "error",
-        title: "failed",
-        text: deletedUser.message,
-        showConfirmButton: false,
-        toast: false,
-        timer: 2000,
-        timerProgressBar: true,
-      });
+      AlertComponent("failed", deletedUser);
       dispatch({ type: "DELETE_USER_SUCCESS", payload: null });
     }
   }, [deletedUser]);
 
-  const id = data._id;
+  useEffect(() => {
+    if (error) {
+      AlertComponent("error", error);
+      dispatch({ type: "DELETE_USER_FAILED", payload: null });
+    }
+  }, [error]);
+
   return (
     <div
       className={`fixed top-0 left-0 w-full flex justify-center items-center addUser  h-[100vh] ${

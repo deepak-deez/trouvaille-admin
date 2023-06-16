@@ -5,6 +5,7 @@ import {
   getBookingNote,
 } from "../../redux/actions/bookingActions";
 import Swal from "sweetalert2";
+import AlertComponent from "../Alerts/AlertComponent";
 
 const DeleteBookingNotePop = ({
   showBookingNoteDelPop,
@@ -28,15 +29,11 @@ const DeleteBookingNotePop = ({
       dispatch(getBookingNote());
       setShowBookingNoteDelPop(!showBookingNoteDelPop);
       dispatch({ type: "DELETE_BOOKING_NOTE_SUCCESS", payload: null });
-      Swal.fire({
-        position: "top",
-        icon: "success",
-        title: "Success",
-        text: deletedNote.message,
-        showConfirmButton: false,
-        timer: 1500,
-        timerProgressBar: true,
-      });
+      AlertComponent("success", deletedNote);
+
+    } else if (deletedNote?.success === false) {
+      AlertComponent("failed", deletedNote);
+      dispatch({ type: "DELETE_BOOKING_NOTE_SUCCESS", payload: null });
     }
   }, [deletedNote]);
 

@@ -1,11 +1,9 @@
 import { React, useEffect, useState, useMemo } from "react";
-import TripListDB from "./TripListDB";
+import AlertComponent from "../Alerts/AlertComponent";
 import TripDropMenu from "../TripDropMenu/TripDropMenu";
 import { useNavigate } from "react-router-dom";
 import DeleteTripPop from "../DeleteTripPop/DeleteTripPop";
 import Pagination from "../Pagination/Pagination";
-import list from "./TripListDB.jsx";
-import axios from "axios";
 import {
   getPackage,
   deletePackage,
@@ -24,29 +22,32 @@ const TripList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
   const { data, loading } = useSelector((state) => state.getPackage);
-  const { data: deletedPackage } = useSelector((state) => state.deletePackage);
+  const { data: deletedPackage, error } = useSelector(
+    (state) => state.deletePackage
+  );
   const dispatch = useDispatch();
-  // const list=useState([]);
-  // console.log(data);
-  // console.log(list.slice(0,3));
-
-  // console.log(currentTableData);
 
   const handleDelete = (id) => {
-    // console.log(id);
     dispatch(deletePackage(id));
   };
+  useEffect(() => {
+    if (deletedPackage?.success) {
+      setDelPop(!delPop);
+      dispatch({ type: "DELETE_PACKAGE_SUCCESS", payload: null });
+      AlertComponent("success", deletedPackage);
+    } else if (deletedPackage?.success === false) {
+      AlertComponent("failed", deletedPackage);
+      dispatch({ type: "DELETE_PACKAGE_SUCCESS", payload: null });
+    }
+  }, [deletedPackage]);
 
   useEffect(() => {
     dispatch(getPackage());
   }, []);
 
-  // const currentTableData = ()=> {
   const firstPageIndex = (currentPage - 1) * PageSize;
   const lastPageIndex = firstPageIndex + PageSize;
-  // if (data && data?.data)
-  // currentTableData = data.data.slice(firstPageIndex, lastPageIndex);
-  // };
+ 
 
   useEffect(() => {
     if (deletedPackage?.success) {
@@ -156,9 +157,6 @@ const TripList = () => {
       />
     </>
   );
-  // }
-
-  // },[])
 };
 
 export default TripList;

@@ -2,10 +2,10 @@ import { React, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./style.scss";
 import { addNewUser, getUser } from "../../redux/actions/addUserAction";
-import Swal from "sweetalert2";
+
 import validator from "validator";
 import LoadingScreen from "../Loading/LoadingScreen";
-
+import AlertComponent from "../Alerts/AlertComponent";
 const AddNewUser = ({ setAddPop, addPop }) => {
   const { data } = useSelector((state) => state.getUser);
   const {
@@ -34,69 +34,26 @@ const AddNewUser = ({ setAddPop, addPop }) => {
       setName("");
       setEmail("");
     } else {
-      Swal.fire({
-        className: "pop-top",
-        position: "top",
-        icon: "error",
-        title: "Oops...",
-        text: "All fields are required",
-        showConfirmButton: false,
-        width: "40vh",
-        // toast: true,
-        timer: 1500,
-        timerProgressBar: true,
-      });
+      AlertComponent("warning", "", "All fields are required");
     }
   };
-
   useEffect(() => {
     if (addedUser?.success) {
       console.log(addedUser);
       dispatch(getUser("Backend-user"));
       setAddPop(!addPop);
-
-      // set addedUser to null
       dispatch({ type: "ADD_USER_SUCCESS", payload: null });
-      Swal.fire({
-        position: "center",
-        width: "40vh",
-        icon: "success",
-        title: "Success",
-        text: addedUser.message,
-        showConfirmButton: false,
-        toast: false,
-        timer: 2000,
-        timerProgressBar: true,
-      });
+      AlertComponent("success", addedUser);
     } else if (addedUser?.success === false) {
-      Swal.fire({
-        position: "center",
-        width: "40vh",
-        icon: "error",
-        title: "failed",
-        text: addedUser.message,
-        showConfirmButton: false,
-        toast: false,
-        timer: 2000,
-        timerProgressBar: true,
-      });
+      AlertComponent("failed", addedUser);
       dispatch({ type: "ADD_USER_SUCCESS", payload: null });
     }
   }, [addedUser]);
 
   useEffect(() => {
     if (error) {
-      Swal.fire({
-        position: "center",
-        width: "40vh",
-        icon: "error",
-        title: "failed",
-        text: error.response.data.message,
-        showConfirmButton: false,
-        toast: false,
-        timer: 2000,
-        timerProgressBar: true,
-      });
+      AlertComponent("error", error);
+      setAddPop(!addPop);
       dispatch({ type: "ADD_USER_FAILED", payload: null });
     }
   }, [error]);
