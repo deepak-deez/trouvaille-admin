@@ -24,7 +24,6 @@ const BookingItems = (props) => {
   const [dataMap, setDataMap] = useState();
 
   useEffect(() => {
-    console.log(props.activeStatusTab);
     if (props.activeStatusTab === "All") {
       dispatch(getBooking());
       dispatch({
@@ -48,7 +47,6 @@ const BookingItems = (props) => {
     setDataMap(booking);
   }, [booking]);
 
-  console.log(data);
 
   const firstPageIndex = (currentPage - 1) * PageSize;
   const lastPageIndex = firstPageIndex + PageSize;

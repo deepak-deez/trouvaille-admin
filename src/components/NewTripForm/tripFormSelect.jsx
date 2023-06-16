@@ -35,7 +35,6 @@ export const GetOptions = () => {
     dispatch(getAllType("occasion", "travel", "category", "amenity"));
   }, []);
 
-  // console.log(data);
   useEffect(() => {
     setOccassionOptions(
       data &&

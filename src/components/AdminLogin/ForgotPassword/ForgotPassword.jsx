@@ -15,16 +15,14 @@ const ForgotPassword = () => {
     const body = {
       email: emailRef.current.value,
     };
-    // const config = { "Content-type": "application/json" };
     const response = await axios.post(
       `${process.env.REACT_APP_NODE_API}/send-reset-mail/Backend-user`,
       body
     );
-    console.log(emailRef.current.value);
+
     setApiMessage(response.data.message);
-    console.log(response.data.message);
-    // if (response?.success) navigate("/resetPassword");
-    // else alert(response.data.message);
+
+
   };
 
   return (

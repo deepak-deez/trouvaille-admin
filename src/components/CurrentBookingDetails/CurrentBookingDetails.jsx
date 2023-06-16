@@ -108,7 +108,7 @@ const CurrentBookingDetails = () => {
       setTimeout(() => {
         navigate("/booking-list");
       }, 2000);
-    } else if (updatedStatus.success === false) {
+    } else if (updatedStatus?.success === false) {
       AlertComponent("failed", updatedStatus);
       dispatch({ type: "UPDATE_BOOKING_STATUS_SUCCESS", payload: null });
     }

@@ -1,5 +1,4 @@
 export const statusColor = (status) => {
-    console.log(status);
     if (status === "Pending" || status === "Pending")
         return "orange";
     else if (status === "Confirm" || status === "confirm")

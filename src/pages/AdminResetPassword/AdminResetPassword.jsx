@@ -14,20 +14,16 @@ const AdminResetPassword = () => {
   const navigate = useNavigate();
   const url = useLocation();
   const [res, setRes] = useState();
-  console.log(url);
 
   const validation = async () => {
     const response = await axios.get(
       `${process.env.REACT_APP_NODE_API}${url.pathname}`
     );
-    console.log(response);
     setRes(response);
     if (response.data.success === false) {
-      console.log("hii");
     }
   };
 
-  console.log(res);
 
   useEffect(() => {
     validation();

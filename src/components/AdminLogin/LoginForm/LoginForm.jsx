@@ -28,7 +28,6 @@ export default function LoginForm() {
     localStorage.getItem("rememberMe") === "true" ? true : false
   );
 
-  console.log(userDetails);
   useEffect(() => {
     if (userDetails?.success) {
       handleRemember(userDetails);
@@ -66,7 +65,6 @@ export default function LoginForm() {
   };
 
   const signInHandler = () => {
-    console.log(details["email"]);
     details["email"] = emailRef.current.value;
     details["password"] = passwordRef.current.value;
     if (emailRef.current.value.length && passwordRef.current.value) {

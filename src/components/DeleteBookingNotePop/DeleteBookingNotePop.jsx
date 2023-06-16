@@ -16,7 +16,6 @@ const DeleteBookingNotePop = ({
   const { data: deletedNote } = useSelector((state) => state.deleteBookingNote);
   const dispatch = useDispatch();
   const id = updateData._id;
-  console.log(id);
 
   const deleteHandler = () => {
     if (id) {

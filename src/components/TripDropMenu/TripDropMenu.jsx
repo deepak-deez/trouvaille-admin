@@ -14,7 +14,6 @@ const TripDropMenu = ({
   deleteTripState,
   setdeleteTripState,
 }) => {
-  // console.log(editData);
   const [showPop, setShowPop] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -39,7 +38,6 @@ const TripDropMenu = ({
           className="flex justify-between items-center w-full"
           onClick={() => {
             navigate(`/update-module/trip-package/${editData._id}`);
-            console.log(editData);
           }}
         >
           Edit

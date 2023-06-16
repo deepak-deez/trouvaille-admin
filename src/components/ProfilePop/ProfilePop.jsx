@@ -18,9 +18,7 @@ const ProfilePop = ({ setProfilePop, profilePop }) => {
   const userType = userDetails?.data?.userDetails.userType;
   const UserId = userDetails?.data?.userDetails._id;
 
-  useEffect(() => {
-    console.log(profilePop, "use");
-  }, [profilePop]);
+
 
   return (
     <>

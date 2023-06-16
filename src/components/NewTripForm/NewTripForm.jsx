@@ -89,10 +89,7 @@ const NewTripForm = () => {
     ]);
   };
   const [arrayDate, setArrayDate] = useState();
-  console.log(duration);
-  useEffect(() => {
-    console.log(arrayDate);
-  }, [arrayDate]);
+
 
   const dispatch = useDispatch();
 
@@ -104,7 +101,6 @@ const NewTripForm = () => {
   const startDate = convertYearDate(`${dateMonthFromat[0]}`);
   const endDate = convertYearDate(`${dateMonthFromat[1]}`);
 
-  console.log(startDate, endDate);
 
   const submitHandler = () => {
     const formData = new FormData();

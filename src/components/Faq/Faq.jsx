@@ -4,13 +4,10 @@ function Faq({ faqFields, setFaqFields, addFaqField }) {
     const rows = [...faqFields];
     rows.splice(index, 1);
     setFaqFields(rows);
-    console.log(rows);
   };
   const handleChange = (index, e) => {
     const { name, value } = e.target;
-    console.log(name);
     const list = [...faqFields];
-    console.log(list);
     list[index][name] = value;
     setFaqFields(list);
   };

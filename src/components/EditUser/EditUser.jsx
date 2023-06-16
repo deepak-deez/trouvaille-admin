@@ -14,7 +14,6 @@ const EditUser = ({ editPop, setEditPop, data }) => {
   const dispatch = useDispatch();
 
   const updateHandler = () => {
-    console.log(id);
     if (email || phone || name) {
       dispatch(updateUser(id, name, email, phone, "Backend-user"));
     }
@@ -68,7 +67,6 @@ const EditUser = ({ editPop, setEditPop, data }) => {
             value={name}
             onChange={(e) => {
               setName(e.target.value);
-              console.log(name);
             }}
           />
           <label className="text-sm py-2 font-light">Email Address</label>
@@ -78,7 +76,6 @@ const EditUser = ({ editPop, setEditPop, data }) => {
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
-              console.log(email);
             }}
           />
           <label className="text-sm py-2 font-light">Phone Number</label>
@@ -90,7 +87,6 @@ const EditUser = ({ editPop, setEditPop, data }) => {
               let phoneVal = e.target.value;
               setPhone(phoneVal);
               if (phoneVal.length > 10) {
-                console.log(phoneVal.length);
                 setErrorText("Enter Valid Number");
               } else if (phoneVal.length === 10) {
                 setErrorText("Valid Number");

@@ -75,7 +75,6 @@ export const addPackage = (formdata) => async (dispatch) => {
     });
 
     const body = formdata;
-    console.log(body, "body package");
     const header = {
       "Content-Type": "application/json",
     };
@@ -86,13 +85,11 @@ export const addPackage = (formdata) => async (dispatch) => {
       header
     );
 
-    console.log(data);
 
     dispatch({
       type: ADD_PACKAGE_SUCCESS,
       payload: data,
     });
-    console.log(data);
   } catch (error) {
     dispatch({
       type: ADD_PACKAGE_FAILED,
