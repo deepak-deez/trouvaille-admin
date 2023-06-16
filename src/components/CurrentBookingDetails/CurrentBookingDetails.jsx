@@ -14,12 +14,13 @@ import Swal from "sweetalert2";
 import LoadingScreen from "../Loading/LoadingScreen";
 import store from "../../redux/store";
 import StatusMenu from "../StatusMenu/StatusMenu";
+import AlertComponent from "../Alerts/AlertComponent";
 
 const CurrentBookingDetails = () => {
   const { data, loading } = useSelector((state) => state.getSingleBooking);
   const { data: updatedBooking } = useSelector((state) => state.updateBooking);
   const { data: deleted } = useSelector((state) => state.deleteBooking);
-  const { data: updatedStatus } = useSelector(
+  const { data: updatedStatus, error } = useSelector(
     (state) => state.updateBookingStatus
   );
   const dispatch = useDispatch();
@@ -103,22 +104,22 @@ const CurrentBookingDetails = () => {
   useEffect(() => {
     if (updatedStatus) {
       dispatch({ type: "UPDATE_BOOKING_STATUS_SUCCESS", payload: null });
-      Swal.fire({
-        position: "center",
-        width: "40vh",
-        icon: "success",
-        title: "Success",
-        text: updatedStatus.message,
-        showConfirmButton: false,
-        toast: false,
-        timer: 2000,
-        timerProgressBar: true,
-      });
+      AlertComponent("success", updatedStatus);
       setTimeout(() => {
         navigate("/booking-list");
       }, 2000);
+    } else if (updatedStatus.success === false) {
+      AlertComponent("failed", updatedStatus);
+      dispatch({ type: "UPDATE_BOOKING_STATUS_SUCCESS", payload: null });
     }
   }, [updatedStatus]);
+
+  useEffect(() => {
+    if (error) {
+      AlertComponent("error", error);
+      dispatch({ type: "UPDATE_BOOKING_STATUS_FAILED", payload: null });
+    }
+  }, [error]);
 
   if (data?.data.cancellationStatus === "true")
     requestedForCancel.current = "true";

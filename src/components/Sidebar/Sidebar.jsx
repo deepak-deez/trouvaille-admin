@@ -52,7 +52,7 @@ const Sidebar = (props) => {
       {/* </div> */}
       <div
         className={
-          `mainSideBar z-[90] fixed top-0 xl:static xl:flex w-full sm:w-[60%] lg:w-[40%] 2xl:w-[30%] p-5 flex-col bg-white h-screen sidebar-shadow  ${
+          `mainSideBar md:overflow-auto z-[90] fixed top-0 xl:static xl:flex w-full sm:w-[60%] lg:w-[40%] 2xl:w-[30%] p-5 flex-col bg-white h-full sidebar-shadow  ${
             !show && " hidden-bar "
           }` + (closingAnimation ? openningAnimaionName : closingAnimationName)
         }
@@ -85,17 +85,20 @@ const Sidebar = (props) => {
         </div>
 
         <div
-          className={`sidebar-footer sticky left-0 bottom-0 w-full md:mt-30`}
+          className={`sidebar-footer sticky left-0 bottom-0 w-full md:mt-30 bg-white`}
         >
-          <img
-            src={SuperAdminIcon}
-            alt="superAdminIcon"
-            className="fixed bottom-[7rem] md:bottom-[8rem]"
-          />
-          <div className="bg-[#E85C53] p-3 text-center">
-            <Link className="text-white" to="/superAdmins">
-              Contact Super Admin
-            </Link>
+          <div className="hidden">
+            {/* Remove Classlist Hidden to Show */}
+            <img
+              src={SuperAdminIcon}
+              alt="superAdminIcon"
+              className="fixed bottom-[7rem] md:bottom-[8rem]"
+            />
+            <div className="bg-[#E85C53] p-3 text-center">
+              <Link className="text-white" to="/superAdmins">
+                Contact Super Admin
+              </Link>
+            </div>
           </div>
           <div className="flex flex-col justify-center items-center mt-5 ">
             <h4 className="text-[#E85C53] font-semibold ">Admin Dashboard</h4>

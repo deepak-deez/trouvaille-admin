@@ -1,13 +1,12 @@
 import { React, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewTip, getTrip } from "../../redux/actions/tripAction.js";
-import Swal from "sweetalert2";
-import imgToUrl from "../../functions/imgToUrl.js";
+import AlertComponent from "../Alerts/AlertComponent.jsx";
 
 const AddNewPop = (props) => {
   const { setShowAdd, showAdd, heading, icon, titleHeading, feature } = props;
   const { data } = useSelector((state) => state.getTrip);
-  const { data: addedTrip } = useSelector((state) => state.addNewTip);
+  const { data: addedTrip, error } = useSelector((state) => state.addNewTip);
   const [name, setName] = useState("");
   const [file, setFile] = useState();
   const [img, setImg] = useState("");
@@ -16,13 +15,11 @@ const AddNewPop = (props) => {
   const dispatch = useDispatch();
 
   const addNewHandler = () => {
- 
     const formdata = new FormData();
     formdata.append("image", img);
     formdata.append("title", name);
     formdata.append("description", description);
-  
-    console.log(formdata);
+
     if (formdata) {
       dispatch(addNewTip(formdata, feature));
       setName("");
@@ -39,32 +36,19 @@ const AddNewPop = (props) => {
         type: "ADD_TRIP_SUCCESS",
         payload: null,
       });
-      Swal.fire({
-        position: "center",
-        width: "40vh",
-        icon: "success",
-        title: "Success",
-        text: addedTrip.message,
-        showConfirmButton: false,
-        toast: false,
-        timer: 2000,
-        timerProgressBar: true,
-      });
+      AlertComponent("success", addedTrip);
     } else if (addedTrip?.success === false) {
-      Swal.fire({
-        position: "center",
-        width: "40vh",
-        icon: "error",
-        title: "failed",
-        text: addedTrip.message,
-        showConfirmButton: false,
-        toast: false,
-        timer: 2000,
-        timerProgressBar: true,
-      });
+      AlertComponent("failed", addedTrip);
       dispatch({ type: "ADD_TRIP_SUCCESS", payload: null });
     }
   });
+
+  useEffect(() => {
+    if (error) {
+      AlertComponent("error", error);
+      dispatch({ type: "ADD_TRIP_FAILED", payload: null });
+    }
+  }, [error]);
 
   function handleChange(e) {
     if (e.target.files.length !== 0) {

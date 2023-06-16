@@ -2,6 +2,7 @@ import { React, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteTrip, getTrip } from "../../redux/actions/tripAction";
 import Swal from "sweetalert2";
+import AlertComponent from "../Alerts/AlertComponent";
 
 const DeletePop = ({
   showDelPop,
@@ -10,10 +11,9 @@ const DeletePop = ({
   heading,
   feature,
 }) => {
-  const { data: deletedTrip } = useSelector((state) => state.deleteTrip);
+  const { data: deletedTrip, error } = useSelector((state) => state.deleteTrip);
   const dispatch = useDispatch();
   const id = updateData._id;
-  console.log(id);
 
   const deleteTripHandler = () => {
     if (id) {
@@ -26,30 +26,19 @@ const DeletePop = ({
       dispatch(getTrip(feature));
       setShowDelPop(!showDelPop);
       dispatch({ type: "DELETE_TRIP_SUCCESS", payload: null });
-      Swal.fire({
-        position: "top",
-        icon: "success",
-        title: "Success",
-        text: deletedTrip.message,
-        showConfirmButton: false,
-        timer: 1500,
-        timerProgressBar: true,
-      });
+      AlertComponent("success", deletedTrip);
     } else if (deletedTrip?.success === false) {
-      Swal.fire({
-        position: "center",
-        width: "40vh",
-        icon: "error",
-        title: "failed",
-        text: deletedTrip.message,
-        showConfirmButton: false,
-        toast: false,
-        timer: 2000,
-        timerProgressBar: true,
-      });
+      AlertComponent("failed", deletedTrip);
       dispatch({ type: "DELETE_TRIP_SUCCESS", payload: null });
     }
   }, [deletedTrip]);
+
+  useEffect(() => {
+    if (error) {
+      AlertComponent("error", error);
+      dispatch({ type: "DELETE_TRIP_FAILED", payload: null });
+    }
+  }, [error]);
 
   return (
     <div

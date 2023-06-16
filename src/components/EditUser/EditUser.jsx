@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser, getUser } from "../../redux/actions/addUserAction";
-import Swal from "sweetalert2";
+import AlertComponent from "../Alerts/AlertComponent";
 
 const EditUser = ({ editPop, setEditPop, data }) => {
   const { data: updatedUser, error } = useSelector((state) => state.updateUser);
@@ -22,57 +22,25 @@ const EditUser = ({ editPop, setEditPop, data }) => {
 
   useEffect(() => {
     if (updatedUser?.success) {
-      console.log(updatedUser);
       dispatch(getUser("Backend-user"));
       setEditPop(!editPop);
 
-      // set addedUser to null
       dispatch({ type: "UPDATE_USER_SUCCESS", payload: null });
-      Swal.fire({
-        position: "center",
-        width: "40vh",
-        icon: "success",
-        title: "Success",
-        text: updatedUser.message,
-        showConfirmButton: false,
-        toast: false,
-        timer: 2000,
-        timerProgressBar: true,
-      });
+      AlertComponent("success", updatedUser);
+
     } else if (updatedUser?.success === false) {
-      Swal.fire({
-        position: "center",
-        width: "40vh",
-        icon: "error",
-        title: "failed",
-        text: updatedUser.message,
-        showConfirmButton: false,
-        toast: false,
-        timer: 2000,
-        timerProgressBar: true,
-      });
+      AlertComponent("failed", updatedUser);
       dispatch({ type: "UPDATE_USER_SUCCESS", payload: null });
     }
   }, [updatedUser]);
-  console.log(updatedUser, "updatedUser");
+
   useEffect(() => {
     if (error) {
-      console.log("ERROR : ", error);
-      Swal.fire({
-        position: "center",
-        width: "40vh",
-        icon: "error",
-        title: "failed",
-        text: error,
-        showConfirmButton: false,
-        toast: false,
-        timer: 2000,
-        timerProgressBar: true,
-      });
+      AlertComponent("error", error);
       dispatch({ type: "UPDATE_USER_FAILED", payload: null });
     }
   }, [error]);
-  console.log(error);
+
 
   return (
     <div

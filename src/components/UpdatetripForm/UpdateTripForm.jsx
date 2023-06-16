@@ -21,6 +21,7 @@ import { getSinglePackage } from "../../redux/actions/addPackageActions";
 import addDays from "date-fns/addDays";
 import convertDate from "../../functions/monthFormat";
 import convertYearDate from "../../functions/yearMonthDate";
+import AlertComponent from "../Alerts/AlertComponent";
 
 const NewTripForm = () => {
   const { id } = useParams();
@@ -28,9 +29,11 @@ const NewTripForm = () => {
   const { occassionOptions, tripCategoryOptions, travelTypeOptions } =
     GetOptions();
   const { data } = useSelector((state) => state.getSinglePackage);
-  const { data: updatedPackage, loading } = useSelector(
-    (state) => state.updatePackage
-  );
+  const {
+    data: updatedPackage,
+    loading,
+    error,
+  } = useSelector((state) => state.updatePackage);
   const [title, setTitle] = useState("");
   const [file, setFile] = useState();
   const [image, setImage] = useState("");
@@ -132,7 +135,6 @@ const NewTripForm = () => {
       setAmenities(data?.data[0].amenities);
       setFile(data?.data[0].image);
       setArrayDate(data?.data[0]?.activities);
-      // errors
       data?.data[0]?.tripCategory?.map((item) => {
         setTripCategory([...tripCategory, { label: item, value: item }]);
       });
@@ -199,18 +201,7 @@ const NewTripForm = () => {
     if (formData) {
       dispatch(updatePackage(id, formData));
     } else {
-      Swal.fire({
-        className: "pop-top",
-        position: "top",
-        icon: "error",
-        title: "Oops...",
-        text: "All fields are required",
-        showConfirmButton: false,
-        width: "40vh",
-        // toast: true,
-        timer: 1500,
-        timerProgressBar: true,
-      });
+      AlertComponent("warning", "", "All fields are required");
     }
   };
 
@@ -218,35 +209,22 @@ const NewTripForm = () => {
     if (updatedPackage?.success) {
       console.log(updatedPackage);
       dispatch({ type: "UPDATE_PACKAGE_SUCCESS", payload: null });
-      Swal.fire({
-        position: "center",
-        width: "40vh",
-        icon: "success",
-        title: "Success",
-        text: updatedPackage.message,
-        showConfirmButton: false,
-        toast: false,
-        timer: 2000,
-        timerProgressBar: true,
-      });
+      AlertComponent("success", updatedPackage);
       setTimeout(() => {
         navigate("/list-of-trips");
       }, 2000);
     } else if (updatedPackage?.success === false) {
-      Swal.fire({
-        position: "center",
-        width: "40vh",
-        icon: "error",
-        title: "failed",
-        text: updatedPackage.message,
-        showConfirmButton: false,
-        toast: false,
-        timer: 2000,
-        timerProgressBar: true,
-      });
+      AlertComponent("failed", updatedPackage);
       dispatch({ type: "UPDATE_PACKAGE_SUCCESS", payload: null });
     }
   }, [updatedPackage]);
+
+  useEffect(() => {
+    if (error) {
+      AlertComponent("error", error);
+      dispatch({ type: "UPDATE_PACKAGE_FAILED", payload: null });
+    }
+  }, [error]);
 
   return (
     <>

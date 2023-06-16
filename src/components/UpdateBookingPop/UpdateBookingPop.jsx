@@ -4,7 +4,7 @@ import {
   updateBookingNote,
 } from "../../redux/actions/bookingActions";
 import { useSelector, useDispatch } from "react-redux";
-import Swal from "sweetalert2";
+import AlertComponent from "../Alerts/AlertComponent";
 
 const UpdateBookingPop = ({
   showBookingNoteUpdatePop,
@@ -14,7 +14,9 @@ const UpdateBookingPop = ({
   heading,
 }) => {
   const [desc, setDesc] = useState(updateData.note);
-  const { data: updatedNote } = useSelector((state) => state.updateBookingNote);
+  const { data: updatedNote, error } = useSelector(
+    (state) => state.updateBookingNote
+  );
   const dispatch = useDispatch();
   const id = updateData._id;
 
@@ -22,17 +24,7 @@ const UpdateBookingPop = ({
     if (desc) {
       dispatch(updateBookingNote(id, desc));
     } else {
-      Swal.fire({
-        className: "pop-top",
-        position: "top",
-        icon: "error",
-        title: "Oops...",
-        text: "All fields are required",
-        showConfirmButton: false,
-        width: "40vh",
-        timer: 1500,
-        timerProgressBar: true,
-      });
+      AlertComponent("warning", "", "All fields are required");
     }
   };
 
@@ -41,19 +33,17 @@ const UpdateBookingPop = ({
       dispatch(getBookingNote());
       setShowBookingNoteUpdatePop(!showBookingNoteUpdatePop);
       dispatch({ type: "UPDATE_BOOKING_NOTE_SUCCESS", payload: null });
-      Swal.fire({
-        position: "center",
-        width: "40vh",
-        icon: "success",
-        title: "Success",
-        text: updatedNote.message,
-        showConfirmButton: false,
-        toast: false,
-        timer: 2000,
-        timerProgressBar: true,
-      });
+      AlertComponent("success", updatedNote);
     }
   }, [updatedNote]);
+
+  useEffect(() => {
+    if (error) {
+      AlertComponent("error", error);
+      setShowBookingNoteUpdatePop(!showBookingNoteUpdatePop);
+      dispatch({ type: "ADD_USER_FAILED", payload: null });
+    }
+  }, [error]);
 
   return (
     <div

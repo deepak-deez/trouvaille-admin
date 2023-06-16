@@ -2,6 +2,7 @@ import { React, useState, useEffect } from "react";
 import { getTrip, updateTrip } from "../../redux/actions/tripAction";
 import { useSelector, useDispatch } from "react-redux";
 import Swal from "sweetalert2";
+import AlertComponent from "../Alerts/AlertComponent";
 
 const UpdatePop = ({
   showUpdatePop,
@@ -13,25 +14,15 @@ const UpdatePop = ({
 }) => {
   const [title, setTitle] = useState(updateData.title);
   const [desc, setDesc] = useState(updateData.description);
-  const { data: updatedTrip } = useSelector((state) => state.updateTrip);
+  const { data: updatedTrip, error } = useSelector((state) => state.updateTrip);
   const dispatch = useDispatch();
   const id = updateData._id;
 
   const updateHandler = () => {
-    if (title || desc) {
+    if (title && desc) {
       dispatch(updateTrip(id, title, desc, feature));
     } else {
-      Swal.fire({
-        className: "pop-top",
-        position: "top",
-        icon: "error",
-        title: "Oops...",
-        text: "All fields are required",
-        showConfirmButton: false,
-        width: "40vh",
-        timer: 1500,
-        timerProgressBar: true,
-      });
+      AlertComponent("warning", "", "All fields are required");
     }
   };
 
@@ -40,32 +31,20 @@ const UpdatePop = ({
       dispatch(getTrip(feature));
       setShowUpdatePop(!showUpdatePop);
       dispatch({ type: "UPDATE_TRIP_SUCCESS", payload: null });
-      Swal.fire({
-        position: "center",
-        width: "40vh",
-        icon: "success",
-        title: "Success",
-        text: updatedTrip.message,
-        showConfirmButton: false,
-        toast: false,
-        timer: 2000,
-        timerProgressBar: true,
-      });
+      AlertComponent("success", updatedTrip);
     } else if (updatedTrip?.success === false) {
-      Swal.fire({
-        position: "center",
-        width: "40vh",
-        icon: "error",
-        title: "failed",
-        text: updatedTrip.message,
-        showConfirmButton: false,
-        toast: false,
-        timer: 2000,
-        timerProgressBar: true,
-      });
+      AlertComponent("failed", updatedTrip);
+
       dispatch({ type: "UPDATE_TRIP_SUCCESS", payload: null });
     }
   }, [updatedTrip]);
+
+  useEffect(() => {
+    if (error) {
+      AlertComponent("error", error);
+      dispatch({ type: "UPDATE_TRIP_FAILED", payload: null });
+    }
+  }, [error]);
 
   return (
     <div

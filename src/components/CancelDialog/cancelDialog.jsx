@@ -9,6 +9,7 @@ import {
 } from "../../redux/actions/bookingActions";
 import LoadingScreen from "../Loading/LoadingScreen";
 import store from "../../redux/store";
+import AlertComponent from "../Alerts/AlertComponent";
 
 const CancelDialog = (props) => {
   const {
@@ -36,17 +37,7 @@ const CancelDialog = (props) => {
       console.log(updatedBooking, "hiii");
       setCancelPopUp(false);
       props.setSubmitDelete(true);
-    } else
-      Swal.fire({
-        position: "top",
-        icon: "warning",
-        title: "Sorry!",
-        text: "Reason field cannot be empty",
-        showConfirmButton: false,
-        toast: true,
-        timer: 1500,
-        timerProgressBar: true,
-      });
+    } else AlertComponent("warning", "", "Reason field cannot be empty");
   };
 
   const handleClick = () => {
@@ -88,11 +79,7 @@ const CancelDialog = (props) => {
               placeholder="Reason"
               className="  border-2 p-2 "
               ref={reasonRef}
-              required={
-                userType === "Backend-user"
-                  ? true
-                  : false
-              }
+              required={userType === "Backend-user" ? true : false}
             />
           </form>
           <button

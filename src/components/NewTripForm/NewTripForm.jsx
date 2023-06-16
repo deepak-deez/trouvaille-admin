@@ -16,15 +16,18 @@ import LoadingScreen from "../Loading/LoadingScreen";
 import addDays from "date-fns/addDays";
 import { useNavigate } from "react-router-dom";
 import convertYearDate from "../../functions/yearMonthDate";
+import AlertComponent from "../Alerts/AlertComponent";
 
 const NewTripForm = () => {
   const { occassionOptions, tripCategoryOptions, travelTypeOptions } =
     GetOptions();
   const { data } = useSelector((state) => state.getPackage);
   const navigate = useNavigate();
-  const { data: addedPackage, loading } = useSelector(
-    (state) => state.addPackage
-  );
+  const {
+    data: addedPackage,
+    loading,
+    error,
+  } = useSelector((state) => state.addPackage);
   const [title, setTitle] = useState("");
   const [file, setFile] = useState();
   const [image, setImage] = useState("");
@@ -136,53 +139,29 @@ const NewTripForm = () => {
     if (formData) {
       dispatch(addPackage(formData));
     } else {
-      Swal.fire({
-        className: "pop-top",
-        position: "top",
-        icon: "error",
-        title: "Oops...",
-        text: "All fields are required",
-        showConfirmButton: false,
-        width: "40vh",
-        // toast: true,
-        timer: 1500,
-        timerProgressBar: true,
-      });
+      AlertComponent("warning", "", "All Feilds Are Requried");
     }
   };
 
   useEffect(() => {
     if (addedPackage?.success) {
-      console.log(addedPackage);
-      // set addedPackage to null
       dispatch({ type: "ADD_PACKAGE_SUCCESS", payload: null });
-      Swal.fire({
-        position: "center",
-        width: "40vh",
-        icon: "success",
-        title: "Success",
-        text: addedPackage.message,
-        showConfirmButton: false,
-        toast: false,
-        timer: 2000,
-        timerProgressBar: true,
-      });
+      AlertComponent("success", addedPackage);
+
       navigate("/list-of-trips");
     } else if (addedPackage?.success === false) {
-      Swal.fire({
-        position: "center",
-        width: "40vh",
-        icon: "error",
-        title: "failed",
-        text: addedPackage.message,
-        showConfirmButton: false,
-        toast: false,
-        timer: 2000,
-        timerProgressBar: true,
-      });
+      AlertComponent("failed", addedPackage);
+
       dispatch({ type: "ADD_PACKAGE_SUCCESS", payload: null });
     }
   }, [addedPackage]);
+
+  useEffect(() => {
+    if (error) {
+      AlertComponent("error", error);
+      dispatch({ type: "ADD_PACKAGE_FAILED", payload: null });
+    }
+  }, [error]);
 
   return (
     <>
