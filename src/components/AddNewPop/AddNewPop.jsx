@@ -78,7 +78,11 @@ const AddNewPop = (props) => {
         <div>
           <div className="border-2 rounded-lg border-dashed flex flex-col md:flex-row justify-around items-center p-5 relative">
             {file ? (
-              <img src={file} alt="browserIcon" className="w-[7rem]" />
+              <img
+                src={file}
+                alt="browserIcon"
+                className="w-[7rem] h-[10rem]"
+              />
             ) : (
               <img src={icon} alt="browserIcon" className="w-[7rem]" />
             )}
@@ -92,7 +96,7 @@ const AddNewPop = (props) => {
               <input
                 type="file"
                 accept=".jpg,.png,.jpeg,.svg"
-                className="absolute left-[-90%] top-[30%] opacity-0 cursor-pointer "
+                className="absolute left-[-90%] top-[30%]  opacity-0 cursor-pointer "
                 onChange={handleChange}
               />
             </div>

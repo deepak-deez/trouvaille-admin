@@ -26,7 +26,6 @@ const EditUser = ({ editPop, setEditPop, data }) => {
 
       dispatch({ type: "UPDATE_USER_SUCCESS", payload: null });
       AlertComponent("success", updatedUser);
-
     } else if (updatedUser?.success === false) {
       AlertComponent("failed", updatedUser);
       dispatch({ type: "UPDATE_USER_SUCCESS", payload: null });
@@ -39,7 +38,6 @@ const EditUser = ({ editPop, setEditPop, data }) => {
       dispatch({ type: "UPDATE_USER_FAILED", payload: null });
     }
   }, [error]);
-
 
   return (
     <div
@@ -83,6 +81,7 @@ const EditUser = ({ editPop, setEditPop, data }) => {
             className="border-2 p-2"
             type="text"
             value={phone}
+            maxLength={10}
             onChange={(e) => {
               let phoneVal = e.target.value;
               setPhone(phoneVal);

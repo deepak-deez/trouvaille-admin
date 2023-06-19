@@ -1,29 +1,49 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Outlet, Link } from "react-router-dom";
 import "./style.scss";
 import mail from "../../../assets/images/adminLogin/singinForm/mail.svg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import AlertComponent from "../../Alerts/AlertComponent";
 
 const URL = process.env.REACT_APP_NODE_API;
 
 const ForgotPassword = () => {
   const emailRef = useRef();
   const [apiMessage, setApiMessage] = useState("");
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+
   const buttonClick = async () => {
-    const body = {
-      email: emailRef.current.value,
-    };
-    const response = await axios.post(
-      `${process.env.REACT_APP_NODE_API}/send-reset-mail/Backend-user`,
-      body
-    );
-
-    setApiMessage(response.data.message);
-
-
+    try {
+      if (emailRef.current.value) {
+        const body = {
+          email: emailRef.current.value,
+        };
+        const response = await axios.post(
+          `${process.env.REACT_APP_NODE_API}/send-reset-mail/Backend-user`,
+          body
+        );
+        setApiMessage(response?.data);
+      } else {
+        AlertComponent("warning", "", "Enter a Valid Email");
+      }
+    } catch (error) {
+      console.log(error);
+      setApiMessage(error?.response?.data);
+    }
   };
+  console.log(apiMessage);
+
+  useEffect(() => {
+    if (apiMessage?.success) {
+      AlertComponent("success", apiMessage);
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    } else if (apiMessage?.success === false) {
+      AlertComponent("failed", apiMessage);
+    }
+  }, [apiMessage]);
 
   return (
     <div className=" my-auto forgot-password-form flex flex-col items-center justify-center">

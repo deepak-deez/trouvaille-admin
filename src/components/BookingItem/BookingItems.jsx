@@ -32,6 +32,7 @@ const BookingItems = (props) => {
       });
     } else {
       dispatch(getBookingByStatus(props.activeStatusTab));
+      setCurrentPage(1);
       dispatch({
         type: "GET_BOOKING_SUCCESS",
         payload: null,
@@ -47,9 +48,18 @@ const BookingItems = (props) => {
     setDataMap(booking);
   }, [booking]);
 
-
   const firstPageIndex = (currentPage - 1) * PageSize;
   const lastPageIndex = firstPageIndex + PageSize;
+
+  useEffect(() => {
+    if (
+      dataMap &&
+      dataMap?.data.slice(firstPageIndex, lastPageIndex).length === 0
+    ) {
+      setCurrentPage((prev) => prev - 1);
+    }
+  }, [data]);
+
   return (
     <>
       {dataMap && (dataMap.data.length !== 0 || dataMap.data === null) ? (
@@ -109,11 +119,19 @@ const BookingItems = (props) => {
                         <span className="md:hidden">
                           <InfoIcon />
                         </span>
-                        
+
                         <p
-                          className={`md:py-5  flex font-semibold items-center gap-1  ` + `text-${statusColor(items?.bookingStatus)}-400`}
+                          className={
+                            `md:py-5  flex font-semibold items-center gap-1  ` +
+                            `text-${statusColor(items?.bookingStatus)}-400`
+                          }
                         >
-                          <span className={`w-[1rem] h-[1rem]  rounded-full `+ `bg-${statusColor(items?.bookingStatus)}-400`}></span>
+                          <span
+                            className={
+                              `w-[1rem] h-[1rem]  rounded-full ` +
+                              `bg-${statusColor(items?.bookingStatus)}-400`
+                            }
+                          ></span>
                           <span>{items.bookingStatus}</span>
                         </p>
                       </div>

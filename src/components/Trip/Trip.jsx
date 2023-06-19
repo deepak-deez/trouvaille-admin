@@ -29,6 +29,16 @@ const Trip = () => {
     dispatch(getTrip("category"));
   }, []);
 
+  useEffect(() => {
+    if (
+      data &&
+      data.data &&
+      data.data.slice(firstPageIndex, lastPageIndex).length === 0
+    ) {
+      setCurrentPage((prev) => prev - 1);
+    }
+  }, [data]);
+
   return (
     <>
       {loading && <LoadingScreen />}

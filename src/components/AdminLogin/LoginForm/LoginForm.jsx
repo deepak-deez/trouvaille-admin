@@ -71,9 +71,10 @@ export default function LoginForm() {
       setemptyFeildMessage(false);
       dispatch(getUsers(emailRef.current.value, passwordRef.current.value));
     } else {
-      setemptyFeildMessage(true);
+      AlertComponent("warning", "", "All feilds are Required");
     }
   };
+  
 
   return (
     <>

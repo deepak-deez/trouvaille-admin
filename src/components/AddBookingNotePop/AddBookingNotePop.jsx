@@ -24,6 +24,10 @@ const AddBookingNotePop = ({ setShowNote, showNote, heading }) => {
 
   useEffect(() => {
     if (adddednote?.success) {
+      console.log(adddednote,"adddednote");
+      console.log(
+        'work'
+      );
       dispatch(getBookingNote());
 
       AlertComponent("success", adddednote);

@@ -24,7 +24,7 @@ const AddNewUser = ({ setAddPop, addPop }) => {
     if (validator.isEmail(email)) {
       setErrorText(null);
     } else {
-      setErrorText("Enter valid Email!");
+      setErrorText("Not a valid Email!");
     }
   };
 
