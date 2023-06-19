@@ -15,15 +15,19 @@ const AddNewPop = (props) => {
   const dispatch = useDispatch();
 
   const addNewHandler = () => {
-    const formdata = new FormData();
-    formdata.append("image", img);
-    formdata.append("title", name);
-    formdata.append("description", description);
+    if (img && name && description) {
+      const formdata = new FormData();
+      formdata.append("image", img);
+      formdata.append("title", name);
+      formdata.append("description", description);
 
-    if (formdata) {
-      dispatch(addNewTip(formdata, feature));
-      setName("");
-      setDescription("");
+      if (formdata) {
+        dispatch(addNewTip(formdata, feature));
+        setName("");
+        setDescription("");
+      }
+    } else {
+      AlertComponent("warning", "", "All Fields Required");
     }
   };
 

@@ -19,15 +19,15 @@ const AddBookingNotePop = ({ setShowNote, showNote, heading }) => {
   const addNewHandler = () => {
     if (description) {
       dispatch(addBookingNote(description));
+    } else {
+      AlertComponent("warning", "", "Enter the Description");
     }
   };
 
   useEffect(() => {
     if (adddednote?.success) {
-      console.log(adddednote,"adddednote");
-      console.log(
-        'work'
-      );
+      console.log(adddednote, "adddednote");
+      console.log("work");
       dispatch(getBookingNote());
 
       AlertComponent("success", adddednote);

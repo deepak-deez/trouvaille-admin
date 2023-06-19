@@ -90,7 +90,6 @@ const NewTripForm = () => {
   };
   const [arrayDate, setArrayDate] = useState();
 
-
   const dispatch = useDispatch();
 
   function handleChange(e) {
@@ -101,39 +100,58 @@ const NewTripForm = () => {
   const startDate = convertYearDate(`${dateMonthFromat[0]}`);
   const endDate = convertYearDate(`${dateMonthFromat[1]}`);
 
-
   const submitHandler = () => {
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("images", image);
-    formData.append("duration", duration);
-    formData.append("startDate", startDate);
-    formData.append("endDate", endDate);
-    formData.append("activities", JSON.stringify(arrayDate));
-    formData.append(
-      "tripCategory",
-      JSON.stringify(tripCategory.map((trip) => trip.value))
-    );
-    formData.append("placeNumber", placeNumber);
-    formData.append("maximumGuests", maximumGuests);
+    if (
+      title &&
+      image &&
+      duration &&
+      startDate &&
+      endDate &&
+      arrayDate &&
+      tripCategory &&
+      placeNumber &&
+      maximumGuests &&
+      inputFields &&
+      discountedPrice &&
+      occasions &&
+      travelType &&
+      amenities &&
+      briefd &&
+      status
+    ) {
+      console.log(title, image, duration);
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("images", image);
+      formData.append("duration", duration);
+      formData.append("startDate", startDate);
+      formData.append("endDate", endDate);
+      formData.append("activities", JSON.stringify(arrayDate));
+      formData.append(
+        "tripCategory",
+        JSON.stringify(tripCategory.map((trip) => trip.value))
+      );
+      formData.append("placeNumber", placeNumber);
+      formData.append("maximumGuests", maximumGuests);
 
-    for (let i = 0; i < inputFields.length; i++) {
-      formData.append("images", inputFields[i].images);
-    }
-    formData.append("tripHighlights", JSON.stringify(inputFields));
-    formData.append("price", price);
-    formData.append("discountedPrice", discountedPrice);
-    formData.append(
-      "occasions",
-      JSON.stringify(occasions.map((occasion) => occasion.value))
-    );
-    formData.append("travelType", JSON.stringify(travelType.value));
-    formData.append("amenities", JSON.stringify(amenities));
-    formData.append("briefDescription", briefd);
-    formData.append("faq", JSON.stringify(faqFields));
-    formData.append("status", status.value);
-    if (formData) {
-      dispatch(addPackage(formData));
+      for (let i = 0; i < inputFields.length; i++) {
+        formData.append("images", inputFields[i].images);
+      }
+      formData.append("tripHighlights", JSON.stringify(inputFields));
+      formData.append("price", price);
+      formData.append("discountedPrice", discountedPrice);
+      formData.append(
+        "occasions",
+        JSON.stringify(occasions.map((occasion) => occasion.value))
+      );
+      formData.append("travelType", JSON.stringify(travelType.value));
+      formData.append("amenities", JSON.stringify(amenities));
+      formData.append("briefDescription", briefd);
+      formData.append("faq", JSON.stringify(faqFields));
+      formData.append("status", status.value);
+      if (formData) {
+        dispatch(addPackage(formData));
+      }
     } else {
       AlertComponent("warning", "", "All Feilds Are Requried");
     }

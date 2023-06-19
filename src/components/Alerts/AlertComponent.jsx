@@ -5,7 +5,7 @@ const AlertComponent = (type, data, warningText) => {
     if (type === "success") {
       Swal.fire({
         position: "center",
-        width: "40vh",
+        width: "40vw",
         icon: "success",
         title: "Success",
         text: data.message,
@@ -17,7 +17,7 @@ const AlertComponent = (type, data, warningText) => {
     } else if (type === "failed") {
       Swal.fire({
         position: "center",
-        width: "40vh",
+        width: "40vw",
         icon: "error",
         title: "Failed",
         text: data.message,
@@ -29,7 +29,7 @@ const AlertComponent = (type, data, warningText) => {
     } else if (type === "error") {
       Swal.fire({
         position: "center",
-        width: "40vh",
+        width: "40vw",
         icon: "error",
         title: "Failed",
         text: data,
