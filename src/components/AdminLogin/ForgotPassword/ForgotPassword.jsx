@@ -5,6 +5,7 @@ import mail from "../../../assets/images/adminLogin/singinForm/mail.svg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AlertComponent from "../../Alerts/AlertComponent";
+import { validEmail } from "../../../constants/regex";
 
 const URL = process.env.REACT_APP_NODE_API;
 
@@ -12,6 +13,18 @@ const ForgotPassword = () => {
   const emailRef = useRef();
   const [apiMessage, setApiMessage] = useState("");
   const navigate = useNavigate();
+
+  const handleEmailValidation = () => {
+    try {
+      if (!validEmail.test(emailRef.current.value)) {
+        throw new Error("Please Enter a valid E-mail!");
+      } else {
+        document.getElementById("validEmail").textContent = "";
+      }
+    } catch (err) {
+      document.getElementById("validEmail").textContent = err.message;
+    }
+  };
 
   const buttonClick = async () => {
     try {
@@ -55,18 +68,24 @@ const ForgotPassword = () => {
         </p>
         <form action="">
           <p className="mt-[47px] text-[14px]">Email Address</p>
-          <div className="bg-white input-fields px-[23px] py-[15px] mt-[9px] flex flex-row items-center justify-between">
-            <input
-              className="bg-transparent outline-none"
-              type="text"
-              placeholder="Enter you email"
-              ref={emailRef}
-            />
-            <button type="button">
-              <img className="input-icon" src={mail} alt="mail-icon" />
-            </button>
+          <div className="flex flex-col relative">
+            <div className="bg-white input-fields px-[23px] py-[15px] mt-[9px] flex flex-row items-center justify-between">
+              <input
+                className="bg-transparent outline-none"
+                type="text"
+                placeholder="Enter you email"
+                ref={emailRef}
+                onChange={handleEmailValidation}
+              />
+              <button type="button">
+                <img className="input-icon" src={mail} alt="mail-icon" />
+              </button>
+            </div>
+            <h4
+              id="validEmail"
+              className="text-red-800 bg-transparent text-md absolute mt-[4rem] "
+            ></h4>
           </div>
-
           <Link
             className="mt-[27px] py-[15px] text-center send-link-button"
             onClick={buttonClick}

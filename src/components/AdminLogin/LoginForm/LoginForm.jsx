@@ -11,11 +11,7 @@ import store from "../../../redux/store.js";
 import LoadingScreen from "../../Loading/LoadingScreen";
 import Swal from "sweetalert2";
 import AlertComponent from "../../Alerts/AlertComponent";
-import {
-  validEmail,
-  mediumRegexPassword,
-  strongRegexPassword,
-} from "../../../constants/regex";
+import { validEmail } from "../../../constants/regex";
 
 export default function LoginForm() {
   const navigate = useNavigate();
