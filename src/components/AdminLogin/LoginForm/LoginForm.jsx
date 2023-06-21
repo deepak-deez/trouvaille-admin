@@ -11,6 +11,11 @@ import store from "../../../redux/store.js";
 import LoadingScreen from "../../Loading/LoadingScreen";
 import Swal from "sweetalert2";
 import AlertComponent from "../../Alerts/AlertComponent";
+import {
+  validEmail,
+  mediumRegexPassword,
+  strongRegexPassword,
+} from "../../../constants/regex";
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -45,6 +50,18 @@ export default function LoginForm() {
     }
   }, [error]);
 
+  const handleEmailValidation = () => {
+    try {
+      if (!validEmail.test(emailRef.current.value)) {
+        throw new Error("Please Enter a valid E-mail!");
+      } else {
+        document.getElementById("validEmail").textContent = "";
+      }
+    } catch (err) {
+      document.getElementById("validEmail").textContent = err.message;
+    }
+  };
+
   const handleRemember = (userDetails) => {
     if (checked) {
       localStorage.setItem("email", emailRef.current.value);
@@ -74,7 +91,6 @@ export default function LoginForm() {
       AlertComponent("warning", "", "All feilds are Required");
     }
   };
-  
 
   return (
     <>
@@ -86,21 +102,28 @@ export default function LoginForm() {
           </h2>
           <form>
             <p className="mt-[47px] text-[14px]">Email Address</p>
-            <div className="bg-white input-fields px-[23px]  mt-[9px] flex flex-row items-center justify-between">
-              <input
-                className="bg-transparent w-[100%] py-[15px] outline-none"
-                type="text"
-                placeholder="Enter you email"
-                ref={emailRef}
-                defaultValue={
-                  localStorage.getItem("email")
-                    ? localStorage.getItem("email")
-                    : ""
-                }
-              />
-              <button type="button">
-                <img className="input-icon" src={mail} alt="mail-icon" />
-              </button>
+            <div className="flex flex-col relative">
+              <div className="bg-white input-fields px-[23px]  mt-[9px] flex flex-row items-center justify-between">
+                <input
+                  className="bg-transparent w-[100%] py-[15px] outline-none"
+                  type="text"
+                  placeholder="Enter you email"
+                  ref={emailRef}
+                  onChange={handleEmailValidation}
+                  defaultValue={
+                    localStorage.getItem("email")
+                      ? localStorage.getItem("email")
+                      : ""
+                  }
+                />
+                <button type="button">
+                  <img className="input-icon" src={mail} alt="mail-icon" />
+                </button>
+              </div>
+              <h4
+                id="validEmail"
+                className="text-red-800 bg-transparent text-md absolute mt-[4rem]"
+              ></h4>
             </div>
             <div className="flex flex-row mt-[26px] justify-between text-[14px] items-center">
               <p>Password</p>
