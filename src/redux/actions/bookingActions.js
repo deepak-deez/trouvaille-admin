@@ -1,4 +1,6 @@
 import axios from "axios";
+import socketIOClient from "socket.io-client";
+
 import {
   GET_BOOKING_FAILED,
   GET_BOOKING_SUCCESS,
