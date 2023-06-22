@@ -152,14 +152,15 @@ const BookingItems = (props) => {
       ) : (
         <Nodata name="Bookings" />
       )}
-
-      <Pagination
-        className="pagination-bar flex justify-end"
-        currentPage={currentPage}
-        totalCount={dataMap && dataMap?.data.length}
-        pageSize={PageSize}
-        onPageChange={(page) => setCurrentPage(page)}
-      />
+      {dataMap && (
+        <Pagination
+          className="pagination-bar flex justify-end"
+          currentPage={currentPage}
+          totalCount={dataMap && dataMap?.data.length}
+          pageSize={PageSize}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
+      )}
     </>
   );
 };

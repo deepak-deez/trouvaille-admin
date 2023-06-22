@@ -160,6 +160,11 @@ const NewTripForm = () => {
     }
   }, [data]);
 
+  console.log(inputFields);
+  for (let i = 0; i < inputFields.length; i++) {
+    console.log(inputFields[i].images);
+  }
+
   const submitHandler = () => {
     const formData = new FormData();
     formData.append("title", title);
@@ -185,6 +190,8 @@ const NewTripForm = () => {
       formData.append("images", inputFields[i].images);
     }
     formData.append("tripHighlights", JSON.stringify(inputFields));
+    console.log(inputFields, "inputFields");
+    console.log(inputFields.length, "inputFields.length");
     formData.append("price", price);
     formData.append("discountedPrice", discountedPrice);
     formData.append(
@@ -222,6 +229,8 @@ const NewTripForm = () => {
       dispatch({ type: "UPDATE_PACKAGE_FAILED", payload: null });
     }
   }, [error]);
+
+  console.log(indexes);
 
   return (
     <>

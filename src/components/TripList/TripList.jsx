@@ -158,13 +158,15 @@ const TripList = () => {
           />
         )}
       </div>
-      <Pagination
-        className="pagination-bar justify-end"
-        currentPage={currentPage}
-        totalCount={data && data?.data.length}
-        pageSize={PageSize}
-        onPageChange={(page) => setCurrentPage(page)}
-      />
+      {data && (
+        <Pagination
+          className="pagination-bar justify-end"
+          currentPage={currentPage}
+          totalCount={data && data?.data.length}
+          pageSize={PageSize}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
+      )}
     </>
   );
 };

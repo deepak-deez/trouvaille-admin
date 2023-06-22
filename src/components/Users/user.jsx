@@ -143,13 +143,15 @@ const User = () => {
       {delPop && (
         <DeleteUser delPop={delPop} setDelPop={setDelPop} data={editable} />
       )}
-      <Pagination
-        className="pagination-bar"
-        currentPage={currentPage}
-        totalCount={data && data?.data.length}
-        pageSize={PageSize}
-        onPageChange={(page) => setCurrentPage(page)}
-      />
+      {data && (
+        <Pagination
+          className="pagination-bar"
+          currentPage={currentPage}
+          totalCount={data && data?.data.length}
+          pageSize={PageSize}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
+      )}
     </>
   );
 };

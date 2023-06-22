@@ -24,9 +24,29 @@ function MultipleTripForm({
 
   const removeInputFields = (index) => {
     const rows = [...inputFields];
+    console.log(index, "index");
     rows.splice(index, 1);
     setInputFields(rows);
+
+    editMode &&
+      setIndexes((prev) => {
+        let arr = [...prev];
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i] === index + 1) {
+            arr.splice(i, 1);
+            for (let j = i; j < arr.length; j++) {
+              arr[j] = arr[j] - 1;
+            }
+          } else if (arr[i] >= index + 1) {
+            arr[i] = arr[i] - 1;
+          }
+        }
+        // if (prev.includes(index + 1) === false) return [...prev, index];
+        console.log(arr, "arr");
+        return arr;
+      });
   };
+
   const handleChange = (index, e) => {
     const { name, value } = e.target;
     const list = [...inputFields];

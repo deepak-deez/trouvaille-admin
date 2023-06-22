@@ -129,13 +129,15 @@ const Trip = () => {
           feature="category"
         />
       )}
-      <Pagination
-        className="pagination-bar flex justify-end"
-        currentPage={currentPage}
-        totalCount={data && data?.data.length}
-        pageSize={PageSize}
-        onPageChange={(page) => setCurrentPage(page)}
-      />
+      {data && (
+        <Pagination
+          className="pagination-bar flex justify-end"
+          currentPage={currentPage}
+          totalCount={data && data?.data.length}
+          pageSize={PageSize}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
+      )}
     </>
   );
 };
