@@ -44,7 +44,7 @@ const Navbar = ({ heading }) => {
       <div className="flex justify-center items-center px-5 space-x-2 ">
         <div ref={refNotification} className="realtive">
           <MdNotificationsNone
-            className="hover: cursor-pointer "
+            className="hover:cursor-pointer relative  "
             onClick={() => {
               setNotificationPopup(!notificationPopup);
             }}
@@ -66,7 +66,7 @@ const Navbar = ({ heading }) => {
             onClick={() => {
               setProfilePop(!profilePop);
             }}
-            className="w-[25px]"
+            className="w-[25px] hover:cursor-pointer relative"
             src={userIcon}
             alt="usericon"
           />

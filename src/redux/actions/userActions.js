@@ -8,7 +8,6 @@ import axios from "axios";
 const URL = process.env.REACT_APP_NODE_API;
 
 export const getUsers = (email, password) => async (dispatch) => {
-
   try {
     dispatch({
       type: ADMIN_REQUEST,
@@ -33,7 +32,7 @@ export const getUsers = (email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: ADMIN_FAILED,
-      payload: error,
+      payload: error.response.data.message,
     });
   }
 };
