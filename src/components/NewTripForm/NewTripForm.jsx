@@ -7,8 +7,6 @@ import TagsInput from "../TagsInput/TagsInput";
 import SelectMenu from "../SelectMenu/SelectMenu";
 import Faq from "../Faq/Faq";
 import StatusMenu from "../StatusMenu/StatusMenu";
-import imgToUrl from "../../functions/imgToUrl";
-import Swal from "sweetalert2";
 import DateRangeComp from "../DateRange/DateRangeComp";
 import { Status, GetOptions } from "./tripFormSelect.jsx";
 import MultipleDateInputs from "../MultipleDateInputs/MultipleDateInputs";

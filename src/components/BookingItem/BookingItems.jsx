@@ -156,7 +156,7 @@ const BookingItems = (props) => {
       <Pagination
         className="pagination-bar flex justify-end"
         currentPage={currentPage}
-        totalCount={data && data?.data.length}
+        totalCount={dataMap && dataMap?.data.length}
         pageSize={PageSize}
         onPageChange={(page) => setCurrentPage(page)}
       />
