@@ -7,6 +7,8 @@ import ProfilePop from "../ProfilePop/ProfilePop";
 import { useSelector } from "react-redux";
 import LoadingScreen from "../Loading/LoadingScreen";
 import NotificationPop from "../NotificationPop/NotificationPop";
+import socketIOClient from "socket.io-client";
+import axios from "axios";
 
 const Navbar = ({ heading }) => {
   const [profilePop, setProfilePop] = useState(false);
@@ -17,6 +19,32 @@ const Navbar = ({ heading }) => {
   const navigate = useNavigate();
   const refProfile = useRef(null);
   const refNotification = useRef(null);
+
+  const socket = socketIOClient(process.env.REACT_APP_NODE_API);
+
+  const [tripUpdatesNotis, setTripUpdatesNotis] = useState();
+
+  useEffect(() => {
+    if (!tripUpdatesNotis) {
+      getBookingNotis();
+    }
+    socket.on("getCurrentBooking", (data) => {
+      setTripUpdatesNotis(data);
+    });
+
+    console.log(tripUpdatesNotis?.data);
+  }, [socket]);
+
+  const getBookingNotis = async () => {
+    const bookingNotisUrl = `${process.env.REACT_APP_NODE_API}/get-booking-notifications/Frontend-user`;
+    try {
+      const response = await axios.get(bookingNotisUrl);
+      setTripUpdatesNotis(response?.data);
+      console.log(tripUpdatesNotis?.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     document.addEventListener("click", hideOnClickOutsideProfile, true);
@@ -44,16 +72,19 @@ const Navbar = ({ heading }) => {
       <div className="flex justify-center items-center px-5 space-x-2 ">
         <div ref={refNotification} className="realtive">
           <MdNotificationsNone
-            className="hover: cursor-pointer "
+            className="hover: cursor-pointer w-6 h-6"
             onClick={() => {
               setNotificationPopup(!notificationPopup);
             }}
           />
-
+          <p className="absolute top-3 right-[9.2rem] w-6 h-6 tex-xs bg-green-600 text-white text-xs text-center pt-1 rounded-full">
+            {tripUpdatesNotis?.data.length}
+          </p>
           {notificationPopup && (
             <NotificationPop
               setNotificationPopup={setNotificationPopup}
               notificationPopup={notificationPopup}
+              tripUpdatesNotis={tripUpdatesNotis?.data}
             />
           )}
         </div>

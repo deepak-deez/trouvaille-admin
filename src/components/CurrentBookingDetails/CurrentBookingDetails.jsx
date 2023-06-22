@@ -108,8 +108,8 @@ const CurrentBookingDetails = () => {
         console.log(socket.id);
       });
 
-      const defaultObj = {
-        userType: "Admin",
+      const notificationObj = {
+        userType: "User",
         title: "Trip Update",
         description: `Your Trip with ${id} has been updated!`,
         refId: data?.data.tripId,
@@ -118,9 +118,9 @@ const CurrentBookingDetails = () => {
         readStatus: false,
       };
 
-      socket.emit("sendStatusUpdate", defaultObj);
+      socket.emit("sendStatusUpdate", notificationObj);
 
-      console.log("Emitted : ", defaultObj);
+      console.log("Emitted : ", notificationObj);
     }
   };
 
