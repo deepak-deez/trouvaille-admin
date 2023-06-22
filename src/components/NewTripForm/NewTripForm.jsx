@@ -91,8 +91,15 @@ const NewTripForm = () => {
   const dispatch = useDispatch();
 
   function handleChange(e) {
-    setFile(URL.createObjectURL(e.target.files[0]));
-    setImage(e.target.files[0]);
+    if (e.target.files[0]) {
+      const maxLimit = 5242880;
+      if (e.target.files[0].size > maxLimit) {
+        AlertComponent("warning", "", "Maximum Size is 5 MB");
+      } else {
+        setFile(URL.createObjectURL(e.target.files[0]));
+        setImage(e.target.files[0]);
+      }
+    }
   }
   const dateMonthFromat = duration?.split(" - ");
   const startDate = convertYearDate(`${dateMonthFromat[0]}`);
@@ -331,6 +338,7 @@ const NewTripForm = () => {
                   onChange={(e) => {
                     setTravelType(e);
                   }}
+                  textPlaceholder="Select Travel Type"
                 />
               </div>
             </div>
@@ -381,6 +389,7 @@ const NewTripForm = () => {
                 onChange={(e) => {
                   setStatus(e);
                 }}
+                textPlaceholder="Status"
               />
               <button
                 className="bg-[#CD4B43] rounded-md w-1/2 p-3"

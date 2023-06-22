@@ -216,6 +216,7 @@ const CurrentBookingDetails = () => {
                     setUpdate(true);
                   }}
                   options={options}
+                  textPlaceholder="Status"
                 />
                 {update && (
                   <button

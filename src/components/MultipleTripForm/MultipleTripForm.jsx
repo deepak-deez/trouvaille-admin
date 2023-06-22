@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import imgToUrl from "../../functions/imgToUrl";
+import AlertComponent from "../Alerts/AlertComponent";
 
 function MultipleTripForm({
   setIndexes,
@@ -10,8 +11,15 @@ function MultipleTripForm({
 }) {
   function imageChange(index, e) {
     const list = [...inputFields];
-    list[index]["images"] = e.target.files[0];
-    list[index]["showIcon"] = URL.createObjectURL(e.target.files[0]);
+    if (e.target.files[0]) {
+      const maxLimit = 5242880;
+      if (e.target.files[0].size > maxLimit) {
+        AlertComponent("warning", "", "Maximum Size is 5 MB");
+      } else {
+        list[index]["images"] = e.target.files[0];
+        list[index]["showIcon"] = URL.createObjectURL(e.target.files[0]);
+      }
+    }
 
     setInputFields(list);
 
