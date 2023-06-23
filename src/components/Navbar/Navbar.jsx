@@ -13,26 +13,28 @@ import axios from "axios";
 const Navbar = ({ heading }) => {
   const [profilePop, setProfilePop] = useState(false);
   const [notificationPopup, setNotificationPopup] = useState(false);
-
   const { userDetails } = useSelector((state) => state.userLogin);
   const userName = userDetails?.data?.userDetails.userName;
   const navigate = useNavigate();
   const refProfile = useRef(null);
   const refNotification = useRef(null);
+  const [tripUpdatesNotis, setTripUpdatesNotis] = useState();
+  const [notisUnread, setNotisUnread] = useState([]);
 
   const socket = socketIOClient(process.env.REACT_APP_NODE_API);
-
-  const [tripUpdatesNotis, setTripUpdatesNotis] = useState();
 
   useEffect(() => {
     if (!tripUpdatesNotis) {
       getBookingNotis();
     }
-    socket.on("getCurrentBooking", (data) => {
-      setTripUpdatesNotis(data);
+    socket.on("getCurrentBooking", (res) => {
+      setTripUpdatesNotis(res);
+      setNotisUnread(
+        res?.data?.filter((data) => {
+          return data.readStatus === false;
+        })
+      );
     });
-
-    console.log(tripUpdatesNotis?.data);
   }, [socket]);
 
   const getBookingNotis = async () => {
@@ -40,7 +42,12 @@ const Navbar = ({ heading }) => {
     try {
       const response = await axios.get(bookingNotisUrl);
       setTripUpdatesNotis(response?.data);
-      console.log(tripUpdatesNotis?.data);
+
+      setNotisUnread(
+        response?.data?.data?.filter((data) => {
+          return data.readStatus === false;
+        })
+      );
     } catch (err) {
       console.log(err);
     }
@@ -78,13 +85,15 @@ const Navbar = ({ heading }) => {
             }}
           />
           <p className="absolute top-3 right-[9.2rem] w-6 h-6 tex-xs bg-green-600 text-white text-xs text-center pt-1 rounded-full">
-            {tripUpdatesNotis?.data.length}
+            {notisUnread?.length}
           </p>
           {notificationPopup && (
             <NotificationPop
               setNotificationPopup={setNotificationPopup}
               notificationPopup={notificationPopup}
               tripUpdatesNotis={tripUpdatesNotis?.data}
+              notisUnread={notisUnread}
+              setNotisUnread={setNotisUnread}
             />
           )}
         </div>
