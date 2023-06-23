@@ -23,7 +23,7 @@ const TravelType = () => {
 
   const { data, loading } = useSelector((state) => state.getTrip);
 
-  const firstPageIndex = (currentPage - 1) * PageSize;
+  const firstPageIndex = currentPage > 0 ? (currentPage - 1) * PageSize : 0;
   const lastPageIndex = firstPageIndex + PageSize;
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const TravelType = () => {
       data.data &&
       data.data.slice(firstPageIndex, lastPageIndex).length === 0
     ) {
-      setCurrentPage((prev) => prev - 1);
+      setCurrentPage((prev) => (prev > 1 ? prev - 1 : 1));
     }
   }, [data]);
 
@@ -54,47 +54,64 @@ const TravelType = () => {
             <i className=" ml-2 red-dot fa-solid fa-circle-plus"></i>
           </button>
         </div>
-        {data && data.data.length !== 0 ? (
-          <div className="grid lg:grid-cols-4 sm:grid-cols-2">
-            {data &&
-              data?.data &&
-              data.data
-                .slice(firstPageIndex, lastPageIndex)
-                .map((item, index) => {
-                  const icon = item.icon;
 
-                  return (
-                    <div className="w-full p-5 gap-4" key={index}>
-                      <div className="p-4 bg-white h-[100%] text-center rounded shadow-md">
-                        <div className="flex justify-end">
-                          <div>
-                            <DotMenu
-                              updateData={item}
-                              showDelPop={showDelPop}
-                              setShowDelPop={setShowDelPop}
-                              showUpdatePop={showUpdatePop}
-                              setShowUpdatePop={setShowUpdatePop}
-                              setEditData={setEditData}
-                            />
+        <div>
+          <div className="flex flex-col justify-between">
+            {data && data.data.length !== 0 ? (
+              <div className="grid md:grid-cols-4 sm:grid-cols-2">
+                {data &&
+                  data?.data &&
+                  data.data
+                    .toReversed()
+                    .slice(firstPageIndex, lastPageIndex)
+                    .map((item, index) => {
+                      const icon = item.icon;
+
+                      return (
+                        <div className="w-full px-5 py-2 gap-2" key={index}>
+                          <div className="p-4 bg-white h-[100%]  min-h-[15rem] text-center rounded shadow-md">
+                            <div className="flex justify-end">
+                              <div>
+                                <DotMenu
+                                  updateData={item}
+                                  showDelPop={showDelPop}
+                                  setShowDelPop={setShowDelPop}
+                                  showUpdatePop={showUpdatePop}
+                                  setShowUpdatePop={setShowUpdatePop}
+                                  setEditData={setEditData}
+                                />
+                              </div>
+                            </div>
+                            <div className="flex justify-center py-2">
+                              <img src={icon} alt="" className="h-10" />
+                            </div>
+                            <h3 className="text-center font-semibold py-2">
+                              {item.title}
+                            </h3>
+                            <p className="text-gray-600 w-full line-clamp-4 ">
+                              {item.description}
+                            </p>
                           </div>
                         </div>
-                        <div className="flex justify-center py-2">
-                          <img src={icon} alt="" className="h-10" />
-                        </div>
-                        <h3 className="text-center font-semibold py-2">
-                          {item.title}
-                        </h3>
-                        <p className="text-gray-600 w-full line-clamp-4 ">
-                          {item.description}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
+                      );
+                    })}
+              </div>
+            ) : (
+              <Nodata name="Travel Type" />
+            )}
           </div>
-        ) : (
-          <Nodata name="Travel Type" />
-        )}
+          <div className="md:absolute md:bottom-16 ">
+            {data && (
+              <Pagination
+                className="pagination-bar flex justify-end"
+                currentPage={currentPage}
+                totalCount={data && data?.data.length}
+                pageSize={PageSize}
+                onPageChange={(page) => setCurrentPage(page)}
+              />
+            )}
+          </div>
+        </div>
       </div>
       {showAdd && (
         <AddNewPop
@@ -125,15 +142,6 @@ const TravelType = () => {
           heading="Travel Type"
           feature="travel"
           updateData={editData}
-        />
-      )}
-      {data && (
-        <Pagination
-          className="pagination-bar flex justify-end"
-          currentPage={currentPage}
-          totalCount={data && data?.data.length}
-          pageSize={PageSize}
-          onPageChange={(page) => setCurrentPage(page)}
         />
       )}
     </>

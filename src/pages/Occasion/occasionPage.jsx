@@ -17,9 +17,9 @@ const OccasionPage = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="w-full bg-[#f5f7f7] h-[100vh] overflow-scroll md:pb-16">
+      <div className="w-full bg-[#f5f9ff] h-screen overflow-scroll md:pb-16">
         <Navbar heading="Occasions List" />
-        <div className="flex flex-col h-screen justify-between">
+        <div className="flex flex-col h-screen md:h-auto justify-between">
           <Occasion />
           <Footer />
         </div>

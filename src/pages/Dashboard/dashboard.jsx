@@ -19,9 +19,9 @@ const Dashboard = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="w-full bg-[#f5f7f7] h-screen overflow-auto md:pb-16">
+      <div className="w-full bg-[#f5f9ff] h-screen overflow-auto md:pb-16">
         <Navbar heading="All Users" />
-        <div className="flex flex-col h-screen justify-between">
+        <div className="flex flex-col h-screen md:h-auto justify-between">
           <User />
           <Footer />
         </div>

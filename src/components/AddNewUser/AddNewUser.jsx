@@ -39,8 +39,9 @@ const AddNewUser = ({ setAddPop, addPop }) => {
   };
   useEffect(() => {
     if (addedUser?.success) {
-      dispatch(getUser("Backend-user"));
+      console.log("hii");
       setAddPop(!addPop);
+      dispatch(getUser("Backend-user"));
       dispatch({ type: "ADD_USER_SUCCESS", payload: null });
       AlertComponent("success", addedUser);
     } else if (addedUser?.success === false) {

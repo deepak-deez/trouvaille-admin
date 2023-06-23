@@ -17,7 +17,6 @@ export const usePagination = ({
   const paginationRange = useMemo(() => {
     const totalPageCount = Math.ceil(totalCount / pageSize);
 
-
     const totalPageNumbers = siblingCount + 5;
 
     if (totalPageNumbers >= totalPageCount) {
@@ -36,12 +35,11 @@ export const usePagination = ({
     const firstPageIndex = 1;
     const lastPageIndex = totalPageCount;
 
-
     if (!toShowLeftDots && toShowRightDots) {
       let leftItemCount = 3 + 2 * siblingCount;
       let leftRange = range(1, leftItemCount);
 
-        return [...leftRange, DOTS];
+      return [...leftRange, DOTS];
     }
 
     if (toShowLeftDots && !toShowRightDots) {
@@ -54,7 +52,7 @@ export const usePagination = ({
     }
 
     if (toShowLeftDots && toShowRightDots) {
-      let middleRange = range(leftSiblingIndex, rightSiblingIndex + 1);
+      let middleRange = range(leftSiblingIndex, rightSiblingIndex);
       return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex];
     }
   }, [totalCount, pageSize, siblingCount, currentPage]);

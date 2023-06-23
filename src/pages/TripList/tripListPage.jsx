@@ -17,9 +17,9 @@ const TripListPage = () => {
   return (
     <div className="flex h-screen">
       <Sidebar />
-      <div className="w-full bg-[#f5f7f7] h-[100vh] overflow-auto md:pb-16">
+      <div className="w-full bg-[#f5f9ff] h-[100vh] overflow-auto md:pb-16">
         <Navbar heading="List Of Trips" />
-        <div className="flex flex-col h-screen justify-between">
+        <div className="flex flex-col h-screen md:h-auto justify-between">
           <TripList />
           <Footer />
         </div>
