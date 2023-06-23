@@ -46,7 +46,7 @@ const User = () => {
     <>
       {/* <LoadingScreen /> */}
       {loading && <LoadingScreen />}
-      <div className="p-3 mb-15">
+      <div className="p-3 mb-10">
         <div className="p-4 bg-white item-center w-full overflow-x-scroll border-b-2">
           <div className="w-full">
             <div>
@@ -83,7 +83,7 @@ const User = () => {
                     return (
                       <div
                         className={
-                          `sm:grid items-start ${
+                          `sm:grid  items-start ${
                             userType == "Admin"
                               ? "sm:grid-cols-4"
                               : "sm:grid-cols-3"
@@ -97,8 +97,10 @@ const User = () => {
                             <PersonIcon />
                           </div>
                           <p>
-                            <span className="sm:hidden mr-10">:</span>
-                            {val.userName}
+                            <span className="sm:hidden">:</span>
+                            <span className=" text-ellipsis overflow-hidden">
+                              {val.userName}
+                            </span>
                           </p>
                         </div>
                         <div className="td-class flex justify-start gap-10 order-3  sm:order-2">
@@ -106,8 +108,11 @@ const User = () => {
                             <EmailIcon />
                           </div>
                           <p>
-                            <span className="sm:hidden mr-10">:</span>
-                            {val.email}
+                            <span className="sm:hidden ">:</span>
+                            <span className="text-ellipsis overflow-hidden">
+                              {/* {" "} */}
+                              {val.email}
+                            </span>
                           </p>
                         </div>
                         <div className="td-class flex justify-start gap-10 order-4  sm:order-3">
@@ -115,7 +120,8 @@ const User = () => {
                             <PhoneIcon />
                           </div>
                           <p>
-                            <span className="sm:hidden mr-10">:</span>
+                            <span className="sm:hidden">:</span>
+                            <span className=" text-ellipsis overflow-hidden"></span>
                             {val.phone}
                           </p>
                         </div>
