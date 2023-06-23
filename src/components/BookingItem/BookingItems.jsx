@@ -102,11 +102,6 @@ const BookingItems = (props) => {
                         <p className="md:py-5 text-ellipsis overflow-hidden">
                           {items.email}
                         </p>
-                        {/* <input
-                          className="md:py-5 "
-                          defaultValue={items.email}
-                          disabled={true}
-                        /> */}
                       </div>
                       <div className="flex items-center justify-between md:p-3">
                         <span className="md:hidden">

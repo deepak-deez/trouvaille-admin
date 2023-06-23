@@ -2,7 +2,6 @@ import { React, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addPackage,
   updatePackage,
 } from "../../redux/actions/addPackageActions";
 import tempIcon from "../../assets/images/trip-list/AddNewTrip-icon.svg";
@@ -11,8 +10,6 @@ import TagsInput from "../TagsInput/TagsInput";
 import SelectMenu from "../SelectMenu/SelectMenu";
 import Faq from "../Faq/Faq";
 import StatusMenu from "../StatusMenu/StatusMenu";
-import imgToUrl from "../../functions/imgToUrl";
-import Swal from "sweetalert2";
 import DateRangeComp from "../DateRange/DateRangeComp";
 import { GetOptions, Status } from "../NewTripForm/tripFormSelect";
 import MultipleDateInputs from "../MultipleDateInputs/MultipleDateInputs";
@@ -167,11 +164,6 @@ const NewTripForm = () => {
     }
   }, [data]);
 
-  console.log(inputFields);
-  for (let i = 0; i < inputFields.length; i++) {
-    console.log(inputFields[i].images);
-  }
-
   const submitHandler = () => {
     const formData = new FormData();
     formData.append("title", title);
@@ -197,8 +189,6 @@ const NewTripForm = () => {
       formData.append("images", inputFields[i].images);
     }
     formData.append("tripHighlights", JSON.stringify(inputFields));
-    console.log(inputFields, "inputFields");
-    console.log(inputFields.length, "inputFields.length");
     formData.append("price", price);
     formData.append("discountedPrice", discountedPrice);
     formData.append(
@@ -237,7 +227,6 @@ const NewTripForm = () => {
     }
   }, [error]);
 
-  console.log(indexes);
 
   return (
     <>

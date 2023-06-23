@@ -1,7 +1,6 @@
 import { React, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { delUser, getUser } from "../../redux/actions/addUserAction";
-import Swal from "sweetalert2";
 import AlertComponent from "../Alerts/AlertComponent";
 
 const DeleteUser = ({ delPop, setDelPop, data }) => {

@@ -1,6 +1,5 @@
 import { React, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { getTrip } from "../../redux/actions/tripAction";
 import { getBookingNote } from "../../redux/actions/bookingActions";
 import LoadingScreen from "../Loading/LoadingScreen";
 import Pagination from "../Pagination/Pagination";
@@ -29,7 +28,6 @@ const BookingNote = () => {
   useEffect(() => {
     dispatch(getBookingNote());
   }, []);
-  console.log(data);
   useEffect(() => {
     if (
       data &&

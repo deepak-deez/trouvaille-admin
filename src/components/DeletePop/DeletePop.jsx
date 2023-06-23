@@ -1,7 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteTrip, getTrip } from "../../redux/actions/tripAction";
-import Swal from "sweetalert2";
 import AlertComponent from "../Alerts/AlertComponent";
 
 const DeletePop = ({

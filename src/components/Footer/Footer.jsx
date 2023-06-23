@@ -2,7 +2,7 @@ import React from "react";
 import "./style.scss";
 const Footer = () => {
   return (
-    <footer className="flex flex-col sm:flex-row  w-full md:fixed bottom-0 px-5 py-2 md:p-5 justify-start items-start bg-[#F3F7FC]">
+    <footer className="  flex flex-col sm:flex-row  w-full md:fixed bottom-0 px-5 py-2 md:p-5 justify-start items-start bg-[#F3F7FC]">
       <a href="dashboard" className="text-[#E75C54] sm:px-3">
         Trouvaille
       </a>

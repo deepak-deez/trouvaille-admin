@@ -1,15 +1,12 @@
 import React, { useRef, useEffect, useState } from "react";
-import { Outlet, Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./style.scss";
 import mail from "../../../assets/images/adminLogin/singinForm/mail.svg";
 import view from "../../../assets/images/adminLogin/singinForm/view.svg";
 import Cookies from "js-cookie";
-import Handle from "rc-slider/lib/Handles/Handle";
 import { getUsers } from "../../../redux/actions/userActions";
 import { useSelector, useDispatch } from "react-redux";
-import store from "../../../redux/store.js";
 import LoadingScreen from "../../Loading/LoadingScreen";
-import Swal from "sweetalert2";
 import AlertComponent from "../../Alerts/AlertComponent";
 import { validEmail } from "../../../constants/regex";
 

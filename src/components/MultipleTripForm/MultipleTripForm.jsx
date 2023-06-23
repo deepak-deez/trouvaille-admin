@@ -1,5 +1,4 @@
 import { React, useState } from "react";
-import imgToUrl from "../../functions/imgToUrl";
 import AlertComponent from "../Alerts/AlertComponent";
 
 function MultipleTripForm({
@@ -32,7 +31,6 @@ function MultipleTripForm({
 
   const removeInputFields = (index) => {
     const rows = [...inputFields];
-    console.log(index, "index");
     rows.splice(index, 1);
     setInputFields(rows);
 
@@ -49,8 +47,6 @@ function MultipleTripForm({
             arr[i] = arr[i] - 1;
           }
         }
-        // if (prev.includes(index + 1) === false) return [...prev, index];
-        console.log(arr, "arr");
         return arr;
       });
   };
@@ -117,7 +113,6 @@ function MultipleTripForm({
                       className="w-[30%] md:w-[20%]  md:h-[10vh]"
                     />
                   ) : (
-                    // <p>{data.icon}</p>
                     <h1 className="text-gray-400">Icon</h1>
                   )
                 ) : data.images ? (

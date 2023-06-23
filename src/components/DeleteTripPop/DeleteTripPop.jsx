@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const DeleteTripPop = ({ delPop, setDelPop, handleDelete, editData }) => {
-
   return (
     <div
       className={`fixed top-0 left-0 w-full flex justify-center items-center addUser  h-[100vh] ${

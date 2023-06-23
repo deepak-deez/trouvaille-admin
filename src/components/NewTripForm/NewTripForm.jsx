@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addPackage, getPackage } from "../../redux/actions/addPackageActions";
+import { addPackage } from "../../redux/actions/addPackageActions";
 import tempIcon from "../../assets/images/trip-list/AddNewTrip-icon.svg";
 import MultipleTripForm from "../MultipleTripForm/MultipleTripForm";
 import TagsInput from "../TagsInput/TagsInput";
@@ -124,7 +124,6 @@ const NewTripForm = () => {
       briefd &&
       status
     ) {
-      console.log(title, image, duration);
       const formData = new FormData();
       formData.append("title", title);
       formData.append("images", image);
