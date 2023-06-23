@@ -104,9 +104,9 @@ const TripList = () => {
                           }
                           key={index}
                         >
-                          <div className="td-class font-bold p-1 md:m-auto  flex flex-col  md:flex-row gap-3 w-full">
+                          <div className="td-class font-bold items-center p-1 md:m-auto  flex flex-col  md:flex-row gap-4 md:gap-2 w-full">
                             <img
-                              className="mx-auto md:mx-0 min-[400px]:w-[20rem] max-w-[350px] max-h-[250px] md:h-[62px] md:w-[62px] rounded-md"
+                              className="  min-w-[62px] min-h-[250px] md:min-h-[62px] w-full max-w-[350px] max-h-[250px] md:h-[62px] md:w-[62px] rounded-md"
                               src={val.image}
                               alt="logo"
                             />
@@ -114,7 +114,7 @@ const TripList = () => {
                               {val.title}
                             </p>
                           </div>
-                          <div className="td-class w-80 flex justify-center md:w-full md:justify-center md:order-1 order-2 my-auto">
+                          <div className="td-class w-80 flex justify-center md:w-full md:justify-center md:order-1 order-3 sm:order-2 my-auto">
                             <div className="md:hidden">
                               <ScheduleIcon />
                             </div>
@@ -132,7 +132,7 @@ const TripList = () => {
                             </div>
                             ₹ {val.discountedPrice}
                           </div>
-                          <div className="td-class mx-auto md:order-4 order-1 md:w-full absolute md:static md:flex justify-center bottom-5 left-5 ml-auto rounded-full border-[2px] border-blue-200 md:border-none pb-2 px-2 my-auto">
+                          <div className="td-class  md:order-4 order-2 sm:order-1 md:w-full top-72  right-5 absolute md:static md:flex justify-center sm:top-5 sm:right-5 ml-auto rounded-full border-[2px] border-grey md:border-none pb-2 px-2 my-auto">
                             <TripDropMenu
                               editData={val}
                               setEditData={setEditData}

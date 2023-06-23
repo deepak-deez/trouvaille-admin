@@ -136,7 +136,7 @@ const BookingItems = (props) => {
                         </p>
                       </div>
 
-                      <div className="md:py-5 flex md:items-center">
+                      <div className="md:py-5 flex md:items-center justify-center">
                         <Link
                           className="border border-black px-3 py-1 rounded-md font-semibold "
                           to={"/booking-list/booking-details/" + items._id}
