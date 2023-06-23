@@ -10,11 +10,10 @@ const AddNewTrip = () => {
   const { userDetails, error, loading } = useSelector(
     (state) => state.userLogin
   );
-  const navigate= useNavigate()
-  useEffect(()=>{
-    if(userDetails===null)
-    navigate("/")
-  })
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (userDetails === null) navigate("/");
+  });
   return (
     <div className="flex h-screen overflow-auto">
       <Sidebar />
