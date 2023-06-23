@@ -22,7 +22,6 @@ const Pagination = (props) => {
     pageSize,
   });
 
-
   if (currentPage === 0 || paginationRange.length < 2) {
     return null;
   }
@@ -38,7 +37,9 @@ const Pagination = (props) => {
   let lastPage = paginationRange[paginationRange.length - 1];
   return (
     <ul
-      className={classnames("pagination-container", { [className]: className })}
+      className={classnames("pagination-container w-full flex-wrap ", {
+        [className]: className,
+      })}
     >
       <li
         className={classnames("pagination-select", {
@@ -48,14 +49,18 @@ const Pagination = (props) => {
       >
         <div>PREV</div>
       </li>
-      {paginationRange.map((pageNumber,index) => {
+      {paginationRange.map((pageNumber, index) => {
         if (pageNumber === DOTS) {
-          return <li className="pagination-item dots" key={index}>&#8230;</li>;
+          return (
+            <li className="pagination-item dots" key={index}>
+              &#8230;
+            </li>
+          );
         }
 
         return (
           <li
-            className={classnames("pagination-item" , {
+            className={classnames("pagination-item", {
               selected: pageNumber === currentPage,
             })}
             onClick={() => onPageChange(pageNumber)}
@@ -70,7 +75,6 @@ const Pagination = (props) => {
           disabled: currentPage === lastPage,
         })}
         onClick={onNext}
-
       >
         <div>NEXT</div>
       </li>

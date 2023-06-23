@@ -56,8 +56,13 @@ const AddNewPop = (props) => {
 
   function handleChange(e) {
     if (e.target.files.length !== 0) {
-      setFile(URL.createObjectURL(e.target.files[0]));
-      setImg(e.target.files[0]);
+      const maxLimit = 5242880;
+      if (e.target.files[0].size > maxLimit) {
+        AlertComponent("warning", "", "Maximum Size is 5 MB");
+      } else {
+        setFile(URL.createObjectURL(e.target.files[0]));
+        setImg(e.target.files[0]);
+      }
     }
   }
 

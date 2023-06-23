@@ -7,23 +7,24 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-    const { userDetails, error, loading } = useSelector(
+  const { userDetails, error, loading } = useSelector(
     (state) => state.userLogin
   );
-  const navigate= useNavigate();
-  
-  useEffect(()=>{
-    if(userDetails===null)
-    navigate("/")
-  })
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userDetails === null) navigate("/");
+  });
 
   return (
-    <div className="flex h-screen">
+    <div className="flex">
       <Sidebar />
-      <div className="w-full bg-[#f5f7f7] h-screen overflow-auto md:pb-16">
+      <div className="w-full bg-[#f5f9ff] h-screen overflow-auto md:pb-16">
         <Navbar heading="All Users" />
-        <User />
-        <Footer />
+        <div className="flex flex-col h-screen md:h-auto justify-between">
+          <User />
+          <Footer />
+        </div>
       </div>
     </div>
   );

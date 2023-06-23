@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import imgToUrl from "../../functions/imgToUrl";
+import AlertComponent from "../Alerts/AlertComponent";
 
 function MultipleTripForm({
   setIndexes,
@@ -10,8 +10,15 @@ function MultipleTripForm({
 }) {
   function imageChange(index, e) {
     const list = [...inputFields];
-    list[index]["images"] = e.target.files[0];
-    list[index]["showIcon"] = URL.createObjectURL(e.target.files[0]);
+    if (e.target.files[0]) {
+      const maxLimit = 5242880;
+      if (e.target.files[0].size > maxLimit) {
+        AlertComponent("warning", "", "Maximum Size is 5 MB");
+      } else {
+        list[index]["images"] = e.target.files[0];
+        list[index]["showIcon"] = URL.createObjectURL(e.target.files[0]);
+      }
+    }
 
     setInputFields(list);
 
@@ -26,7 +33,24 @@ function MultipleTripForm({
     const rows = [...inputFields];
     rows.splice(index, 1);
     setInputFields(rows);
+
+    editMode &&
+      setIndexes((prev) => {
+        let arr = [...prev];
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i] === index + 1) {
+            arr.splice(i, 1);
+            for (let j = i; j < arr.length; j++) {
+              arr[j] = arr[j] - 1;
+            }
+          } else if (arr[i] >= index + 1) {
+            arr[i] = arr[i] - 1;
+          }
+        }
+        return arr;
+      });
   };
+
   const handleChange = (index, e) => {
     const { name, value } = e.target;
     const list = [...inputFields];
@@ -89,7 +113,6 @@ function MultipleTripForm({
                       className="w-[30%] md:w-[20%]  md:h-[10vh]"
                     />
                   ) : (
-                    // <p>{data.icon}</p>
                     <h1 className="text-gray-400">Icon</h1>
                   )
                 ) : data.images ? (

@@ -1,6 +1,5 @@
 import React from "react";
 import "./style.scss";
-import { Outlet, Link } from "react-router-dom";
 import navLogo from "../../../assets/images/adminLogin/navBar/navBar.svg";
 
 export default function Navbar() {
@@ -22,13 +21,6 @@ export default function Navbar() {
         </div>
       </div>
       <div className="hidden lg:flex flex-row gap-[28px]">
-        {/* <p className="new-user-text pt-[18px]">New to here?</p>
-        <Link
-          className="create-account-button py-[9px] m-auto px-[20px]"
-          to="/signup"
-        >
-          Create an account
-        </Link> */}
       </div>
     </nav>
   );

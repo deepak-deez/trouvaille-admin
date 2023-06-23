@@ -1,7 +1,6 @@
 import { React, useState, useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import CancelDialog from "../CancelDialog/cancelDialog";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -216,17 +215,19 @@ const CurrentBookingDetails = () => {
                     setUpdate(true);
                   }}
                   options={options}
+                  textPlaceholder="Status"
                 />
-                {update && (
-                  <button
-                    className=" bg-red-500 p-2 rounded-md text-white"
-                    onClick={() => {
-                      updateStatus();
-                    }}
-                  >
-                    Update Status
-                  </button>
-                )}
+                <button
+                  className={` bg-red-500 p-2 rounded-md text-white  ${
+                    update ? "opacity-100" : "opacity-0"
+                  }`}
+                  disabled={!update}
+                  onClick={() => {
+                    updateStatus();
+                  }}
+                >
+                  Update Status
+                </button>
               </div>
             </div>
 

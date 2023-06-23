@@ -41,11 +41,9 @@ const ForgotPassword = () => {
         AlertComponent("warning", "", "Enter a Valid Email");
       }
     } catch (error) {
-      console.log(error);
       setApiMessage(error?.response?.data);
     }
   };
-  console.log(apiMessage);
 
   useEffect(() => {
     if (apiMessage?.success) {

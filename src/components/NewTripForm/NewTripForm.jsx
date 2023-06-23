@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addPackage, getPackage } from "../../redux/actions/addPackageActions";
+import { addPackage } from "../../redux/actions/addPackageActions";
 import tempIcon from "../../assets/images/trip-list/AddNewTrip-icon.svg";
 import MultipleTripForm from "../MultipleTripForm/MultipleTripForm";
 import TagsInput from "../TagsInput/TagsInput";
@@ -91,8 +91,15 @@ const NewTripForm = () => {
   const dispatch = useDispatch();
 
   function handleChange(e) {
-    setFile(URL.createObjectURL(e.target.files[0]));
-    setImage(e.target.files[0]);
+    if (e.target.files[0]) {
+      const maxLimit = 5242880;
+      if (e.target.files[0].size > maxLimit) {
+        AlertComponent("warning", "", "Maximum Size is 5 MB");
+      } else {
+        setFile(URL.createObjectURL(e.target.files[0]));
+        setImage(e.target.files[0]);
+      }
+    }
   }
   const dateMonthFromat = duration?.split(" - ");
   const startDate = convertYearDate(`${dateMonthFromat[0]}`);
@@ -117,7 +124,6 @@ const NewTripForm = () => {
       briefd &&
       status
     ) {
-      console.log(title, image, duration);
       const formData = new FormData();
       formData.append("title", title);
       formData.append("images", image);
@@ -331,6 +337,7 @@ const NewTripForm = () => {
                   onChange={(e) => {
                     setTravelType(e);
                   }}
+                  textPlaceholder="Select Travel Type"
                 />
               </div>
             </div>
@@ -381,6 +388,7 @@ const NewTripForm = () => {
                 onChange={(e) => {
                   setStatus(e);
                 }}
+                textPlaceholder="Status"
               />
               <button
                 className="bg-[#CD4B43] rounded-md w-1/2 p-3"

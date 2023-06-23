@@ -12,6 +12,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import Pagination from "../Pagination/Pagination";
 import store from "../../redux/store";
+import Nodata from "../Nodata/Nodata";
 
 let PageSize = 10;
 
@@ -23,7 +24,7 @@ const User = () => {
   const [editable, setEditable] = useState("");
   const dispatch = useDispatch();
   const { data, loading } = useSelector((state) => state.getUser);
-  const firstPageIndex = (currentPage - 1) * PageSize;
+  const firstPageIndex = currentPage > 0 ? (currentPage - 1) * PageSize : 0;
   const lastPageIndex = firstPageIndex + PageSize;
   const storeData = store.getState();
   const userType = storeData.userLogin.userDetails?.data.userDetails.userType;
@@ -32,22 +33,26 @@ const User = () => {
     dispatch(getUser("Backend-user"));
   }, []);
 
+
+
   useEffect(() => {
+    console.log(data);
     if (
       data &&
       data.data &&
       data.data.slice(firstPageIndex, lastPageIndex).length === 0
     ) {
-      setCurrentPage((prev) => prev - 1);
+      console.log(data);
+      setCurrentPage((prev) => (prev > 1 ? prev - 1 : 1));
     }
   }, [data]);
-
+  console.log(lastPageIndex, firstPageIndex, currentPage);
   return (
     <>
       {/* <LoadingScreen /> */}
       {loading && <LoadingScreen />}
-      <div className="p-3 h-full md:h-auto">
-        <div className="p-4 bg-white item-center w-full overflow-x-scroll border-b-2">
+      <div className="p-3 flex flex-col justify-between gap-4">
+        <div className="p-4 bg-white item-center w-full border-b-2">
           <div className="w-full">
             <div>
               <div
@@ -75,15 +80,18 @@ const User = () => {
                 </div>
               </div>
             </div>
+
             <div>
-              {data &&
+              {data && data.data.length != 0 ? (
+                data &&
                 data.data
+                  // .toReversed()
                   .slice(firstPageIndex, lastPageIndex)
                   .map((val, index) => {
                     return (
                       <div
                         className={
-                          `sm:grid items-start ${
+                          `sm:grid items-start  ${
                             userType == "Admin"
                               ? "sm:grid-cols-4"
                               : "sm:grid-cols-3"
@@ -131,11 +139,26 @@ const User = () => {
                         </div>
                       </div>
                     );
-                  })}
+                  })
+              ) : (
+                <Nodata name="users" />
+              )}
             </div>
           </div>
         </div>
+        <div className="md:absolute md:bottom-16 ">
+          {data && (
+            <Pagination
+              className="pagination-bar"
+              currentPage={currentPage}
+              totalCount={data && data?.data.length}
+              pageSize={PageSize}
+              onPageChange={(page) => setCurrentPage(page)}
+            />
+          )}
+        </div>
       </div>
+
       {addPop && <AddNewUser setAddPop={setAddPop} addPop={addPop} />}
       {editPop && (
         <EditUser editPop={editPop} setEditPop={setEditPop} data={editable} />
@@ -143,13 +166,6 @@ const User = () => {
       {delPop && (
         <DeleteUser delPop={delPop} setDelPop={setDelPop} data={editable} />
       )}
-      <Pagination
-        className="pagination-bar"
-        currentPage={currentPage}
-        totalCount={data && data?.data.length}
-        pageSize={PageSize}
-        onPageChange={(page) => setCurrentPage(page)}
-      />
     </>
   );
 };

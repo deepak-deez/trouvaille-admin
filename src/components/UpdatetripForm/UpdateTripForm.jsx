@@ -2,7 +2,6 @@ import { React, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addPackage,
   updatePackage,
 } from "../../redux/actions/addPackageActions";
 import tempIcon from "../../assets/images/trip-list/AddNewTrip-icon.svg";
@@ -11,8 +10,6 @@ import TagsInput from "../TagsInput/TagsInput";
 import SelectMenu from "../SelectMenu/SelectMenu";
 import Faq from "../Faq/Faq";
 import StatusMenu from "../StatusMenu/StatusMenu";
-import imgToUrl from "../../functions/imgToUrl";
-import Swal from "sweetalert2";
 import DateRangeComp from "../DateRange/DateRangeComp";
 import { GetOptions, Status } from "../NewTripForm/tripFormSelect";
 import MultipleDateInputs from "../MultipleDateInputs/MultipleDateInputs";
@@ -93,13 +90,20 @@ const NewTripForm = () => {
   const dispatch = useDispatch();
 
   function handleChange(e) {
-    setFile(URL.createObjectURL(e.target.files[0]));
-    setImage(e.target.files[0]);
-    const obj = indexes;
+    if (e.target.files[0]) {
+      const maxLimit = 5242880;
+      if (e.target.files[0].size > maxLimit) {
+        AlertComponent("warning", "", "Maximum Size is 5 MB");
+      } else {
+        setFile(URL.createObjectURL(e.target.files[0]));
+        setImage(e.target.files[0]);
+        const obj = indexes;
 
-    if (obj[0] !== 0) obj.unshift(0);
+        if (obj[0] !== 0) obj.unshift(0);
 
-    setIndexes(obj);
+        setIndexes(obj);
+      }
+    }
   }
   const addInputField = () => {
     setInputFields([
@@ -222,6 +226,7 @@ const NewTripForm = () => {
       dispatch({ type: "UPDATE_PACKAGE_FAILED", payload: null });
     }
   }, [error]);
+
 
   return (
     <>
@@ -381,6 +386,7 @@ const NewTripForm = () => {
                   onChange={(e) => {
                     setTravelType(e);
                   }}
+                  textPlaceholder="Select Travel type"
                 />
               </div>
             </div>
@@ -431,6 +437,7 @@ const NewTripForm = () => {
                 onChange={(e) => {
                   setStatus(e);
                 }}
+                textPlaceholder="Status"
               />
               <button
                 className="bg-[#CD4B43] rounded-md w-1/2 p-3"

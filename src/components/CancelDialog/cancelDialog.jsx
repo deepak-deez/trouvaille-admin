@@ -1,7 +1,5 @@
-import axios from "axios";
-import { React, useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+import { React, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   deleteBooking,
@@ -73,7 +71,6 @@ const CancelDialog = (props) => {
             <textarea
               type="text"
               rows="5"
-              // cols="25"
               placeholder="Reason"
               className="  border-2 p-2 "
               ref={reasonRef}

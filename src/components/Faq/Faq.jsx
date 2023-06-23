@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import React from "react";
 function Faq({ faqFields, setFaqFields, addFaqField }) {
   const removefaqFields = (index) => {
     const rows = [...faqFields];
@@ -13,7 +13,6 @@ function Faq({ faqFields, setFaqFields, addFaqField }) {
   };
   return (
     <div className="col-sm-8">
-   
       {faqFields.map((data, index) => {
         return (
           <div className="row my-3" key={index}>

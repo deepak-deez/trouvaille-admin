@@ -11,7 +11,7 @@ import Pagination from "../Pagination/Pagination";
 import "./style.scss";
 import Nodata from "../Nodata/Nodata";
 
-let PageSize = 8;
+let PageSize = 4;
 
 const AmenitiesTable = () => {
   const [showAdd, setShowAdd] = useState(false);
@@ -22,7 +22,7 @@ const AmenitiesTable = () => {
   const dispatch = useDispatch();
   const { data, loading } = useSelector((state) => state.getTrip);
 
-  const firstPageIndex = (currentPage - 1) * PageSize;
+  const firstPageIndex = currentPage > 0 ? (currentPage - 1) * PageSize : 0;
   const lastPageIndex = firstPageIndex + PageSize;
   useEffect(() => {
     dispatch(getTrip("amenity"));
@@ -34,7 +34,7 @@ const AmenitiesTable = () => {
       data.data &&
       data.data.slice(firstPageIndex, lastPageIndex).length === 0
     ) {
-      setCurrentPage((prev) => prev - 1);
+      setCurrentPage((prev) => (prev > 1 ? prev - 1 : 1));
     }
   }, [data]);
 
@@ -61,49 +61,64 @@ const AmenitiesTable = () => {
                 </div>
               </div>
             </div>
-            {data && data.data.length !== 0 ? (
+            <div className="flex flex-col justify-between">
               <div>
-                {data &&
-                  data?.data &&
-                  data?.data
-                    .slice(firstPageIndex, lastPageIndex)
-                    .map((item, index) => {
-                      return (
-                        <div
-                          className={
-                            " tr-class flex flex-col md:grid md:grid-cols-3 text-start border-[2px] p-5 md:border-none mb-5 " +
-                            (index % 2 == 0 ? " bg-[#F5F9FF]" : "")
-                          }
-                          key={index}
-                        >
-                          <div className="td-class font-bold w-100 flex flex-col md:flex-row md:columns-2 md:gap-3 items-center m-3 order-2 md:order-1">
-                            <img
-                              src={item.icon}
-                              alt=""
-                              className="h-[62px] img-filter w-[62px] mr-3"
-                            />
-                            <span className="">{item.title}</span>
-                          </div>
-                          <p className="td-class order-3 md:order-2 text-center md:text-start justify-center my-auto md:items-center w-100">
-                            {item.description}
-                          </p>
-                          <div className="text-center order-1 md:order-3 flex items-center justify-end md:justify-center">
-                            <DotMenu
-                              updateData={item}
-                              showDelPop={showDelPop}
-                              setShowDelPop={setShowDelPop}
-                              showUpdatePop={showUpdatePop}
-                              setShowUpdatePop={setShowUpdatePop}
-                              setEditData={setEditData}
-                            />
-                          </div>
-                        </div>
-                      );
-                    })}
+                {data && data.data.length !== 0 ? (
+                  <div>
+                    {data &&
+                      data?.data &&
+                      data?.data
+                        .slice(firstPageIndex, lastPageIndex)
+                        .map((item, index) => {
+                          return (
+                            <div
+                              className={
+                                " tr-class flex flex-col md:grid md:grid-cols-3 text-start border-[2px] px-5 md:h-[7rem] md:border-none p-6 mb-6 md:mb-0" +
+                                (index % 2 == 0 ? " bg-[#F5F9FF]" : "")
+                              }
+                              key={index}
+                            >
+                              <div className="td-class font-bold w-100 flex flex-col md:flex-row md:columns-2 md:gap-3 items-center m-3 order-2 md:order-1">
+                                <img
+                                  src={item.icon}
+                                  alt=""
+                                  className="h-[62px] img-filter w-[62px] mr-3"
+                                />
+                                <span className="">{item.title}</span>
+                              </div>
+                              <p className="td-class line-clamp-3 order-3 md:order-2 text-center md:text-start justify-center my-auto md:items-center w-100">
+                                {item.description}
+                              </p>
+                              <div className="text-center order-1 md:order-3 flex items-center justify-end md:justify-center">
+                                <DotMenu
+                                  updateData={item}
+                                  showDelPop={showDelPop}
+                                  setShowDelPop={setShowDelPop}
+                                  showUpdatePop={showUpdatePop}
+                                  setShowUpdatePop={setShowUpdatePop}
+                                  setEditData={setEditData}
+                                />
+                              </div>
+                            </div>
+                          );
+                        })}
+                  </div>
+                ) : (
+                  <Nodata name="amenities" />
+                )}
               </div>
-            ) : (
-              <Nodata name="amenities" />
-            )}
+              <div className="md:absolute md:bottom-16">
+                {data && (
+                  <Pagination
+                    className="pagination-bar flex justify-end"
+                    currentPage={currentPage}
+                    totalCount={data && data?.data.length}
+                    pageSize={PageSize}
+                    onPageChange={(page) => setCurrentPage(page)}
+                  />
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -137,13 +152,6 @@ const AmenitiesTable = () => {
           feature="amenity"
         />
       )}
-      <Pagination
-        className="pagination-bar flex justify-end"
-        currentPage={currentPage}
-        totalCount={data && data?.data.length}
-        pageSize={PageSize}
-        onPageChange={(page) => setCurrentPage(page)}
-      />
     </>
   );
 };

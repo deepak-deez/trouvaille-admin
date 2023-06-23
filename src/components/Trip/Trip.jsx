@@ -22,7 +22,7 @@ const Trip = () => {
   const dispatch = useDispatch();
 
   const { data, loading } = useSelector((state) => state.getTrip);
-  const firstPageIndex = (currentPage - 1) * PageSize;
+  const firstPageIndex = currentPage > 0 ? (currentPage - 1) * PageSize : 0;
   const lastPageIndex = firstPageIndex + PageSize;
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const Trip = () => {
       data.data &&
       data.data.slice(firstPageIndex, lastPageIndex).length === 0
     ) {
-      setCurrentPage((prev) => prev - 1);
+      setCurrentPage((prev) => (prev > 1 ? prev - 1 : 1));
     }
   }, [data]);
 
@@ -54,50 +54,65 @@ const Trip = () => {
             <i className=" ml-2 red-dot fa-solid fa-circle-plus"></i>
           </button>
         </div>
-        {data && data.data.length !== 0 ? (
-          <div className="grid sm:grid-cols-2 2xl:grid-cols-4">
-            {/* Change The Classname to "trips-grid-container" to display the grids auto flow */}
-            {data &&
-              data?.data &&
-              data.data
-                .slice(firstPageIndex, lastPageIndex)
-                .map((val, index) => {
-                  return (
-                    <div className="p-5 gap-4" key={index}>
-                      <div className="p-8 flex flex-col gap-5 bg-white h-[100%] text-center rounded shadow-md">
-                        <div className="flex justify-end">
-                          <div>
-                            <DotMenu
-                              updateData={val}
-                              showDelPop={showDelPop}
-                              setShowDelPop={setShowDelPop}
-                              showUpdatePop={showUpdatePop}
-                              setShowUpdatePop={setShowUpdatePop}
-                              setEditData={setEditData}
-                            />
+        <div className=" flex flex-col justify-between">
+          <div>
+            {data && data.data.length !== 0 ? (
+              <div className="grid sm:grid-cols-2 md:grid-cols-4">
+                {data &&
+                  data?.data &&
+                  data.data
+                    .toReversed()
+                    .slice(firstPageIndex, lastPageIndex)
+                    .map((val, index) => {
+                      return (
+                        <div className="px-5 py-2 gap-2" key={index}>
+                          <div className="px-4 py-3 flex flex-col gap-5 bg-white h-full min-h-[15rem] text-center rounded shadow-md">
+                            <div className="flex justify-end">
+                              <div>
+                                <DotMenu
+                                  updateData={val}
+                                  showDelPop={showDelPop}
+                                  setShowDelPop={setShowDelPop}
+                                  showUpdatePop={showUpdatePop}
+                                  setShowUpdatePop={setShowUpdatePop}
+                                  setEditData={setEditData}
+                                />
+                              </div>
+                            </div>
+                            <div className="flex justify-center">
+                              <img
+                                src={val.icon}
+                                alt=""
+                                className="h-10 img-filter"
+                              />
+                            </div>
+                            <h3 className="text-center font-semibold">
+                              {val.title}
+                            </h3>
+                            <p className="text-gray-600 w-full  line-clamp-4 hover:overflow-scroll">
+                              {val.description}
+                            </p>
                           </div>
                         </div>
-                        <div className="flex justify-center">
-                          <img
-                            src={val.icon}
-                            alt=""
-                            className="h-10 img-filter"
-                          />
-                        </div>
-                        <h3 className="text-center font-semibold">
-                          {val.title}
-                        </h3>
-                        <p className="text-gray-600 w-full  line-clamp-4">
-                          {val.description}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
+                      );
+                    })}
+              </div>
+            ) : (
+              <Nodata name="category" />
+            )}
           </div>
-        ) : (
-          <Nodata name="category" />
-        )}
+          <div className="md:absolute md:bottom-16 ">
+            {data && (
+              <Pagination
+                className="pagination-bar flex justify-end"
+                currentPage={currentPage}
+                totalCount={data && data?.data.length}
+                pageSize={PageSize}
+                onPageChange={(page) => setCurrentPage(page)}
+              />
+            )}
+          </div>
+        </div>
       </div>
       {showAdd && (
         <AddNewPop
@@ -129,13 +144,6 @@ const Trip = () => {
           feature="category"
         />
       )}
-      <Pagination
-        className="pagination-bar flex justify-end"
-        currentPage={currentPage}
-        totalCount={data && data?.data.length}
-        pageSize={PageSize}
-        onPageChange={(page) => setCurrentPage(page)}
-      />
     </>
   );
 };

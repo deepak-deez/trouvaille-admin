@@ -57,10 +57,8 @@ const ResetPassword = () => {
     try {
       if (strongRegexPassword.test(password.current.value)) {
         setPwdError(false);
-        console.log(pwdError);
         document.getElementById("validPassword").textContent =
           "Password Strength : Strong!";
-        // throw new Error("Password Strength : Strong!");
       } else {
         if (mediumRegexPassword.test(password.current.value)) {
           setPwdError(true);

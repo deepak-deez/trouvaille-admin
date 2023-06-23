@@ -1,6 +1,5 @@
 import { React, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { getTrip } from "../../redux/actions/tripAction";
 import { getBookingNote } from "../../redux/actions/bookingActions";
 import LoadingScreen from "../Loading/LoadingScreen";
 import Pagination from "../Pagination/Pagination";
@@ -23,20 +22,19 @@ const BookingNote = () => {
 
   const { data, loading } = useSelector((state) => state.getBookingNote);
 
-  const firstPageIndex = (currentPage - 1) * PageSize;
+  const firstPageIndex = currentPage > 0 ? (currentPage - 1) * PageSize : 0;
   const lastPageIndex = firstPageIndex + PageSize;
 
   useEffect(() => {
     dispatch(getBookingNote());
   }, []);
-  console.log(data);
   useEffect(() => {
     if (
       data &&
       data.data &&
       data.data.slice(firstPageIndex, lastPageIndex).length === 0
     ) {
-      setCurrentPage((prev) => prev - 1);
+      setCurrentPage((prev) => (prev > 1 ? prev - 1 : 1));
     }
   }, [data]);
 
@@ -55,45 +53,61 @@ const BookingNote = () => {
             <i className=" ml-2 red-dot fa-solid fa-circle-plus"></i>
           </button>
         </div>
-        {data && data.data.length !== 0 ? (
-          <div className="grid lg:grid-cols-4 sm:grid-cols-2">
-            {data &&
-              data?.data &&
-              data.data
-                .slice(firstPageIndex, lastPageIndex)
-                .map((item, index) => {
-                  return (
-                    <div className="w-full p-5 gap-4" key={index}>
-                      <div className="p-4 bg-white h-[100%] text-center rounded shadow-md">
-                        <div className="flex justify-end">
-                          <div>
-                            <BookingNoteMenu
-                              updateData={item}
-                              showBookingNoteDelPop={showBookingNoteDelPop}
-                              setShowBookingNoteDelPop={
-                                setShowBookingNoteDelPop
-                              }
-                              showBookingNoteUpdatePop={
-                                showBookingNoteUpdatePop
-                              }
-                              setShowBookingNoteUpdatePop={
-                                setShowBookingNoteUpdatePop
-                              }
-                              setEditData={setEditData}
-                            />
+        <div className="flex flex-col justify-between">
+          <div>
+            {data && data.data.length !== 0 ? (
+              <div className="grid lg:grid-cols-4 sm:grid-cols-2">
+                {data &&
+                  data?.data &&
+                  data.data
+                    .toReversed()
+                    .slice(firstPageIndex, lastPageIndex)
+                    .map((item, index) => {
+                      return (
+                        <div className="w-full p-5 gap-4" key={index}>
+                          <div className="p-4 bg-white h-[10rem] text-center rounded shadow-md">
+                            <div className="flex justify-end">
+                              <div>
+                                <BookingNoteMenu
+                                  updateData={item}
+                                  showBookingNoteDelPop={showBookingNoteDelPop}
+                                  setShowBookingNoteDelPop={
+                                    setShowBookingNoteDelPop
+                                  }
+                                  showBookingNoteUpdatePop={
+                                    showBookingNoteUpdatePop
+                                  }
+                                  setShowBookingNoteUpdatePop={
+                                    setShowBookingNoteUpdatePop
+                                  }
+                                  setEditData={setEditData}
+                                />
+                              </div>
+                            </div>
+                            <p className="text-gray-600 w-full line-clamp-4 ">
+                              {item.note}
+                            </p>
                           </div>
                         </div>
-                        <p className="text-gray-600 w-full line-clamp-4 ">
-                          {item.note}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
+                      );
+                    })}
+              </div>
+            ) : (
+              <Nodata name="Booking Note" />
+            )}
           </div>
-        ) : (
-          <Nodata name="Booking Note" />
-        )}
+          <div className="md:absolute md:bottom-16">
+            {data && (
+              <Pagination
+                className="pagination-bar flex justify-end"
+                currentPage={currentPage}
+                totalCount={data && data?.data.length}
+                pageSize={PageSize}
+                onPageChange={(page) => setCurrentPage(page)}
+              />
+            )}
+          </div>
+        </div>
       </div>
       {showNote && (
         <AddBookingNotePop
@@ -119,13 +133,6 @@ const BookingNote = () => {
           updateData={editData}
         />
       )}
-      <Pagination
-        className="pagination-bar flex justify-end"
-        currentPage={currentPage}
-        totalCount={data && data?.data.length}
-        pageSize={PageSize}
-        onPageChange={(page) => setCurrentPage(page)}
-      />
     </>
   );
 };

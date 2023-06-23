@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import getNumberOfDays from "../../functions/noOfDates";
 import dateRange from "../../functions/dateRange";
 import convertDate from "../../functions/monthFormat";
 
@@ -17,7 +16,6 @@ const MultipleDateInputs = ({
   const newStartdate = convertDate(startDate);
   const newEnddate = convertDate(endDate);
 
-  // let diff = getNumberOfDays(newStartdate, newEnddate);
   useEffect(() => {
     setArrayDate([...dateRange(newStartdate, newEnddate)]);
     setCounter(1);

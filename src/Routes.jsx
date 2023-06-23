@@ -19,10 +19,13 @@ import ForgotPassword from "./pages/AdminForgotPassword/AdminForgotPassword.jsx"
 import ResetPassword from "./pages/AdminResetPassword/AdminResetPassword.jsx";
 import Signup from "./pages/AdminSignUp/AdminSignUp.jsx";
 import BookingNotesPage from "./pages/BookingNotesPage/BookingNotesPage";
+import { CheckUrlPath } from "./functions/pathChecker";
 
 const Router = () => {
   return (
     <BrowserRouter>
+      {/* <div className="flex"> */}
+      {/* <CheckUrlPath /> */}
       <Routes>
         <Route exact path="/" element={<AdminLogin />} />
         <Route exact path="/dashboard" element={<Dashboard />} />
@@ -55,6 +58,7 @@ const Router = () => {
         />
         <Route exact path="*" element={<PageError />} />
       </Routes>
+      {/* </div> */}
     </BrowserRouter>
   );
 };
