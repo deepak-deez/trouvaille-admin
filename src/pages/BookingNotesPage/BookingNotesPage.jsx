@@ -18,8 +18,10 @@ const BookingNotesPage = () => {
       <Sidebar />
       <div className="w-full bg-[#f5f7f7] h-screen overflow-auto md:pb-16">
         <Navbar heading="Booking Notes" />
-        <BookingNote />
-        <Footer />
+        <div className="flex flex-col h-screen justify-between">
+          <BookingNote />
+          <Footer />
+        </div>
       </div>
     </div>
   );

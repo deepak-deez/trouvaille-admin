@@ -46,7 +46,7 @@ const User = () => {
     <>
       {/* <LoadingScreen /> */}
       {loading && <LoadingScreen />}
-      <div className="p-3 h-full md:h-auto">
+      <div className="p-3 mb-15">
         <div className="p-4 bg-white item-center w-full overflow-x-scroll border-b-2">
           <div className="w-full">
             <div>
@@ -135,6 +135,15 @@ const User = () => {
             </div>
           </div>
         </div>
+        {data && (
+          <Pagination
+            className="pagination-bar"
+            currentPage={currentPage}
+            totalCount={data && data?.data.length}
+            pageSize={PageSize}
+            onPageChange={(page) => setCurrentPage(page)}
+          />
+        )}
       </div>
       {addPop && <AddNewUser setAddPop={setAddPop} addPop={addPop} />}
       {editPop && (
@@ -142,15 +151,6 @@ const User = () => {
       )}
       {delPop && (
         <DeleteUser delPop={delPop} setDelPop={setDelPop} data={editable} />
-      )}
-      {data && (
-        <Pagination
-          className="pagination-bar"
-          currentPage={currentPage}
-          totalCount={data && data?.data.length}
-          pageSize={PageSize}
-          onPageChange={(page) => setCurrentPage(page)}
-        />
       )}
     </>
   );
