@@ -10,6 +10,8 @@ import {
 import LoadingScreen from "../Loading/LoadingScreen";
 import store from "../../redux/store";
 import AlertComponent from "../Alerts/AlertComponent";
+import socketIOClient from "socket.io-client";
+import { CleanHands } from "@mui/icons-material";
 
 const CancelDialog = (props) => {
   const {
@@ -18,6 +20,7 @@ const CancelDialog = (props) => {
     loading,
   } = useSelector((state) => state.deleteBooking);
 
+  const socket = socketIOClient(process.env.REACT_APP_NODE_API);
   const storeData = store.getState();
   const { data: updatedBooking } = useSelector((state) => state.updateBooking);
   const { setCancelPopUp, id } = props;
@@ -41,6 +44,19 @@ const CancelDialog = (props) => {
   const handleClick = () => {
     if (userType === "Backend-user") {
       submitCancelRequest(reasonRef.current.value);
+
+      const notificationObj = {
+        userType: "Backend-user",
+        description: "Cancellation Request",
+        reasonForCancellation: reasonRef.current.value,
+        refId: id,
+        userId: updatedBooking?.data?.data?.userId,
+        createdAt: new Date(),
+        readStatus: false,
+        title: updatedBooking?.data?.data?.title,
+      };
+
+      socket.emit("sendCancellationRequest", notificationObj);
     } else if (userType === "Admin") {
       handleResponse();
       props.setSubmitDelete(true);

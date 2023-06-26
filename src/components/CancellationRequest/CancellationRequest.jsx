@@ -6,24 +6,6 @@ import socketIOClient from "socket.io-client";
 const ENDPOINT = process.env.REACT_APP_NODE_API;
 
 const CancellationRequest = () => {
-  const requests = [
-    {
-      title: "Warsáw, Poland",
-      date: "April 15, 2023",
-      url: "https://www.google.com/",
-    },
-    {
-      title: "Giza, Egypt",
-      date: "July 19, 2023",
-      url: "https://www.google.com/",
-    },
-    {
-      title: "Venice, Italy",
-      date: "May 24, 2023",
-      url: "https://www.google.com/",
-    },
-  ];
-
   const [response, setResponse] = useState();
 
   const API = process.env.REACT_APP_NODE_API;
@@ -109,7 +91,7 @@ const CancellationRequest = () => {
                 cancel. Link:
                 <Link
                   to={
-                    "http://localhost:3000/booking-list/booking-details/" +
+                    "http://localhost:3001/booking-list/booking-details/" +
                     item._id
                   }
                   className=" text-blue-500 "

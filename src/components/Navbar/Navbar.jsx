@@ -19,21 +19,34 @@ const Navbar = ({ heading }) => {
   const refProfile = useRef(null);
   const refNotification = useRef(null);
   const [tripUpdatesNotis, setTripUpdatesNotis] = useState();
-  const [notisUnread, setNotisUnread] = useState([]);
+  const [tripCancellationNotis, setTripCancellationNotis] = useState();
+  const [notisUnread, setNotisUnread] = useState(0);
 
   const socket = socketIOClient(process.env.REACT_APP_NODE_API);
 
   useEffect(() => {
-    if (!tripUpdatesNotis) {
+    if (!tripUpdatesNotis || !tripCancellationNotis) {
       getBookingNotis();
     }
-    socket.on("getCurrentBooking", (res) => {
-      setTripUpdatesNotis(res);
-      setNotisUnread(
-        res?.data?.filter((data) => {
-          return data.readStatus === false;
-        })
-      );
+
+    if (userDetails?.data?.userDetails?.userType === "Admin") {
+      socket.on("getCancellationRequest", (response) => {
+        setTripCancellationNotis(response);
+        tripCancellationNotis?.data?.map((data, index) => {
+          if (data?.readStatus === false) {
+            setNotisUnread(notisUnread + 1);
+          }
+        });
+      });
+    }
+
+    socket.on("getCurrentBooking", (response) => {
+      setTripUpdatesNotis(response);
+      tripUpdatesNotis?.data?.map((data, index) => {
+        if (data?.readStatus === false) {
+          setNotisUnread(notisUnread + 1);
+        }
+      });
     });
   }, [socket]);
 
@@ -43,16 +56,29 @@ const Navbar = ({ heading }) => {
       const response = await axios.get(bookingNotisUrl);
       setTripUpdatesNotis(response?.data);
 
-      setNotisUnread(
-        response?.data?.data?.filter((data) => {
-          return data.readStatus === false;
-        })
-      );
+      tripUpdatesNotis?.data?.map((data, index) => {
+        if (data?.readStatus === false) {
+          setNotisUnread(notisUnread + 1);
+        }
+      });
+    } catch (err) {
+      console.log(err);
+    }
+
+    const cancelBookingNotisUrl = `${process.env.REACT_APP_NODE_API}/get-booking-notifications/Backend-user`;
+    try {
+      const response = await axios.get(cancelBookingNotisUrl);
+      setTripCancellationNotis(response?.data);
+
+      tripCancellationNotis?.data?.map((data, index) => {
+        if (data?.readStatus === false) {
+          setNotisUnread(notisUnread + 1);
+        }
+      });
     } catch (err) {
       console.log(err);
     }
   };
-
   useEffect(() => {
     document.addEventListener("click", hideOnClickOutsideProfile, true);
     document.addEventListener("click", hideOnClickOutsideNotification, true);
@@ -85,7 +111,7 @@ const Navbar = ({ heading }) => {
             }}
           />
           <p className="absolute top-3 right-[9.2rem] w-6 h-6 tex-xs bg-green-600 text-white text-xs text-center pt-1 rounded-full">
-            {notisUnread?.length}
+            {notisUnread}
           </p>
           {notificationPopup && (
             <NotificationPop
@@ -94,6 +120,7 @@ const Navbar = ({ heading }) => {
               tripUpdatesNotis={tripUpdatesNotis?.data}
               notisUnread={notisUnread}
               setNotisUnread={setNotisUnread}
+              tripCancellationNotis={tripCancellationNotis}
             />
           )}
         </div>

@@ -44,8 +44,6 @@ const CurrentBookingDetails = () => {
     dispatch(getSingleBooking(id));
   }, [id]);
 
-  console.log("Booking ID : ", data?.data.tripId);
-
   useEffect(() => {
     if (data && data.data) {
       setStatus({
@@ -104,10 +102,6 @@ const CurrentBookingDetails = () => {
     if (id && status.value) {
       dispatch(updateBookingStatus(id, status.value));
 
-      socket.on("connect", () => {
-        console.log(socket.id);
-      });
-
       const notificationObj = {
         userType: "User",
         title: "Trip Update",
@@ -119,8 +113,6 @@ const CurrentBookingDetails = () => {
       };
 
       socket.emit("sendStatusUpdate", notificationObj);
-
-      console.log("Emitted : ", notificationObj);
     }
   };
 
