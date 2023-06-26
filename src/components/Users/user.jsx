@@ -108,10 +108,9 @@ const User = () => {
                           <div className="sm:hidden">
                             <EmailIcon />
                           </div>
-                          <p>
+                          <p className="flex">
                             <span className="sm:hidden ">:</span>
-                            <span className="text-ellipsis overflow-hidden">
-                              {" "}
+                            <span className="block w-[10rem] sm:w-full overflow-hidden truncate">
                               {val.email}
                             </span>
                           </p>
