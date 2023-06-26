@@ -92,13 +92,14 @@ const User = () => {
                         }
                         key={index}
                       >
-                        <div className="td-class font-bold flex justify-start gap-10  order-2 sm:order-1">
+                        <div className="td-class  flex justify-start gap-10  order-2 sm:order-1">
                           <div className="sm:hidden">
                             <PersonIcon />
                           </div>
                           <p>
                             <span className="sm:hidden">:</span>
-                            <span className=" text-ellipsis overflow-hidden">
+                            <span className=" text-ellipsis font-bold overflow-hidden">
+                              {" "}
                               {val.userName}
                             </span>
                           </p>
@@ -110,7 +111,7 @@ const User = () => {
                           <p>
                             <span className="sm:hidden ">:</span>
                             <span className="text-ellipsis overflow-hidden">
-                              {/* {" "} */}
+                              {" "}
                               {val.email}
                             </span>
                           </p>
@@ -121,7 +122,7 @@ const User = () => {
                           </div>
                           <p>
                             <span className="sm:hidden">:</span>
-                            <span className=" text-ellipsis overflow-hidden"></span>
+                            <span className=" text-ellipsis overflow-hidden"></span>{" "}
                             {val.phone}
                           </p>
                         </div>
