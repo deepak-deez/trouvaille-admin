@@ -5,12 +5,16 @@ import AlertComponent from "../Alerts/AlertComponent";
 
 const EditUser = ({ editPop, setEditPop, data }) => {
   const { data: updatedUser, error } = useSelector((state) => state.updateUser);
-  const [name, setName] = useState(data.userName);
-  const [email, setEmail] = useState(data.email);
-  const [phone, setPhone] = useState(data.phone);
+  const [name, setName] = useState(
+    data.userName || data.data.userDetails.userName
+  );
+  const [email, setEmail] = useState(data.email || data.data.userDetails.email);
+  const [phone, setPhone] = useState(data.phone || data.data.userDetails.phone);
   const [errorText, setErrorText] = useState(null);
 
-  const id = data._id;
+  console.log(data);
+
+  const id = data._id || data.data.userDetails._id;
   const dispatch = useDispatch();
 
   const updateHandler = () => {
