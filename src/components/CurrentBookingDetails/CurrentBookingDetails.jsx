@@ -60,8 +60,17 @@ const CurrentBookingDetails = () => {
   const userType = storeData.userLogin.userDetails.data.userDetails.userType;
 
   const denyReq = async () => {
-    dispatch(updateBooking(id, "false", "", "Pending", "", "false"));
-
+    dispatch(updateBooking(id, "false", "Pending", "false"));
+    if (userType === "Backend-user") {
+      const updateDeleteRequest = `${process.env.REACT_APP_NODE_API}/read-notification/${id}`;
+      console.log(updateDeleteRequest);
+      try {
+        const response = await axios.get(updateDeleteRequest);
+        console.log(response);
+      } catch (err) {
+        console.log(err);
+      }
+    }
     setDeny(!deny);
     Swal.fire({
       position: "top",

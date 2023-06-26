@@ -54,6 +54,7 @@ const CancelDialog = (props) => {
         createdAt: new Date(),
         readStatus: false,
         title: updatedBooking?.data?.data?.title,
+        deleteStatus: false,
       };
 
       socket.emit("sendCancellationRequest", notificationObj);
