@@ -78,7 +78,7 @@ const TripList = () => {
               <p className="p-3 hidden md:block">Duration</p>
               <p className="p-3 hidden md:block"> Price</p>
               <p className="p-3 hidden md:block">Discounted Price</p>
-              <div className="flex items-center justify-center">
+              <div className="flex items-center w-full justify-center">
                 <button
                   className="text-[#E75C54]"
                   onClick={() => {
@@ -86,7 +86,7 @@ const TripList = () => {
                   }}
                 >
                   <span>Add New Trip</span>
-                  <i className=" red-dot fa-solid fa-circle-plus"></i>
+                  <i className=" ml-1 red-dot fa-solid fa-circle-plus"></i>
                 </button>
               </div>
             </div>
@@ -113,7 +113,7 @@ const TripList = () => {
                                   src={val.image}
                                   alt="logo"
                                 />
-                                <p className="my-auto text-center md:text-start">
+                                <p className="my-auto text-center w-full truncate p-3  md:text-start">
                                   {val.title}
                                 </p>
                               </div>

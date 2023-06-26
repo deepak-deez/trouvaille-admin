@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addPackage } from "../../redux/actions/addPackageActions";
-import tempIcon from "../../assets/images/trip-list/AddNewTrip-icon.svg";
+import tempIcon from "../../assets/images/trip-list/imgplaceholders.jpeg";
 import MultipleTripForm from "../MultipleTripForm/MultipleTripForm";
 import TagsInput from "../TagsInput/TagsInput";
 import SelectMenu from "../SelectMenu/SelectMenu";
@@ -197,12 +197,16 @@ const NewTripForm = () => {
         <div className="md:w-1/3 bg-[#f5f7f7] rounded-lg m-4 p-4 h-[50%] mx-auto">
           <div className="flex justify-center">
             {file ? (
-              <img src={file} alt="browserIcon" />
+              <img
+                src={file}
+                className="h-[10rem] lg:h-auto"
+                alt="browserIcon"
+              />
             ) : (
               <img src={tempIcon} alt="browserIcon" />
             )}
           </div>
-          <div className=" flex justify-center">
+          <div className=" flex justify-center mt-2">
             <div className="relative">
               <button className="border-2 border-red-500 px-2 rounded-md text-red-500">
                 Browse
@@ -233,7 +237,8 @@ const NewTripForm = () => {
             <h2 className="text-start font-bold">
               Trip Duration & Day Activities
             </h2>
-            <label className=" text-gray-400">Duration</label>
+            <label className=" text-gray-400">Duration (select dates) </label>
+
             <DateRangeComp
               duration={duration}
               setDuration={setDuration}

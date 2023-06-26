@@ -84,9 +84,11 @@ const Occasion = () => {
                                   alt=""
                                   className="h-[62px] img-filter w-[62px] mr-3"
                                 />
-                                <span className="px-2">{item.title}</span>
+                                <span className="px-2 w-full truncate ">
+                                  {item.title}
+                                </span>
                               </div>
-                              <p className="td-class line-clamp-3 order-3 md:order-2 text-center md:text-start justify-center my-auto ">
+                              <p className="td-class line-clamp-3 order-3 hover:overflow-scroll md:order-2 text-center md:text-start justify-center my-auto ">
                                 {item.description}
                               </p>
                               <div className="text-end order-1 md:order-3 flex items-center md:justify-center justify-end">

@@ -20,7 +20,9 @@ const EditUser = ({ editPop, setEditPop, data }) => {
   const dispatch = useDispatch();
 
   const updateHandler = () => {
-    if (email || phone || name) {
+    if (name === "") {
+      AlertComponent("warning", "", "Name Can't be Empty");
+    } else if (email || phone || name) {
       dispatch(updateUser(id, name, email, phone, "Backend-user"));
     }
   };
@@ -80,7 +82,7 @@ const EditUser = ({ editPop, setEditPop, data }) => {
         <form className="flex flex-col ">
           <label className="text-sm font-light py-2">Name</label>
           <input
-            className="border-2 p-2"
+            className="border-2  p-2"
             type="text"
             value={name}
             onChange={(e) => {
@@ -95,6 +97,7 @@ const EditUser = ({ editPop, setEditPop, data }) => {
             onChange={(e) => {
               setEmail(e.target.value);
             }}
+            disabled
           />
           <label className="text-sm py-2 font-light">Phone Number</label>
           <input
@@ -106,10 +109,12 @@ const EditUser = ({ editPop, setEditPop, data }) => {
             onChange={(e) => {
               let phoneVal = e.target.value;
               setPhone(phoneVal);
-              if (phoneVal.length > 10) {
+              if (phoneVal.length < 10) {
                 setErrorText("Enter Valid Number");
               } else if (phoneVal.length === 10) {
                 setErrorText("Valid Number");
+              } else if (phoneVal.length > 0) {
+                setErrorText("Only 10 Digit Accepted");
               }
             }}
           />

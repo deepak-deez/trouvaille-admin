@@ -98,8 +98,8 @@ const User = () => {
                           <div className="sm:hidden">
                             <PersonIcon />
                           </div>
-                          <p>
-                            <span className="sm:hidden mr-10">:</span>
+                          <p className="overflow-hidden truncate">
+                            <span className="sm:hidden mr-10 ">:</span>
                             {val.userName}
                           </p>
                         </div>

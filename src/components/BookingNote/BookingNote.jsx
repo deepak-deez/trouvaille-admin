@@ -84,7 +84,7 @@ const BookingNote = () => {
                                 />
                               </div>
                             </div>
-                            <p className="text-gray-600 w-full line-clamp-4 ">
+                            <p className="text-gray-600 hover:overflow-scroll w-full line-clamp-4 ">
                               {item.note}
                             </p>
                           </div>

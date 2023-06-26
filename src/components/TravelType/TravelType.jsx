@@ -85,10 +85,10 @@ const TravelType = () => {
                             <div className="flex justify-center py-2">
                               <img src={icon} alt="" className="h-10" />
                             </div>
-                            <h3 className="text-center font-semibold py-2">
+                            <h3 className="text-center w-full truncate font-semibold py-2">
                               {item.title}
                             </h3>
-                            <p className="text-gray-600 w-full line-clamp-4 ">
+                            <p className="text-gray-600 w-full hover:overflow-scroll line-clamp-4 ">
                               {item.description}
                             </p>
                           </div>
