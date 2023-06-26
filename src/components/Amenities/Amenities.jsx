@@ -42,7 +42,7 @@ const AmenitiesTable = () => {
     <>
       {loading && <LoadingScreen />}
       <div className="p-3 ">
-        <div className="p-4 bg-white item-center w-full overflow-x-scroll border-b-2">
+        <div className="p-4 bg-white item-center w-full border-b-2">
           <div className="w-[100%]">
             <div>
               <div className="tr-class md:grid md:grid-cols-3 flex text-[#8383A9] items-center text-center justify-center">

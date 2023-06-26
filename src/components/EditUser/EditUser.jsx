@@ -2,13 +2,19 @@ import { React, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser, getUser } from "../../redux/actions/addUserAction";
 import AlertComponent from "../Alerts/AlertComponent";
+import store from "../../redux/store";
+import { useNavigate } from "react-router-dom";
 
 const EditUser = ({ editPop, setEditPop, data }) => {
   const { data: updatedUser, error } = useSelector((state) => state.updateUser);
+  let { userDetails } = useSelector((state) => state.userLogin);
+  const storeData = store.getState();
+  const userType = storeData.userLogin.userDetails?.data.userDetails.userType;
   const [name, setName] = useState(data.userName);
   const [email, setEmail] = useState(data.email);
   const [phone, setPhone] = useState(data.phone);
   const [errorText, setErrorText] = useState(null);
+  const navigate = useNavigate();
 
   const id = data._id;
   const dispatch = useDispatch();
@@ -29,6 +35,20 @@ const EditUser = ({ editPop, setEditPop, data }) => {
     } else if (updatedUser?.success === false) {
       AlertComponent("failed", updatedUser);
       dispatch({ type: "UPDATE_USER_SUCCESS", payload: null });
+    }
+  }, [updatedUser]);
+
+  let newUserData = { ...userDetails };
+  useEffect(() => {
+    console.log(userType === "Backend-user" && updatedUser?.success);
+    if (userType === "Backend-user" && updatedUser?.success) {
+      const updatedDetails = updatedUser?.data?.adminDetails;
+      newUserData.data.userDetails.email = updatedDetails.email;
+      newUserData.data.userDetails.phone = updatedDetails.phone;
+      newUserData.data.userDetails.userName = updatedDetails.userName;
+      userDetails = { ...newUserData };
+      localStorage.setItem("userDetails", JSON.stringify(userDetails));
+      navigate("/dashboard");
     }
   }, [updatedUser]);
 
@@ -79,9 +99,10 @@ const EditUser = ({ editPop, setEditPop, data }) => {
           <label className="text-sm py-2 font-light">Phone Number</label>
           <input
             className="border-2 p-2"
-            type="text"
+            type="number"
             value={phone}
-            maxLength={10}
+            // maxLength={10}
+            max={10}
             onChange={(e) => {
               let phoneVal = e.target.value;
               setPhone(phoneVal);

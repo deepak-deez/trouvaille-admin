@@ -23,6 +23,7 @@ const User = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [editable, setEditable] = useState("");
   const dispatch = useDispatch();
+  const { userDetails } = useSelector((state) => state.userLogin);
   const { data, loading } = useSelector((state) => state.getUser);
   const firstPageIndex = currentPage > 0 ? (currentPage - 1) * PageSize : 0;
   const lastPageIndex = firstPageIndex + PageSize;
@@ -33,20 +34,14 @@ const User = () => {
     dispatch(getUser("Backend-user"));
   }, []);
 
-
-
   useEffect(() => {
-    console.log(data);
     if (
       data &&
       data.data &&
       data.data.slice(firstPageIndex, lastPageIndex).length === 0
     ) {
-      console.log(data);
-      setCurrentPage((prev) => (prev > 1 ? prev - 1 : 1));
     }
   }, [data]);
-  console.log(lastPageIndex, firstPageIndex, currentPage);
   return (
     <>
       {/* <LoadingScreen /> */}
@@ -56,15 +51,13 @@ const User = () => {
           <div className="w-full">
             <div>
               <div
-                className={`tr-class sm:grid items-center text-[#8383A9] ${
-                  userType == "Admin" ? "sm:grid-cols-4" : "sm:grid-cols-3"
-                }  gap-2 px-5`}
+                className={`tr-class sm:grid items-center text-[#8383A9] sm:grid-cols-4  gap-2 px-5`}
               >
                 <p className="pr-3 hidden sm:block ">User Name</p>
                 <p className="p-3 hidden sm:block">Email Address</p>
                 <p className="p-3 hidden sm:block">Phone Number</p>
                 <div
-                  className={`p-3 text-[#E75C54 flex items-center justify-center ${
+                  className={`p-3 text-[#E75C54] flex items-center justify-center ${
                     userType == "Admin" ? "flex" : "hidden"
                   }`}
                 >
@@ -85,16 +78,17 @@ const User = () => {
               {data && data.data.length != 0 ? (
                 data &&
                 data.data
-                  // .toReversed()
+                  .toReversed()
                   .slice(firstPageIndex, lastPageIndex)
                   .map((val, index) => {
                     return (
                       <div
                         className={
                           `sm:grid items-start  ${
-                            userType == "Admin"
-                              ? "sm:grid-cols-4"
-                              : "sm:grid-cols-3"
+                            // userType == "Admin"
+                            // ?
+                            "sm:grid-cols-4"
+                            // : "sm:grid-cols-3"
                           } flex flex-col gap-2 sm:py-4 tr-class px-5 ` +
                           (index % 2 == 0 ? " bg-[#F5F9FF]" : "")
                         }
@@ -127,15 +121,19 @@ const User = () => {
                             {val.phone}
                           </p>
                         </div>
-                        <div className="flex ms-2 w-full justify-end sm:justify-center order-1 sm:order-4">
-                          <Menu
-                            editPop={editPop}
-                            setEditPop={setEditPop}
-                            setEditable={setEditable}
-                            data={val}
-                            delPop={delPop}
-                            setDelPop={setDelPop}
-                          />
+                        <div className="flex ms-2 w-full justify-end sm:justify-center order-1 sm:order-4 ">
+                          {((userType === "Backend-user" &&
+                            val._id === userDetails.data.userDetails._id) ||
+                            userType === "Admin") && (
+                            <Menu
+                              editPop={editPop}
+                              setEditPop={setEditPop}
+                              setEditable={setEditable}
+                              data={val}
+                              delPop={delPop}
+                              setDelPop={setDelPop}
+                            />
+                          )}
                         </div>
                       </div>
                     );

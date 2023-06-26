@@ -3,29 +3,31 @@ import delIcon from "../../assets/images/user/delete.svg";
 import editIcon from "../../assets/images/user/edit-icon.svg";
 import store from "../../redux/store";
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Menu = ({ setEditPop, setEditable, data, delPop, setDelPop }) => {
   const [menu, setMenu] = useState(false);
   const location = useLocation();
   const curretPageLocation = location.pathname;
   const storeData = store.getState();
+  const { userDetails } = useSelector((state) => state.userLogin);
   const userType = storeData.userLogin.userDetails.data.userDetails.userType;
-  const refDotMenu=useRef(null)
+  const refDotMenu = useRef(null);
 
-  const handleClickOutside=(e)=>{
-    if(refDotMenu.current && !refDotMenu.current.contains(e.target)){
-      setMenu(false)
+  const handleClickOutside = (e) => {
+    if (refDotMenu.current && !refDotMenu.current.contains(e.target)) {
+      setMenu(false);
     }
-  }
-  
-  useEffect(()=>{
-    document.addEventListener("click",handleClickOutside,"true")
-  },[])
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside, "true");
+  }, []);
 
   return (
     <div className="relative" ref={refDotMenu}>
       <button
-        className={`font-bold   ${userType == "Admin" ? "flex" : "hidden"} `}
+        className={`font-bold   `}
         onClick={() => {
           setMenu(!menu);
         }}
@@ -53,15 +55,19 @@ const Menu = ({ setEditPop, setEditable, data, delPop, setDelPop }) => {
           Edit
           <img className="" src={editIcon} alt="edit" />
         </button>
-        <button
-          className="flex justify-between items-center w-full"
-          onClick={() => {
-            setDelPop(!delPop);
-            setEditable(data);
-          }}
-        >
-          Delete <img className="" src={delIcon} alt="delete" />
-        </button>
+        {userType === "Backend-user" ? (
+          <></>
+        ) : (
+          <button
+            className="flex justify-between items-center w-full"
+            onClick={() => {
+              setDelPop(!delPop);
+              setEditable(data);
+            }}
+          >
+            Delete <img className="" src={delIcon} alt="delete" />
+          </button>
+        )}
       </div>
     </div>
   );

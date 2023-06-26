@@ -69,7 +69,7 @@ const TripList = () => {
     <>
       {loading && <LoadingScreen />}
       <div className="">
-        <div className="p-2 bg-white item-center w-full overflow-x-scroll border-b-2">
+        <div className="p-2 bg-white item-center w-full border-b-2">
           <div className="w-full">
             <div className="tr-class md:grid md:grid-cols-5 text-[#8383A9] text-center">
               <p className="pr-3 my-auto  hidden md:block text-start ml-10">

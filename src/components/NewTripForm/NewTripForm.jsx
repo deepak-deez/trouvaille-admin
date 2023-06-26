@@ -106,7 +106,15 @@ const NewTripForm = () => {
   const endDate = convertYearDate(`${dateMonthFromat[1]}`);
 
   const submitHandler = () => {
-    if (
+    if (maximumGuests >= 100) {
+      AlertComponent("warning", "", "Ops We have Max capacity of 100 Guests ");
+    } else if (discountedPrice > price) {
+      AlertComponent(
+        "warning",
+        "",
+        "Discounted Price can't be More than Original Price"
+      );
+    } else if (
       title &&
       image &&
       duration &&
@@ -117,6 +125,7 @@ const NewTripForm = () => {
       placeNumber &&
       maximumGuests &&
       inputFields &&
+      price &&
       discountedPrice &&
       occasions &&
       travelType &&
