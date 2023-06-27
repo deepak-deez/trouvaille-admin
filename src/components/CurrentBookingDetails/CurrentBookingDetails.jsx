@@ -120,7 +120,7 @@ const CurrentBookingDetails = () => {
     }
   }, [error]);
 
-  if (data?.data.cancellationStatus === "true")
+  if (data?.data?.cancellationStatus === "true")
     requestedForCancel.current = "true";
   else requestedForCancel.current = "false";
   if (loading) {
@@ -128,22 +128,23 @@ const CurrentBookingDetails = () => {
   } else if (data && data?.data)
     return (
       <>
-        <div className="flex-col flex md:flex-row w-full item-center py-5">
-          <div className="flex md:w-[50%] w-full p-2">
-            <div className="w-[100%] md:mx-4 md:mt-4 mx-2 my-2 flex items-center justify-center md:justify-start">
-              <img
-                className="object-cover w-[350px] h-[350px] sm:w-full md:w-full md:h-[400px] rounded-md"
-                src={data?.data.tripDetails?.image}
-                alt="img1"
-              />
+        <div className="sm:px-10 sm:pt-10">
+          <div className="flex-col bg-white flex md:flex-row w-full item-center py-5">
+            <div className="flex  md:w-[50%] w-full p-2">
+              <div className="w-[100%] md:mx-4 md:mt-4 mx-2 my-2 flex  justify-center md:justify-start">
+                <img
+                  className="object-cover w-[350px] h-[350px] sm:w-full md:w-full md:h-[400px] rounded-md"
+                  src={data?.data.tripDetails?.image}
+                  alt="img1"
+                />
+              </div>
             </div>
-          </div>
-          <div className="mx-2 md:w-[50%] self-center sm:w-full sm:self-start p-2 ">
-            <div className="flex justify-between items-center gap-3">
-              <p className="text-3xl  my-5 w-[50%]">{data.data.title}</p>
-              <div className="flex w-[50%]">
-                <Link
-                  className={`flex border px-3 py-2 rounded-md border-black me-5 font-bold
+            <div className="mx-2 md:w-[50%] self-center sm:w-full sm:self-start p-2 ">
+              <div className="flex justify-between items-center gap-3">
+                <p className="text-3xl  my-5 w-[50%]">{data.data.title}</p>
+                <div className="flex w-[50%]">
+                  <Link
+                    className={`flex border-2 shadow-md px-3 py-2 rounded-md border-[#7e827f] me-5 font-bold
                 ${
                   userType === "Backend-user"
                     ? requestedForCancel.current !== "true"
@@ -152,62 +153,77 @@ const CurrentBookingDetails = () => {
                     : "flex"
                 }
                 `}
-                  onClick={() => {
-                    setCancelPopUp(!cancelPopUp);
-                  }}
-                >
-                  {userType === "Admin" ? "Cancel" : "Request Cancellation"}
-                </Link>
-                <Link
-                  className={` justify-self-end border px-3 py-2 rounded-md border-black me-5 bg-red-600 text-white font-bold
+                    onClick={() => {
+                      setCancelPopUp(!cancelPopUp);
+                    }}
+                  >
+                    {userType === "Admin" ? "Cancel" : "Request Cancellation"}
+                  </Link>
+                  <Link
+                    className={` justify-self-end border px-3 py-2 rounded-md border-black me-5 bg-[#E55D54] text-white font-bold
                 ${requestedForCancel.current !== "true" ? "hidden" : "flex"}`}
-                  onClick={() => {
-                    denyReq();
-                  }}
-                >
-                  {userType === "Admin"
-                    ? "Deny Request"
-                    : "Delete Cancellation Request"}
-                </Link>
-              </div>
-            </div>
-            <div className="flex gap-2 ">
-              <div className="flex flex-col w-[50%] sm:text-md md:text-lg text-sm text-[#8E8D98] gap-5">
-                <span className="">Passenger name:</span>
-                <span className="">Other passengers:</span>
-                <ol>
-                  {data.data.otherPassenger.map((item, index) => {
-                    return (
-                      <li className=" text-black" key={index}>
-                        {index + 1}. {item.firstName} {item.lastName}
-                      </li>
-                    );
-                  })}
-                </ol>
-                <span className="">Email address:</span>
-                <span className="">Phone:</span>
-                <span className="">Address:</span>
-                <span className="">Status:</span>
+                    onClick={() => {
+                      denyReq();
+                    }}
+                  >
+                    {userType === "Admin" ? "Deny Request" : "Delete Request"}
+                  </Link>
+                </div>
               </div>
 
-              <div className="flex w-[50%] flex-col sm:text-md md:text-lg text-sm gap-5 ">
-                <p> {data.data.name}</p>
-                <p> {data.data.passengers}3</p>
-                <ul>
-                  {data.data.otherPassenger.map((item, index) => {
-                    return (
-                      <li className="flex gap-4" key={index}>
-                        <span className="font-light">Age:</span>
-                        <span> {item.age} </span>
-                        <span className="font-light">Sex:</span>
-                        <span> {item.gender}</span>
-                      </li>
-                    );
-                  })}
-                </ul>
-                <p className=" overflow-x-scroll">{data.data.email}</p>
-                <p>{data.data.phone}</p>
-                <p> {data.data.address}</p>
+              <div className="grid grid-cols-2 font-medium gap-6 ">
+                <span className="text-[#7e827f] font-light">
+                  Passenger name:
+                </span>
+                <p className="break-words"> {data.data.name}</p>
+                <span className="text-[#7e827f] font-light">
+                  Other passengers:
+                </span>
+                <p className="break-words">
+                  {" "}
+                  {data.data.otherPassenger.length}
+                </p>
+                <div className=" col-span-2 ">
+                  <ol className="list-decimal">
+                    {data.data.otherPassenger.map((item, index) => {
+                      return (
+                        <li
+                          className="grid grid-cols-2 my-3 gap-2 w-full break-words text-black"
+                          key={index}
+                        >
+                          <p className="">
+                            {index + 1}.{item.firstName} {item.lastName}
+                          </p>
+                          <div className="grid md:grid-cols-4 grid-cols-2 ">
+                            <p className=" font-light text-[#7e827f]">Age:</p>
+                            <p className="break-words"> {item.age} </p>
+                            <p className="font-light text-[#7e827f]">Sex:</p>
+                            <p className="break-words"> {item.gender}</p>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ol>
+                  <ul>
+                    {data.data.otherPassenger.map((item, index) => {
+                      return (
+                        <li className="flex flex-wrap gap-4" key={index}></li>
+                      );
+                    })}
+                  </ul>
+                </div>
+
+                <span className="text-[#7e827f] font-light">
+                  Email address:
+                </span>
+                <p className="break-words overflow-x-scroll">
+                  {data.data.email}
+                </p>
+                <span className="text-[#7e827f] font-light">Phone:</span>
+                <p className="break-words">{data.data.phone}</p>
+                <span className="text-[#7e827f] font-light">Address:</span>
+                <p className="break-words"> {data.data.address}</p>
+                <span className="text-[#7e827f] font-light">Status:</span>
                 <StatusMenu
                   value={status}
                   onChange={(e) => {
@@ -218,7 +234,7 @@ const CurrentBookingDetails = () => {
                   textPlaceholder="Status"
                 />
                 <button
-                  className={` bg-red-500 p-2 rounded-md text-white  ${
+                  className={`col-span-2 bg-[#E55D54] p-2 rounded-md text-white mb-10 ${
                     update ? "opacity-100" : "opacity-0"
                   }`}
                   disabled={!update}
@@ -228,15 +244,17 @@ const CurrentBookingDetails = () => {
                 >
                   Update Status
                 </button>
-              </div>
-            </div>
-
-            <div
-              className={`flex gap-2 border border-red-600 rounded-md py-5 px-3 mt-5
+                <div
+                  className={`max-h-[8rem] w-full col-span-2  mb-10 shadow-md  gap-2 border-2 border-[#E55D54] rounded-md py-5 px-3 mt-5
                ${requestedForCancel.current === "false" ? "hidden" : "flex"}`}
-            >
-              <span className=" ">Cancellation Reason: </span>{" "}
-              <span>{data.data.deleteReason}</span>
+                >
+                  <p className="break-words overflow-hidden hover:overflow-scroll">
+                    <span className="font-bold">Cancellation Reason: </span>
+                    <span>{data.data.deleteReason}</span>
+                  </p>
+                </div>
+                {/* </div> */}
+              </div>
             </div>
           </div>
         </div>

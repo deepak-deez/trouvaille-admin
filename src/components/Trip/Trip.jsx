@@ -51,7 +51,7 @@ const Trip = () => {
             }}
           >
             Add Category
-            <i className=" ml-2 red-dot fa-solid fa-circle-plus"></i>
+            <i className=" ms-2 red-dot fa-solid fa-circle-plus"></i>
           </button>
         </div>
         <div className=" flex flex-col justify-between">

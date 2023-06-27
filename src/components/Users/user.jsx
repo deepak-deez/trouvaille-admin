@@ -56,21 +56,25 @@ const User = () => {
                 <p className="pr-3 hidden sm:block ">User Name</p>
                 <p className="p-3 hidden sm:block">Email Address</p>
                 <p className="p-3 hidden sm:block">Phone Number</p>
-                <div
-                  className={`p-3 text-[#E75C54] flex items-center justify-center ${
-                    userType == "Admin" ? "flex" : "hidden"
-                  }`}
-                >
-                  <button
-                    className="flex items-center text-[#E75C54] "
-                    onClick={() => {
-                      setAddPop(!addPop);
-                    }}
+                {userType === "Admin" ? (
+                  <div
+                    className={`p-3 text-[#E75C54] flex items-center justify-center `}
                   >
-                    <span>Add A New User</span>
-                    <i className="ms-2 red-dot fa-solid fa-circle-plus"></i>
-                  </button>
-                </div>
+                    <button
+                      className="flex items-center text-[#E75C54] "
+                      onClick={() => {
+                        setAddPop(!addPop);
+                      }}
+                    >
+                      <span>Add A New User</span>
+                      <i className="ms-2 red-dot fa-solid fa-circle-plus"></i>
+                    </button>
+                  </div>
+                ) : (
+                  <span className="p-3 flex items-center justify-center">
+                    Action
+                  </span>
+                )}
               </div>
             </div>
 
@@ -98,10 +102,9 @@ const User = () => {
                           <div className="sm:hidden">
                             <PersonIcon />
                           </div>
-                          <p className="overflow-hidden truncate">
+                          <p className="flex gap-1 overflow-hidden truncate">
                             <span className="sm:hidden ">:</span>
                             <span className=" text-ellipsis font-bold overflow-hidden">
-                              {" "}
                               {val.userName}
                             </span>
                           </p>
@@ -110,7 +113,7 @@ const User = () => {
                           <div className="sm:hidden">
                             <EmailIcon />
                           </div>
-                          <p className="flex">
+                          <p className="flex gap-1 overflow-hidden truncate">
                             <span className="sm:hidden ">:</span>
                             <span className="block w-[10rem] sm:w-full overflow-hidden truncate">
                               {val.email}
@@ -121,7 +124,7 @@ const User = () => {
                           <div className="sm:hidden">
                             <PhoneIcon />
                           </div>
-                          <p>
+                          <p className="flex gap-1 overflow-hidden truncate">
                             <span className="sm:hidden">:</span>
                             <span className=" text-ellipsis overflow-hidden"></span>{" "}
                             {val.phone}

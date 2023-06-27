@@ -30,8 +30,8 @@ const BookingList = () => {
               setActiveStatusTab={setActiveStatusTab}
             />
             <div className="bg-white  overflow-auto px-2 w-full ">
-              <div className="hidden md:grid grid-cols-6 gap-3 text-[#8383A9] text-start">
-                <span className="py-5">Trip Title</span>
+              <div className="hidden md:grid grid-cols-6 gap-3 text-[#8383A9] text-center">
+                <span className="py-5 ">Trip Title</span>
                 <span className="py-5 ">Passenger Name</span>
                 <span className="py-5">Email</span>
                 <span className="py-5">Phone number</span>

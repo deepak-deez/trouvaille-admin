@@ -56,7 +56,7 @@ const AmenitiesTable = () => {
                     }}
                   >
                     Add New Amenities
-                    <i className=" ms-5 red-dot fa-solid fa-circle-plus"></i>
+                    <i className=" ms-2 red-dot fa-solid fa-circle-plus"></i>
                   </button>
                 </div>
               </div>
@@ -83,9 +83,11 @@ const AmenitiesTable = () => {
                                 <img
                                   src={item.icon}
                                   alt=""
-                                  className="h-[62px] img-filter w-[62px] mr-3"
+                                  className="h-[3.875rem] min-w-[3.875rem] img-filter w-[62px] mr-3"
                                 />
-                                <p className=" w-full truncate">{item.title}</p>
+                                <p className=" w-full text-center md:text-start truncate">
+                                  {item.title}
+                                </p>
                               </div>
                               <p className="td-class hover:overflow-scroll line-clamp-3 order-3 md:order-2 text-center md:text-start justify-center my-auto md:items-center w-100">
                                 {item.description}
