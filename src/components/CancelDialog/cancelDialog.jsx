@@ -10,7 +10,7 @@ import {
 import LoadingScreen from "../Loading/LoadingScreen";
 import store from "../../redux/store";
 import AlertComponent from "../Alerts/AlertComponent";
-import socketIOClient from "socket.io-client";
+import { socket } from "../../functions/socketConnection";
 import { CleanHands } from "@mui/icons-material";
 
 const CancelDialog = (props) => {
@@ -20,7 +20,7 @@ const CancelDialog = (props) => {
     loading,
   } = useSelector((state) => state.deleteBooking);
 
-  const socket = socketIOClient(process.env.REACT_APP_NODE_API);
+
   const storeData = store.getState();
   const { data: updatedBooking } = useSelector((state) => state.updateBooking);
   const { setCancelPopUp, id } = props;

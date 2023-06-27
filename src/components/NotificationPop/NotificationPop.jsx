@@ -86,7 +86,7 @@ const NotificationPop = ({
                       has been requested for cancellation.{" "}
                       <Link
                         to={
-                          "http://localhost:3001/booking-list/booking-details/" +
+                          "http://localhost:3000/booking-list/booking-details/" +
                           item.refId
                         }
                         className=" text-blue-500 "
@@ -135,7 +135,7 @@ const NotificationPop = ({
                     <Link
                       className="bg-orange-500 px-2 w-max flex text-white justify-self-end text-center"
                       to={
-                        "http://localhost:3001/booking-list/booking-details/" +
+                        "http://localhost:3000/booking-list/booking-details/" +
                         data.refId
                       }
                       data-notification-id={data?._id}

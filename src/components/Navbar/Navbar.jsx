@@ -7,7 +7,7 @@ import ProfilePop from "../ProfilePop/ProfilePop";
 import { useSelector } from "react-redux";
 import LoadingScreen from "../Loading/LoadingScreen";
 import NotificationPop from "../NotificationPop/NotificationPop";
-import socketIOClient from "socket.io-client";
+import { socket } from "../../functions/socketConnection";
 import axios from "axios";
 
 const Navbar = ({ heading }) => {
@@ -22,13 +22,7 @@ const Navbar = ({ heading }) => {
   const [tripCancellationNotis, setTripCancellationNotis] = useState();
   const [notisUnread, setNotisUnread] = useState(0);
 
-  const socket = socketIOClient(process.env.REACT_APP_NODE_API);
-
   useEffect(() => {
-    if (!tripUpdatesNotis || !tripCancellationNotis) {
-      getBookingNotis();
-    }
-
     if (userDetails?.data?.userDetails?.userType === "Admin") {
       socket.on("getCancellationRequest", (response) => {
         setTripCancellationNotis(response);
@@ -48,9 +42,16 @@ const Navbar = ({ heading }) => {
         }
       });
     });
-  }, [socket]);
+  },[socket]);
+
+  useEffect(() => {
+    if (!tripUpdatesNotis || !tripCancellationNotis) {
+      getBookingNotis();
+    }
+  });
 
   const getBookingNotis = async () => {
+    console.log("hii");
     const bookingNotisUrl = `${process.env.REACT_APP_NODE_API}/get-booking-notifications/Frontend-user`;
     try {
       const response = await axios.get(bookingNotisUrl);
