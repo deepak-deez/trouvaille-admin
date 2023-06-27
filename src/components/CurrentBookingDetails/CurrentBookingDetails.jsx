@@ -64,6 +64,7 @@ const CurrentBookingDetails = () => {
     dispatch(updateBooking(id, "false", "", "false"));
     setRequestedForCancel(false);
     setSubmitDelete(false);
+    console.log("deny set to false");
     setDeny(!deny);
     Swal.fire({
       position: "top",
@@ -78,11 +79,14 @@ const CurrentBookingDetails = () => {
   };
 
   useEffect(() => {
+    console.log("admin wala dispatch");
     dispatch(getSingleBooking(id));
   }, [deny, cancelPopUp]);
 
   useEffect(() => {
+    console.log(submitDelete, "submitDelete");
     if (submitDelete) {
+      console.log("submit wala dispatch");
       dispatch(getSingleBooking(id));
 
       Swal.fire({
@@ -127,11 +131,16 @@ const CurrentBookingDetails = () => {
   }, [error]);
 
   useEffect(() => {
+    console.log(data);
     if (data !== null) {
+      console.log(data);
       if (data?.data?.cancellationStatus === "true") {
+        console.log(data);
         setRequestedForCancel(true);
+        console.log("set to true");
       } else {
         setRequestedForCancel(false);
+        console.log("set to false");
       }
     }
   }, [data]);
@@ -167,7 +176,9 @@ const CurrentBookingDetails = () => {
                     ? requestedForCancel !== true
                       ? "flex"
                       : "hidden"
-                    : "flex"
+                    : data && data.data.bookingStatus !== "cancelled"
+                    ? "flex"
+                    : "hidden"
                 }
                 `}
                     onClick={() => {
