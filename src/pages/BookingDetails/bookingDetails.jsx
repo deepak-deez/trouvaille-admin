@@ -11,15 +11,14 @@ const BookingDetails = () => {
   const { userDetails, error, loading } = useSelector(
     (state) => state.userLogin
   );
-  const navigate= useNavigate()
-  useEffect(()=>{
-    if(userDetails===null)
-    navigate("/")
-  })
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (userDetails === null) navigate("/");
+  });
   return (
     <div className="flex h-screen">
       <Sidebar />
-      <div className="w-full bg-[#f5f7f7] h-screen overflow-auto">
+      <div className="w-full bg-[#f5f9ff] h-screen overflow-auto">
         <Navbar heading="Booking Details" />
         <div className="flex flex-col">
           <CurrentBookingDetails />

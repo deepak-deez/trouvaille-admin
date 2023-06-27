@@ -56,7 +56,7 @@ const Occasion = () => {
                   }}
                 >
                   <span>Add New Occasion</span>
-                  <i className=" ms-5 red-dot fa-solid fa-circle-plus"></i>
+                  <i className=" ms-2 red-dot fa-solid fa-circle-plus"></i>
                 </button>
               </div>
             </div>
@@ -82,9 +82,9 @@ const Occasion = () => {
                                 <img
                                   src={item.icon}
                                   alt=""
-                                  className="h-[62px] img-filter w-[62px] mr-3"
+                                  className="h-[3.875rem] min-w-[3.875rem] img-filter w-[3.875rem] mr-3"
                                 />
-                                <span className="px-2 w-full truncate ">
+                                <span className="px-2 w-full text-center md:text-start truncate ">
                                   {item.title}
                                 </span>
                               </div>

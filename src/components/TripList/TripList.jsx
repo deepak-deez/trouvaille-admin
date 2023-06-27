@@ -86,7 +86,7 @@ const TripList = () => {
                   }}
                 >
                   <span>Add New Trip</span>
-                  <i className=" ml-1 red-dot fa-solid fa-circle-plus"></i>
+                  <i className=" ms-2 red-dot fa-solid fa-circle-plus"></i>
                 </button>
               </div>
             </div>

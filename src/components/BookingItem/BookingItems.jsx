@@ -87,7 +87,7 @@ const BookingItems = (props) => {
                               alt="Package-Icon"
                             />
 
-                            <span className="font-semibold w-full truncate text-start text-ellipsis overflow-hidden">
+                            <span className="font-semibold truncate text-start text-ellipsis overflow-hidden">
                               {items?.title}
                             </span>
                           </div>
@@ -95,16 +95,14 @@ const BookingItems = (props) => {
                             <span className="md:hidden">
                               <PersonIcon />
                             </span>
-                            <p className="md:py-5 w-full truncate">
-                              {items?.name}
-                            </p>
+                            <p className="md:py-5 truncate">{items?.name}</p>
                           </div>
 
                           <div className="flex items-center justify-between md:p-3">
                             <span className="md:hidden">
                               <EmailIcon />
                             </span>
-                            <p className="md:py-5 w-full truncate text-ellipsis overflow-hidden">
+                            <p className="md:py-5 truncate text-ellipsis overflow-hidden">
                               {items?.email}
                             </p>
                           </div>
