@@ -41,11 +41,12 @@ const CancelDialog = (props) => {
       submitCancelRequest(reasonRef.current.value);
     } else if (userType === "Admin") {
       handleResponse();
+      console.log("hii");
       props.setSubmitDelete(true);
       setCancelPopUp(false);
       setTimeout(() => {
         dispatch({ type: "DELETE_BOOKING_SUCCESS", payload: null });
-        navigate("/booking-list");
+        // navigate("/booking-list");
       }, 1500);
     }
   };

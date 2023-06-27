@@ -256,7 +256,7 @@ export const deleteBooking = (id, userType) => async (dispatch) => {
     const header = {
       "Content-Type": "application/json",
     };
-    const { data } = await axios.delete(
+    const { data } = await axios.post(
       `${API}/delete-booking/${userType}/${id}`,
       header
     );
