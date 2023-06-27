@@ -37,8 +37,13 @@ const CurrentBookingDetails = () => {
   ];
 
   useEffect(() => {
+    console.log("id wala dispatch");
     dispatch(getSingleBooking(id));
   }, [id]);
+
+  // useEffect(() => {
+  //   dispatch(getSingleBooking(id));
+  // }, []);
 
   useEffect(() => {
     if (data && data.data) {
@@ -50,14 +55,15 @@ const CurrentBookingDetails = () => {
   }, [data]);
 
   const [deny, setDeny] = useState(updatedBooking);
-  const requestedForCancel = useRef();
+  const [requestedForCancel, setRequestedForCancel] = useState();
   const navigate = useNavigate();
   const storeData = store.getState();
   const userType = storeData.userLogin.userDetails.data.userDetails.userType;
 
   const denyReq = async () => {
-    dispatch(updateBooking(id, "false", "", "Pending", "", "false"));
-
+    dispatch(updateBooking(id, "false", "", "false"));
+    setRequestedForCancel(false);
+    setSubmitDelete(false);
     setDeny(!deny);
     Swal.fire({
       position: "top",
@@ -77,7 +83,7 @@ const CurrentBookingDetails = () => {
 
   useEffect(() => {
     if (submitDelete) {
-      dispatch(getBooking());
+      dispatch(getSingleBooking(id));
 
       Swal.fire({
         position: "top",
@@ -120,9 +126,20 @@ const CurrentBookingDetails = () => {
     }
   }, [error]);
 
-  if (data?.data?.cancellationStatus === "true")
-    requestedForCancel.current = "true";
-  else requestedForCancel.current = "false";
+  useEffect(() => {
+    if (data !== null) {
+      if (data?.data?.cancellationStatus === "true") {
+        setRequestedForCancel(true);
+      } else {
+        setRequestedForCancel(false);
+      }
+    }
+  }, [data]);
+
+  useEffect(() => {
+    console.log(requestedForCancel);
+  }, [requestedForCancel]);
+
   if (loading) {
     return <LoadingScreen />;
   } else if (data && data?.data)
@@ -147,7 +164,7 @@ const CurrentBookingDetails = () => {
                     className={`flex border-2 shadow-md px-3 py-2 rounded-md border-[#7e827f] me-5 font-bold
                 ${
                   userType === "Backend-user"
-                    ? requestedForCancel.current !== "true"
+                    ? requestedForCancel !== true
                       ? "flex"
                       : "hidden"
                     : "flex"
@@ -161,7 +178,7 @@ const CurrentBookingDetails = () => {
                   </Link>
                   <Link
                     className={` justify-self-end border px-3 py-2 rounded-md border-black me-5 bg-[#E55D54] text-white font-bold
-                ${requestedForCancel.current !== "true" ? "hidden" : "flex"}`}
+                ${requestedForCancel !== true ? "hidden" : "flex"}`}
                     onClick={() => {
                       denyReq();
                     }}
@@ -246,7 +263,7 @@ const CurrentBookingDetails = () => {
                 </button>
                 <div
                   className={`max-h-[8rem] w-full col-span-2  mb-10 shadow-md  gap-2 border-2 border-[#E55D54] rounded-md py-5 px-3 mt-5
-               ${requestedForCancel.current === "false" ? "hidden" : "flex"}`}
+               ${requestedForCancel === false ? "hidden" : "flex"}`}
                 >
                   <p className="break-words overflow-hidden hover:overflow-scroll">
                     <span className="font-bold">Cancellation Reason: </span>
