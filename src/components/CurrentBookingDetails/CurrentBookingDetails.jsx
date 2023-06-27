@@ -14,6 +14,8 @@ import LoadingScreen from "../Loading/LoadingScreen";
 import store from "../../redux/store";
 import StatusMenu from "../StatusMenu/StatusMenu";
 import AlertComponent from "../Alerts/AlertComponent";
+import { socket } from "../../functions/socketConnection";
+import { format } from "date-fns";
 
 const CurrentBookingDetails = () => {
   const { data, loading } = useSelector((state) => state.getSingleBooking);
@@ -64,7 +66,16 @@ const CurrentBookingDetails = () => {
     dispatch(updateBooking(id, "false", "", "false"));
     setRequestedForCancel(false);
     setSubmitDelete(false);
-    console.log("deny set to false");
+    if (userType === "Backend-user") {
+      const updateDeleteRequest = `${process.env.REACT_APP_NODE_API}/read-notification/${id}`;
+      console.log(updateDeleteRequest);
+      try {
+        const response = await axios.get(updateDeleteRequest);
+        console.log(response);
+      } catch (err) {
+        console.log(err);
+      }
+    }
     setDeny(!deny);
     Swal.fire({
       position: "top",
@@ -107,6 +118,18 @@ const CurrentBookingDetails = () => {
   const updateStatus = () => {
     if (id && status.value) {
       dispatch(updateBookingStatus(id, status.value));
+
+      const notificationObj = {
+        userType: "User",
+        title: "Trip Update",
+        description: `Your Trip with ${id} has been updated!`,
+        refId: data?.data.tripId,
+        userId: data?.data.userId,
+        createdAt: new Date(),
+        readStatus: false,
+      };
+
+      socket.emit("sendStatusUpdate", notificationObj);
     }
   };
 

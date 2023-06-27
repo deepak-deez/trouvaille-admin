@@ -12,12 +12,10 @@ const CancelNotification = () => {
   const { userDetails, error, loading } = useSelector(
     (state) => state.userLogin
   );
-  const navigate= useNavigate()
-  useEffect(()=>{
-    if(userDetails===null)
-    navigate("/")
-  })
-
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (userDetails === null) navigate("/");
+  });
 
   return (
     <>
@@ -25,8 +23,8 @@ const CancelNotification = () => {
         <div className="flex h-screen">
           <Sidebar />
           <div className="w-full bg-[#f5f7f7] ">
-            <Navbar heading="Notifications"/>
-            <div className="md:h-[90vh] flex flex-col">
+            <Navbar heading="Notifications" />
+            <div className="hscreen overflow-auto">
               <CancellationRequest />
             </div>
             <Footer />

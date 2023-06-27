@@ -52,7 +52,7 @@ const Sidebar = (props) => {
       {/* </div> */}
       <div
         className={
-          `mainSideBar h-screen md:overflow-auto z-[90] fixed top-0 xl:static xl:flex w-full sm:w-[60%] lg:w-[40%] 2xl:w-[30%] p-5 flex-col bg-white  sidebar-shadow  ${
+          `mainSideBar md:overflow-auto z-[90] h-screen fixed top-0 xl:static xl:flex w-full sm:w-[60%] lg:w-[40%] 2xl:w-[30%] p-5 flex-col bg-white  sidebar-shadow  ${
             !show && " hidden-bar "
           }` + (closingAnimation ? openningAnimaionName : closingAnimationName)
         }
