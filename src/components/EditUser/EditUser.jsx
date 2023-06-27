@@ -10,13 +10,17 @@ const EditUser = ({ editPop, setEditPop, data }) => {
   let { userDetails } = useSelector((state) => state.userLogin);
   const storeData = store.getState();
   const userType = storeData.userLogin.userDetails?.data.userDetails.userType;
-  const [name, setName] = useState(data.userName);
-  const [email, setEmail] = useState(data.email);
-  const [phone, setPhone] = useState(data.phone);
+  const [name, setName] = useState(
+    data.userName || data.data.userDetails.userName
+  );
+  const [email, setEmail] = useState(data.email || data.data.userDetails.email);
+  const [phone, setPhone] = useState(data.phone || data.data.userDetails.phone);
   const [errorText, setErrorText] = useState(null);
   const navigate = useNavigate();
 
-  const id = data._id;
+  console.log(data);
+
+  const id = data._id || data.data.userDetails._id;
   const dispatch = useDispatch();
 
   const updateHandler = () => {

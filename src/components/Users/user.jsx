@@ -94,22 +94,27 @@ const User = () => {
                         }
                         key={index}
                       >
-                        <div className="td-class font-bold flex justify-start gap-10  order-2 sm:order-1">
+                        <div className="td-class  flex justify-start gap-10  order-2 sm:order-1">
                           <div className="sm:hidden">
                             <PersonIcon />
                           </div>
                           <p className="overflow-hidden truncate">
-                            <span className="sm:hidden mr-10 ">:</span>
-                            {val.userName}
+                            <span className="sm:hidden ">:</span>
+                            <span className=" text-ellipsis font-bold overflow-hidden">
+                              {" "}
+                              {val.userName}
+                            </span>
                           </p>
                         </div>
                         <div className="td-class flex justify-start gap-10 order-3  sm:order-2">
                           <div className="sm:hidden">
                             <EmailIcon />
                           </div>
-                          <p>
-                            <span className="sm:hidden mr-10">:</span>
-                            {val.email}
+                          <p className="flex">
+                            <span className="sm:hidden ">:</span>
+                            <span className="block w-[10rem] sm:w-full overflow-hidden truncate">
+                              {val.email}
+                            </span>
                           </p>
                         </div>
                         <div className="td-class flex justify-start gap-10 order-4  sm:order-3">
@@ -117,7 +122,8 @@ const User = () => {
                             <PhoneIcon />
                           </div>
                           <p>
-                            <span className="sm:hidden mr-10">:</span>
+                            <span className="sm:hidden">:</span>
+                            <span className=" text-ellipsis overflow-hidden"></span>{" "}
                             {val.phone}
                           </p>
                         </div>
