@@ -15,11 +15,10 @@ import LoadingScreen from "../Loading/LoadingScreen";
 import store from "../../redux/store";
 import StatusMenu from "../StatusMenu/StatusMenu";
 import AlertComponent from "../Alerts/AlertComponent";
-import socketIOClient from "socket.io-client";
+import { socket } from "../../functions/socketConnection";
 import { format } from "date-fns";
 
 const CurrentBookingDetails = () => {
-  const socket = socketIOClient(process.env.REACT_APP_NODE_API);
   const { data, loading } = useSelector((state) => state.getSingleBooking);
   const { data: updatedBooking } = useSelector((state) => state.updateBooking);
   const { data: deleted } = useSelector((state) => state.deleteBooking);

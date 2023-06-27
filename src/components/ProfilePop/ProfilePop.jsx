@@ -17,8 +17,7 @@ const ProfilePop = ({ setProfilePop, profilePop }) => {
   const userName = userDetails?.data?.userDetails.userName;
   const userType = userDetails?.data?.userDetails.userType;
   const UserId = userDetails?.data?.userDetails._id;
-
-
+  console.log("pro");
 
   return (
     <>

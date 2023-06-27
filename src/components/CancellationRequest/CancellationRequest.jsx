@@ -1,16 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import socketIOClient from "socket.io-client";
+import { socket } from "../../functions/socketConnection";
 
-const ENDPOINT = process.env.REACT_APP_NODE_API;
 
 const CancellationRequest = () => {
   const [response, setResponse] = useState();
 
   const API = process.env.REACT_APP_NODE_API;
 
-  const socket = socketIOClient(ENDPOINT);
   const [notisUnread, setNotisUnread] = useState([]);
   const [statusNotis, setStatusNotis] = useState();
 
@@ -91,7 +89,7 @@ const CancellationRequest = () => {
                 cancel. Link:
                 <Link
                   to={
-                    "http://localhost:3001/booking-list/booking-details/" +
+                    "http://localhost:3000/booking-list/booking-details/" +
                     item._id
                   }
                   className=" text-blue-500 "
@@ -136,7 +134,7 @@ const CancellationRequest = () => {
               <Link
                 className="bg-orange-500 px-2 w-max flex text-white justify-self-end text-center"
                 to={
-                  "http://localhost:3001/booking-list/booking-details/" +
+                  "http://localhost:3000/booking-list/booking-details/" +
                   data.refId
                 }
                 onClick={navigateHandler}
