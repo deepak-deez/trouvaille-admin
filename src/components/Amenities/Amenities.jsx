@@ -42,7 +42,7 @@ const AmenitiesTable = () => {
     <>
       {loading && <LoadingScreen />}
       <div className="p-3 ">
-        <div className="p-4 bg-white item-center w-full overflow-x-scroll border-b-2">
+        <div className="p-4 bg-white item-center w-full border-b-2">
           <div className="w-[100%]">
             <div>
               <div className="tr-class md:grid md:grid-cols-3 flex text-[#8383A9] items-center text-center justify-center">
@@ -68,6 +68,7 @@ const AmenitiesTable = () => {
                     {data &&
                       data?.data &&
                       data?.data
+                        .toReversed()
                         .slice(firstPageIndex, lastPageIndex)
                         .map((item, index) => {
                           return (
@@ -84,9 +85,9 @@ const AmenitiesTable = () => {
                                   alt=""
                                   className="h-[62px] img-filter w-[62px] mr-3"
                                 />
-                                <span className="">{item.title}</span>
+                                <p className=" w-full truncate">{item.title}</p>
                               </div>
-                              <p className="td-class line-clamp-3 order-3 md:order-2 text-center md:text-start justify-center my-auto md:items-center w-100">
+                              <p className="td-class hover:overflow-scroll line-clamp-3 order-3 md:order-2 text-center md:text-start justify-center my-auto md:items-center w-100">
                                 {item.description}
                               </p>
                               <div className="text-center order-1 md:order-3 flex items-center justify-end md:justify-center">

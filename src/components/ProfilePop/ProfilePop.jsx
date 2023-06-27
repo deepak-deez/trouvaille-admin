@@ -1,8 +1,9 @@
 import Cookies from "js-cookie";
-import { React, useEffect, useRef } from "react";
+import { React, useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./style.scss";
+import EditUser from "../EditUser/EditUser";
 
 const ProfilePop = ({ setProfilePop, profilePop }) => {
   const navigate = useNavigate();
@@ -17,8 +18,11 @@ const ProfilePop = ({ setProfilePop, profilePop }) => {
   const userName = userDetails?.data?.userDetails.userName;
   const userType = userDetails?.data?.userDetails.userType;
   const UserId = userDetails?.data?.userDetails._id;
+  const [editPop, setEditPop] = useState(false);
 
-
+  const handleClick = () => {
+    setEditPop(true);
+  };
 
   return (
     <>
@@ -33,9 +37,14 @@ const ProfilePop = ({ setProfilePop, profilePop }) => {
           <h3 className=""> Name: {userName}</h3>
           <h3 className=""> Id: {UserId}</h3>
           <h3 className=""> UserType: {userType}</h3>
-          {/* <button className=" w-[80%] bg-[#E75C54] p-1 rounded-md text-white ">
-            Edit Profile
-          </button> */}
+          {userType === "Backend-user" && (
+            <button
+              className=" w-[80%] bg-[#E75C54] p-1 rounded-md text-white "
+              onClick={() => handleClick()}
+            >
+              Edit Profile
+            </button>
+          )}
           <button
             className=" w-[80%] bg-[#E75C54] p-1 rounded-md text-white "
             onClick={() => {
@@ -46,6 +55,13 @@ const ProfilePop = ({ setProfilePop, profilePop }) => {
           </button>
         </div>
       </div>
+      {editPop && userDetails && (
+        <EditUser
+          editPop={editPop}
+          setEditPop={setEditPop}
+          data={userDetails}
+        />
+      )}
     </>
   );
 };

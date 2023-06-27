@@ -86,10 +86,10 @@ const Trip = () => {
                                 className="h-10 img-filter"
                               />
                             </div>
-                            <h3 className="text-center font-semibold">
+                            <h3 className="text-center w-full truncate  font-semibold">
                               {val.title}
                             </h3>
-                            <p className="text-gray-600 w-full  line-clamp-4 hover:overflow-scroll">
+                            <p className="text-gray-600 w-full  break-all line-clamp-4 hover:overflow-scroll">
                               {val.description}
                             </p>
                           </div>
