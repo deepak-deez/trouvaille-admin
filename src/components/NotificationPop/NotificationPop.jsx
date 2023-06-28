@@ -92,7 +92,7 @@ const NotificationPop = ({
 
   return (
     <div
-      className="bg-[#F5F9FF] z-50  w-[15rem] sm:w-[25rem] rounded-lg h-[2rem] absolute  top-[3rem] right-[3.5rem]"
+      className="bg-[#F5F9FF] z-50  w-[15rem] sm:w-[25rem] rounded-lg h-[2rem] absolute  top-[3rem] right-[4rem] sm:right-[4.3rem] md:right-[4.6rem]"
       // onClick={() => {
       //   setNotificationPopup(false);
       // }}
@@ -143,10 +143,13 @@ const NotificationPop = ({
                               `http://localhost:${runningPort}/booking-list/booking-details/` +
                               item.refId
                             }
-                            className=" text-[#CD4B43] "
+                            className=" text-blue-600 "
                             data-notification-id={item?._id}
                             data-ref-id={item?.refId}
-                            onClick={navigateHandler}
+                            onClick={() => {
+                              setNotificationPopup(false);
+                              navigateHandler();
+                            }}
                           >
                             View Details
                           </Link>
@@ -203,7 +206,10 @@ const NotificationPop = ({
                           }
                           data-notification-id={data?._id}
                           data-ref-id={data?.refId}
-                          onClick={navigateHandler}
+                          onClick={() => {
+                            setNotificationPopup(false);
+                            navigateHandler();
+                          }}
                         >
                           View Details
                         </Link>
