@@ -21,7 +21,7 @@ const Navbar = ({ heading }) => {
   const refNotification = useRef(null);
   const [tripUpdatesNotis, setTripUpdatesNotis] = useState();
   const [tripCancellationNotis, setTripCancellationNotis] = useState();
-  const [bookingNotisUnread, setBookingotisUnread] = useState([]);
+  const [bookingNotisUnread, setBookingNotisUnread] = useState([]);
   const [cancelNotisUnread, setCancelNotisUnread] = useState([]);
 
   useEffect(() => {
@@ -34,20 +34,17 @@ const Navbar = ({ heading }) => {
 
     socket.on("getCurrentBooking", (response) => {
       setTripUpdatesNotis(response);
-      countNotisUnread(response, bookingNotisUnread, setBookingotisUnread);
+      countNotisUnread(response, bookingNotisUnread, setBookingNotisUnread);
     });
   }, [socket]);
 
   useEffect(() => {
-    console.log("first");
     if (!tripUpdatesNotis || !tripCancellationNotis) {
       getBookingNotis();
     }
   }, []);
 
-  useEffect(() => {
-    console.log("Effect : ", bookingNotisUnread);
-  }, [bookingNotisUnread]);
+  useEffect(() => {}, [bookingNotisUnread]);
 
   const getBookingNotis = async () => {
     const bookingNotisUrl = `${process.env.REACT_APP_NODE_API}/get-booking-notifications/Frontend-user`;
@@ -58,7 +55,7 @@ const Navbar = ({ heading }) => {
       countNotisUnread(
         response?.data,
         bookingNotisUnread,
-        setBookingotisUnread
+        setBookingNotisUnread
       );
     } catch (err) {
       console.log(err);
@@ -75,6 +72,7 @@ const Navbar = ({ heading }) => {
       console.log(err);
     }
   };
+
   useEffect(() => {
     document.addEventListener("click", hideOnClickOutsideProfile, true);
     document.addEventListener("click", hideOnClickOutsideNotification, true);
@@ -98,15 +96,22 @@ const Navbar = ({ heading }) => {
   return (
     <div className="flex justify-between sticky py-5 top-0 w-full z-50 items-center bg-[#dbe6f5] xl:m-0 col-span-10 p-5">
       <h2 className="font-bold ml-10 ">{heading}</h2>
-      <div className="flex justify-center items-center px-5 space-x-2 ">
+      <div className="flex justify-center items-center px-5 space-x-2 cursor-pointer">
         <div ref={refNotification} className="realtive">
           <MdNotificationsNone
-            className="hover:cursor-pointer relative  "
+            className="hover:cursor-pointer relative  w-6 h-6"
             onClick={() => {
               setNotificationPopup(!notificationPopup);
             }}
           />
-          <p className="absolute top-3 right-[9.2rem] w-6 h-6 tex-xs bg-green-600 text-white text-xs text-center pt-1 rounded-full">
+          <p
+            className={
+              "absolute top-3 right-[9.2rem] w-6 h-6 tex-xs bg-blue-500 text-white text-xs text-center pt-1 rounded-full" +
+              (bookingNotisUnread.length + cancelNotisUnread.length <= 0
+                ? " hidden "
+                : " block ")
+            }
+          >
             {bookingNotisUnread.length + cancelNotisUnread.length}
           </p>
           {notificationPopup && (
@@ -115,7 +120,7 @@ const Navbar = ({ heading }) => {
               notificationPopup={notificationPopup}
               tripUpdatesNotis={tripUpdatesNotis?.data}
               bookingNotisUnread={bookingNotisUnread}
-              setBookingNotisUnread={setBookingotisUnread}
+              setBookingNotisUnread={setBookingNotisUnread}
               cancelNotisUnread={cancelNotisUnread}
               setCancelNotisUnread={setCancelNotisUnread}
               tripCancellationNotis={tripCancellationNotis}
