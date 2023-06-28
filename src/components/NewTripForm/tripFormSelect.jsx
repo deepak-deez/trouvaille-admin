@@ -17,6 +17,7 @@ export const GetOptions = () => {
       label: "None",
     },
   ]);
+  const [amenitiesOptions, setAmenitiesOptions] = useState([]);
 
   const [tripCategoryOptions, settripCategoryOptions] = useState([
     {
@@ -60,11 +61,20 @@ export const GetOptions = () => {
             return { label: item.title, value: item.title };
           })
     );
+    setAmenitiesOptions(
+      data &&
+        data?.data
+          ?.filter((item) => item.purpose === "amenity")
+          .map((item) => {
+            return item.title;
+          })
+    );
   }, [data]);
 
   return {
     occassionOptions,
     tripCategoryOptions,
     travelTypeOptions,
+    amenitiesOptions,
   };
 };

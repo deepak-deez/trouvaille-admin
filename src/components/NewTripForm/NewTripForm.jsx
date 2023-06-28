@@ -17,8 +17,12 @@ import convertYearDate from "../../functions/yearMonthDate";
 import AlertComponent from "../Alerts/AlertComponent";
 
 const NewTripForm = () => {
-  const { occassionOptions, tripCategoryOptions, travelTypeOptions } =
-    GetOptions();
+  const {
+    occassionOptions,
+    tripCategoryOptions,
+    travelTypeOptions,
+    amenitiesOptions,
+  } = GetOptions();
   const { data } = useSelector((state) => state.getPackage);
   const navigate = useNavigate();
   const {
@@ -361,6 +365,7 @@ const NewTripForm = () => {
               heading="Amenities"
               tags={amenities}
               setTags={setAmenities}
+              options={amenitiesOptions}
             />
           </div>
           <div className="p-2 flex flex-col space-y-2 ">
@@ -405,7 +410,7 @@ const NewTripForm = () => {
                 textPlaceholder="Status"
               />
               <button
-                className="bg-[#CD4B43] rounded-md w-1/2 p-3"
+                className="bg-[#CD4B43] text-white rounded-md w-1/2 p-3"
                 onClick={submitHandler}
               >
                 Submit
