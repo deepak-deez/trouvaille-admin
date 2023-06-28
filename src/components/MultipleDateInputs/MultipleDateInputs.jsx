@@ -36,7 +36,7 @@ const MultipleDateInputs = ({
             <label> {input?.date}</label>
             <input
               placeholder="Details"
-              className=" border p-3 "
+              className=" border p-3  rounded-md"
               type="text"
               onChange={(e) => {
                 handleChange(key, e);

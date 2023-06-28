@@ -98,7 +98,7 @@ export default function LoginForm() {
             <div className="flex flex-col relative">
               <div className="bg-white input-fields px-[23px]  mt-[9px] flex flex-row items-center justify-between">
                 <input
-                  className="bg-transparent w-[100%] py-[15px] outline-none"
+                  className="bg-transparent rounded-md w-[100%] py-[15px] outline-none"
                   type="text"
                   placeholder="Enter you email"
                   ref={emailRef}
@@ -126,7 +126,7 @@ export default function LoginForm() {
             </div>
             <div className="bg-white input-fields px-[23px] mt-[9px] flex flex-row items-center justify-between">
               <input
-                className="bg-transparent w-[100%] py-[15px] outline-none"
+                className="bg-transparent rounded-md w-[100%] py-[15px] outline-none"
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter you password"
                 ref={passwordRef}

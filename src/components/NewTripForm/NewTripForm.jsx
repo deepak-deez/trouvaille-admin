@@ -214,7 +214,7 @@ const NewTripForm = () => {
               <input
                 type="file"
                 accept=".jpg,.png,.jpeg,.svg"
-                className=" absolute left-[10%] opacity-0 cursor-pointer w-full"
+                className=" absolute left-0 opacity-0 cursor-pointer w-full"
                 onChange={handleChange}
               />
             </div>

@@ -71,7 +71,7 @@ const ForgotPassword = () => {
           <div className="flex flex-col relative">
             <div className="bg-white input-fields px-[23px] py-[15px] mt-[9px] flex flex-row items-center justify-between">
               <input
-                className="bg-transparent outline-none"
+                className="bg-transparent rounded-md outline-none"
                 type="text"
                 placeholder="Enter you email"
                 ref={emailRef}

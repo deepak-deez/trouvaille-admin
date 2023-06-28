@@ -13,15 +13,15 @@ const TagsInput = ({ heading, tags, setTags }) => {
   return (
     <div className="w-full">
       <h2 className=" text-gray-400 py-2">{heading}</h2>
-      <div className="tags-input overflow-scroll ">
-        <div className=" gap-2  text-[#CD4B43]">
+      <div className="tags-input  overflow-scroll ">
+        <div className=" gap-2 grid grid-cols-2 md:grid-cols-3  text-[#CD4B43]">
           {tags.map((tag, index) => {
             return (
               <div
-                className=" bg-[#F3E3E2] flex rounded-lg  items-center p-2 justify-center "
+                className=" bg-[#F3E3E2] my-2 flex rounded-lg  items-center p-2 justify-center "
                 key={index}
               >
-                <span>{tag}</span>
+                <span className="break-all">{tag}</span>
                 <button onClick={() => removeTags(index)}>
                   <i className="fas fa-regular fa-xmark ms-2"></i>
                 </button>
@@ -32,6 +32,7 @@ const TagsInput = ({ heading, tags, setTags }) => {
         <input
           type="text"
           onKeyUp={(event) => addTags(event)}
+          className="w-full"
           placeholder="Press enter to add tags"
         />
       </div>

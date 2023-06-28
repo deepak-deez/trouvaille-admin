@@ -9,18 +9,22 @@ const EditUser = ({ editPop, setEditPop, data }) => {
   const { data: updatedUser, error } = useSelector((state) => state.updateUser);
   let { userDetails } = useSelector((state) => state.userLogin);
   const storeData = store.getState();
-  const userType = storeData.userLogin.userDetails?.data.userDetails.userType;
+  const userType = storeData.userLogin.userDetails?.data?.userDetails?.userType;
   const [name, setName] = useState(
-    data.userName || data.data.userDetails.userName
+    data.userName || data?.data?.userDetails?.userName
   );
-  const [email, setEmail] = useState(data.email || data.data.userDetails.email);
-  const [phone, setPhone] = useState(data.phone || data.data.userDetails.phone);
+  const [email, setEmail] = useState(
+    data.email || data?.data?.userDetails.email
+  );
+  const [phone, setPhone] = useState(
+    data.phone || data?.data?.userDetails.phone
+  );
   const [errorText, setErrorText] = useState(null);
   const navigate = useNavigate();
 
   console.log(data);
 
-  const id = data._id || data.data.userDetails._id;
+  const id = data._id || data?.data?.userDetails?._id;
   const dispatch = useDispatch();
 
   const updateHandler = () => {
@@ -49,9 +53,9 @@ const EditUser = ({ editPop, setEditPop, data }) => {
     console.log(userType === "Backend-user" && updatedUser?.success);
     if (userType === "Backend-user" && updatedUser?.success) {
       const updatedDetails = updatedUser?.data?.adminDetails;
-      newUserData.data.userDetails.email = updatedDetails.email;
-      newUserData.data.userDetails.phone = updatedDetails.phone;
-      newUserData.data.userDetails.userName = updatedDetails.userName;
+      newUserData.data.userDetails.email = updatedDetails?.email;
+      newUserData.data.userDetails.phone = updatedDetails?.phone;
+      newUserData.data.userDetails.userName = updatedDetails?.userName;
       userDetails = { ...newUserData };
       localStorage.setItem("userDetails", JSON.stringify(userDetails));
       navigate("/dashboard");
@@ -86,7 +90,7 @@ const EditUser = ({ editPop, setEditPop, data }) => {
         <form className="flex flex-col ">
           <label className="text-sm font-light py-2">Name</label>
           <input
-            className="border-2  p-2"
+            className="border-2 rounded-md p-2"
             type="text"
             value={name}
             onChange={(e) => {
@@ -95,7 +99,7 @@ const EditUser = ({ editPop, setEditPop, data }) => {
           />
           <label className="text-sm py-2 font-light">Email Address</label>
           <input
-            className="border-2 p-2"
+            className="border-2 rounded-md p-2"
             type="email"
             value={email}
             onChange={(e) => {
@@ -105,7 +109,7 @@ const EditUser = ({ editPop, setEditPop, data }) => {
           />
           <label className="text-sm py-2 font-light">Phone Number</label>
           <input
-            className="border-2 p-2"
+            className="border-2 rounded-md p-2"
             type="number"
             value={phone}
             // maxLength={10}

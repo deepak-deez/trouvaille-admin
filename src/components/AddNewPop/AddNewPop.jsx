@@ -98,14 +98,14 @@ const AddNewPop = (props) => {
             <p className="md:w-1/3 my-2">
               Allowed file types: <b> png, jpg, jpeg </b>
             </p>
-            <div className="relative">
+            <div className="relative w-[4.5rem] h-[2rem] ">
               <button className="border-2 border-red-500 px-2 rounded-md text-red-500">
                 Browse
               </button>
               <input
                 type="file"
                 accept=".jpg,.png,.jpeg,.svg"
-                className="absolute left-[-90%] top-[30%]  opacity-0 cursor-pointer "
+                className="absolute top-0 left-0  opacity-0 w-full h-full  "
                 onChange={handleChange}
               />
             </div>
@@ -116,7 +116,7 @@ const AddNewPop = (props) => {
             {titleHeading} Title
           </label>
           <input
-            className="border-2"
+            className="border-2 rounded-md"
             type="text"
             value={name}
             onChange={(e) => {
@@ -125,7 +125,7 @@ const AddNewPop = (props) => {
           />
           <label className="text-sm  py-2 font-semibold">Description</label>
           <textarea
-            className="resize-none border-2"
+            className="resize-none rounded-md border-2"
             cols="30"
             rows="10"
             value={description}

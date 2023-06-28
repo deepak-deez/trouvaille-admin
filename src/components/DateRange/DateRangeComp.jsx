@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { DateRange } from "react-date-range";
-import calendarIcon from "../../assets/images/trip-list/calendar-icon.png";
-
+import calendarIcon from "../../assets/images/trip-list/calender-icon.svg";
+// import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import format from "date-fns/format";
 
 import "react-date-range/dist/styles.css";
@@ -48,14 +48,14 @@ const DateRangeComp = ({ setDuration, duration, range, setRange }) => {
   return (
     <>
       <div className=" relative ">
-        <div className="calendarWrap flex  ">
+        <div className="calendarWrap flex border-2 rounded-md  md:w-[60%] justify-between p-1">
           <input
             value={`${format(range[0].startDate, "dd LLLL")} - ${format(
               range[0].endDate,
               "dd LLLL"
             )}`}
             readOnly
-            className="inputBox border-2 md:w-[60%]"
+            className="inputBox outline-0 rounded-md w-full"
             onClick={() => {
               setOpen(!open);
             }}
@@ -63,7 +63,7 @@ const DateRangeComp = ({ setDuration, duration, range, setRange }) => {
 
           <img
             src={calendarIcon}
-            className="w-[2rem] h-[2rem]"
+            className="w-[1.4rem] h-[1.5rem]"
             alt="calendar"
             onClick={() => {
               setOpen(!open);

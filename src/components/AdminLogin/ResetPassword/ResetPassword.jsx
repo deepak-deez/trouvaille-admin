@@ -97,7 +97,7 @@ const ResetPassword = () => {
           <div className="flex flex-col relative">
             <div className="bg-white input-fields px-[23px] py-[15px] mt-[9px] flex flex-row items-center justify-between">
               <input
-                className="bg-transparent outline-none w-[100%]"
+                className="bg-transparent  rounded-md outline-none w-[100%]"
                 type="text"
                 placeholder="Enter your password"
                 ref={password}
@@ -119,7 +119,7 @@ const ResetPassword = () => {
           <div className="flex flex-col relative">
             <div className="bg-white input-fields px-[23px] py-[15px] mt-[9px] flex flex-row items-center justify-between">
               <input
-                className="bg-transparent outline-none w-[100%]"
+                className="bg-transparent rounded-md outline-none w-[100%]"
                 type="text"
                 placeholder="Confirm your password"
                 ref={confirmPassword}

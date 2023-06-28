@@ -82,7 +82,7 @@ const AddNewUser = ({ setAddPop, addPop }) => {
             Name
           </label>
           <input
-            className="border-2"
+            className="border-2 rounded-md"
             type="text"
             value={name}
             onChange={(e) => {
@@ -93,7 +93,7 @@ const AddNewUser = ({ setAddPop, addPop }) => {
             Email Address
           </label>
           <input
-            className="border-2"
+            className="border-2 rounded-md"
             value={email}
             type="email"
             onChange={(e) => {
