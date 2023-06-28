@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import LoadingScreen from "../Loading/LoadingScreen";
 import NotificationPop from "../NotificationPop/NotificationPop";
 import { socket } from "../../functions/socketConnection";
+import countNotisUnread from "../../functions/countNotisUnread";
 import axios from "axios";
 
 const Navbar = ({ heading }) => {
@@ -20,48 +21,45 @@ const Navbar = ({ heading }) => {
   const refNotification = useRef(null);
   const [tripUpdatesNotis, setTripUpdatesNotis] = useState();
   const [tripCancellationNotis, setTripCancellationNotis] = useState();
-  const [notisUnread, setNotisUnread] = useState(0);
+  const [bookingNotisUnread, setBookingotisUnread] = useState([]);
+  const [cancelNotisUnread, setCancelNotisUnread] = useState([]);
 
   useEffect(() => {
     if (userDetails?.data?.userDetails?.userType === "Admin") {
       socket.on("getCancellationRequest", (response) => {
         setTripCancellationNotis(response);
-        tripCancellationNotis?.data?.map((data, index) => {
-          if (data?.readStatus === false) {
-            setNotisUnread(notisUnread + 1);
-          }
-        });
+        countNotisUnread(response, cancelNotisUnread, setCancelNotisUnread);
       });
     }
 
     socket.on("getCurrentBooking", (response) => {
       setTripUpdatesNotis(response);
-      tripUpdatesNotis?.data?.map((data, index) => {
-        if (data?.readStatus === false) {
-          setNotisUnread(notisUnread + 1);
-        }
-      });
+      countNotisUnread(response, bookingNotisUnread, setBookingotisUnread);
     });
-  },[socket]);
+  }, [socket]);
 
   useEffect(() => {
+    console.log("first");
     if (!tripUpdatesNotis || !tripCancellationNotis) {
       getBookingNotis();
     }
-  });
+  }, []);
+
+  useEffect(() => {
+    console.log("Effect : ", bookingNotisUnread);
+  }, [bookingNotisUnread]);
 
   const getBookingNotis = async () => {
-    console.log("hii");
     const bookingNotisUrl = `${process.env.REACT_APP_NODE_API}/get-booking-notifications/Frontend-user`;
     try {
       const response = await axios.get(bookingNotisUrl);
       setTripUpdatesNotis(response?.data);
 
-      tripUpdatesNotis?.data?.map((data, index) => {
-        if (data?.readStatus === false) {
-          setNotisUnread(notisUnread + 1);
-        }
-      });
+      countNotisUnread(
+        response?.data,
+        bookingNotisUnread,
+        setBookingotisUnread
+      );
     } catch (err) {
       console.log(err);
     }
@@ -69,13 +67,10 @@ const Navbar = ({ heading }) => {
     const cancelBookingNotisUrl = `${process.env.REACT_APP_NODE_API}/get-booking-notifications/Backend-user`;
     try {
       const response = await axios.get(cancelBookingNotisUrl);
+
       setTripCancellationNotis(response?.data);
 
-      tripCancellationNotis?.data?.map((data, index) => {
-        if (data?.readStatus === false) {
-          setNotisUnread(notisUnread + 1);
-        }
-      });
+      countNotisUnread(response?.data, cancelNotisUnread, setCancelNotisUnread);
     } catch (err) {
       console.log(err);
     }
@@ -112,15 +107,17 @@ const Navbar = ({ heading }) => {
             }}
           />
           <p className="absolute top-3 right-[9.2rem] w-6 h-6 tex-xs bg-green-600 text-white text-xs text-center pt-1 rounded-full">
-            {notisUnread}
+            {bookingNotisUnread.length + cancelNotisUnread.length}
           </p>
           {notificationPopup && (
             <NotificationPop
               setNotificationPopup={setNotificationPopup}
               notificationPopup={notificationPopup}
               tripUpdatesNotis={tripUpdatesNotis?.data}
-              notisUnread={notisUnread}
-              setNotisUnread={setNotisUnread}
+              bookingNotisUnread={bookingNotisUnread}
+              setBookingNotisUnread={setBookingotisUnread}
+              cancelNotisUnread={cancelNotisUnread}
+              setCancelNotisUnread={setCancelNotisUnread}
               tripCancellationNotis={tripCancellationNotis}
             />
           )}

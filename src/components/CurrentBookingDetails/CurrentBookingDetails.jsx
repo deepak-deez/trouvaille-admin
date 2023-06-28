@@ -62,10 +62,9 @@ const CurrentBookingDetails = () => {
     setSubmitDelete(false);
     if (userType === "Backend-user") {
       const updateDeleteRequest = `${process.env.REACT_APP_NODE_API}/read-notification/${id}`;
-      console.log(updateDeleteRequest);
+
       try {
         const response = await axios.get(updateDeleteRequest);
-        console.log(response);
       } catch (err) {
         console.log(err);
       }
@@ -153,7 +152,6 @@ const CurrentBookingDetails = () => {
       }
     }
   }, [data]);
-
 
   if (loading) {
     return <LoadingScreen />;
