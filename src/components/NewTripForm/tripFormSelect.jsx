@@ -3,7 +3,7 @@ import { getAllType } from "../../redux/actions/tripAction";
 import { useEffect, useState } from "react";
 
 export const Status = [
-  { label: "Active", value: "Active " },
+  { label: "Active", value: "Active" },
   { label: "In-Active", value: "In-Active" },
 ];
 
@@ -17,6 +17,7 @@ export const GetOptions = () => {
       label: "None",
     },
   ]);
+  const [amenitiesOptions, setAmenitiesOptions] = useState([]);
 
   const [tripCategoryOptions, settripCategoryOptions] = useState([
     {
@@ -60,11 +61,20 @@ export const GetOptions = () => {
             return { label: item.title, value: item.title };
           })
     );
+    setAmenitiesOptions(
+      data &&
+        data?.data
+          ?.filter((item) => item.purpose === "amenity")
+          .map((item) => {
+            return item.title;
+          })
+    );
   }, [data]);
 
   return {
     occassionOptions,
     tripCategoryOptions,
     travelTypeOptions,
+    amenitiesOptions,
   };
 };

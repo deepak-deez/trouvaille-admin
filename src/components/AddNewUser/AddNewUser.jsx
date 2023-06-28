@@ -17,6 +17,7 @@ const AddNewUser = ({ setAddPop, addPop }) => {
   const [email, setEmail] = useState("");
   const [errors, setErrorText] = useState(null);
   const dispatch = useDispatch();
+  const runningPort = window.location.port;
 
   const validateEmail = (e) => {
     setEmail(e.target.value);
@@ -30,7 +31,7 @@ const AddNewUser = ({ setAddPop, addPop }) => {
 
   const addUserHandler = () => {
     if (name && email) {
-      dispatch(addNewUser(name, email, "Backend-user"));
+      dispatch(addNewUser(name, email, "Backend-user", runningPort));
       setName("");
       setEmail("");
     } else {
@@ -81,7 +82,7 @@ const AddNewUser = ({ setAddPop, addPop }) => {
             Name
           </label>
           <input
-            className="border-2"
+            className="border-2 rounded-md"
             type="text"
             value={name}
             onChange={(e) => {
@@ -92,7 +93,7 @@ const AddNewUser = ({ setAddPop, addPop }) => {
             Email Address
           </label>
           <input
-            className="border-2"
+            className="border-2 rounded-md"
             value={email}
             type="email"
             onChange={(e) => {

@@ -11,7 +11,7 @@ export default function SignUp() {
           <p className="mt-[25px] text-[14px]">Email Address</p>
           <div className="bg-white w-100 input-fields px-[23px] py-[10px] mt-[9px]">
             <input
-              className="outline-none"
+              className="outline-none rounded-md"
               type="text"
               placeholder="Enter you email"
             />
@@ -19,7 +19,7 @@ export default function SignUp() {
           <p className="mt-[10px] text-[14px]">Phone Number</p>
           <div className="bg-white w-100 input-fields px-[23px] py-[10px] mt-[9px]">
             <input
-              className="outline-none"
+              className="outline-none rounded-md"
               type="text"
               placeholder="Enter you email"
             />
@@ -27,7 +27,7 @@ export default function SignUp() {
           <p className="mt-[10px] text-[14px]">Password</p>
           <div className="bg-white input-fields px-[23px] mt-[9px] flex flex-row items-center justify-between">
             <input
-              className="bg-transparent w-[100%] py-[10px] outline-none"
+              className="bg-transparent rounded-md w-[100%] py-[10px] outline-none"
               type="text"
               placeholder="Enter you password"
             />
@@ -38,7 +38,7 @@ export default function SignUp() {
           <p className="mt-[10px] text-[14px]">Confirm Password</p>
           <div className="bg-white input-fields px-[23px] mt-[9px] flex flex-row items-center justify-between">
             <input
-              className="bg-transparent w-[100%] py-[10px] outline-none"
+              className="bg-transparent rounded-md w-[100%] py-[10px] outline-none"
               type="text"
               placeholder="Enter you password"
             />

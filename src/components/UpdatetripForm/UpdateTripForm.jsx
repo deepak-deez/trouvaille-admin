@@ -1,9 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  updatePackage,
-} from "../../redux/actions/addPackageActions";
+import { updatePackage } from "../../redux/actions/addPackageActions";
 import tempIcon from "../../assets/images/trip-list/AddNewTrip-icon.svg";
 import MultipleTripForm from "../MultipleTripForm/MultipleTripForm";
 import TagsInput from "../TagsInput/TagsInput";
@@ -23,8 +21,12 @@ import AlertComponent from "../Alerts/AlertComponent";
 const NewTripForm = () => {
   const { id } = useParams();
 
-  const { occassionOptions, tripCategoryOptions, travelTypeOptions } =
-    GetOptions();
+  const {
+    occassionOptions,
+    tripCategoryOptions,
+    travelTypeOptions,
+    amenitiesOptions,
+  } = GetOptions();
   const { data } = useSelector((state) => state.getSinglePackage);
   const {
     data: updatedPackage,
@@ -227,7 +229,6 @@ const NewTripForm = () => {
     }
   }, [error]);
 
-
   return (
     <>
       {loading && <LoadingScreen />}
@@ -396,6 +397,7 @@ const NewTripForm = () => {
               heading="Amenities"
               tags={amenities}
               setTags={setAmenities}
+              options={amenitiesOptions}
             />
           </div>
           <div className="p-2 flex flex-col space-y-2 ">
@@ -440,7 +442,7 @@ const NewTripForm = () => {
                 textPlaceholder="Status"
               />
               <button
-                className="bg-[#CD4B43] rounded-md w-1/2 p-3"
+                className="bg-[#CD4B43] text-white rounded-md w-1/2 p-3"
                 onClick={submitHandler}
               >
                 Submit

@@ -22,7 +22,7 @@ function Faq({ faqFields, setFaqFields, addFaqField }) {
                   <label className=" text-gray-400">Question</label>
                   <input
                     type="text"
-                    className="border-2 p-2 rounded-md w-full"
+                    className="border-2  p-2 rounded-md w-full"
                     onChange={(e) => handleChange(index, e)}
                     value={data.question}
                     name="question"

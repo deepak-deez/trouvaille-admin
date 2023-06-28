@@ -13,6 +13,7 @@ const ForgotPassword = () => {
   const emailRef = useRef();
   const [apiMessage, setApiMessage] = useState("");
   const navigate = useNavigate();
+  const runningPort = window.location.port;
 
   const handleEmailValidation = () => {
     try {
@@ -31,9 +32,10 @@ const ForgotPassword = () => {
       if (emailRef.current.value) {
         const body = {
           email: emailRef.current.value,
+          port: runningPort,
         };
         const response = await axios.post(
-          `${process.env.REACT_APP_NODE_API}/send-reset-mail/Backend-user`,
+          `${URL}/send-reset-mail/Backend-user`,
           body
         );
         setApiMessage(response?.data);
@@ -69,7 +71,7 @@ const ForgotPassword = () => {
           <div className="flex flex-col relative">
             <div className="bg-white input-fields px-[23px] py-[15px] mt-[9px] flex flex-row items-center justify-between">
               <input
-                className="bg-transparent outline-none"
+                className="bg-transparent rounded-md outline-none"
                 type="text"
                 placeholder="Enter you email"
                 ref={emailRef}

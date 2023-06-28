@@ -69,7 +69,7 @@ const UpdatePop = ({
             {titleHeading} Title
           </label>
           <input
-            className="border-2 p-2"
+            className="border-2 rounded-md p-2"
             type="text"
             value={title}
             onChange={(e) => {

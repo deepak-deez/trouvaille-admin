@@ -30,6 +30,8 @@ const User = () => {
   const storeData = store.getState();
   const userType = storeData.userLogin.userDetails?.data.userDetails.userType;
 
+  console.log(window.location.port, " window.location");
+
   useEffect(() => {
     dispatch(getUser("Backend-user"));
   }, []);
