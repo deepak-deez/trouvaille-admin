@@ -11,9 +11,11 @@ const NotificationPop = ({
   setNotificationPopup,
   notificationPopup,
   tripUpdatesNotis,
-  notisUnread,
-  setNotisUnread,
   tripCancellationNotis,
+  bookingNotisUnread,
+  setBookingNotisUnread,
+  cancelNotisUnread,
+  setCancelNotisUnread,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,6 +32,13 @@ const NotificationPop = ({
   const navigateHandler = async ({ target }) => {
     const parentElement = target.parentElement;
     const notificationId = target.getAttribute("data-notification-id");
+    const notificationType = parentElement.getAttribute(
+      "data-notification-type"
+    );
+
+    console.log(parentElement);
+
+    console.log(notificationType);
 
     const markasReadApi =
       process.env.REACT_APP_NODE_API +
@@ -40,11 +49,38 @@ const NotificationPop = ({
       const response = await axios.get(markasReadApi);
 
       if (response.status === 200) {
-        if (notisUnread > 0) {
-          setNotisUnread(notisUnread - 1);
+        if (notificationType === "tripUpdateNotis") {
+          console.log("Update Noti");
+          const bookingNotisUnreadCopy = [...bookingNotisUnread];
+
+          console.log(bookingNotisUnreadCopy);
+
+          const toDelete = bookingNotisUnreadCopy.find(
+            (data) => data._id === notificationId
+          );
+
+          if (!toDelete.readStatus) {
+            bookingNotisUnreadCopy.splice(toDelete, 1);
+          }
+
+          console.log(bookingNotisUnreadCopy);
+
+          setBookingNotisUnread(bookingNotisUnreadCopy);
+        } else {
+          const cancelNotisUnreadCopy = [...cancelNotisUnread];
+
+          const toDelete = cancelNotisUnreadCopy.find(
+            (data) => data._id === notificationId
+          );
+
+          if (!toDelete.readStatus) {
+            cancelNotisUnreadCopy.splice(toDelete, 1);
+          }
+
+          setCancelNotisUnread(cancelNotisUnreadCopy);
         }
 
-        parentElement.classList.toggle("bg-blue-100");
+        parentElement.classList.remove("bg-blue-100");
       }
     } catch (err) {
       console.log(err);
@@ -66,7 +102,7 @@ const NotificationPop = ({
       <div>
         {loading && <Miniloader />}
         <div className="w-full p-3 bg-[#F5F9FF] drop-shadow-2xl  rounded-md h-[35rem] relative">
-          <div className="overflow-y-scroll notification-box max-h-[45%]">
+          <div className="overflow-y-scroll notification-box max-h-[45%] border-b-4  rounded-2xl">
             {tripCancellationNotis &&
               tripCancellationNotis?.data
                 ?.slice(0)
@@ -74,6 +110,7 @@ const NotificationPop = ({
                 .map((item, index) => {
                   return (
                     <div
+                      data-notification-type={"tripCancelNoti"}
                       className={
                         "p-3  rounded-md shadow-lg mb-5 " +
                         (!item?.readStatus ? " bg-blue-100 " : " bg-white ")
@@ -86,7 +123,7 @@ const NotificationPop = ({
                       has been requested for cancellation.{" "}
                       <Link
                         to={
-                          "http://localhost:3000/booking-list/booking-details/" +
+                          "http://localhost:3001/booking-list/booking-details/" +
                           item.refId
                         }
                         className=" text-blue-500 "
@@ -100,15 +137,16 @@ const NotificationPop = ({
                   );
                 })}
           </div>
-          <div className="overflow-y-scroll notification-box max-h-[45%]">
+          <div className="overflow-y-scroll notification-box max-h-[45%] mt-2 border-t-4 rounded-2xl">
             {tripUpdatesNotis
               ?.slice(0)
               .reverse()
               .map((data, index) => {
                 return (
                   <div
+                    data-notification-type={"tripUpdateNotis"}
                     className={
-                      "p-3 flex flex-col gap-2 my-3 booking-notis-card rounded-md shadow-lg " +
+                      "p-3 flex flex-col gap-2 mb-3 booking-notis-card rounded-md shadow-lg " +
                       (!data?.readStatus ? "bg-blue-100" : "bg-white")
                     }
                   >
@@ -135,7 +173,7 @@ const NotificationPop = ({
                     <Link
                       className="bg-orange-500 px-2 w-max flex text-white justify-self-end text-center"
                       to={
-                        "http://localhost:3000/booking-list/booking-details/" +
+                        "http://localhost:3001/booking-list/booking-details/" +
                         data.refId
                       }
                       data-notification-id={data?._id}

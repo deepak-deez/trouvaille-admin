@@ -15,7 +15,7 @@ import store from "../../redux/store";
 import StatusMenu from "../StatusMenu/StatusMenu";
 import AlertComponent from "../Alerts/AlertComponent";
 import { socket } from "../../functions/socketConnection";
-import { format } from "date-fns";
+import axios from "axios";
 
 const CurrentBookingDetails = () => {
   const { data, loading } = useSelector((state) => state.getSingleBooking);
@@ -39,7 +39,6 @@ const CurrentBookingDetails = () => {
   ];
 
   useEffect(() => {
-    console.log("id wala dispatch");
     dispatch(getSingleBooking(id));
   }, [id]);
 
@@ -68,10 +67,9 @@ const CurrentBookingDetails = () => {
     setSubmitDelete(false);
     if (userType === "Backend-user") {
       const updateDeleteRequest = `${process.env.REACT_APP_NODE_API}/read-notification/${id}`;
-      console.log(updateDeleteRequest);
+
       try {
         const response = await axios.get(updateDeleteRequest);
-        console.log(response);
       } catch (err) {
         console.log(err);
       }
@@ -90,14 +88,11 @@ const CurrentBookingDetails = () => {
   };
 
   useEffect(() => {
-    console.log("admin wala dispatch");
     dispatch(getSingleBooking(id));
   }, [deny, cancelPopUp]);
 
   useEffect(() => {
-    console.log(submitDelete, "submitDelete");
     if (submitDelete) {
-      console.log("submit wala dispatch");
       dispatch(getSingleBooking(id));
 
       Swal.fire({
@@ -154,23 +149,16 @@ const CurrentBookingDetails = () => {
   }, [error]);
 
   useEffect(() => {
-    console.log(data);
     if (data !== null) {
-      console.log(data);
       if (data?.data?.cancellationStatus === "true") {
-        console.log(data);
         setRequestedForCancel(true);
-        console.log("set to true");
       } else {
         setRequestedForCancel(false);
-        console.log("set to false");
       }
     }
   }, [data]);
 
-  useEffect(() => {
-    console.log(requestedForCancel);
-  }, [requestedForCancel]);
+  useEffect(() => {}, [requestedForCancel]);
 
   if (loading) {
     return <LoadingScreen />;

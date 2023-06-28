@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { socket } from "../../functions/socketConnection";
 
-
 const CancellationRequest = () => {
   const [response, setResponse] = useState();
 
