@@ -6,6 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import Miniloader from "../MiniLoader/Miniloader";
 import axios from "axios";
 import "./style.scss";
+import Tab from "@mui/material/Tab";
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import TabPanel from "@mui/lab/TabPanel";
+import timestampConvert from "../../functions/timestampConvert";
+import format from "date-fns/format";
 
 const NotificationPop = ({
   setNotificationPopup,
@@ -25,9 +31,14 @@ const NotificationPop = ({
     dispatch(getNotification());
   }, []);
 
+  const [value, setValue] = useState("1");
+
   const handleNavigation = (e) => {
     const navgiteTo = e.target.getAttribute("data-booking-id");
     navigate(navgiteTo);
+  };
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
 
   const navigateHandler = async ({ target }) => {
@@ -81,10 +92,10 @@ const NotificationPop = ({
 
   return (
     <div
-      className="bg-[#F5F9FF] z-50  w-[15rem] sm:w-[25rem] rounded-lg h-[2rem] absolute  top-[3rem] right-[3.5rem]"
-      onClick={() => {
-        setNotificationPopup(false);
-      }}
+      className="bg-[#F5F9FF] z-50  w-[15rem] sm:w-[25rem] rounded-lg h-[2rem] absolute  top-[3rem] right-[4rem] sm:right-[4.3rem] md:right-[4.6rem]"
+      // onClick={() => {
+      //   setNotificationPopup(false);
+      // }}
     >
       <div
         className="arrow-up absolute right-3 sm:right-[5rem] top-[-10px]
@@ -93,92 +104,122 @@ const NotificationPop = ({
 
       <div>
         {loading && <Miniloader />}
-        <div className="w-full p-3 bg-[#F5F9FF] drop-shadow-2xl  rounded-md h-[35rem] relative">
-          <div className="overflow-y-scroll notification-box max-h-[45%] border-b-4  rounded-2xl">
-            {tripCancellationNotis &&
-              tripCancellationNotis?.data
-                ?.slice(0)
-                .reverse()
-                .map((item, index) => {
-                  return (
-                    <div
-                      data-notification-type={"tripCancelNoti"}
-                      className={
-                        "p-3  rounded-md shadow-lg mb-5 " +
-                        (!item?.readStatus ? " bg-blue-100 " : " bg-white ")
-                      }
-                      key={index}
-                    >
-                      Booking for{" "}
-                      <span className="text-[#E75C54]">{item.title}</span> on{" "}
-                      <span className="text-[#E75C54]">{item.createdAt}</span>{" "}
-                      has been requested for cancellation.{" "}
-                      <Link
-                        to={
-                          `http://localhost:${runningPort}/booking-list/booking-details/` +
-                          item.refId
+        <div className="w-full  bg-[#F5F9FF] drop-shadow-2xl  rounded-md h-[35rem] overflow-auto relative">
+          <TabContext value={value}>
+            <div className="sticky top-0 bg-white py-1">
+              <TabList
+                onChange={handleChange}
+                aria-label="lab API tabs example"
+              >
+                <Tab label="Bookings" value="1" />
+                <Tab label="Booking Update" value="2" />
+              </TabList>
+            </div>
+            <TabPanel value="1">
+              <div className="overflow-y-scroll notification-box max-h-[45%] border-b-4  rounded-2xl">
+                {tripCancellationNotis &&
+                  tripCancellationNotis?.data
+                    ?.slice(0)
+                    .reverse()
+                    .map((item, index) => {
+                      return (
+                        <div
+                          data-notification-type={"tripCancelNoti"}
+                          className={
+                            "p-3  rounded-md shadow-lg mb-5 " +
+                            (!item?.readStatus ? " bg-blue-100 " : " bg-white ")
+                          }
+                          key={index}
+                        >
+                          Booking for{" "}
+                          <span className="text-[#E75C54]">{item.title}</span>{" "}
+                          on{" "}
+                          <span className="text-[#E75C54]">
+                            {item.createdAt}
+                          </span>{" "}
+                          has been requested for cancellation.{" "}
+                          <Link
+                            to={
+                              `http://localhost:${runningPort}/booking-list/booking-details/` +
+                              item.refId
+                            }
+                            className=" text-blue-600 "
+                            data-notification-id={item?._id}
+                            data-ref-id={item?.refId}
+                            onClick={() => {
+                              setNotificationPopup(false);
+                              navigateHandler();
+                            }}
+                          >
+                            View Details
+                          </Link>
+                        </div>
+                      );
+                    })}
+              </div>
+            </TabPanel>
+            <TabPanel value="2">
+              <div className="overflow-y-scroll notification-box max-h-[45%] mt-2 border-t-4 rounded-2xl">
+                {tripUpdatesNotis
+                  ?.slice(0)
+                  .reverse()
+                  .map((data, index) => {
+                    return (
+                      <div
+                        data-notification-type={"tripUpdateNotis"}
+                        className={
+                          "p-3 flex flex-col gap-2 mb-3 booking-notis-card rounded-md shadow-lg " +
+                          (!data?.readStatus ? "bg-blue-100" : "bg-white")
                         }
-                        className=" text-blue-500 "
-                        data-notification-id={item?._id}
-                        data-ref-id={item?.refId}
-                        onClick={navigateHandler}
                       >
-                        View Details
-                      </Link>
-                    </div>
-                  );
-                })}
-          </div>
-          <div className="overflow-y-scroll notification-box max-h-[45%] mt-2 border-t-4 rounded-2xl">
-            {tripUpdatesNotis
-              ?.slice(0)
-              .reverse()
-              .map((data, index) => {
-                return (
-                  <div
-                    data-notification-type={"tripUpdateNotis"}
-                    className={
-                      "p-3 flex flex-col gap-2 mb-3 booking-notis-card rounded-md shadow-lg " +
-                      (!data?.readStatus ? "bg-blue-100" : "bg-white")
-                    }
-                  >
-                    <h4 className="text-black">{data.title}</h4>
-                    <p>
-                      New Trip has been booked on location :{" "}
-                      <span className="text-blue-500">{data.description}</span>
-                    </p>
-                    <p>
-                      Name :{" "}
-                      <span className="text-blue-500">{data.userName}</span>
-                    </p>
-                    <p>
-                      Email :{" "}
-                      <span className="text-blue-500">{data.userEmail}</span>
-                    </p>
-                    <p>
-                      Booked From User ID :{" "}
-                      <span className="text-blue-500">{data.userId}</span>
-                    </p>
-                    <p className="text-end text-xs text-gray-300">
-                      At {data.createdAt}
-                    </p>
-                    <Link
-                      className="bg-orange-500 px-2 w-max flex text-white justify-self-end text-center"
-                      to={
-                        `http://localhost:${runningPort}/booking-list/booking-details/` +
-                        data.refId
-                      }
-                      data-notification-id={data?._id}
-                      data-ref-id={data?.refId}
-                      onClick={navigateHandler}
-                    >
-                      View Details
-                    </Link>
-                  </div>
-                );
-              })}
-          </div>
-          <div className="flex text-center  flex-col sjustify-center items-center space-y-2 p-2 sticky bottom-0">
+                        <h4 className="text-black">{data.title}</h4>
+                        <p>
+                          New Trip has been booked on location :{" "}
+                          <span className="text-[#CD4B43]">
+                            {data.description}
+                          </span>
+                        </p>
+                        <p>
+                          Name :{" "}
+                          <span className="text-[#CD4B43]">
+                            {data.userName}
+                          </span>
+                        </p>
+                        <p>
+                          Email :{" "}
+                          <span className="text-[#CD4B43]">
+                            {data.userEmail}
+                          </span>
+                        </p>
+                        <p>
+                          Booked From User ID :{" "}
+                          <span className="text-[#CD4B43]">{data.userId}</span>
+                        </p>
+                        <p className="text-end text-xs text-[#CD4B43]">
+                          At {data.createdAt}
+                        </p>
+                        <Link
+                          className="bg-[#CD4B43] rounded-md p-2 w-max flex text-white justify-self-end text-center"
+                          to={
+                            `http://localhost:${runningPort}/booking-list/booking-details/` +
+                            data.refId
+                          }
+                          data-notification-id={data?._id}
+                          data-ref-id={data?.refId}
+                          onClick={() => {
+                            setNotificationPopup(false);
+                            navigateHandler();
+                          }}
+                        >
+                          View Details
+                        </Link>
+                      </div>
+                    );
+                  })}
+              </div>
+            </TabPanel>
+          </TabContext>
+          <div className="flex text-center w-full bg-white flex-col justify-center items-center  px-2 py-3 sticky bottom-0">
             <button
               className=" w-[80%] bg-[#E75C54] p-1 rounded-md text-white hover:brightness-90 transition-all duration-200 "
               onClick={() => {

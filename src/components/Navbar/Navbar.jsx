@@ -19,6 +19,7 @@ const Navbar = ({ heading }) => {
   const navigate = useNavigate();
   const refProfile = useRef(null);
   const refNotification = useRef(null);
+  const refTabs = useRef(null);
   const [tripUpdatesNotis, setTripUpdatesNotis] = useState();
   const [tripCancellationNotis, setTripCancellationNotis] = useState();
   const [bookingNotisUnread, setBookingNotisUnread] = useState([]);
@@ -97,23 +98,25 @@ const Navbar = ({ heading }) => {
     <div className="flex justify-between sticky py-5 top-0 w-full z-50 items-center bg-[#dbe6f5] xl:m-0 col-span-10 p-5">
       <h2 className="font-bold ml-10 ">{heading}</h2>
       <div className="flex justify-center items-center px-5 space-x-2 cursor-pointer">
-        <div ref={refNotification} className="realtive">
-          <MdNotificationsNone
-            className="hover:cursor-pointer relative  w-6 h-6"
-            onClick={() => {
-              setNotificationPopup(!notificationPopup);
-            }}
-          />
-          <p
-            className={
-              "absolute top-3 right-[9.2rem] w-6 h-6 tex-xs bg-blue-500 text-white text-xs text-center pt-1 rounded-full" +
-              (bookingNotisUnread.length + cancelNotisUnread.length <= 0
-                ? " hidden "
-                : " block ")
-            }
-          >
-            {bookingNotisUnread.length + cancelNotisUnread.length}
-          </p>
+        <div ref={refNotification}>
+          <div className="relative">
+            <MdNotificationsNone
+              className="hover:cursor-pointer   w-6 h-6"
+              onClick={() => {
+                setNotificationPopup(!notificationPopup);
+              }}
+            />
+            <p
+              className={
+                "absolute top-[-0.8rem] left-2  w-6 h-6 bg-blue-500 text-white text-xs text-center pt-1 rounded-full" +
+                (bookingNotisUnread.length + cancelNotisUnread.length <= 0
+                  ? " hidden "
+                  : " block ")
+              }
+            >
+              {bookingNotisUnread.length + cancelNotisUnread.length}
+            </p>
+          </div>
           {notificationPopup && (
             <NotificationPop
               setNotificationPopup={setNotificationPopup}

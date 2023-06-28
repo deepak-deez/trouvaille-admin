@@ -26,9 +26,9 @@ const ProfilePop = ({ setProfilePop, profilePop }) => {
 
   return (
     <>
-      <div className="bg-[#F5F9FF] z-30  w-[15rem] rounded-lg absolute  top-8 right-[-0.5rem]">
+      <div className="bg-[#F5F9FF] z-30  w-[15rem] rounded-lg absolute  top-8 right-[-0.8rem]">
         <div
-          className="arrow-up absolute right-[80px] top-[-10px]
+          className="arrow-up absolute  right-[15px]  md:right-[95px] top-[-10px]
             "
         ></div>
 
