@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { socket } from "../../functions/socketConnection";
 
@@ -7,7 +8,8 @@ const CancellationRequest = () => {
   const [response, setResponse] = useState();
 
   const API = process.env.REACT_APP_NODE_API;
-
+  const { userDetails } = useSelector((state) => state.userLogin);
+  const [tripCancellationNotis, setTripCancellationNotis] = useState();
   const [notisUnread, setNotisUnread] = useState([]);
   const [statusNotis, setStatusNotis] = useState();
   const runningPort = window.location.port;
@@ -15,6 +17,19 @@ const CancellationRequest = () => {
   useEffect(() => {
     if (!statusNotis) {
       getAllNotifications();
+    }
+
+    if (userDetails?.data?.userDetails?.userType === "Admin") {
+      socket.on("getCancellationRequest", (response) => {
+        setTripCancellationNotis(response);
+        response?.data?.data?.forEach((data) => {
+          if (data?.readStatus === false) {
+            setNotisUnread((notisUnread) => {
+              return notisUnread + 1;
+            });
+          }
+        });
+      });
     }
 
     socket.on("getCurrentBooking", (res) => {
@@ -81,8 +96,11 @@ const CancellationRequest = () => {
 
   return (
     <div className="w-full bg-white p-2 flex flex-col gap-5 h-[85vh] overflow-auto  ">
-      {response?.data
-        ? response?.data?.data.map((item, index) => {
+      {tripCancellationNotis &&
+        tripCancellationNotis?.data
+          ?.slice(0)
+          .reverse()
+          .map((item, index) => {
             return (
               <p className="mx-5 p-3 rounded-lg bg-[#F5F9FF]" key={index}>
                 Booking for {item.title} on {item.date} has been requested for
@@ -98,8 +116,7 @@ const CancellationRequest = () => {
                 </Link>
               </p>
             );
-          })
-        : ""}
+          })}
       {/* <div className="h-[50vh]"> */}
       {statusNotis?.data
         ?.slice(0)
@@ -146,7 +163,6 @@ const CancellationRequest = () => {
             </div>
           );
         })}
-      {/* </div> */}
     </div>
   );
 };
