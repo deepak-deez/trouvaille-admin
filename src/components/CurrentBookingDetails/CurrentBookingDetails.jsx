@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getSingleBooking,
   updateBooking,
-  getBooking,
   updateBookingStatus,
 } from "../../redux/actions/bookingActions";
 import Swal from "sweetalert2";
@@ -15,7 +14,7 @@ import store from "../../redux/store";
 import StatusMenu from "../StatusMenu/StatusMenu";
 import AlertComponent from "../Alerts/AlertComponent";
 import { socket } from "../../functions/socketConnection";
-import { format } from "date-fns";
+import axios from "axios";
 
 const CurrentBookingDetails = () => {
   const { data, loading } = useSelector((state) => state.getSingleBooking);
@@ -33,19 +32,14 @@ const CurrentBookingDetails = () => {
   let { id } = useParams();
 
   const options = [
-    { label: "Confirm", value: "Confirm " },
+    { label: "Confirm", value: "Confirm" },
     { label: "Pending", value: "Pending" },
     { label: "Completed", value: "Completed" },
   ];
 
   useEffect(() => {
-    console.log("id wala dispatch");
     dispatch(getSingleBooking(id));
   }, [id]);
-
-  // useEffect(() => {
-  //   dispatch(getSingleBooking(id));
-  // }, []);
 
   useEffect(() => {
     if (data && data.data) {
@@ -90,14 +84,11 @@ const CurrentBookingDetails = () => {
   };
 
   useEffect(() => {
-    console.log("admin wala dispatch");
     dispatch(getSingleBooking(id));
   }, [deny, cancelPopUp]);
 
   useEffect(() => {
-    console.log(submitDelete, "submitDelete");
     if (submitDelete) {
-      console.log("submit wala dispatch");
       dispatch(getSingleBooking(id));
 
       Swal.fire({
@@ -105,7 +96,7 @@ const CurrentBookingDetails = () => {
         icon: "success",
         title: "Done!",
         text: `Booking  ${
-          userType === "Admin" ? "cancelled!" : "requested for cancellation!"
+          userType === "Admin" ? "Cancelled!" : "requested for cancellation!"
         }`,
         showConfirmButton: false,
         toast: true,
@@ -154,23 +145,15 @@ const CurrentBookingDetails = () => {
   }, [error]);
 
   useEffect(() => {
-    console.log(data);
     if (data !== null) {
-      console.log(data);
       if (data?.data?.cancellationStatus === "true") {
-        console.log(data);
         setRequestedForCancel(true);
-        console.log("set to true");
       } else {
         setRequestedForCancel(false);
-        console.log("set to false");
       }
     }
   }, [data]);
 
-  useEffect(() => {
-    console.log(requestedForCancel);
-  }, [requestedForCancel]);
 
   if (loading) {
     return <LoadingScreen />;
@@ -199,7 +182,7 @@ const CurrentBookingDetails = () => {
                     ? requestedForCancel !== true
                       ? "flex"
                       : "hidden"
-                    : data && data.data.bookingStatus !== "cancelled"
+                    : data && data.data.bookingStatus !== "Cancelled"
                     ? "flex"
                     : "hidden"
                 }

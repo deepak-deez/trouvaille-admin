@@ -8,6 +8,7 @@ import {
   strongRegexPassword,
 } from "../../../constants/regex";
 import swal from "sweetalert2";
+import AlertComponent from "../../Alerts/AlertComponent";
 
 const ResetPassword = () => {
   const password = useRef();
@@ -37,21 +38,20 @@ const ResetPassword = () => {
             resetNewPassword
           );
           if (response?.data?.success) {
+            AlertComponent("success", response?.data, "");
             localStorage.removeItem("password");
-            navigate("/");
+            setTimeout(() => {
+              navigate("/");
+            }, 2000);
           }
         }
       } else {
-        swal.fire({
-          icon: "Warning",
-          title: "Warning!",
-          text: "Fields can't be empty",
-          timer: "2500",
-          buttons: true,
-        });
+        AlertComponent("warning", "", "Fields can't be empty");
       }
     } catch (err) {}
   };
+
+  console.log(resetNewPassword);
 
   const checkValidPassword = () => {
     try {
@@ -121,7 +121,7 @@ const ResetPassword = () => {
               <input
                 className="bg-transparent outline-none w-[100%]"
                 type="text"
-                placeholder="confirm your password"
+                placeholder="Confirm your password"
                 ref={confirmPassword}
                 onChange={handlePasswordCheck}
               />

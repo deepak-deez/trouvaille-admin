@@ -3,7 +3,7 @@ import { getAllType } from "../../redux/actions/tripAction";
 import { useEffect, useState } from "react";
 
 export const Status = [
-  { label: "Active", value: "Active " },
+  { label: "Active", value: "Active" },
   { label: "In-Active", value: "In-Active" },
 ];
 

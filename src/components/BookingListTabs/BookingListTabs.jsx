@@ -35,9 +35,9 @@ const BookingListTabs = (props) => {
       <div
         className={
           "p-3 text-center " +
-          (activeStatusTab === "cancelled" ? "text-red-400 active-tab" : "")
+          (activeStatusTab === "Cancelled" ? "text-red-400 active-tab" : "")
         }
-        onClick={() => setActiveStatusTab("cancelled")}
+        onClick={() => setActiveStatusTab("Cancelled")}
       >
         Cancelled
       </div>

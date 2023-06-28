@@ -5,7 +5,7 @@ export const statusColor = (status) => {
         return "green";
     else if (status === "completed" || status === "Completed")
         return "blue";
-    else if (status === "Cancelled" || status === "Cancelled")
+    else if (status === "cancelled" || status === "Cancelled")
         return "red";
     else
         return "cyan"

@@ -13,6 +13,7 @@ const ForgotPassword = () => {
   const emailRef = useRef();
   const [apiMessage, setApiMessage] = useState("");
   const navigate = useNavigate();
+  const runningPort = window.location.port;
 
   const handleEmailValidation = () => {
     try {
@@ -31,9 +32,10 @@ const ForgotPassword = () => {
       if (emailRef.current.value) {
         const body = {
           email: emailRef.current.value,
+          port: runningPort,
         };
         const response = await axios.post(
-          `${process.env.REACT_APP_NODE_API}/send-reset-mail/Backend-user`,
+          `${URL}/send-reset-mail/Backend-user`,
           body
         );
         setApiMessage(response?.data);
