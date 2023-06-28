@@ -37,10 +37,6 @@ const NotificationPop = ({
       "data-notification-type"
     );
 
-    console.log(parentElement);
-
-    console.log(notificationType);
-
     const markasReadApi =
       process.env.REACT_APP_NODE_API +
       "/set-notification-mark-read/" +
@@ -51,10 +47,7 @@ const NotificationPop = ({
 
       if (response.status === 200) {
         if (notificationType === "tripUpdateNotis") {
-          console.log("Update Noti");
           const bookingNotisUnreadCopy = [...bookingNotisUnread];
-
-          console.log(bookingNotisUnreadCopy);
 
           const toDelete = bookingNotisUnreadCopy.find(
             (data) => data._id === notificationId
@@ -63,8 +56,6 @@ const NotificationPop = ({
           if (!toDelete.readStatus) {
             bookingNotisUnreadCopy.splice(toDelete, 1);
           }
-
-          console.log(bookingNotisUnreadCopy);
 
           setBookingNotisUnread(bookingNotisUnreadCopy);
         } else {
