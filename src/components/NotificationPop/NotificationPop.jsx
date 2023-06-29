@@ -91,12 +91,7 @@ const NotificationPop = ({
   };
 
   return (
-    <div
-      className="bg-[#F5F9FF] z-50  w-[15rem] sm:w-[25rem] rounded-lg h-[2rem] absolute  top-[3rem] right-[4rem] sm:right-[4.3rem] md:right-[4.6rem]"
-      // onClick={() => {
-      //   setNotificationPopup(false);
-      // }}
-    >
+    <div className="bg-[#F5F9FF] z-50  w-[15rem] sm:w-[25rem] rounded-lg h-[2rem] absolute  top-[3rem] right-[4rem] sm:right-[4.3rem] md:right-[4.6rem]">
       <div
         className="arrow-up absolute right-3 sm:right-[5rem] top-[-10px]
             "
@@ -104,19 +99,19 @@ const NotificationPop = ({
 
       <div>
         {loading && <Miniloader />}
-        <div className="w-full h-full  bg-[#F5F9FF] drop-shadow-2xl  rounded-md max-h-[35rem] overflow-auto relative">
+        <div className="w-full h-full bg-[#F5F9FF] drop-shadow-2xl  rounded-md max-h-[35rem] overflow-auto relative">
           <TabContext value={value}>
             <div className="sticky top-0 bg-white py-1">
               <TabList
                 onChange={handleChange}
                 aria-label="lab API tabs example"
               >
-                <Tab label="Bookings" value="1" />
+                <Tab label="Requests" value="1" />
                 <Tab label="Booking Update" value="2" />
               </TabList>
             </div>
             <TabPanel value="1">
-              <div className="overflow-y-scroll notification-box max-h-[45%] border-b-4  rounded-2xl">
+              <div className="overflow-y-scroll notification-box max-h-[45%] rounded-2xl">
                 {tripCancellationNotis &&
                   tripCancellationNotis?.data
                     ?.slice(0)
@@ -163,7 +158,7 @@ const NotificationPop = ({
               </div>
             </TabPanel>
             <TabPanel value="2">
-              <div className="overflow-y-scroll notification-box max-h-[45%] mt-2 border-t-4 rounded-2xl">
+              <div className="overflow-y-scroll notification-box max-h-[45%] rounded-2xl">
                 {tripUpdatesNotis
                   ?.slice(0)
                   .reverse()

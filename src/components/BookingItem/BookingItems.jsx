@@ -12,6 +12,7 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import InfoIcon from "@mui/icons-material/Info";
 import Pagination from "../Pagination/Pagination";
 import Nodata from "../Nodata/Nodata";
+import defautNotFoundImage from "../../assets/images/booking/defaultImage.jpg";
 import { statusColor } from "../../functions/statusColor";
 
 let PageSize = 4;
@@ -85,8 +86,11 @@ const BookingItems = (props) => {
                               className="md:w-[62px] min-w-[62px] max-h-[250px] max-w-[350px] md:h-[62px] object-fill w-[90%] h-80 rounded-md my-4 md:my-0"
                               src={items.tripDetails?.image}
                               alt="Package-Icon"
+                              onError={({ currentTarget }) => {
+                                currentTarget.onerror = null;
+                                currentTarget.src = defautNotFoundImage;
+                              }}
                             />
-
                             <span className="font-semibold truncate text-start text-ellipsis overflow-hidden">
                               {items?.title}
                             </span>

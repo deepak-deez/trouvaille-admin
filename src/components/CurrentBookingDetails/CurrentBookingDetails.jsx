@@ -14,6 +14,7 @@ import store from "../../redux/store";
 import StatusMenu from "../StatusMenu/StatusMenu";
 import AlertComponent from "../Alerts/AlertComponent";
 import { socket } from "../../functions/socketConnection";
+import defaultBookingImg from "../../assets/images/booking/defaultImage.jpg";
 import axios from "axios";
 
 const CurrentBookingDetails = () => {
@@ -165,7 +166,11 @@ const CurrentBookingDetails = () => {
                 <img
                   className="object-cover w-[350px] h-[350px] sm:w-full md:w-full md:h-[400px] rounded-md"
                   src={data?.data.tripDetails?.image}
-                  alt="img1"
+                  alt="booking-img"
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null;
+                    currentTarget.src = defaultBookingImg;
+                  }}
                 />
               </div>
             </div>

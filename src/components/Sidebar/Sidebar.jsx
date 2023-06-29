@@ -56,14 +56,14 @@ const Sidebar = (props) => {
           }` + (closingAnimation ? openningAnimaionName : closingAnimationName)
         }
       >
-        <div
-          className="h-full"
-          onClick={() => {
-            navigate("/");
-          }}
-        >
-          <div className={`sidebar-logo flex p-3 px-4 `}>
-            <div className="flex justify-center px-3 items-center">
+        <div className="h-full">
+          <div className={`sidebar-logo flex p-3 px-4 cursor-pointer`}>
+            <div
+              className="flex justify-center px-3 items-center"
+              onClick={() => {
+                navigate("/");
+              }}
+            >
               <img src={mainLogo} alt="logo" />
             </div>
             <div className="flex flex-col justify-start items-start">
