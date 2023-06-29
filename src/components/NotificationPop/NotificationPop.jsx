@@ -104,7 +104,7 @@ const NotificationPop = ({
 
       <div>
         {loading && <Miniloader />}
-        <div className="w-full  bg-[#F5F9FF] drop-shadow-2xl  rounded-md h-[35rem] overflow-auto relative">
+        <div className="w-full h-full  bg-[#F5F9FF] drop-shadow-2xl  rounded-md max-h-[35rem] overflow-auto relative">
           <TabContext value={value}>
             <div className="sticky top-0 bg-white py-1">
               <TabList
@@ -135,7 +135,11 @@ const NotificationPop = ({
                           <span className="text-[#E75C54]">{item.title}</span>{" "}
                           on{" "}
                           <span className="text-[#E75C54]">
-                            {item.createdAt}
+                            {format(
+                              new Date(item.createdAt.split("T")[0]),
+                              "dd/MM/yyyy"
+                            )}{" "}
+                            {timestampConvert(item.createdAt)}
                           </span>{" "}
                           has been requested for cancellation.{" "}
                           <Link
@@ -196,7 +200,11 @@ const NotificationPop = ({
                           <span className="text-[#CD4B43]">{data.userId}</span>
                         </p>
                         <p className="text-end text-xs text-[#CD4B43]">
-                          At {data.createdAt}
+                          {format(
+                            new Date(data.createdAt.split("T")[0]),
+                            "dd/MM/yyyy"
+                          )}{" "}
+                          {timestampConvert(data.createdAt)}
                         </p>
                         <Link
                           className="bg-[#CD4B43] rounded-md p-2 w-max flex text-white justify-self-end text-center"

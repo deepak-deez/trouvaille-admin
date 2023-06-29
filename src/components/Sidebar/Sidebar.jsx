@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./Sidebar.scss";
 import mainLogo from "../../assets/images/navbar/Site-logo.svg";
 import SideBarLinks from "./sidebarData";
@@ -13,6 +13,7 @@ const Sidebar = (props) => {
   const [closingAnimation, setClosingAnimation] = useState(false);
   const [openningAnimaionName, setOpenningAnimaionName] = useState("");
   const [closingAnimationName, setClosingAnimationName] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const windowWidth = window.innerWidth;
@@ -39,7 +40,6 @@ const Sidebar = (props) => {
 
   return (
     <>
-      {/* <div className="p-4 xl:p-0 relative"> */}
       <button
         className="navbar_toggle absolute top-[1rem] left-2 block xl:hidden bg-[#E85C53] text-white hover:text-white px-2 py-1 "
         style={{
@@ -49,7 +49,6 @@ const Sidebar = (props) => {
       >
         <i className="fa-solid fa-bars"></i>
       </button>
-      {/* </div> */}
       <div
         className={
           `mainSideBar md:overflow-auto z-[90] h-screen fixed top-0 xl:static xl:flex w-full sm:w-[60%] lg:w-[40%] 2xl:w-[30%] p-5 flex-col bg-white  sidebar-shadow  ${
@@ -57,7 +56,12 @@ const Sidebar = (props) => {
           }` + (closingAnimation ? openningAnimaionName : closingAnimationName)
         }
       >
-        <div className="h-full">
+        <div
+          className="h-full"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
           <div className={`sidebar-logo flex p-3 px-4 `}>
             <div className="flex justify-center px-3 items-center">
               <img src={mainLogo} alt="logo" />
