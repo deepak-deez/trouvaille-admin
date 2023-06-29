@@ -161,7 +161,13 @@ const CancellationRequest = () => {
                     >
                       Booking for{" "}
                       <span className="text-[#E75C54]">{item.title}</span> on{" "}
-                      <span className="text-[#E75C54]">{item.createdAt}</span>{" "}
+                      <span className="text-[#E75C54]">
+                        {format(
+                          new Date(item.createdAt.split("T")[0]),
+                          "dd/MM/yyyy"
+                        )}{" "}
+                        {timestampConvert(item.createdAt)}
+                      </span>{" "}
                       has been requested for cancellation.{" "}
                       <Link
                         to={

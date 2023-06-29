@@ -108,7 +108,7 @@ const Navbar = ({ heading }) => {
             />
             <p
               className={
-                "absolute top-[-0.8rem] left-2  w-6 h-6 bg-blue-500 text-white text-xs text-center pt-1 rounded-full" +
+                "absolute top-[-0.5rem] left-[-0.7rem]  w-6 h-6 bg-blue-500 text-white text-xs text-center pt-1 rounded-full" +
                 (bookingNotisUnread.length + cancelNotisUnread.length <= 0
                   ? " hidden "
                   : " block ")
