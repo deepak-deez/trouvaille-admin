@@ -152,7 +152,6 @@ const NewTripForm = () => {
       formData.append("maximumGuests", maximumGuests);
 
       for (let i = 0; i < inputFields.length; i++) {
-        console.log(inputFields[i].images);
         if (inputFields[i].images.length > 0) {
           formData.append("images", inputFields[i].images);
         } else {

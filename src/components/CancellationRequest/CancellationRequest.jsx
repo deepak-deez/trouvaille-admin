@@ -61,7 +61,6 @@ const CancellationRequest = () => {
         setBookingNotisUnread
       );
     } catch (err) {
-      console.log(err);
     }
 
     const cancelBookingNotisUrl = `${process.env.REACT_APP_NODE_API}/get-booking-notifications/Backend-user`;

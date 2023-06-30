@@ -37,7 +37,6 @@ const TagsInput = ({ heading, tags, setTags, options }) => {
     document.addEventListener("click", handleClickOutside, "true");
   }, []);
 
-  console.log(options);
 
   const [state, setState] = useState({
     filteredOptions: [],

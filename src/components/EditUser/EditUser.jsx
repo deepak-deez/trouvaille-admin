@@ -22,13 +22,11 @@ const EditUser = ({ editPop, setEditPop, data }) => {
   const [errorText, setErrorText] = useState(null);
   const navigate = useNavigate();
 
-  console.log(data);
 
   const id = data._id || data?.data?.userDetails?._id;
   const dispatch = useDispatch();
 
   const updateHandler = () => {
-    console.log(name, phone, email);
     if (email && phone && name) {
       dispatch(updateUser(id, name, email, phone, "Backend-user"));
     } else {
@@ -51,7 +49,6 @@ const EditUser = ({ editPop, setEditPop, data }) => {
 
   let newUserData = { ...userDetails };
   useEffect(() => {
-    console.log(userType === "Backend-user" && updatedUser?.success);
     if (userType === "Backend-user" && updatedUser?.success) {
       const updatedDetails = updatedUser?.data?.adminDetails;
       newUserData.data.userDetails.email = updatedDetails?.email;

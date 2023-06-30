@@ -58,7 +58,6 @@ const CancelDialog = (props) => {
       socket.emit("sendCancellationRequest", notificationObj);
     } else if (userType === "Admin") {
       handleResponse();
-      console.log("hii");
       props.setSubmitDelete(true);
       setCancelPopUp(false);
       setTimeout(() => {
