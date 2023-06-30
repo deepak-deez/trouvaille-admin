@@ -5,7 +5,6 @@ export const CheckUrlPath = () => {
   const location = useLocation();
   const path = location.pathname;
   let component;
-  console.log(path);
   if (
     path === "/signup" ||
     path === "/forgot-password" ||

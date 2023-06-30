@@ -33,10 +33,6 @@ const NotificationPop = ({
 
   const [value, setValue] = useState("1");
 
-  const handleNavigation = (e) => {
-    const navgiteTo = e.target.getAttribute("data-booking-id");
-    navigate(navgiteTo);
-  };
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -145,9 +141,9 @@ const NotificationPop = ({
                             className=" text-blue-600 "
                             data-notification-id={item?._id}
                             data-ref-id={item?.refId}
-                            onClick={() => {
+                            onClick={(e) => {
                               setNotificationPopup(false);
-                              navigateHandler();
+                              navigateHandler(e);
                             }}
                           >
                             View Details
@@ -170,6 +166,7 @@ const NotificationPop = ({
                           "p-3 flex flex-col gap-2 mb-3 booking-notis-card rounded-md shadow-lg " +
                           (!data?.readStatus ? "bg-blue-100" : "bg-white")
                         }
+                        key={index}
                       >
                         <h4 className="text-black">{data.title}</h4>
                         <p>
@@ -209,9 +206,9 @@ const NotificationPop = ({
                           }
                           data-notification-id={data?._id}
                           data-ref-id={data?.refId}
-                          onClick={() => {
+                          onClick={(e) => {
+                            navigateHandler(e);
                             setNotificationPopup(false);
-                            navigateHandler();
                           }}
                         >
                           View Details

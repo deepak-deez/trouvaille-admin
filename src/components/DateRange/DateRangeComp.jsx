@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { DateRange } from "react-date-range";
 import calendarIcon from "../../assets/images/trip-list/calender-icon.svg";
-// import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import format from "date-fns/format";
 
 import "react-date-range/dist/styles.css";

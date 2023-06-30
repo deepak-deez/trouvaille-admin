@@ -114,7 +114,7 @@ const CurrentBookingDetails = () => {
         userType: "User",
         title: "Trip Update",
         description: `Your Trip with ${id} has been updated!`,
-        refId: data?.data.tripId,
+        refId: id,
         userId: data?.data.userId,
         createdAt: new Date(),
         readStatus: false,
