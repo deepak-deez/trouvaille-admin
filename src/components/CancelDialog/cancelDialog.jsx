@@ -18,7 +18,6 @@ const CancelDialog = (props) => {
     loading,
   } = useSelector((state) => state.deleteBooking);
 
-
   const storeData = store.getState();
   const { data: updatedBooking } = useSelector((state) => state.updateBooking);
   const { setCancelPopUp, id } = props;
@@ -62,7 +61,6 @@ const CancelDialog = (props) => {
       setCancelPopUp(false);
       setTimeout(() => {
         dispatch({ type: "DELETE_BOOKING_SUCCESS", payload: null });
-        // navigate("/booking-list");
       }, 1500);
     }
   };

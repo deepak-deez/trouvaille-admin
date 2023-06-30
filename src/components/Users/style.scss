@@ -1,15 +1,7 @@
 tbody tr:nth-child(odd) {
-    background-color: #F5F9FF;
-  }
+  background-color: #f5f9ff;
+}
 
 .red-dot {
-  color: #E75C54;
-} 
-
-// .tr-class {
-//   @apply flex flex-col mb-4 sm:table-row
-// }
-
-// .td-class {
-//   @apply px-4 py-3 first:rounded-t-lg last:rounded-b-lg sm:first:rounded-t-none sm:last:rounded-b-none sm:first:rounded-tl-lg sm:first:rounded-bl-lg sm:last:rounded-tr-lg sm:last:rounded-br-lg
-// }
+  color: #e75c54;
+}

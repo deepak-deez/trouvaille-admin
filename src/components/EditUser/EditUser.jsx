@@ -22,7 +22,6 @@ const EditUser = ({ editPop, setEditPop, data }) => {
   const [errorText, setErrorText] = useState(null);
   const navigate = useNavigate();
 
-
   const id = data._id || data?.data?.userDetails?._id;
   const dispatch = useDispatch();
 
@@ -110,7 +109,6 @@ const EditUser = ({ editPop, setEditPop, data }) => {
             className="border-2 rounded-md p-2"
             type="number"
             value={phone}
-            // maxLength={10}
             max={10}
             onChange={(e) => {
               let phoneVal = e.target.value;

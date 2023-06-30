@@ -60,8 +60,7 @@ const CancellationRequest = () => {
         bookingNotisUnread,
         setBookingNotisUnread
       );
-    } catch (err) {
-    }
+    } catch (err) {}
 
     const cancelBookingNotisUrl = `${process.env.REACT_APP_NODE_API}/get-booking-notifications/Backend-user`;
     try {
@@ -198,6 +197,7 @@ const CancellationRequest = () => {
                       "p-3 flex flex-col gap-2 my-3 booking-notis-card rounded-md shadow-lg " +
                       (!data.readStatus ? " bg-blue-100 " : " bg-white ")
                     }
+                    key={index}
                   >
                     <h4 className="text-[#CD4B43]">{data.title}</h4>
                     <p>

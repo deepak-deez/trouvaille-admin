@@ -30,7 +30,6 @@ const User = () => {
   const storeData = store.getState();
   const userType = storeData.userLogin.userDetails?.data.userDetails.userType;
 
-
   useEffect(() => {
     dispatch(getUser("Backend-user"));
   }, []);
@@ -89,12 +88,7 @@ const User = () => {
                     return (
                       <div
                         className={
-                          `sm:grid items-start  ${
-                            // userType == "Admin"
-                            // ?
-                            "sm:grid-cols-4"
-                            // : "sm:grid-cols-3"
-                          } flex flex-col gap-2 sm:py-4 tr-class px-5 ` +
+                          `sm:grid items-start  ${"sm:grid-cols-4"} flex flex-col gap-2 sm:py-4 tr-class px-5 ` +
                           (index % 2 == 0 ? " bg-[#F5F9FF]" : "")
                         }
                         key={index}
