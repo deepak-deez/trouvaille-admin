@@ -112,7 +112,7 @@ const NewTripForm = () => {
   const submitHandler = () => {
     if (maximumGuests >= 100) {
       AlertComponent("warning", "", "Ops We have Max capacity of 100 Guests ");
-    } else if (discountedPrice > price) {
+    } else if (Number(discountedPrice) > Number(price)) {
       AlertComponent(
         "warning",
         "",
@@ -152,7 +152,12 @@ const NewTripForm = () => {
       formData.append("maximumGuests", maximumGuests);
 
       for (let i = 0; i < inputFields.length; i++) {
-        formData.append("images", inputFields[i].images);
+        console.log(inputFields[i].images);
+        if (inputFields[i].images.length > 0) {
+          formData.append("images", inputFields[i].images);
+        } else {
+          AlertComponent("warning", "", "Image is required");
+        }
       }
       formData.append("tripHighlights", JSON.stringify(inputFields));
       formData.append("price", price);
@@ -170,7 +175,7 @@ const NewTripForm = () => {
         dispatch(addPackage(formData));
       }
     } else {
-      AlertComponent("warning", "", "All Feilds Are Requried");
+      AlertComponent("warning", "", "All Fields Are Requried");
     }
   };
 

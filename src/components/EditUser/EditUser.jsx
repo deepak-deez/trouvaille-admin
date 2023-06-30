@@ -28,10 +28,11 @@ const EditUser = ({ editPop, setEditPop, data }) => {
   const dispatch = useDispatch();
 
   const updateHandler = () => {
-    if (name === "") {
-      AlertComponent("warning", "", "Name Can't be Empty");
-    } else if (email || phone || name) {
+    console.log(name, phone, email);
+    if (email && phone && name) {
       dispatch(updateUser(id, name, email, phone, "Backend-user"));
+    } else {
+      AlertComponent("warning", "", "Fields Can't be Empty");
     }
   };
 
