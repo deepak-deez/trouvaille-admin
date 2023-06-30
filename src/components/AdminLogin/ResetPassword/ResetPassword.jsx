@@ -51,7 +51,6 @@ const ResetPassword = () => {
     } catch (err) {}
   };
 
-  console.log(resetNewPassword);
 
   const checkValidPassword = () => {
     try {

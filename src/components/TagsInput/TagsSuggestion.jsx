@@ -15,7 +15,6 @@ const Autocomplete = ({ state, setState, options, setTags, tags }) => {
     }
   };
 
-  console.log(tags);
 
   if (state.filteredOptions.length) {
     return (
